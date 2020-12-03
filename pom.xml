@@ -26,7 +26,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<sharding-sphere.version>3.0.0</sharding-sphere.version>
 		<junit.version>4.12</junit.version>
-		<solr.version>7.7.2</solr.version>
+		<solr.version>7.1.0</solr.version>
 		<swagger.version>2.9.2</swagger.version>
 		<fastjson.version>1.2.69</fastjson.version>
 		<log4j.version>1.2.27</log4j.version>
