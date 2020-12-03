@@ -29,7 +29,7 @@
 		<solr.version>8.2.0</solr.version>
 		<swagger.version>2.9.2</swagger.version>
 		<fastjson.version>1.2.69</fastjson.version>
-		<log4j.version>1.2.17</log4j.version>
+		<log4j.version>1.2.27</log4j.version>
 		<guava.version>27.0-jre</guava.version>
 		<apollo.version>1.1.0</apollo.version>
 		<joda.version>2.10.1</joda.version>
@@ -49,7 +49,7 @@
 		<caffeine.version>2.7.0</caffeine.version>
 		<curator.version>2.13.0</curator.version>
 		<txlcn.version>5.0.2.RELEASE</txlcn.version>
-		<zookeeper.version>3.4.8</zookeeper.version>
+		<zookeeper.version>3.4.14</zookeeper.version>
 		<swagger.ui.version>1.9.6</swagger.ui.version>
 		<redisson.version>3.10.6</redisson.version>
 		<mybatis.plus.version>3.3.2</mybatis.plus.version>
