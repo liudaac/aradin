@@ -339,6 +339,7 @@
 				<artifactId>mybatis-spring-boot-starter</artifactId>
 				<version>${mybatis.version}</version>
 			</dependency>
+			
 			<!-- spring扩展 -->
 			<dependency>
 				<groupId>org.springframework.social</groupId>
