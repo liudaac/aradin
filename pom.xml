@@ -365,12 +365,12 @@
 			<dependency>
 				<groupId>org.apache.solr</groupId>
 				<artifactId>solr-core</artifactId>
-				<version>${solr.version}</version><!--$NO-MVN-MAN-VER$ -->
+				<version>${solr.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.solr</groupId>
 				<artifactId>solr-solrj</artifactId>
-				<version>${solr.version}</version><!--$NO-MVN-MAN-VER$ -->
+				<version>${solr.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
