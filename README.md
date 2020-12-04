@@ -1,0 +1,3 @@
+# aradin
+阿拉丁基础开发框架
+以SpringCloud及SpringCloud Alibaba为基础做上层通用功能包扩展，降低集成复杂度，同时扩充部分必要的能力
