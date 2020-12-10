@@ -9,6 +9,7 @@
 	<packaging>pom</packaging>
 	<version>${revision}</version>
 	<modules>
+		<module>aradin-examples</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
