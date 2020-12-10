@@ -1,4 +1,4 @@
-package org.aradin.starter.velocity;
+package org.aradin.spring.velocity.starter;
 
 /**
  * Hello world!

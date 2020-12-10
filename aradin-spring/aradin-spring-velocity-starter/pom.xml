@@ -6,11 +6,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>cn.aradin</groupId>
-		<artifactId>aradin-starter</artifactId>
+		<artifactId>aradin-spring</artifactId>
 		<version>${revision}</version>
 	</parent>
-	<artifactId>aradin-starter-velocity</artifactId>
-	<name>aradin-starter-velocity</name>
+	<artifactId>aradin-spring-velocity-starter</artifactId>
+	<name>aradin-spring-velocity-starter</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
