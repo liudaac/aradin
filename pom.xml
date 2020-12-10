@@ -7,7 +7,7 @@
 	<groupId>cn.aradin</groupId>
 	<artifactId>aradin-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>0.1.0</version>
+	<version>${revision}</version>
 	<modules>
 	</modules>
 	<parent>
@@ -17,6 +17,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
+		<!-- Project revision -->
+		<revision>0.1.1</revision>
+	
 		<!-- Base Code -->
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -52,6 +55,8 @@
 		<!-- Old velocity -->
 		<velocity.version>1.7</velocity.version>
 		<velocity-tools.version>2.0</velocity-tools.version>
+		<!-- Netty -->
+		<netty.version>4.1.55.Final</netty.version>
 		<!-- TOOLS -->
 		<fastjson.version>1.2.75</fastjson.version>
 		<gson.version>2.8.5</gson.version>
@@ -258,6 +263,13 @@
 				<groupId>org.apache.velocity</groupId>
 				<artifactId>velocity-tools</artifactId>
 				<version>${velocity-tools.version}</version>
+			</dependency>
+			
+			<!-- Netty -->
+			<dependency>
+    			<groupId>io.netty</groupId>
+    			<artifactId>netty-all</artifactId>
+    			<version>${netty.version}</version>
 			</dependency>
 			
 			<!-- tools -->
