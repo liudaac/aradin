@@ -11,6 +11,8 @@
 	<modules>
 		<module>aradin-examples</module>
 		<module>aradin-spring</module>
+		<module>aradin-zookeeper</module>
+		<module>aradin-wechat</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

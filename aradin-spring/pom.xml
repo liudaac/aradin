@@ -14,11 +14,21 @@
 	<name>Aradin Spring</name>
 	<description>Aradin features on Spring</description>
 	<modules>
-	<module>aradin-spring-core</module>
-	<module>aradin-spring-velocity</module>
-	</modules>
-	<!--
-><module></module>	<build>
+		<module>aradin-spring-core</module>
+		<module>aradin-spring-actuator-starter</module>
+		<module>aradin-spring-webwall-starter</module>
+		<module>aradin-spring-redis-starter</module>
+		<module>aradin-spring-redisson-starter</module>
+		<module>aradin-spring-caffeine</module>
+		<module>aradin-spring-caffeine-starter</module>
+		<module>aradin-spring-velocity</module>
+		<module>aradin-spring-velocity-starter</module>
+		<module>aradin-spring-shiro</module>
+		<module>aradin-spring-shiro-starter</module>
+		<module>aradin-spring-swagger-starter</module>
+		<module>aradin-spring-lts-starter</module>
+    </modules>
+	<!--<build>
         <plugins>
             <plugin>
                 <groupId>org.jacoco</groupId>
