@@ -28,6 +28,13 @@
 		<module>aradin-spring-swagger-starter</module>
 		<module>aradin-spring-lts-starter</module>
     </modules>
+    <build>
+    	<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+    </build>
 	<!--<build>
         <plugins>
             <plugin>
