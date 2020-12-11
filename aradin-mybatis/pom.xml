@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>cn.aradin</groupId>
+		<artifactId>aradin</artifactId>
+		<version>${revision}</version>
+		<relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>aradin-mybatis</artifactId>
+	<packaging>pom</packaging>
+	<name>Aradin Spring</name>
+	<description>Aradin features on Wechat</description>
+	<modules>
+	<module>aradin-mybatis-boot-starter</module>
+    <module>aradin-mybatis-plus-starter</module>
+  </modules>
+	<dependencies>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<!-- Druid 数据连接池依赖 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+		</dependency>
+	</dependencies>
+</project>

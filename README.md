@@ -20,3 +20,4 @@
   * zookeeper监听集成
   * 基于zookeeper版本同步
   * 基于zookeeper集群注册
+  * Mybatis及Mybatis Plus集成

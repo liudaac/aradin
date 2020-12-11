@@ -45,6 +45,7 @@
 		<redis.version>2.9.0</redis.version>
 		<redisson.version>3.10.6</redisson.version>
 		<caffeine.version>2.7.0</caffeine.version>
+		<druid.version>1.2.3</druid.version>
 		<!-- RDBC -->
 		<shiro.version>1.4.0</shiro.version>
 		<spring.social.version>1.1.6.RELEASE</spring.social.version>
@@ -129,6 +130,11 @@
 				<groupId>org.mybatis.spring.boot</groupId>
 				<artifactId>mybatis-spring-boot-starter</artifactId>
 				<version>${mybatis.version}</version>
+			</dependency>
+			<dependency>
+    			<groupId>com.alibaba</groupId>
+    			<artifactId>druid</artifactId>
+    			<version>${druid.version}</version>
 			</dependency>
 			
 			<!-- Lucene -->
