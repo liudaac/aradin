@@ -13,11 +13,10 @@ public class SwaggerProperties {
     private String description = "Swagger 自动生成接口文档";
     private String version;
     private Boolean enable;
-    private Boolean auth;
     private String contactName;
     private String contactEmail;
     private String contactUrl;
     private String license;
     private String licenseUrl;
-    private Boolean useDefaultStatus = true;
+    private Boolean useDefaultStatus = true;//是否使用HTTP默认状态值
 }

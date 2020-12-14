@@ -21,12 +21,10 @@ import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
 import springfox.documentation.service.Contact;
 import springfox.documentation.service.SecurityReference;
 import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.ApiSelectorBuilder;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -58,12 +56,6 @@ public class AradinSwaggerAutoConfiguration {
 		//接口路径过滤
 		if (StringUtils.isNotEmpty(swaggerProperties.getAntPath())) {
 			builder = builder.paths(PathSelectors.ant(swaggerProperties.getAntPath()));
-		}
-		
-		if (swaggerProperties.getAuth()) {
-			//使用认证上下文
-			docket.securitySchemes(securitySchemes())
-			.securityContexts(securityContexts());
 		}
 		return builder.build();
 	}
@@ -100,21 +92,6 @@ public class AradinSwaggerAutoConfiguration {
         }
         return apis;
     }
-    
-    private List<ApiKey> securitySchemes() {
-		return Lists.newArrayList(
-				new ApiKey("Authorization", "Authorization", "header"));
-	}
-    
-    private List<SecurityContext> securityContexts() {
-		return Lists.newArrayList(
-				SecurityContext.builder()
-						.securityReferences(defaultAuth())
-						//正则式过滤,此处是所有非login开头的接口都需要认证
-						.forPaths(PathSelectors.regex("^(?!login).*$"))
-						.build()
-		);
-	}
     
     List<SecurityReference> defaultAuth() {
 		AuthorizationScope authorizationScope = new AuthorizationScope("global", "认证权限");
