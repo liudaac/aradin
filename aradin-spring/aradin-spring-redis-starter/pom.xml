@@ -21,5 +21,15 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- redis 依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.aradin</groupId>
+			<artifactId>aradin-spring-core</artifactId>
+			<version>${revision}</version>
+		</dependency>
 	</dependencies>
 </project>
