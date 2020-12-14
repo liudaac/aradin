@@ -1,0 +1,22 @@
+spring:
+  velocity:
+    enabled: true #设定是否允许mvc使用velocity
+    cache: true #是否开启模板缓存
+    check-template-location: true #是否检查模板路径是否存在
+    prefix: #设定velocity模板的前缀
+    suffix: .vm #设定velocity模板的后缀
+    date-tool-attribute: #设定暴露给velocity上下文使用的DateTool的名
+    number-tool-attribute: #设定暴露给velocity上下文的NumberTool的名
+    resource-loader-path: 'classpath:/template/' #设定模板路径，默认为:classpath:/templates/
+    toolbox-config-location: 'classpath:/toolbox.xml' #设定Velocity Toolbox配置文件的路径，比如 /WEB-INF/toolbox.xml.
+    prefer-file-system-access: false #是否优先从文件系统加载模板以支持热加载，默认为true
+    #allow-request-override 指定HttpServletRequest的属性是否可以覆盖controller的model的同名项
+    #allow-session-override 指定HttpSession的属性是否可以覆盖controller的model的同名项
+    #charset 设定模板编码
+    #content-type 设定ContentType的值
+    #expose-request-attributes #是否在merge模板的时候，将request属性都添加到model中
+    #expose-session-attributes #是否在merge模板的时候，将HttpSession属性都添加到model中
+    #expose-spring-macro-helpers #设定是否以springMacroRequestContext的名来暴露RequestContext给Spring’s macro类库使用
+    #properties #设置velocity的额外属性
+    #request-context-attribute #设定RequestContextattribute的名
+    #view-names #设定需要解析的视图名称.
