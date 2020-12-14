@@ -1,0 +1,15 @@
+aradin:
+  swagger:
+    base-package: 
+    ant-path: 
+    title: 
+    description: 
+    version: 
+    enable: true
+    auth: false
+    contact-name: daliu
+    contact-email: daliu@corp.netease.com
+    contact-url: 
+    license:
+    license-url: 
+    use-default-status: 
