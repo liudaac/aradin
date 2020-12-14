@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.nsc.darwin.velocity.VelocityAutoConfiguration
+org.aradin.spring.velocity.starter.AradinVelocityAutoConfiguration
