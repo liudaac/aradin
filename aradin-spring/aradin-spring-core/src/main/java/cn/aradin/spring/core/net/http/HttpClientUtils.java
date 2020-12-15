@@ -86,7 +86,7 @@ public class HttpClientUtils {
 
 	/**
 	 * 数据返回自动JSON对象解析
-	 * @param T The class name of clazz
+	 * @param <T> The class name of clazz
 	 * @param request The URI request
 	 * @param clazz The result class
 	 * @return Instance of clazz
