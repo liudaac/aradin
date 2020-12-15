@@ -11,6 +11,7 @@
 	<modules>
 		<module>aradin-examples</module>
 		<module>aradin-spring</module>
+		<module>aradin-mybatis</module>
 		<module>aradin-zookeeper</module>
 		<module>aradin-wechat</module>
 	</modules>
