@@ -2,7 +2,7 @@ package cn.aradin.spring.core.transfer;
 
 /**
  * Abstract Handler Used For Transferring A To B
- * @author daliu
+ * @author liudaac
  *
  * @param <A> source clazz
  * @param <B> target clazz

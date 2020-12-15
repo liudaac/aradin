@@ -20,7 +20,7 @@ import cn.aradin.spring.core.net.http.handler.ResponseHandlerFactory;
 
 /**
  * The Interface For Using Http Clients
- * @author daliu
+ * @author liudaac
  *
  */
 public class HttpClientUtils {

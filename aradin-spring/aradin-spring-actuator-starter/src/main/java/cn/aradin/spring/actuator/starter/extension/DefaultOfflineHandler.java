@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * The Default Implement Class For Offline Handler
- * @author daliu
+ * @author liudaac
  *
  */
 @Slf4j

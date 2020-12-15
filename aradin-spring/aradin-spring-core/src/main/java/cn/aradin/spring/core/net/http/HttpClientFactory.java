@@ -20,7 +20,7 @@ import org.apache.http.ssl.SSLContexts;
 
 /**
  * httpclient 4.3.x
- * @author daliu
+ * @author liudaac
  *
  */
 public class HttpClientFactory {

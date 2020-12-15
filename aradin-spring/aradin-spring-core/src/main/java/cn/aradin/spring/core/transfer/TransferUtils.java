@@ -5,7 +5,7 @@ import java.util.Collection;
 /**
  * Util Class
  * A To B OR Collection(A) To Collection(B)
- * @author daliu
+ * @author liudaac
  *
  */
 public class TransferUtils {

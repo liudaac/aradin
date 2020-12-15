@@ -15,7 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Date Transfer Module
- * @author daliu
+ * @author liudaac
  *
  */
 public class DateUtil {

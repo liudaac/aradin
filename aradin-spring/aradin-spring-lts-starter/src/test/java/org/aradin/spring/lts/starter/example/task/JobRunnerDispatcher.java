@@ -12,7 +12,7 @@ import com.github.ltsopensource.tasktracker.runner.JobRunner;
  * JobRunner两种模式
  * 1、@JobRunner4TaskTracker 全局只能存在一个，作为单一jobrunner模式
  * 2、@LTS 可以声明多个，实现job执行类，每个方法加JobRunnerItem注解，使用shardField区分，即执行方法注解中包含默认的shardField参数（默认取值taskId）,将每个方法实现构造为对应的JobRunner，并按照分配对应的shardField值生成映射关系，分发任务时直接分配
- * @author daliu
+ * @author liudaac
  *
  */
 @JobRunner4TaskTracker

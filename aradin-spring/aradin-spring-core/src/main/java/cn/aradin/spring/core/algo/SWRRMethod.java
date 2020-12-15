@@ -12,7 +12,7 @@ import com.google.common.collect.Lists;
 /**
  * https://blog.csdn.net/yangbodong22011/article/details/73369426
  * SWWR负载均衡算法
- * @author daliu
+ * @author liudaac
  *
  */
 public class SWRRMethod {
