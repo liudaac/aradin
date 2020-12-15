@@ -38,7 +38,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * {@link org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration} 通过SelectImporter 引入所有cachetype的默认Configuration，然后根据各个Configuration的Condition决定初始化哪一个
- * {@link org.springframework.boot.autoconfigure.cache.RedisCacheConfiguration}
+ * org.springframework.boot.autoconfigure.cache.RedisCacheConfiguration
  * @author liuda
  *
  */
@@ -69,9 +69,11 @@ public final static String CACHE_MANAGER = "cacheManager";
 	
 	/**
 	 * 原生实现，由于原生存在对CacheManager的单实例限制
-	 * @param redisConnectionFactory
-	 * @param resourceLoader
-	 * @return
+	 * @param redisConnectionFactory redisConnectionFactory
+	 * @param resourceLoader resourceLoader
+	 * @param redisCacheManagerProperties redisCacheManagerProperties
+	 * @param cacheManagerCustomizers cacheManagerCustomizers
+	 * @return The primary cache Manager
 	 */
 	@Bean
 	@Primary

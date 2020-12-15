@@ -149,6 +149,9 @@ public class ServletToolboxManager extends XMLToolboxManager
      * ServletToolboxManager factory method.
      * This method will ensure there is exactly one ServletToolboxManager
      * per xml toolbox configuration file.
+     * @param servletContext servletContext
+     * @param toolboxFile toolboxFile
+     * @return ServletToolboxManager
      */
     @SuppressWarnings("unchecked")
 	public static synchronized ServletToolboxManager getInstance(ServletContext servletContext,
@@ -234,8 +237,9 @@ public class ServletToolboxManager extends XMLToolboxManager
      * This effectively means that no session-scoped tools will be added to
      * the ToolboxContext for a request that does not have a session object.
      * </p>
-     *
+     * @param b
      * The default value is true.
+     * 
      */
     public void setCreateSession(boolean b)
     {
@@ -250,6 +254,7 @@ public class ServletToolboxManager extends XMLToolboxManager
      *
      * @see ViewContext#XHTML
      * @since VelocityTools 1.1
+     * @param value Boolean
      */
     public void setXhtml(Boolean value)
     {
@@ -264,7 +269,7 @@ public class ServletToolboxManager extends XMLToolboxManager
      * <p>Retrieves the rule set Digester should use to parse and load
      * the toolbox for this manager.</p>
      *
-     * <p>The DTD corresponding to the ServletToolboxRuleSet is:
+     * <p>The DTD corresponding to the ServletToolboxRuleSet is:</p>
      * <pre>
      *  &lt;?xml version="1.0"?&gt;
      *  &lt;!ELEMENT toolbox (create-session?,xhtml?,tool*,data*,#PCDATA)&gt;
@@ -280,7 +285,7 @@ public class ServletToolboxManager extends XMLToolboxManager
      *      &lt;!ATTLIST parameter name CDATA #REQUIRED&gt;
      *      &lt;!ATTLIST parameter value CDATA #REQUIRED&gt;
      *  &lt;!ELEMENT value          (#CDATA)&gt;
-     * </pre></p>
+     * </pre>
      *
      * @since VelocityTools 1.1
      */
@@ -448,6 +453,8 @@ public class ServletToolboxManager extends XMLToolboxManager
     /**
      * Returns a mutex (lock object) unique to the specified session
      * to allow for reliable synchronization on the session.
+     * @param session session
+     * @return Object Object
      */
     protected Object getMutex(HttpSession session)
     {

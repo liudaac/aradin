@@ -62,6 +62,7 @@ public class VelocityToolboxView extends VelocityView {
 	 * resource, as expected by ServletToolboxManager which is part of
 	 * the view package of Velocity Tools.
 	 * @see org.apache.velocity.tools.view.servlet.ServletToolboxManager#getInstance
+	 * @param toolboxConfigLocation toolboxConfigLocation
 	 */
 	public void setToolboxConfigLocation(String toolboxConfigLocation) {
 		this.toolboxConfigLocation = toolboxConfigLocation;
@@ -69,6 +70,7 @@ public class VelocityToolboxView extends VelocityView {
 
 	/**
 	 * Return the Velocity Toolbox config location, if any.
+	 * @return toolboxConfigLocation
 	 */
 	protected String getToolboxConfigLocation() {
 		return this.toolboxConfigLocation;

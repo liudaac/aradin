@@ -79,7 +79,7 @@ public class GlobalThreadManager {
 
 	/**
 	 * Construct a one-thread pool for sync tasks
-	 * @return
+	 * @return thread pool
 	 */
 	public static ThreadPoolProxy getSinglePool() {
 		return getSinglePool(DEFAULT_SINGLE_POOL_NAME);

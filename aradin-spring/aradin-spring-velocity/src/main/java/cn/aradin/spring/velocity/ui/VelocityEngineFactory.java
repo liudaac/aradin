@@ -39,7 +39,7 @@ import org.springframework.util.StringUtils;
  * Factory that configures a VelocityEngine. Can be used standalone,
  * but typically you will either use {@link VelocityEngineFactoryBean}
  * for preparing a VelocityEngine as bean reference, or
- * {@link org.springframework.web.servlet.view.velocity.VelocityConfigurer}
+ * link cn.aradin.spring.velocity.view.VelocityConfigurer
  * for web views.
  *
  * <p>The optional "configLocation" property sets the location of the Velocity
@@ -66,7 +66,7 @@ import org.springframework.util.StringUtils;
  * @see #setOverrideLogging
  * @see #createVelocityEngine
  * @see VelocityEngineFactoryBean
- * @see org.springframework.web.servlet.view.velocity.VelocityConfigurer
+ * @see cn.aradin.spring.velocity.view.VelocityConfigurer
  * @see org.apache.velocity.app.VelocityEngine
  */
 public class VelocityEngineFactory {
@@ -107,6 +107,7 @@ public class VelocityEngineFactory {
 	 * @see #setVelocityPropertiesMap
 	 * @see #setConfigLocation
 	 * @see #setResourceLoaderPath
+	 * @param velocityProperties velocityProperties
 	 */
 	public void setVelocityProperties(Properties velocityProperties) {
 		CollectionUtils.mergePropertiesIntoMap(velocityProperties, this.velocityProperties);
@@ -116,6 +117,7 @@ public class VelocityEngineFactory {
 	 * Set Velocity properties as Map, to allow for non-String values
 	 * like "ds.resource.loader.instance".
 	 * @see #setVelocityProperties
+	 * @param velocityPropertiesMap velocityPropertiesMap
 	 */
 	public void setVelocityPropertiesMap(Map<String, Object> velocityPropertiesMap) {
 		if (velocityPropertiesMap != null) {
@@ -149,6 +151,7 @@ public class VelocityEngineFactory {
 	 * @see #setPreferFileSystemAccess
 	 * @see SpringResourceLoader
 	 * @see org.apache.velocity.runtime.resource.loader.FileResourceLoader
+	 * @param resourceLoaderPath resourceLoaderPath
 	 */
 	public void setResourceLoaderPath(String resourceLoaderPath) {
 		this.resourceLoaderPath = resourceLoaderPath;
@@ -160,13 +163,14 @@ public class VelocityEngineFactory {
 	 * ApplicationContext if running in a context.
 	 * @see org.springframework.core.io.DefaultResourceLoader
 	 * @see org.springframework.context.ApplicationContext
+	 * @param resourceLoader resourceLoader
 	 */
 	public void setResourceLoader(ResourceLoader resourceLoader) {
 		this.resourceLoader = resourceLoader;
 	}
 
 	/**
-	 * Return the Spring ResourceLoader to use for loading Velocity template files.
+	 * @return Return the Spring ResourceLoader to use for loading Velocity template files.
 	 */
 	protected ResourceLoader getResourceLoader() {
 		return this.resourceLoader;
@@ -183,13 +187,14 @@ public class VelocityEngineFactory {
 	 * be necessary if some of your templates reside in an expanded classes
 	 * directory while others reside in jar files.
 	 * @see #setResourceLoaderPath
+	 * @param preferFileSystemAccess preferFileSystemAccess
 	 */
 	public void setPreferFileSystemAccess(boolean preferFileSystemAccess) {
 		this.preferFileSystemAccess = preferFileSystemAccess;
 	}
 
 	/**
-	 * Return whether to prefer file system access for template loading.
+	 * @return Return whether to prefer file system access for template loading.
 	 */
 	protected boolean isPreferFileSystemAccess() {
 		return this.preferFileSystemAccess;
@@ -198,6 +203,7 @@ public class VelocityEngineFactory {
 	/**
 	 * Set whether Velocity should log via Commons Logging, i.e. whether Velocity's
 	 * log system should be set to {@link CommonsLogLogChute}. Default is "true".
+	 * @param overrideLogging overrideLogging
 	 */
 	public void setOverrideLogging(boolean overrideLogging) {
 		this.overrideLogging = overrideLogging;

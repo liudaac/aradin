@@ -66,7 +66,6 @@ public abstract class VelocityEngineUtils {
 	 * @param model the Map that contains model names as keys and model objects as values
 	 * @return the result as String
 	 * @throws VelocityException if the template wasn't found or rendering failed
-	 * @see org.springframework.mail.MailPreparationException
 	 * @deprecated Use {@link #mergeTemplateIntoString(VelocityEngine, String, String, Map)}
 	 * instead, following Velocity 1.6's corresponding deprecation in its own API.
 	 */
@@ -89,7 +88,6 @@ public abstract class VelocityEngineUtils {
 	 * @param model the Map that contains model names as keys and model objects as values
 	 * @return the result as String
 	 * @throws VelocityException if the template wasn't found or rendering failed
-	 * @see org.springframework.mail.MailPreparationException
 	 */
 	public static String mergeTemplateIntoString(VelocityEngine velocityEngine, String templateLocation,
 			String encoding, Map<String, Object> model) throws VelocityException {

@@ -20,7 +20,7 @@ import cn.aradin.spring.velocity.ui.VelocityEngineFactory;
  *
  * <pre class="code">
  * &lt;bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer"&gt;
- *   &lt;property name="resourceLoaderPath">&lt;value&gt;/WEB-INF/velocity/&lt;/value>&lt;/property&gt;
+ *   &lt;property name="resourceLoaderPath"&lt;value&gt;/WEB-INF/velocity/&lt;/value&lt;/property&gt;
  * &lt;/bean&gt;</pre>
  *
  * This bean must be included in the application context of any application
@@ -33,7 +33,7 @@ import cn.aradin.spring.velocity.ui.VelocityEngineFactory;
  *
  * <p>Note that you can also refer to a pre-configured VelocityEngine
  * instance via the "velocityEngine" property, e.g. set up by
- * {@link org.springframework.ui.velocity.VelocityEngineFactoryBean},
+ * {@link cn.aradin.spring.velocity.ui.VelocityEngineFactoryBean},
  * This allows to share a VelocityEngine for web and email usage, for example.
  *
  * <p>This configurer registers the "spring.vm" Velocimacro library for web views
@@ -75,13 +75,14 @@ public class VelocityConfigurer extends VelocityEngineFactory
 	/**
 	 * Set a pre-configured VelocityEngine to use for the Velocity web
 	 * configuration: e.g. a shared one for web and email usage, set up via
-	 * {@link org.springframework.ui.velocity.VelocityEngineFactoryBean}.
+	 * {@link cn.aradin.spring.velocity.ui.VelocityEngineFactoryBean}.
 	 * <p>Note that the Spring macros will <i>not</i> be enabled automatically in
 	 * case of an external VelocityEngine passed in here. Make sure to include
 	 * {@code spring.vm} in your template loader path in such a scenario
 	 * (if there is an actual need to use those macros).
 	 * <p>If this is not set, VelocityEngineFactory's properties
 	 * (inherited by this class) have to be specified.
+	 * @param velocityEngine velocityEngine
 	 */
 	public void setVelocityEngine(VelocityEngine velocityEngine) {
 		this.velocityEngine = velocityEngine;

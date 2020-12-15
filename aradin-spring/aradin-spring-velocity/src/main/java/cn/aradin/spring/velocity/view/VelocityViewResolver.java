@@ -52,6 +52,7 @@ public class VelocityViewResolver extends AbstractTemplateViewResolver {
 	 * of this view, or {@code null} if not needed. DateTool is part of Velocity Tools 1.0.
 	 * @see org.apache.velocity.tools.generic.DateTool
 	 * @see VelocityView#setDateToolAttribute
+	 * @param dateToolAttribute dateToolAttribute
 	 */
 	public void setDateToolAttribute(String dateToolAttribute) {
 		this.dateToolAttribute = dateToolAttribute;
@@ -62,6 +63,7 @@ public class VelocityViewResolver extends AbstractTemplateViewResolver {
 	 * of this view, or {@code null} if not needed. NumberTool is part of Velocity Tools 1.1.
 	 * @see org.apache.velocity.tools.generic.NumberTool
 	 * @see VelocityView#setNumberToolAttribute
+	 * @param numberToolAttribute numberToolAttribute
 	 */
 	public void setNumberToolAttribute(String numberToolAttribute) {
 		this.numberToolAttribute = numberToolAttribute;
@@ -79,6 +81,7 @@ public class VelocityViewResolver extends AbstractTemplateViewResolver {
 	 * VelocityToolboxView instances being created.
 	 * @see org.apache.velocity.tools.view.servlet.ServletToolboxManager#getInstance
 	 * @see VelocityToolboxView#setToolboxConfigLocation
+	 * @param toolboxConfigLocation toolboxConfigLocation
 	 */
 	public void setToolboxConfigLocation(String toolboxConfigLocation) {
 		this.toolboxConfigLocation = toolboxConfigLocation;

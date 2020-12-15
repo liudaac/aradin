@@ -392,8 +392,9 @@ public class DateUtil {
 	 * 
 	 * @param date
 	 *            日期 为null时表示当天
-	 * @param month
+	 * @param months
 	 *            相加(相减)的月数
+	 * @return The date
 	 */
 	public static Date nextMonth(Date date, int months) {
 		Calendar cal = Calendar.getInstance();
@@ -411,6 +412,7 @@ public class DateUtil {
 	 *            日期 为null时表示当天
 	 * @param day
 	 *            相加(相减)的天数
+	 * @return The date
 	 */
 	public static Date nextDay(Date date, int day) {
 		Calendar cal = Calendar.getInstance();

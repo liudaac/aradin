@@ -15,8 +15,8 @@ public class MapUtil {
 	
 	/**
 	 * Map key 排序
-	 * @param map
-	 * @return
+	 * @param map The origin map
+	 * @return The ordered map
 	 */
 	public static Map<String,String> order(Map<String, String> map){
 		HashMap<String, String> tempMap = new LinkedHashMap<String, String>();
@@ -38,9 +38,9 @@ public class MapUtil {
 
 	/**
 	 * 转换对象为map
-	 * @param object
-	 * @param ignore
-	 * @return
+	 * @param object The origin instance
+	 * @param ignore The fields which need ignore
+	 * @return The target map
 	 */
 	public static Map<String,String> objectToMap(Object object,String... ignore){
 		Map<String,String> tempMap = new LinkedHashMap<String, String>();
@@ -76,10 +76,10 @@ public class MapUtil {
 
 	/**
 	 * url 参数串连
-	 * @param map
-	 * @param keyLower
-	 * @param valueUrlencode
-	 * @return
+	 * @param map The orgin map
+	 * @param keyLower If trans keys to lowercase
+	 * @param valueUrlencode If need urlencode
+	 * @return The joined value
 	 */
 	public static String mapJoin(Map<String, String> map,boolean keyLower,boolean valueUrlencode){
 		StringBuilder stringBuilder = new StringBuilder();
@@ -104,10 +104,10 @@ public class MapUtil {
 
 	/**
 	 * 参数串联 打包成md5签名
-	 * @param map
-	 * @param keyLower
-	 * @param valueUrlencode
-	 * @return
+	 * @param map The orgin params
+	 * @param keyLower If need key to lowercase
+	 * @param valueUrlencode If need urlencode
+	 * @return The transfered value
 	 */
 	public static String md5Join(Map<String, String> map,boolean keyLower,boolean valueUrlencode){
 		String origin = mapJoin(map, keyLower, valueUrlencode);

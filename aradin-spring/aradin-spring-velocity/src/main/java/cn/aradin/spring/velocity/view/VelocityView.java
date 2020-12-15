@@ -125,6 +125,7 @@ public class VelocityView extends AbstractTemplateView {
 	 * @see org.apache.velocity.tools.generic.DateTool
 	 * @see org.springframework.web.servlet.support.RequestContextUtils#getLocale
 	 * @see org.springframework.web.servlet.LocaleResolver
+	 * @param dateToolAttribute dateToolAttribute
 	 */
 	public void setDateToolAttribute(String dateToolAttribute) {
 		this.dateToolAttribute = dateToolAttribute;
@@ -139,6 +140,7 @@ public class VelocityView extends AbstractTemplateView {
 	 * @see org.apache.velocity.tools.generic.NumberTool
 	 * @see org.springframework.web.servlet.support.RequestContextUtils#getLocale
 	 * @see org.springframework.web.servlet.LocaleResolver
+	 * @param numberToolAttribute numberToolAttribute
 	 */
 	public void setNumberToolAttribute(String numberToolAttribute) {
 		this.numberToolAttribute = numberToolAttribute;
@@ -149,6 +151,7 @@ public class VelocityView extends AbstractTemplateView {
 	 * by the VelocityEngine: "ISO-8859-1" if not specified otherwise.
 	 * <p>Specify the encoding in the VelocityEngine rather than per template
 	 * if all your templates share a common encoding.
+	 * @param encoding encoding
 	 */
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
@@ -156,6 +159,7 @@ public class VelocityView extends AbstractTemplateView {
 
 	/**
 	 * Return the encoding for the Velocity template.
+	 * @return encoding
 	 */
 	protected String getEncoding() {
 		return this.encoding;
@@ -167,13 +171,14 @@ public class VelocityView extends AbstractTemplateView {
 	 * modify Velocity templates without restarting the application (similar to JSPs).
 	 * <p>Note that this is a minor optimization only, as Velocity itself caches
 	 * templates in a modification-aware fashion.
+	 * @param cacheTemplate cacheTemplate
 	 */
 	public void setCacheTemplate(boolean cacheTemplate) {
 		this.cacheTemplate = cacheTemplate;
 	}
 
 	/**
-	 * Return whether the Velocity template should be cached.
+	 * @return Return whether the Velocity template should be cached.
 	 */
 	protected boolean isCacheTemplate() {
 		return this.cacheTemplate;
@@ -184,6 +189,7 @@ public class VelocityView extends AbstractTemplateView {
 	 * <p>If this is not set, the default lookup will occur: A single VelocityConfig
 	 * is expected in the current web application context, with any bean name.
 	 * @see VelocityConfig
+	 * @param velocityEngine velocityEngine
 	 */
 	public void setVelocityEngine(VelocityEngine velocityEngine) {
 		this.velocityEngine = velocityEngine;
@@ -191,6 +197,7 @@ public class VelocityView extends AbstractTemplateView {
 
 	/**
 	 * Return the VelocityEngine used by this view.
+	 * @return velocityEngine
 	 */
 	protected VelocityEngine getVelocityEngine() {
 		return this.velocityEngine;
