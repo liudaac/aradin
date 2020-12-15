@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.aradin.spring.redisson.starter.AradinRedissonAutoConfiguration
+cn.aradin.spring.redisson.starter.AradinRedissonAutoConfiguration

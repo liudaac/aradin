@@ -1,4 +1,4 @@
-package org.aradin.spring.redisson.starter;
+package cn.aradin.spring.redisson.starter;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
