@@ -59,11 +59,11 @@ public class HttpClientFactory {
 
 	/**
 	 * Key store 类型HttpClient
-	 * @param keystore
-	 * @param keyPassword
-	 * @param supportedProtocols
-	 * @param maxTotal
-	 * @param maxPerRoute
+	 * @param keystore HTTPS Cert in memory
+	 * @param keyPassword The PWD of Cert
+	 * @param supportedProtocols protocols
+	 * @param maxTotal Max number of connection
+	 * @param maxPerRoute Max connections for each route
 	 * @return
 	 */
 	public static HttpClient createKeyMaterialHttpClient(KeyStore keystore,String keyPassword,String[] supportedProtocols,int maxTotal,int maxPerRoute) {

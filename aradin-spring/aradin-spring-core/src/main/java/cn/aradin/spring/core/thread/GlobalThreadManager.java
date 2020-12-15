@@ -27,7 +27,10 @@ public class GlobalThreadManager {
 	private static Map<String, ThreadPoolProxy> mMap = new HashMap<String, ThreadPoolProxy>();
 	private static Object mSingleLock = new Object();
 
-	/** 获取下载线程 */
+	/**
+	 * Get the thread pool for downloading
+	 * @return thread pool
+	 */
 	public static ThreadPoolProxy getDownloadPool() {
 		if (mDownloadPool == null) {
 			synchronized (mDownloadLock) {
@@ -41,7 +44,9 @@ public class GlobalThreadManager {
 	}
 
 	/**
-	 * 获取一个用于执行长耗时任务的线程池，避免和短耗时任务处在同一个队列 而阻塞了重要的短耗时的任务，通常用联网操作s
+	 * 	获取一个用于执行长耗时任务的线程池，避免和短耗时任务处在同一个队列 而阻塞了重要的短耗时的任务，通常用联网操作s
+	 * Get a thread pool for long-duration tasks
+	 * @return thread pool
 	 */
 	public static ThreadPoolProxy getLongPool() {
 		if (mLongPool == null) {
@@ -55,7 +60,11 @@ public class GlobalThreadManager {
 		return mLongPool;
 	}
 
-	/** 获取一个用于执行短耗时任务的线程池，避免因为和耗时长的任务处在同一个队列而长时间得不到执行，通常用来执行本地的IO/SQL */
+	/**
+	 *   获取一个用于执行短耗时任务的线程池，避免因为和耗时长的任务处在同一个队列而长时间得不到执行，通常用来执行本地的IO/SQL
+	 * Get a thread pool for short-duration tasks  
+	 * @return thread pool
+	 */
 	public static ThreadPoolProxy getShortPool() {
 		if (mShortPool == null) {
 			synchronized (mShortLock) {
@@ -68,12 +77,14 @@ public class GlobalThreadManager {
 		return mShortPool;
 	}
 
-	/** 获取一个单线程池，所有任务将会被按照加入的顺序执行，免除了同步开销的问题 */
+	/**
+	 * Construct a one-thread pool for sync tasks
+	 * @return
+	 */
 	public static ThreadPoolProxy getSinglePool() {
 		return getSinglePool(DEFAULT_SINGLE_POOL_NAME);
 	}
 
-	/** 获取一个单线程池，所有任务将会被按照加入的顺序执行，免除了同步开销的问题 */
 	public static ThreadPoolProxy getSinglePool(String name) {
 		synchronized (mSingleLock) {
 			ThreadPoolProxy singlePool = mMap.get(name);
@@ -134,14 +145,12 @@ public class GlobalThreadManager {
 			return mPool.submit(callable);
 		}
 
-		/** 取消线程池中某个还未执行的任务 */
 		public synchronized void cancel(Runnable runn) {
 			if (mPool != null && (!mPool.isShutdown()) || mPool.isTerminating()) {
 				mPool.getQueue().remove(runn);
 			}
 		}
 
-		/** 返回线程池中某个还未执行的任务 */
 		public synchronized boolean contains(Runnable runn) {
 			if (mPool != null && (!mPool.isShutdown() || mPool.isTerminating())) {
 				return mPool.getQueue().contains(runn);
@@ -150,14 +159,12 @@ public class GlobalThreadManager {
 			}
 		}
 
-		/** 立刻关闭线程池，并且正在执行的任务也将会被中断 */
 		public void stop() {
 			if (mPool != null && (!mPool.isShutdown() || mPool.isTerminating())) {
 				mPool.shutdown();
 			}
 		}
 
-		/** 平缓关闭单任务线程池，但是会确保所有已经加入的任务都将会被执行完毕才关闭 */
 		public synchronized void shutdown() {
 			if (mPool != null && (!mPool.isShutdown() || mPool.isTerminating())) {
 				mPool.shutdownNow();

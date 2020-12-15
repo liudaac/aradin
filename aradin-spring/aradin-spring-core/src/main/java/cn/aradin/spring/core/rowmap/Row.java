@@ -20,13 +20,9 @@ public class Row extends HashMap<Object, Object> {
 	@SuppressWarnings("rawtypes")
 	private final Map<Object, List> _fields = new HashMap<Object, List>();
 
-	/**
-	 * 
-	 */
 	public Row() {
 	}
 
-	/** */
 	public Row(Map<?, ?> map) {
 		super(map);
 		for (Object obj : map.keySet()) {
@@ -34,12 +30,6 @@ public class Row extends HashMap<Object, Object> {
 		}
 	}
 
-	/**
-	 * ֵ
-	 * 
-	 * @param name
-	 * @return
-	 */
 	public String gets(Object name) {
 		try {
 			if (get(name) != null)
@@ -50,13 +40,6 @@ public class Row extends HashMap<Object, Object> {
 		return null;
 	}
 
-	/**
-	 * 
-	 * 
-	 * @param name
-	 * @param defaultValue
-	 * @return
-	 */
 	public String gets(Object name, String defaultValue) {
 		try {
 			if (get(name) != null)
@@ -67,13 +50,6 @@ public class Row extends HashMap<Object, Object> {
 		return defaultValue;
 	}
 
-	/**
-	 * 
-	 * 
-	 * @param name
-	 * @param defaultValue
-	 * @return
-	 */
 	public String gets(Object name, String enc, String defaultValue) {
 		try {
 			if (get(name) != null)
@@ -84,10 +60,6 @@ public class Row extends HashMap<Object, Object> {
 		return defaultValue;
 	}
 
-	/**
-	 * @param name
-	 * @return
-	 */
 	public Integer getInt(Object name) {
 		Object o = get(name);
 		if (o != null) {
@@ -99,11 +71,6 @@ public class Row extends HashMap<Object, Object> {
 		return null;
 	}
 
-	/**
-	 * @param name
-	 * @param defaultValue
-	 * @return
-	 */
 	public int getInt(Object name, int defaultValue) {
 		Object o = get(name);
 		if (o != null) {
@@ -127,29 +94,15 @@ public class Row extends HashMap<Object, Object> {
 		return defaultValue;
 	}
 
-	/**
-	 * @param which
-	 * @param defaultValue
-	 * @return
-	 */
 	public int getInt(int which, int defaultValue) {
 		Object key = ordering.get(which);
 		return getInt(key, defaultValue);
 	}
 
-	/**
-	 * @param name
-	 * @return
-	 */
 	public float getFloat(Object name) {
 		return Float.valueOf(get(name).toString()).floatValue();
 	}
 
-	/**
-	 * @param name
-	 * @param defaultValue
-	 * @return
-	 */
 	public float getFloat(Object name, float defaultValue) {
 		Object o = get(name);
 		if (o != null)
@@ -160,21 +113,11 @@ public class Row extends HashMap<Object, Object> {
 		return defaultValue;
 	}
 
-	/**
-	 * @param which
-	 * @param defaultValue
-	 * @return
-	 */
 	public float getFloat(int which, float defaultValue) {
 		Object key = ordering.get(which);
 		return getFloat(key, defaultValue);
 	}
 
-	/**
-	 * @param name
-	 * @param defaultValue
-	 * @return
-	 */
 	public Long getLong(Object name) {
 		Object o = get(name);
 		if (o != null)
@@ -185,11 +128,6 @@ public class Row extends HashMap<Object, Object> {
 		return null;
 	}
 
-	/**
-	 * @param name
-	 * @param defaultValue
-	 * @return
-	 */
 	public long getLong(Object name, long defaultValue) {
 		Object o = get(name);
 		if (o != null)
@@ -200,19 +138,11 @@ public class Row extends HashMap<Object, Object> {
 		return defaultValue;
 	}
 
-	/**
-	 * @param which
-	 * @return
-	 */
 	public Object get(int which) {
 		Object key = ordering.get(which);
 		return get(key);
 	}
 
-	/**
-	 * @param which
-	 * @return
-	 */
 	public Object getKey(int which) {
 		Object key = ordering.get(which);
 		return key;
@@ -230,9 +160,6 @@ public class Row extends HashMap<Object, Object> {
 		return strs;
 	}
 
-	/**
-	 * 
-	 */
 	public void dump() {
 		for (Iterator<?> e = keySet().iterator(); e.hasNext();) {
 			String name = (String) e.next();
@@ -266,31 +193,16 @@ public class Row extends HashMap<Object, Object> {
 		return value;
 	}
 
-	/**
-	 * @param name
-	 * @param value
-	 * @return
-	 */
 	public int putInt(Object name, int value) {
 		super.put(name, new Integer(value));
 		return value;
 	}
 
-	/**
-	 * @param name
-	 * @param value
-	 * @return
-	 */
 	public float putFloat(Object name, float value) {
 		super.put(name, new Float(value));
 		return value;
 	}
 
-	/**
-	 * @param name
-	 * @param value
-	 * @return
-	 */
 	public String putFunction(String name, String value) {
 		if (functionMap == null)
 			functionMap = new HashMap<String, String>();
@@ -302,10 +214,6 @@ public class Row extends HashMap<Object, Object> {
 		return value;
 	}
 
-	/**
-	 * @param name
-	 * @return
-	 */
 	public String getFunction(String name) {
 		return functionMap.get(name);
 	}
@@ -314,9 +222,6 @@ public class Row extends HashMap<Object, Object> {
 		return this.functionMap;
 	}
 
-	/**
-	 * @param fmap
-	 */
 	public void setFunctionMap(HashMap<String, String> fmap) {
 		if (fmap != null && fmap.size() > 0) {
 			if (functionMap == null)
@@ -358,11 +263,6 @@ public class Row extends HashMap<Object, Object> {
 		ordering.clear();
 	}
 
-	/**
-	 * 
-	 * 
-	 * @return
-	 */
 	public int length() {
 		return size();
 	}

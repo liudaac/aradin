@@ -38,9 +38,9 @@ public class HttpClientUtils {
 	 * 
 	 * @param keyStoreName     keyStore 名称
 	 * @param keyStoreFilePath 私钥文件路径
-	 * @param mch_id
-	 * @param maxTotal
-	 * @param maxPerRoute
+	 * @param mch_id mch_id
+	 * @param maxTotal maxTotal
+	 * @param maxPerRoute maxPerRoute
 	 */
 	public static void initMchKeyStore(String keyStoreName, String keyStoreFilePath, String mch_id, int maxTotal,
 			int maxPerRoute) {
@@ -86,11 +86,11 @@ public class HttpClientUtils {
 
 	/**
 	 * 数据返回自动JSON对象解析
-	 * 
-	 * @param request
-	 * @param clazz
-	 * @return
-	 * @throws Exception
+	 * @param T The class name of clazz
+	 * @param request The URI request
+	 * @param clazz The result class
+	 * @return Instance of clazz
+	 * @throws Exception Exception
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T executeJsonResult(HttpUriRequest request, Class<T> clazz) throws Exception {

@@ -4,8 +4,8 @@ package cn.aradin.spring.core.transfer;
  * Abstract Handler Used For Transferring A To B
  * @author daliu
  *
- * @param <A>
- * @param <B>
+ * @param <A> source clazz
+ * @param <B> target clazz
  */
 public abstract class TransferHandler<A, B> {
 	

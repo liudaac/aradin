@@ -4,7 +4,7 @@ import java.util.Collection;
 
 /**
  * Util Class
- * A To B OR Collection<A> To Collection<B>
+ * A To B OR Collection(A) To Collection(B)
  * @author daliu
  *
  */
