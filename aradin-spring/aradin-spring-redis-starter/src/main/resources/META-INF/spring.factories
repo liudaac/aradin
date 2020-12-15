@@ -1,3 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.aradin.spring.redis.starter.AradinRedisAutoConfiguration,\
-org.aradin.spring.redis.starter.AradinRedisManagerAutoConfiguration
+cn.aradin.spring.redis.starter.AradinRedisAutoConfiguration,\
+cn.aradin.spring.redis.starter.AradinRedisManagerAutoConfiguration

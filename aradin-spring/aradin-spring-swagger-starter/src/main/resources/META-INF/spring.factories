@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.aradin.spring.swagger.starter.AradinSwaggerAutoConfiguration
+cn.aradin.spring.swagger.starter.AradinSwaggerAutoConfiguration
