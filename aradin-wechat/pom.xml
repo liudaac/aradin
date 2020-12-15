@@ -11,7 +11,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>aradin-wechat</artifactId>
 	<packaging>pom</packaging>
-	<name>Aradin Spring</name>
+	<name>aradin-wechat</name>
 	<description>Aradin features on Wechat</description>
 	<modules>
 	</modules>

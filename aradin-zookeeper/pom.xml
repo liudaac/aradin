@@ -11,7 +11,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>aradin-zookeeper</artifactId>
 	<packaging>pom</packaging>
-	<name>Aradin Spring</name>
+	<name>aradin-zookeeper</name>
 	<description>Aradin features on Zookeeper</description>
 	<modules>
 		<module>aradin-zookeeper-boot-starter</module>
