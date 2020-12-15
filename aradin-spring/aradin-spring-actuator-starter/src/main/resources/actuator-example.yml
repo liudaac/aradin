@@ -1,0 +1,19 @@
+info:
+  app:
+    name: aradin
+    version: 0.0.1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info,health,metrics #开启指定的actuator
+      basepath: /aradin #改变原本内建的/actuator/xxx路径
+  endpoint:
+    shutdown:
+      enabled: true #开启shutdown
+
+aradin:
+  actuator:
+    online:
+      shell: /filebeat-start.sh
