@@ -354,12 +354,22 @@
         	</dependency>
         	<dependency>
         		<groupId>cn.aradin</groupId>
+        		<artifactId>aradin-mybatis</artifactId>
+        		<version>${project.version}</version>
+        	</dependency>
+        	<dependency>
+        		<groupId>cn.aradin</groupId>
         		<artifactId>aradin-mybatis-boot-starter</artifactId>
         		<version>${project.version}</version>
         	</dependency>
         	<dependency>
         		<groupId>cn.aradin</groupId>
         		<artifactId>aradin-mybatis-plus-starter</artifactId>
+        		<version>${project.version}</version>
+        	</dependency>
+        	<dependency>
+        		<groupId>cn.aradin</groupId>
+        		<artifactId>aradin-spring</artifactId>
         		<version>${project.version}</version>
         	</dependency>
         	<dependency>
