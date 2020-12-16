@@ -36,7 +36,6 @@
 		<dependency>
 			<groupId>cn.aradin</groupId>
 			<artifactId>aradin-spring-core</artifactId>
-			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

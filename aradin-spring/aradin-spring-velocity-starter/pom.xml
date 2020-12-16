@@ -24,7 +24,6 @@
 		<dependency>
 			<groupId>cn.aradin</groupId>
 			<artifactId>aradin-spring-velocity</artifactId>
-			<version>${revision}</version>
 		</dependency>
 	</dependencies>
 </project>

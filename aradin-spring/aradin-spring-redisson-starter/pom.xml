@@ -24,7 +24,6 @@
 		<dependency>
 			<groupId>cn.aradin</groupId>
 			<artifactId>aradin-spring-redis-starter</artifactId>
-			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.redisson</groupId>
