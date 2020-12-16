@@ -11,7 +11,8 @@
 	</parent>
 	<artifactId>aradin-spring-velocity-starter</artifactId>
 	<name>aradin-spring-velocity-starter</name>
-	<url>http://maven.apache.org</url>
+	<description>Aradin Spring Velocity Booter</description>
+	<url>https://github.com/liudaac/aradin</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>

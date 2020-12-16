@@ -8,6 +8,8 @@
 	<artifactId>aradin</artifactId>
 	<packaging>pom</packaging>
 	<version>${revision}</version>
+	<name>Aradin</name>
+	<description>Aradin Build And Dependencies</description>
 	<modules>
 		<module>aradin-spring</module>
 		<module>aradin-mybatis</module>

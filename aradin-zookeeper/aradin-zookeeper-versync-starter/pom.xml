@@ -11,7 +11,8 @@
 	</parent>
 	<artifactId>aradin-zookeeper-versync-starter</artifactId>
 	<name>aradin-zookeeper-versync-starter</name>
-	<url>http://maven.apache.org</url>
+	<description>Aradin Zookeeper Version SyncBooter</description>
+	<url>https://github.com/liudaac/aradin</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>

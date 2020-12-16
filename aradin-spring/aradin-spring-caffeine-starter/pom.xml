@@ -11,7 +11,8 @@
 	</parent>
 	<artifactId>aradin-spring-caffeine-starter</artifactId>
 	<name>aradin-spring-caffeine-starter</name>
-	<url>http://maven.apache.org</url>
+	<description>Aradin Caffeine Boot</description>
+	<url>https://github.com/liudaac/aradin</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>

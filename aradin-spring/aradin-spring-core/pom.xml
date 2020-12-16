@@ -11,7 +11,8 @@
 	</parent>
 	<artifactId>aradin-spring-core</artifactId>
 	<name>aradin-spring-core</name>
-	<url>http://maven.apache.org</url>
+	<description>Aradin Spring Core</description>
+	<url>https://github.com/liudaac/aradin</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>

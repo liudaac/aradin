@@ -11,7 +11,8 @@
 	</parent>
 	<artifactId>aradin-mybatis-boot-starter</artifactId>
 	<name>aradin-mybatis-boot-starter</name>
-	<url>http://maven.apache.org</url>
+	<description>Mybatis Boot Starter</description>
+	<url>https://github.com/liudaac/aradin</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>

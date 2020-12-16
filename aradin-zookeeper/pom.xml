@@ -13,6 +13,7 @@
 	<packaging>pom</packaging>
 	<name>aradin-zookeeper</name>
 	<description>Aradin features on Zookeeper</description>
+	<url>https://github.com/liudaac/aradin</url>
 	<modules>
 		<module>aradin-zookeeper-boot-starter</module>
 		<module>aradin-zookeeper-versync-starter</module>

@@ -11,7 +11,8 @@
 	</parent>
 	<artifactId>aradin-spring-actuator-starter</artifactId>
 	<name>aradin-spring-actuator-starter</name>
-	<url>http://maven.apache.org</url>
+	<description>Actuator And Customized HealthCheck</description>
+	<url>https://github.com/liudaac/aradin</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>

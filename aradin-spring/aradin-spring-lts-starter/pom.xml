@@ -11,7 +11,8 @@
 	</parent>
 	<artifactId>aradin-spring-lts-starter</artifactId>
 	<name>aradin-spring-lts-starter</name>
-	<url>http://maven.apache.org</url>
+	<description>Aradin Spring Lts Boot</description>
+	<url>https://github.com/liudaac/aradin</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>

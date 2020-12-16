@@ -11,7 +11,8 @@
 	</parent>
 	<artifactId>aradin-spring-velocity</artifactId>
 	<name>aradin-spring-velocity</name>
-	<url>http://maven.apache.org</url>
+	<description>Aradin Core Velocity</description>
+	<url>https://github.com/liudaac/aradin</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>

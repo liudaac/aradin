@@ -11,7 +11,8 @@
 	</parent>
 	<artifactId>aradin-spring-webwall-starter</artifactId>
 	<name>aradin-spring-webwall-starter</name>
-	<url>http://maven.apache.org</url>
+	<description>Aradin Webwall Booter</description>
+	<url>https://github.com/liudaac/aradin</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
