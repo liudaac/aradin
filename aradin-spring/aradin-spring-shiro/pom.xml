@@ -8,6 +8,7 @@
 		<groupId>cn.aradin</groupId>
 		<artifactId>aradin-spring</artifactId>
 		<version>${revision}</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>aradin-spring-shiro</artifactId>
 	<name>aradin-spring-shiro</name>

@@ -8,6 +8,7 @@
 		<groupId>cn.aradin</groupId>
 		<artifactId>aradin-mybatis</artifactId>
 		<version>${revision}</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>aradin-mybatis-plus-starter</artifactId>
 	<name>aradin-mybatis-plus-starter</name>

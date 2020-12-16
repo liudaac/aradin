@@ -8,6 +8,7 @@
 		<groupId>cn.aradin</groupId>
 		<artifactId>aradin-zookeeper</artifactId>
 		<version>${revision}</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>aradin-zookeeper-cluster-starter</artifactId>
 	<name>aradin-zookeeper-cluster-starter</name>
