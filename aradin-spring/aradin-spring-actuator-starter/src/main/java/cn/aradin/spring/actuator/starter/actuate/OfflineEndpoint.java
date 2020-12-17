@@ -33,7 +33,7 @@ public class OfflineEndpoint implements ApplicationContextAware{
 	}
 	
 	@WriteOperation
-	public Map<String, String> shutdown() {
+	public Map<String, String> offline() {
 		if (this.context == null) {
 			return NO_CONTEXT_MESSAGE;
 		}
