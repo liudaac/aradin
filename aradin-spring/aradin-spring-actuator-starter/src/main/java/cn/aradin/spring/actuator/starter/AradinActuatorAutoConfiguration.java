@@ -6,7 +6,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import cn.aradin.spring.actuator.starter.extension.DefaultOfflineHandler;
+import cn.aradin.spring.actuator.starter.extension.DefaultOnlineHandler;
 import cn.aradin.spring.actuator.starter.extension.IOfflineHandler;
+import cn.aradin.spring.actuator.starter.extension.IOnlineHandler;
 import cn.aradin.spring.actuator.starter.properties.ActuatorOnlineProperties;
 
 @Configuration
@@ -17,5 +19,11 @@ public class AradinActuatorAutoConfiguration {
 	@ConditionalOnMissingBean
 	public IOfflineHandler offlineHandler() {
 		return new DefaultOfflineHandler();
+	}
+	
+	@Bean
+	@ConditionalOnMissingBean
+	public IOnlineHandler onlineHandler() {
+		return new DefaultOnlineHandler();
 	}
 }

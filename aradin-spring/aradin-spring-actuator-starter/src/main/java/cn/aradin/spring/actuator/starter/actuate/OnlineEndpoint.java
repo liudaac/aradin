@@ -2,12 +2,15 @@ package cn.aradin.spring.actuator.starter.actuate;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 
+import cn.aradin.spring.actuator.starter.extension.IOnlineHandler;
 import cn.aradin.spring.actuator.starter.properties.ActuatorOnlineProperties;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,9 +23,12 @@ public class OnlineEndpoint {
 	
 	private final ActuatorOnlineProperties actuatorOnlineProperties;
 	
-	public OnlineEndpoint(ActuatorOnlineProperties actuatorOnlineProperties) {
+	private final List<IOnlineHandler> onlineHandlers;
+	
+	public OnlineEndpoint(ActuatorOnlineProperties actuatorOnlineProperties, List<IOnlineHandler> onlineHandlers) {
 		// TODO Auto-generated constructor stub
 		this.actuatorOnlineProperties = actuatorOnlineProperties;
+		this.onlineHandlers = onlineHandlers;
 	}
 	
 	@ReadOperation
@@ -52,6 +58,16 @@ public class OnlineEndpoint {
 				// TODO: handle exception
 				e.printStackTrace();
 			}
+		}
+		try {
+			if (CollectionUtils.isNotEmpty(onlineHandlers)) {
+				onlineHandlers.forEach(handler->{
+					handler.online();
+				});
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
 		}
         return ONLINE_MESSAGE;
 	}
