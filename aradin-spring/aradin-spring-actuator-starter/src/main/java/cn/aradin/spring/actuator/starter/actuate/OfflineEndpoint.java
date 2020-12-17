@@ -7,7 +7,7 @@ import java.util.Map;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
-import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;
+import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -32,7 +32,7 @@ public class OfflineEndpoint implements ApplicationContextAware{
 		this.offlineHandlers = handlers;
 	}
 	
-	@WriteOperation
+	@ReadOperation
 	public Map<String, String> offline() {
 		if (this.context == null) {
 			return NO_CONTEXT_MESSAGE;
