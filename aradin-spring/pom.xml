@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<groupId>cn.aradin</groupId>
 		<artifactId>aradin</artifactId>
@@ -16,6 +14,7 @@
 	<modules>
 		<module>aradin-spring-core</module>
 		<module>aradin-spring-actuator-starter</module>
+		<module>aradin-spring-actuator-consul-starter</module>
 		<module>aradin-spring-webwall-starter</module>
 		<module>aradin-spring-redis-starter</module>
 		<module>aradin-spring-redisson-starter</module>
@@ -27,7 +26,7 @@
 		<module>aradin-spring-shiro-starter</module>
 		<module>aradin-spring-swagger-starter</module>
 		<module>aradin-spring-lts-starter</module>
-    </modules>
+  </modules>
     <build>
     	<resources>
 			<resource>
