@@ -22,7 +22,7 @@ public class InitedEndpoint implements ApplicationContextAware{
 	
 	@ReadOperation
 	public Map<String, String> inited() {
-		if (this.context != null && this.context.isRunning()) {
+		if (this.context != null && this.context.isActive()) {
 			return INITED_MESSAGE;
 		}
 		return NO_INITED_MESSAGE;
