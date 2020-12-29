@@ -136,13 +136,13 @@ public class ExcelUtil {
 	}
 
 	/**
-	 * 创建sheet到file中
+	 * create sheet in selected file
 	 * 
-	 * @param filepath
-	 * @param sheetIndex
-	 * @param cellnames
-	 * @param arrRows
-	 * @throws Exception
+	 * @param filepath localpath
+	 * @param sheetname sheetname
+	 * @param cellnames name list
+	 * @param arrRows data
+	 * @throws Exception IO
 	 */
 	public static void createSheet(String filepath, String sheetname, String[] cellnames, List<List<Object>> arrRows)
 			throws Exception {

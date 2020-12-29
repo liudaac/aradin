@@ -64,7 +64,7 @@ public class HttpClientFactory {
 	 * @param supportedProtocols protocols
 	 * @param maxTotal Max number of connection
 	 * @param maxPerRoute Max connections for each route
-	 * @return
+	 * @return HttpClient Instance
 	 */
 	public static HttpClient createKeyMaterialHttpClient(KeyStore keystore,String keyPassword,String[] supportedProtocols,int maxTotal,int maxPerRoute) {
 		try {
