@@ -25,7 +25,7 @@ public class AradinRedisAutoConfiguration {
 	public RedisTemplate<String, Object> redisSerializeTemplate(RedisConnectionFactory redisConnectionFactory) {
 		RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
 		template.setConnectionFactory(redisConnectionFactory);
-		template.setEnableDefaultSerializer(false);
+//		template.setEnableDefaultSerializer(false);
 		template.setKeySerializer(RedisSerializer.string());
 		return template;
 	}
