@@ -10,11 +10,14 @@ import java.security.cert.CertificateException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.util.EntityUtils;
 
 import cn.aradin.spring.core.net.http.handler.ResponseHandlerFactory;
 
@@ -95,5 +98,29 @@ public class HttpClientUtils {
 	@SuppressWarnings("unchecked")
 	public static <T> T executeJsonResult(HttpUriRequest request, Class<T> clazz) throws Exception {
 		return (T) execute(request, ResponseHandlerFactory.createJsonResponseHandler(clazz));
+	}
+	
+	/**
+	 * Download Data
+	 * @param url Target
+	 * @return Datas
+	 */
+	public static byte[] downloadData(String url) {
+		 HttpGet httpGet = new HttpGet(url);
+		 try {
+			HttpResponse response = httpClient.execute(httpGet);
+			HttpEntity entity = response.getEntity();
+	        if (entity == null) {
+	            return null;
+	        }
+	        return EntityUtils.toByteArray(entity);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
