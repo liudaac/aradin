@@ -24,7 +24,7 @@
 	</parent>
 	<properties>
 		<!-- Project revision -->
-		<revision>0.0.1.BETA3</revision>
+		<revision>0.0.1.Alpha</revision>
 
 		<!-- Base Code -->
 		<java.version>1.8</java.version>
@@ -79,6 +79,7 @@
 		<commons-collections.version>3.2.2</commons-collections.version>
 		<commons-digester.version>2.1</commons-digester.version>
 		<commons-io.version>2.6</commons-io.version>
+		<poi.version>3.11</poi.version>
 		
 		<flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
 	</properties>
@@ -353,6 +354,13 @@
 				<artifactId>commons-io</artifactId>
 				<version>${commons-io.version}</version>
 			</dependency>
+			<!-- Excel -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml</artifactId>
+				<version>${poi.version}</version>
+			</dependency>
+			
 			<dependency>
 				<groupId>cn.aradin</groupId>
 				<artifactId>aradin-mybatis</artifactId>
