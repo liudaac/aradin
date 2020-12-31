@@ -14,7 +14,6 @@
 	<modules>
 		<module>aradin-spring-core</module>
 		<module>aradin-spring-actuator-starter</module>
-		<module>aradin-spring-actuator-consul-starter</module>
 		<module>aradin-spring-webwall-starter</module>
 		<module>aradin-spring-redis-starter</module>
 		<module>aradin-spring-redisson-starter</module>

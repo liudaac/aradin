@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.aradin.spring.actuator.consul.starter.AradinActuatorConsulAutoConfiguration
