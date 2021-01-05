@@ -13,7 +13,6 @@
   * lts集成
   * redis集成
   * redisson集成
-  * shiro集成
   * swagger集成
   * velocity兼容
   * 一般性web防护
@@ -26,3 +25,7 @@
 * netty grpc paxos/raft一致性组件
 * 分布式内存缓存
 * 分库分表方案，支持分割算法扩展
+
+# v0.0.3 权限扩充（规划中）
+* shiro集成
+* security集成
