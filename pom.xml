@@ -13,9 +13,8 @@
 	<modules>
 		<module>aradin-spring</module>
 		<module>aradin-mybatis</module>
-		<module>aradin-zookeeper</module>
-		<!-- <module>aradin-examples</module>  
-			<module>aradin-wechat</module> -->
+		<module>aradin-wechat</module>
+		<!-- <module>aradin-zookeeper</module> <module>aradin-examples</module> -->
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -65,6 +64,8 @@
 		<velocity-tools.version>2.0</velocity-tools.version>
 		<!-- Netty -->
 		<netty.version>4.1.55.Final</netty.version>
+		<!-- WEIXIN -->
+		<wechat.version>2.8.30</wechat.version>
 		<!-- TOOLS -->
 		<jacoco.version>0.8.3</jacoco.version>
 		<fastjson.version>1.2.75</fastjson.version>
@@ -81,7 +82,7 @@
 		<commons-digester.version>2.1</commons-digester.version>
 		<commons-io.version>2.6</commons-io.version>
 		<poi.version>3.11</poi.version>
-		
+
 		<flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
 	</properties>
 
@@ -289,6 +290,13 @@
 				<version>${netty.version}</version>
 			</dependency>
 
+			<!-- WeChat -->
+			<dependency>
+				<groupId>com.github.liyiorg</groupId>
+				<artifactId>weixin-popular</artifactId>
+				<version>${wechat.version}</version>
+			</dependency>
+
 			<!-- tools -->
 			<dependency>
 				<groupId>com.alibaba</groupId>
@@ -361,7 +369,7 @@
 				<artifactId>poi-ooxml</artifactId>
 				<version>${poi.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>cn.aradin</groupId>
 				<artifactId>aradin-mybatis</artifactId>
@@ -562,29 +570,29 @@
 				</configuration>
 			</plugin>
 			<plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>flatten-maven-plugin</artifactId>
-                <configuration>
-                    <updatePomFile>true</updatePomFile>
-                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>flatten</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>flatten</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>flatten.clean</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+				<configuration>
+					<updatePomFile>true</updatePomFile>
+					<flattenMode>resolveCiFriendliesOnly</flattenMode>
+				</configuration>
+				<executions>
+					<execution>
+						<id>flatten</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>flatten</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>flatten.clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
