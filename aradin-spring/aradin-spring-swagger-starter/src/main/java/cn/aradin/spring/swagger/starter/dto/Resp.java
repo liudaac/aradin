@@ -53,6 +53,9 @@ public class Resp<C extends CodedEnum, T> implements Serializable{
 	public static <A> Resp<AradinCodedEnum, A> ok(A data) {
 		return new Resp<AradinCodedEnum, A>().data(data).code(AradinCodedEnum.OK);
 	}
+	public static <C extends CodedEnum, A> Resp<C, A> ok(C coded, A data) {
+		return new Resp<C, A>(coded, null, data);
+	}
 	public static Resp<CodedEnum, Object> error(HttpError error) {
 		return error(error, null);
 	}
