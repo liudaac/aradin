@@ -14,6 +14,7 @@
 	<modules>
 	<module>aradin-mybatis-boot-starter</module>
     <module>aradin-mybatis-plus-starter</module>
+    <module>aradin-mybatis-shard-starter</module>
   </modules>
 	<dependencies>
 		<dependency>
@@ -21,7 +22,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
-		<!-- Druid æ•°æ®è¿æ¥æ± ä¾èµ– -->
+		<!-- Druid Êı¾İÁ¬½Ó³ØÒÀÀµ -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
