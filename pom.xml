@@ -381,6 +381,21 @@
 
 			<dependency>
 				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-alibaba</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-alibaba-nacos-starter</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-alibaba-sentinel-starter</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
 				<artifactId>aradin-mybatis</artifactId>
 				<version>${revision}</version>
 			</dependency>
