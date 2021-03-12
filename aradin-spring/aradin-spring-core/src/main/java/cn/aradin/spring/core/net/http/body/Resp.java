@@ -52,11 +52,11 @@ public class Resp<T> implements Serializable {
 		return new Resp<A>().data(data);
 	}
 
-	public static Resp<?> error(HttpError error) {
+	public static Resp<Object> error(HttpError error) {
 		return error(error, null);
 	}
 
-	public static Resp<?> error(HttpError error, String alias) {
-		return new Resp<Object>().code(error.getCode()).msg(StringUtils.isNotBlank(alias) ? alias : error.getMsg());
+	public static Resp<Object> error(HttpError error, String alias) {
+		return new Resp<Object>().code(error.getCode()!=null?error.getCode():error.getCoded().getCode()).msg(StringUtils.isNotBlank(alias) ? alias : error.getMsg());
 	}
 }
