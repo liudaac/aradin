@@ -19,6 +19,9 @@
   * Mybatis及Mybatis Plus集成
 
 # v0.0.2 能力扩充（开发中）
+* alibaba dubbo
+* alibaba nacos
+* alibaba sentinel
 * zookeeper监听集成
   * 基于zookeeper版本同步
   * 基于zookeeper集群注册
