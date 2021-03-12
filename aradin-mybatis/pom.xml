@@ -22,7 +22,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
-		<!-- Druid 数据连接池依赖 -->
+		<!-- Druid -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
