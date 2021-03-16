@@ -38,8 +38,8 @@
 			<artifactId>sentinel-datasource-nacos</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>cn.aradin</groupId>
-			<artifactId>aradin-alibaba-nacos-starter</artifactId>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
