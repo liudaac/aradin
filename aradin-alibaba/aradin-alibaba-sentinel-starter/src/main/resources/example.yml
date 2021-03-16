@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    sentinel:
+      enabled: true
+      eager: true
+      transport:
+        port: 
+        dashboard: 
+      datasource:
+        - nacos:
+            username: 
+            password: 
+            data-type: json
+            rule-type: flow
+            group-id: SENTINEL_GROUP
+            data-id: ${spring.application.name}-flow-rules
+            namespace: 
+            server-addr: 

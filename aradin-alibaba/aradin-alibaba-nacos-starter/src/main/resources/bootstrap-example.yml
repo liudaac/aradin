@@ -1,0 +1,20 @@
+spring:
+  profiles:
+    active: ${spring.profiles.active}
+  application:
+    name: 
+  cloud:
+    nacos:
+      username: 
+      password: 
+      config:
+        enabled: true
+        server-addr: 
+        namespace: 
+        prefix: 
+        file-extension: yaml
+      discovery:
+        enabled: true
+        register-enabled: true
+        namespace: 
+        server-addr: 
