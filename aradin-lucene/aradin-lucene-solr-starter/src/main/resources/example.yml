@@ -1,0 +1,6 @@
+spring:
+  data:
+    solr:
+      zk-host:
+        - 127.0.0.1:2181
+      chroot: 

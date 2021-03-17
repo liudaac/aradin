@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>cn.aradin</groupId>
+		<artifactId>aradin</artifactId>
+		<version>${revision}</version>
+		<relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>aradin-lucene</artifactId>
+	<packaging>pom</packaging>
+	<name>aradin-zookeeper</name>
+	<description>Aradin features on Zookeeper</description>
+	<url>https://github.com/liudaac/aradin</url>
+	<modules>
+    <module>aradin-lucene-solr-starter</module>
+  </modules>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

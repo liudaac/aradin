@@ -14,6 +14,7 @@
 		<module>aradin-spring</module>
 		<module>aradin-mybatis</module>
 		<module>aradin-alibaba</module>
+		<module>aradin-lucene</module>
 		<!-- <module>aradin-wechat</module> <module>aradin-zookeeper</module> <module>aradin-examples</module> -->
 	</modules>
 	<parent>
@@ -392,6 +393,16 @@
 			<dependency>
 				<groupId>cn.aradin</groupId>
 				<artifactId>aradin-alibaba-sentinel-starter</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-lucene</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-lucene-solr-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
