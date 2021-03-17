@@ -26,7 +26,7 @@ public class AradinSolrAutoConfiguration {
 	
 	@Bean
 	public CloudSolrClient solrClient() {
-		Builder clientBuilder = new Builder(aradinSolrProperties.getZkHost(), Optional.ofNullable(aradinSolrProperties.getChroot()));
+		Builder clientBuilder = new Builder(aradinSolrProperties.getZkHosts(), Optional.ofNullable(aradinSolrProperties.getChroot()));
 		return clientBuilder.build();
 	}
 }

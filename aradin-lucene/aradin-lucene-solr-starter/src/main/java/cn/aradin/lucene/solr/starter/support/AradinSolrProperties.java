@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AradinSolrProperties {
-	private List<String> zkHost;
+	private List<String> zkHosts;
 	private String chroot;
 }
