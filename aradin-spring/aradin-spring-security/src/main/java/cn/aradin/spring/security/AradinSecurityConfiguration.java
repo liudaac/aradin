@@ -1,10 +1,10 @@
-package org.aradin.zookeeper.boot.starter;
+package cn.aradin.spring.security;
 
 /**
  * Hello world!
  *
  */
-public class App 
+public class AradinSecurityConfiguration 
 {
     public static void main( String[] args )
     {

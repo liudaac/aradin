@@ -15,7 +15,8 @@
 		<module>aradin-mybatis</module>
 		<module>aradin-alibaba</module>
 		<module>aradin-lucene</module>
-		<!-- <module>aradin-wechat</module> <module>aradin-zookeeper</module> <module>aradin-examples</module> -->
+		<module>aradin-zookeeper</module>
+		<!-- <module>aradin-wechat</module> <module>aradin-examples</module> -->
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -25,7 +26,7 @@
 	</parent>
 	<properties>
 		<!-- Project revision -->
-		<revision>0.0.2.Alpha</revision>
+		<revision>0.0.2.BETA5</revision>
 
 		<!-- Base Code -->
 		<java.version>1.8</java.version>
