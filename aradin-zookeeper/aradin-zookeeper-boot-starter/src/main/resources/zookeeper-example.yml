@@ -1,0 +1,10 @@
+aradin:
+  zookeeper:
+    enable: true
+    session-timeout: 5000
+    connection-timeout: 5000
+    addresses:
+      - id: 
+        address: 
+      - id: 
+        address: 

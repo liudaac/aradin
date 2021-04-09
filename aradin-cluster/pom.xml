@@ -9,24 +9,19 @@
 		<relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>aradin-zookeeper</artifactId>
+	<artifactId>aradin-cluster</artifactId>
 	<packaging>pom</packaging>
-	<name>aradin-zookeeper</name>
-	<description>Aradin features on Zookeeper</description>
-	<url>https://github.com/liudaac/aradin</url>
+	<name>aradin-cluster</name>
+	<description>Aradin features on Cluster</description>
 	<modules>
-		<module>aradin-zookeeper-boot-starter</module>
-		<module>aradin-zookeeper-versync-starter</module>
+		<module>aradin-cluster-core</module>
+		<module>aradin-cluster-zookeeper-starter</module>
 	</modules>
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
-			</plugin>
-		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
 	</build>
 </project>

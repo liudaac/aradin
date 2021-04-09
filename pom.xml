@@ -16,6 +16,7 @@
 		<module>aradin-alibaba</module>
 		<module>aradin-lucene</module>
 		<module>aradin-zookeeper</module>
+		<module>aradin-cluster</module>
 		<!-- <module>aradin-wechat</module> <module>aradin-examples</module> -->
 	</modules>
 	<parent>
@@ -474,6 +475,16 @@
 			<dependency>
 				<groupId>cn.aradin</groupId>
 				<artifactId>aradin-spring-webwall-starter</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-zookeeper-boot-starter</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-cluster-core</artifactId>
 				<version>${revision}</version>
 			</dependency>
 		</dependencies>
