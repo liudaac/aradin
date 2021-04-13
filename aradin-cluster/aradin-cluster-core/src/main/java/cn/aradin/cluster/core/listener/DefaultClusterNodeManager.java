@@ -2,11 +2,8 @@ package cn.aradin.cluster.core.listener;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class DefaultClusterNodeManager implements IClusterNodeManager {
-
-	private AtomicInteger nodeNum = new AtomicInteger(0);
 
 	private Set<String> nodes = new HashSet<String>();
 
@@ -14,7 +11,6 @@ public class DefaultClusterNodeManager implements IClusterNodeManager {
 	public void nodeInit(Set<String> nodes) {
 		// TODO Auto-generated method stub
 		this.nodes.addAll(nodes);
-		nodeNum.set(nodes.size());
 	}
 
 	@Override
@@ -32,7 +28,7 @@ public class DefaultClusterNodeManager implements IClusterNodeManager {
 	@Override
 	public Integer nodeNum() {
 		// TODO Auto-generated method stub
-		return this.nodeNum.get();
+		return this.nodes.size();
 	}
 
 	@Override
