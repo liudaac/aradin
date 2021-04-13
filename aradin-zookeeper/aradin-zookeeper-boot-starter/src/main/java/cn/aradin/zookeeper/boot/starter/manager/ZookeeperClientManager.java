@@ -26,6 +26,7 @@ public class ZookeeperClientManager {
 		this.zookeeperProperties = zookeeperProperties;
 		this.dispatcher = dispatcher;
 		init();
+		this.dispatcher.initHandlers(this);
 	}
 	
 	/**
@@ -63,5 +64,9 @@ public class ZookeeperClientManager {
 				}
 			});
 		}
+	}
+	
+	public CuratorFramework getClient(String id) {
+		return zookeeperClients.get(id);
 	}
 }

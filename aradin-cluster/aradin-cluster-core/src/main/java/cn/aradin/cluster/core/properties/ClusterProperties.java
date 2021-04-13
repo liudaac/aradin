@@ -13,7 +13,9 @@ import lombok.NoArgsConstructor;
 @ConfigurationProperties(prefix = "aradin.cluster")
 public class ClusterProperties {
 	private String name;
-	private boolean register = false;
+	private String nodeName;//Current Node Name
+	private boolean register = true;
 	private boolean preferIpAddress = false;
 	private RegisterType registerType;
+	private String zookeeperAddressId;
 }

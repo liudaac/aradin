@@ -23,5 +23,9 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>cn.aradin</groupId>
+			<artifactId>aradin-zookeeper-boot-starter</artifactId>
+		</dependency>
 	</dependencies>
 </project>

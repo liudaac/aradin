@@ -10,6 +10,7 @@ import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
 
 import cn.aradin.spring.core.thread.AradinExecutors;
 import cn.aradin.zookeeper.boot.starter.handler.INodeHandler;
+import cn.aradin.zookeeper.boot.starter.manager.ZookeeperClientManager;
 
 public class ZookeeperEventDispatcher implements PathChildrenCacheListener{
 	
@@ -19,6 +20,12 @@ public class ZookeeperEventDispatcher implements PathChildrenCacheListener{
 		this.nodeHandlers = nodeHandlers;
 	}
 
+	public void initHandlers(ZookeeperClientManager clientManager) {
+		this.nodeHandlers.forEach(handler -> {
+			handler.init(clientManager);
+		});
+	}
+	
 	@Override
 	public void childEvent(CuratorFramework client, PathChildrenCacheEvent event) throws Exception {
 		// TODO Auto-generated method stub

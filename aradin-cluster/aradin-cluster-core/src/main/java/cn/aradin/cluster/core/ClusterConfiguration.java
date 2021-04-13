@@ -1,8 +1,12 @@
 package cn.aradin.cluster.core;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import cn.aradin.cluster.core.listener.DefaultClusterNodeManager;
+import cn.aradin.cluster.core.listener.IClusterNodeManager;
 import cn.aradin.cluster.core.properties.ClusterProperties;
 
 /**
@@ -12,4 +16,10 @@ import cn.aradin.cluster.core.properties.ClusterProperties;
 @Configuration
 @EnableConfigurationProperties(ClusterProperties.class)
 public class ClusterConfiguration {
+	
+	@Bean
+	@ConditionalOnMissingBean
+	public IClusterNodeManager clusterNodeListener() {
+		return new DefaultClusterNodeManager();
+	}
 }

@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @ConfigurationProperties(prefix = "aradin.zookeeper")
 public class ZookeeperProperties {
-	private boolean enable = false;
+	private boolean enable = true;
 	private int sessionTimeout = 5000;
 	private int connectionTimeout = 5000;
 	private List<Zookeeper> addresses = Lists.newArrayList();

@@ -1,6 +1,7 @@
 aradin:
   cluster:
     name: default
+    node-name: ${HOST}
     register: true
     prefer-ip-address: true
     zookeeper-address-id: ${customid}

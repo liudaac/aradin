@@ -1,13 +1,15 @@
 aradin:
   cluster:
     name: default
-    register: true
-    prefer-ip-address: true
+    node-name: ${HOST}
+    #register: true
+    #prefer-ip-address: false
+    register-type: zookeeper #nacos
     zookeeper-address-id: ${customid}
   zookeeper:
-    enable: true
-    session-timeout: 5000
-    connection-timeout: 5000
+    #enable: true
+    #session-timeout: 5000
+    #connection-timeout: 5000
     addresses:
       - id: ${customid}
         address: 
