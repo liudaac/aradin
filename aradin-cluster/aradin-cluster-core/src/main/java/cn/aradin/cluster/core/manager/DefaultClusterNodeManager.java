@@ -1,4 +1,4 @@
-package cn.aradin.cluster.core.listener;
+package cn.aradin.cluster.core.manager;
 
 import java.util.HashSet;
 import java.util.Set;

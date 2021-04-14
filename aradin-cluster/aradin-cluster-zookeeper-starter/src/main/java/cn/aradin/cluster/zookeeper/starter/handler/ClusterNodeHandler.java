@@ -13,7 +13,7 @@ import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
 import org.apache.zookeeper.CreateMode;
 
 import cn.aradin.cluster.core.enums.RegisterType;
-import cn.aradin.cluster.core.listener.IClusterNodeManager;
+import cn.aradin.cluster.core.manager.IClusterNodeManager;
 import cn.aradin.cluster.core.properties.ClusterProperties;
 import cn.aradin.zookeeper.boot.starter.handler.INodeHandler;
 import cn.aradin.zookeeper.boot.starter.manager.ZookeeperClientManager;
@@ -88,7 +88,7 @@ public class ClusterNodeHandler implements INodeHandler {
 		path = path.substring(0, path.lastIndexOf("/"));
 		if (path.contains("/")) {
 			String cluster = path.substring(path.lastIndexOf("/") + 1);
-			if (clusterProperties.getName().equalsIgnoreCase(cluster)) {
+			if (clusterProperties.getZookeeperAddressId().equalsIgnoreCase(cluster)) {
 				return true;
 			}
 		}

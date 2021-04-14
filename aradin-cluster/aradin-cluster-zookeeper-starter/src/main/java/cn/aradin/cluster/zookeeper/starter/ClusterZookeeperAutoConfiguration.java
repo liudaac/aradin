@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import cn.aradin.cluster.core.ClusterConfiguration;
-import cn.aradin.cluster.core.listener.IClusterNodeManager;
+import cn.aradin.cluster.core.manager.IClusterNodeManager;
 import cn.aradin.cluster.core.properties.ClusterProperties;
 import cn.aradin.cluster.zookeeper.starter.handler.ClusterNodeHandler;
 import cn.aradin.zookeeper.boot.starter.ZookeeperBootAutoConfiguration;

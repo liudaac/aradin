@@ -5,8 +5,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import cn.aradin.cluster.core.listener.DefaultClusterNodeManager;
-import cn.aradin.cluster.core.listener.IClusterNodeManager;
+import cn.aradin.cluster.core.manager.DefaultClusterNodeManager;
+import cn.aradin.cluster.core.manager.IClusterNodeManager;
 import cn.aradin.cluster.core.properties.ClusterProperties;
 
 /**
