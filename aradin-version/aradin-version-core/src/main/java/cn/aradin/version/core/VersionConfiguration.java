@@ -6,8 +6,6 @@ import org.springframework.context.annotation.Configuration;
 
 import cn.aradin.version.core.handler.DefaultVersionHandler;
 import cn.aradin.version.core.handler.IVersionHandler;
-import cn.aradin.version.core.manager.DefaultVersionManager;
-import cn.aradin.version.core.manager.IVersionManager;
 
 /**
  * Version Configuration
@@ -15,12 +13,6 @@ import cn.aradin.version.core.manager.IVersionManager;
  */
 @Configuration
 public class VersionConfiguration {
-	
-	@Bean
-	@ConditionalOnMissingBean
-	public IVersionManager defaultVersionManager() {
-		return new DefaultVersionManager();
-	}
 	
 	@Bean
 	@ConditionalOnMissingBean
