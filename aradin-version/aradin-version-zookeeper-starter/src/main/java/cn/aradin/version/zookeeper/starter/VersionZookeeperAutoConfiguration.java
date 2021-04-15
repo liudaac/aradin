@@ -17,7 +17,7 @@ import cn.aradin.zookeeper.boot.starter.properties.ZookeeperProperties;
 
 /**
  * VersionZookeeper Configuration
- *
+ * PathPattern like /${addressid}/${group}/${key}
  */
 @Configuration
 @Import(VersionConfiguration.class)
