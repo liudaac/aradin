@@ -489,6 +489,11 @@
 			</dependency>
 			<dependency>
 				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-cluster-zookeeper-starter</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
 				<artifactId>aradin-version-core</artifactId>
 				<version>${revision}</version>
 			</dependency>

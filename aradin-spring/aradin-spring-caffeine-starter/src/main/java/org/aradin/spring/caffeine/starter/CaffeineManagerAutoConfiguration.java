@@ -4,7 +4,7 @@ package org.aradin.spring.caffeine.starter;
  * Hello world!
  *
  */
-public class App 
+public class CaffeineManagerAutoConfiguration 
 {
     public static void main( String[] args )
     {

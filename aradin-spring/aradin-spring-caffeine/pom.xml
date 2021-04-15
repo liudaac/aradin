@@ -23,16 +23,13 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>cn.aradin</groupId>
+			<artifactId>aradin-cluster-zookeeper-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.aradin</groupId>
+			<artifactId>aradin-version-zookeeper-starter</artifactId>
+		</dependency>
 	</dependencies>
-	<build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
