@@ -8,8 +8,11 @@ import cn.aradin.zookeeper.boot.starter.manager.ZookeeperClientManager;
 public interface INodeHandler {
 
 	public void init(ZookeeperClientManager clientManager);
-	
+
 	public boolean support(PathChildrenCacheEvent event);
 
 	public void handler(CuratorFramework client, PathChildrenCacheEvent event);
+
+	public default void setValue(String path, String value) {
+	};
 }

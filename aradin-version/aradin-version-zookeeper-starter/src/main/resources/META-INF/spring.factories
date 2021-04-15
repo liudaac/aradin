@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+cn.aradin.version.zookeeper.starter.VersionZookeeperAutoConfiguration
