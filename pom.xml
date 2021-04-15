@@ -17,6 +17,7 @@
 		<module>aradin-lucene</module>
 		<module>aradin-zookeeper</module>
 		<module>aradin-cluster</module>
+		<module>aradin-version</module>
 		<!-- <module>aradin-wechat</module> <module>aradin-examples</module> -->
 	</modules>
 	<parent>
