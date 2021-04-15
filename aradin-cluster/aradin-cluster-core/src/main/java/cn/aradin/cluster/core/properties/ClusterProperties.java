@@ -2,7 +2,7 @@ package cn.aradin.cluster.core.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import cn.aradin.cluster.core.enums.RegisterType;
+import cn.aradin.spring.core.enums.RegisterType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

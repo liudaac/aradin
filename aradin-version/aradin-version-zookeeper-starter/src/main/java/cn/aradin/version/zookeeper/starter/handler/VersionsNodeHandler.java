@@ -7,8 +7,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
 
+import cn.aradin.spring.core.enums.RegisterType;
 import cn.aradin.version.core.dispatcher.VersionDispatcher;
-import cn.aradin.version.core.enums.SyncType;
 import cn.aradin.version.core.properties.VersionProperties;
 import cn.aradin.zookeeper.boot.starter.handler.INodeHandler;
 import cn.aradin.zookeeper.boot.starter.manager.ZookeeperClientManager;
@@ -29,7 +29,7 @@ public class VersionsNodeHandler implements INodeHandler {
 		if (versionProperties == null) {
 			throw new RuntimeException("Version is not config");
 		}
-		if (!SyncType.zookeeper.equals(versionProperties.getSyncType())) {
+		if (!RegisterType.zookeeper.equals(versionProperties.getRegisterType())) {
 			throw new RuntimeException("Version is not registed on zookeeper");
 		}
 		this.versionProperties = versionProperties;

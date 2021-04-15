@@ -1,4 +1,4 @@
-package cn.aradin.cluster.core.enums;
+package cn.aradin.spring.core.enums;
 
 public enum RegisterType {
 	zookeeper,

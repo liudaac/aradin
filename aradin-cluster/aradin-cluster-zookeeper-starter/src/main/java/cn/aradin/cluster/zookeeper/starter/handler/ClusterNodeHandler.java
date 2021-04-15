@@ -12,9 +12,9 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
 import org.apache.zookeeper.CreateMode;
 
-import cn.aradin.cluster.core.enums.RegisterType;
 import cn.aradin.cluster.core.manager.IClusterNodeManager;
 import cn.aradin.cluster.core.properties.ClusterProperties;
+import cn.aradin.spring.core.enums.RegisterType;
 import cn.aradin.zookeeper.boot.starter.handler.INodeHandler;
 import cn.aradin.zookeeper.boot.starter.manager.ZookeeperClientManager;
 import cn.aradin.zookeeper.boot.starter.properties.Zookeeper;

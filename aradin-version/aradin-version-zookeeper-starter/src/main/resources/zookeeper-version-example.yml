@@ -1,6 +1,6 @@
 aradin:
   version:
-    sync-type: zookeeper #nacos
+    register-type: zookeeper #nacos
     zookeeper-address-id: ${customid}
   zookeeper:
     #enable: true
