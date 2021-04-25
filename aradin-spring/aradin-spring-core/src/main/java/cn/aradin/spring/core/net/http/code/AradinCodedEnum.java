@@ -4,7 +4,15 @@ public enum AradinCodedEnum implements CodedEnum {
 	
 	OK(0),
 	ERROR(-1),
-	TOOFAST(429);
+	PARTIAL(206),
+	BADREQUEST(400),
+	NOAUTH(401),
+	FORBBIDEN(403),
+	NOTFOUND(404),
+	CONFLICT(409),
+	TOOLARGE(413),
+	TOOFAST(429),
+	INTERNAL(500);
 	
 	private final int code;
 
