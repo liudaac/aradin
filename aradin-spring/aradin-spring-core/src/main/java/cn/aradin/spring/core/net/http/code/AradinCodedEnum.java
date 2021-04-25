@@ -3,7 +3,7 @@ package cn.aradin.spring.core.net.http.code;
 public enum AradinCodedEnum implements CodedEnum {
 	
 	OK(0),
-	EROOR(-1),
+	ERROR(-1),
 	TOOFAST(429);
 	
 	private final int code;
