@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
-
 import cn.aradin.zookeeper.boot.starter.handler.INodeHandler;
 import cn.aradin.zookeeper.boot.starter.manager.ZookeeperClientManager;
 import cn.aradin.zookeeper.boot.starter.properties.ZookeeperProperties;
@@ -17,7 +15,6 @@ import cn.aradin.zookeeper.boot.starter.support.ZookeeperEventDispatcher;
  * @author daliu
  *
  */
-@DependsOn("aradinBeanFactory")
 @Configuration
 @EnableConfigurationProperties(ZookeeperProperties.class)
 public class ZookeeperBootAutoConfiguration {
