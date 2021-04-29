@@ -19,7 +19,7 @@ public class ClusterConfiguration {
 	
 	@Bean
 	@ConditionalOnMissingBean
-	public IClusterNodeManager clusterNodeListener() {
-		return new DefaultClusterNodeManager();
+	public IClusterNodeManager clusterNodeListener(ClusterProperties clusterProperties) {
+		return new DefaultClusterNodeManager(clusterProperties);
 	}
 }

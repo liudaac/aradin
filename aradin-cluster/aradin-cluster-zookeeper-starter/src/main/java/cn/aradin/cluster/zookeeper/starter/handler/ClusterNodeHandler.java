@@ -2,10 +2,9 @@ package cn.aradin.cluster.zookeeper.starter.handler;
 
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.curator.framework.CuratorFramework;
@@ -101,7 +100,7 @@ public class ClusterNodeHandler implements INodeHandler {
 		switch (event.getType()) {
 		case INITIALIZED:
 			if (CollectionUtils.isNotEmpty(event.getInitialData())) {
-				Set<String> nodes = new HashSet<String>();
+				List<String> nodes = new ArrayList<String>();
 				event.getInitialData().forEach(data -> {
 					nodes.add(data.getPath());
 				});
