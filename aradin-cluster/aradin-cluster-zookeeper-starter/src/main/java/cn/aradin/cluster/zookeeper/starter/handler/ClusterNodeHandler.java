@@ -41,7 +41,7 @@ public class ClusterNodeHandler implements INodeHandler {
 				&& CollectionUtils.isNotEmpty(zookeeperProperties.getAddresses())) {
 			Optional<Zookeeper> result = zookeeperProperties.getAddresses().stream()
 					.filter(zookeeper -> zookeeper.getId().equals(clusterProperties.getZookeeperAddressId())).findAny();
-			if (!result.isPresent()) {
+			if (result.isPresent()) {
 				return;
 			}
 		}
