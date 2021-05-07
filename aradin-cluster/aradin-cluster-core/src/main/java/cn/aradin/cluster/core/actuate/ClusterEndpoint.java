@@ -7,7 +7,6 @@ import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 
 import cn.aradin.cluster.core.manager.IClusterNodeManager;
-import cn.aradin.cluster.core.properties.ClusterProperties;
 
 @Endpoint(id = "cluster", enableByDefault = true)
 public class ClusterEndpoint{
@@ -16,18 +15,14 @@ public class ClusterEndpoint{
 	
 	private IClusterNodeManager clusterNodeManager;
 	
-	private ClusterProperties clusterProperties;
-	
-	public ClusterEndpoint(IClusterNodeManager clusterNodeManager,
-			ClusterProperties clusterProperties) {
+	public ClusterEndpoint(IClusterNodeManager clusterNodeManager) {
 		// TODO Auto-generated constructor stub
 		this.clusterNodeManager = clusterNodeManager;
-		this.clusterProperties = clusterProperties;
 	}
 	
 	@ReadOperation
 	public Map<String, String> cluster() {
-		nodesMap.put("name", clusterProperties.getNodeName());
+		nodesMap.put("name", clusterNodeManager.currentNode());
 		nodesMap.put("nodeNames", String.join(",", clusterNodeManager.nodeNames()));
 		nodesMap.put("index", String.valueOf(clusterNodeManager.currentIndex()));
 		nodesMap.put("nodeNum", String.valueOf(clusterNodeManager.nodeNum()));

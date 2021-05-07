@@ -42,6 +42,12 @@ public interface IClusterNodeManager {
 	public Collection<String> nodeNames();
 	
 	/**
+	 * Get current node
+	 * @return
+	 */
+	public String currentNode();
+	
+	/**
 	 * Get current node index
 	 * @return
 	 */

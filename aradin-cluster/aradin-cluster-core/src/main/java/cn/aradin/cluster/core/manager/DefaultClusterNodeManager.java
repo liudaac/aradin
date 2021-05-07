@@ -14,6 +14,8 @@ public class DefaultClusterNodeManager implements IClusterNodeManager {
 	
 	private int currentIndex = -1;
 	
+	private String currentNode;
+	
 	private ClusterProperties clusterProperties;
 	
 	public DefaultClusterNodeManager(ClusterProperties clusterProperties) {
@@ -80,5 +82,11 @@ public class DefaultClusterNodeManager implements IClusterNodeManager {
 	public void setCurrentIndex(int currentIndex) {
 		// TODO Auto-generated method stub
 		this.currentIndex = currentIndex;
+	}
+
+	@Override
+	public String currentNode() {
+		// TODO Auto-generated method stub
+		return clusterProperties.getNodeName();
 	}
 }
