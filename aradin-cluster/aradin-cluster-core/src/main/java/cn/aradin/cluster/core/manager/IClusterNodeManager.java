@@ -1,25 +1,26 @@
 package cn.aradin.cluster.core.manager;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.Map;
 
 public interface IClusterNodeManager {
 	/**
 	 * Initial nodes in memory
 	 * @param nodes 
 	 */
-	public void nodeInit(List<String> nodes);
+	public void nodeInit(Map<Integer, String> nodes);
 	
 	/**
 	 * Add new node
 	 * @param node The name of new node
 	 */
-	public void nodeAdded(String node);
+	public void nodeAdded(Integer index, String node);
 	
 	/**
 	 * Remove node
 	 * @param node The name of target node
 	 */
-	public void nodeRemoved(String node);
+	public void nodeRemoved(Integer index, String node);
 	
 	/**
 	 * Get Specific Node Index
@@ -38,11 +39,16 @@ public interface IClusterNodeManager {
 	 * Get all nodes
 	 * @return All nodes
 	 */
-	public List<String> nodeNames();
+	public Collection<String> nodeNames();
 	
 	/**
 	 * Get current node index
 	 * @return
 	 */
 	public int currentIndex();
+	
+	/**
+	 * Set current node index
+	 */
+	public void setCurrentIndex(int currentIndex);
 }

@@ -28,7 +28,7 @@
 	</parent>
 	<properties>
 		<!-- Project revision -->
-		<revision>0.0.2.BETA9</revision>
+		<revision>0.0.2.Alpha</revision>
 
 		<!-- Base Code -->
 		<java.version>1.8</java.version>

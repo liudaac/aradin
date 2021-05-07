@@ -29,5 +29,16 @@
 			<groupId>cn.aradin</groupId>
 			<artifactId>aradin-zookeeper-boot-starter</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>cn.aradin</groupId>
+			<artifactId>aradin-spring-actuator-starter</artifactId>
+		</dependency>
 	</dependencies>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+	</build>
 </project>

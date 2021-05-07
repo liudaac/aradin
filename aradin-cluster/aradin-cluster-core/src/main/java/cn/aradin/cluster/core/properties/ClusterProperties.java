@@ -18,4 +18,5 @@ public class ClusterProperties {
 	private boolean preferIpAddress = false;
 	private RegisterType registerType;
 	private String zookeeperAddressId;
+	private Integer maxNode = 32;//Max Node Num To Support
 }

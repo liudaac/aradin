@@ -14,7 +14,9 @@ import cn.aradin.zookeeper.boot.starter.handler.INodeHandler;
 import cn.aradin.zookeeper.boot.starter.manager.ZookeeperClientManager;
 import cn.aradin.zookeeper.boot.starter.properties.Zookeeper;
 import cn.aradin.zookeeper.boot.starter.properties.ZookeeperProperties;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class VersionsNodeHandler implements INodeHandler {
 
 	private VersionProperties versionProperties;
@@ -57,7 +59,13 @@ public class VersionsNodeHandler implements INodeHandler {
 	@Override
 	public boolean support(PathChildrenCacheEvent event) {
 		// TODO Auto-generated method stub
+		if (log.isDebugEnabled()) {
+			log.debug("Received Event {}", event.getType());
+		}
 		String path = event.getData().getPath();
+		if (log.isDebugEnabled()) {
+			log.debug("Received Event Path {} {}", path, event.getType());
+		}
 		path = path.substring(0, path.lastIndexOf("/"));
 		if (path.contains("/")) {
 			path = path.substring(0, path.lastIndexOf("/"));
