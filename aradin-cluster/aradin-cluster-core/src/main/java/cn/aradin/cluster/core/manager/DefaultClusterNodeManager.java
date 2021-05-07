@@ -14,8 +14,6 @@ public class DefaultClusterNodeManager implements IClusterNodeManager {
 	
 	private int currentIndex = -1;
 	
-	private String currentNode;
-	
 	private ClusterProperties clusterProperties;
 	
 	public DefaultClusterNodeManager(ClusterProperties clusterProperties) {
