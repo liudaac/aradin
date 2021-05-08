@@ -18,17 +18,17 @@
   * 一般性web防护
   * Mybatis及Mybatis Plus集成
 
-# v0.0.2 能力扩充（开发中）
+# v0.0.2 能力扩充（已完成）
 * alibaba dubbo
 * alibaba nacos
 * alibaba sentinel
 * zookeeper监听集成
   * 基于zookeeper版本同步
   * 基于zookeeper集群注册
-* netty grpc paxos/raft一致性组件
 * 分布式内存缓存
 * 分库分表方案，支持分割算法扩展
 
-# v0.0.3 权限扩充（规划中）
+# v0.0.3 权限扩充（开发中）
+* netty grpc paxos/raft一致性组件
 * shiro集成
 * security集成
