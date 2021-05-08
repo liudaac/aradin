@@ -32,3 +32,4 @@
 * netty grpc paxos/raft一致性组件
 * shiro集成
 * security集成
+* skywalking集成
