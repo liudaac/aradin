@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
+import org.apache.curator.framework.state.ConnectionState;
 
 import cn.aradin.spring.core.enums.RegisterType;
 import cn.aradin.version.core.dispatcher.VersionDispatcher;
@@ -54,6 +55,7 @@ public class VersionsNodeHandler implements INodeHandler {
 		if (this.zookeeperClient == null) {
 			throw new RuntimeException("Version's Zookeeper Client is not exist, Please check the sync-type");
 		}
+		this.zookeeperClient.getConnectionStateListenable().addListener(this);
 	}
 
 	@Override
@@ -105,5 +107,11 @@ public class VersionsNodeHandler implements INodeHandler {
 			e.printStackTrace();
 			throw new RuntimeException(e.getCause());
 		}
+	}
+
+	@Override
+	public void stateChanged(CuratorFramework client, ConnectionState newState) {
+		// TODO Auto-generated method stub
+		log.warn("Zookeeper Version Connect Status Changed {}", newState.name());
 	}
 }

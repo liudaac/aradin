@@ -12,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
 import org.apache.curator.framework.state.ConnectionState;
-import org.apache.curator.framework.state.ConnectionStateListener;
 import org.apache.zookeeper.CreateMode;
 
 import com.alibaba.fastjson.JSONObject;
@@ -28,7 +27,7 @@ import cn.aradin.zookeeper.boot.starter.properties.ZookeeperProperties;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class ClusterNodeHandler implements INodeHandler, ConnectionStateListener {
+public class ClusterNodeHandler implements INodeHandler {
 
 	private ClusterProperties clusterProperties;
 
