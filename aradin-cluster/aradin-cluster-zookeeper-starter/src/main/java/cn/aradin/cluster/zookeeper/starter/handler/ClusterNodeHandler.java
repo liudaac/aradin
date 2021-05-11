@@ -11,6 +11,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
+import org.apache.curator.framework.state.ConnectionState;
+import org.apache.curator.framework.state.ConnectionStateListener;
 import org.apache.zookeeper.CreateMode;
 
 import com.alibaba.fastjson.JSONObject;
@@ -26,12 +28,12 @@ import cn.aradin.zookeeper.boot.starter.properties.ZookeeperProperties;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class ClusterNodeHandler implements INodeHandler {
+public class ClusterNodeHandler implements INodeHandler, ConnectionStateListener {
 
 	private ClusterProperties clusterProperties;
-	
+
 	private IClusterNodeManager clusterNodeManager;
-	
+
 	private Integer registerRetry = 0;
 
 	public ClusterNodeHandler(ClusterProperties clusterProperties, ZookeeperProperties zookeeperProperties,
@@ -61,7 +63,7 @@ public class ClusterNodeHandler implements INodeHandler {
 			return 0;
 		}
 		if (existNodes.size() >= maxNode) {
-			throw new RuntimeException("Cluster Node Is OutSize With Nodes "+ JSONObject.toJSONString(existNodes));
+			throw new RuntimeException("Cluster Node Is OutSize With Nodes " + JSONObject.toJSONString(existNodes));
 		}
 		List<Integer> nodes = Lists.newArrayList();
 		existNodes.forEach(existNode -> {
@@ -70,18 +72,18 @@ public class ClusterNodeHandler implements INodeHandler {
 			}
 		});
 		Collections.sort(nodes);
-		for(int i=0; i<maxNode; i++) {
-			if (nodes.size()>i) {
+		for (int i = 0; i < maxNode; i++) {
+			if (nodes.size() > i) {
 				if (nodes.get(i) != i) {
 					return i;
 				}
-			}else {
+			} else {
 				return i;
 			}
 		}
 		throw new RuntimeException("Cluster Node Is OutSize");
 	}
-	
+
 	private void registerNode(CuratorFramework client, String nodeName) {
 		if (registerRetry++ > 5) {
 			registerRetry = 0;
@@ -97,7 +99,9 @@ public class ClusterNodeHandler implements INodeHandler {
 			throw new RuntimeException(e.getCause());
 		}
 		try {
-			client.create().withMode(CreateMode.EPHEMERAL).forPath("/" + clusterProperties.getZookeeperAddressId() + "/" + String.valueOf(index), clusterProperties.getNodeName().getBytes());
+			client.create().withMode(CreateMode.EPHEMERAL).forPath(
+					"/" + clusterProperties.getZookeeperAddressId() + "/" + String.valueOf(index),
+					clusterProperties.getNodeName().getBytes());
 			registerRetry = 0;
 			clusterNodeManager.setCurrentIndex(index);
 		} catch (Exception e) {
@@ -109,7 +113,7 @@ public class ClusterNodeHandler implements INodeHandler {
 			registerNode(client, nodeName);
 		}
 	}
-	
+
 	@Override
 	public void init(ZookeeperClientManager clientManager) {
 		// TODO Auto-generated method stub
@@ -132,6 +136,7 @@ public class ClusterNodeHandler implements INodeHandler {
 		CuratorFramework client = clientManager.getClient(clusterProperties.getZookeeperAddressId());
 		try {
 			registerNode(client, clusterProperties.getNodeName());
+			client.getConnectionStateListenable().addListener(this);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -141,7 +146,7 @@ public class ClusterNodeHandler implements INodeHandler {
 			throw new RuntimeException(e.getCause());
 		}
 	}
-	
+
 	private boolean supportPath(String path) {
 		if (path.contains("/")) {
 			path = path.substring(0, path.lastIndexOf("/"));
@@ -178,7 +183,7 @@ public class ClusterNodeHandler implements INodeHandler {
 					Map<Integer, String> nodes = new HashMap<Integer, String>(clusterProperties.getMaxNode());
 					event.getInitialData().forEach(data -> {
 						if (supportPath(data.getPath())) {
-							String path = data.getPath().substring(data.getPath().lastIndexOf("/")+1);
+							String path = data.getPath().substring(data.getPath().lastIndexOf("/") + 1);
 							if (StringUtils.isNumeric(path)) {
 								nodes.put(Integer.parseInt(path), new String(data.getData()));
 							}
@@ -191,7 +196,7 @@ public class ClusterNodeHandler implements INodeHandler {
 				}
 				break;
 			case CHILD_ADDED:
-				String node = event.getData().getPath().substring(event.getData().getPath().lastIndexOf("/")+1);
+				String node = event.getData().getPath().substring(event.getData().getPath().lastIndexOf("/") + 1);
 				if (log.isDebugEnabled()) {
 					log.debug("Node Adding {}", node);
 				}
@@ -203,7 +208,7 @@ public class ClusterNodeHandler implements INodeHandler {
 				}
 				break;
 			case CHILD_REMOVED:
-				node = event.getData().getPath().substring(event.getData().getPath().lastIndexOf("/")+1);
+				node = event.getData().getPath().substring(event.getData().getPath().lastIndexOf("/") + 1);
 				if (log.isDebugEnabled()) {
 					log.debug("Node Removing {}", node);
 				}
@@ -220,6 +225,28 @@ public class ClusterNodeHandler implements INodeHandler {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void stateChanged(CuratorFramework client, ConnectionState newState) {
+		// TODO Auto-generated method stub
+		if (newState == ConnectionState.LOST) {
+			while (true) {
+				try {
+					if (client.getZookeeperClient().blockUntilConnectedOrTimedOut()) {
+						registerNode(client, clusterProperties.getNodeName());
+						log.error("Re Register Succeed {}", clusterProperties.getNodeName());
+						break;
+					}
+				} catch (InterruptedException e) {
+					// TODO: log something
+					break;
+				} catch (Exception e) {
+					// TODO: log something
+					log.error("Re Register Failed {}", e.getMessage());
+				}
+			}
 		}
 	}
 }
