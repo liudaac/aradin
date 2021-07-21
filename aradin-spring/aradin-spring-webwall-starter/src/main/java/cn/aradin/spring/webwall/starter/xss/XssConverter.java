@@ -1,7 +1,5 @@
 package cn.aradin.spring.webwall.starter.xss;
 
-import com.alibaba.fastjson.JSONValidator;
-
 public class XssConverter {
 	/**
 	 * 将容易引起xss漏洞的半角字符直接替换成全角字符
@@ -10,7 +8,7 @@ public class XssConverter {
 	 * @return
 	 */
 	public static String xssEncode(String s) {
-		if (s == null || "".equals(s)||JSONValidator.fromUtf8(s.getBytes()).validate()) {
+		if (s == null || "".equals(s)) {
 			return s;
 		}
 		StringBuilder sb = new StringBuilder(s.length() + 16);
