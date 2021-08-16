@@ -455,6 +455,11 @@
 			</dependency>
 			<dependency>
 				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-spring-salarm-starter</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
 				<artifactId>aradin-spring-redisson-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>

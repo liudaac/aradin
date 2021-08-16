@@ -1,0 +1,4 @@
+aradin:
+  salarm:
+    ttl: PT60M #https://blog.csdn.net/huang007guo/article/details/81625061
+    level: info # trace,info,warn,error
