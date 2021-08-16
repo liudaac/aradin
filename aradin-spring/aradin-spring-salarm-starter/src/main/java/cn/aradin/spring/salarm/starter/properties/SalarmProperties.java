@@ -14,6 +14,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SalarmProperties {
-	private Duration ttl = Duration.ofSeconds(3600L);//Min interval for sending a same alarm
-	private SalarmLevel level = SalarmLevel.warn;//Min level to send
+	private Duration ttl = Duration.ofSeconds(3600L);// Min interval for sending a same alarm
+	private SalarmLevel level = SalarmLevel.warn;// Min level to send
 }
