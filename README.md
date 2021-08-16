@@ -33,3 +33,4 @@
 * shiro集成
 * security集成
 * skywalking集成
+* salarm告警控制模板
