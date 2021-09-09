@@ -28,33 +28,34 @@
 	</parent>
 	<properties>
 		<!-- Project revision -->
-		<revision>0.0.3.0</revision>
+		<revision>0.0.3.1</revision>
 
 		<!-- Base Code -->
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- Springboot -->
-		<springboot.version>2.3.4.RELEASE</springboot.version>
+		<springboot.version>2.5.4</springboot.version>
 		<!-- Springcloud -->
-		<spring-cloud.version>Hoxton.SR8</spring-cloud.version>
-		<spring-cloud-alibaba.version>2.2.5.RELEASE</spring-cloud-alibaba.version>
+		<spring-cloud.version>Hoxton.SR12</spring-cloud.version>
+		<spring-cloud-alibaba.version>2.2.6.RELEASE</spring-cloud-alibaba.version>
 		<dubbo.version>2.7.12</dubbo.version>
 		<spring-cloud-alibaba-arthas.version>3.4.3</spring-cloud-alibaba-arthas.version>
 		<!-- Mybatis And DB -->
 		<mybatis.version>2.2.0</mybatis.version><!-- 2.1.3 -->
-		<mybatis.plus.version>3.3.2</mybatis.plus.version>
+		<mybatis.plus.version>3.4.3.3</mybatis.plus.version>
+		<mybatis.plus.generator.version>3.5.0</mybatis.plus.generator.version>
 		<!-- Lucene -->
 		<elasticsearch.version>7.6.2</elasticsearch.version>
 		<solr.version>8.4.0</solr.version>
 		<camel.version>3.5.0</camel.version>
 		<!-- Caches -->
-		<redis.version>2.9.0</redis.version>
-		<redisson.version>3.10.6</redisson.version>
+		<redis.version>3.7.0</redis.version>
+		<redisson.version>3.16.2</redisson.version>
 		<caffeine.version>2.7.0</caffeine.version>
-		<druid.version>1.2.3</druid.version>
+		<druid.version>1.2.6</druid.version>
 		<!-- RDBC -->
-		<shiro.version>1.7.1</shiro.version>
+		<shiro.version>1.8.0</shiro.version>
 		<spring.social.version>1.1.6.RELEASE</spring.social.version>
 		<java-jwt.version>3.4.1</java-jwt.version>
 		<jjwt.version>0.9.1</jjwt.version>
@@ -70,7 +71,7 @@
 		<!-- Netty -->
 		<netty.version>4.1.55.Final</netty.version>
 		<!-- WEIXIN -->
-		<wechat.version>2.8.30</wechat.version>
+		<wechat.version>2.8.31</wechat.version>
 		<!-- TOOLS -->
 		<jacoco.version>0.8.3</jacoco.version>
 		<fastjson.version>1.2.78</fastjson.version>
@@ -79,7 +80,7 @@
 		<guava.version>30.0-jre</guava.version>
 		<joda.version>2.10.1</joda.version>
 		<lombok.version>1.16.20</lombok.version>
-		<http.version>4.5.6</http.version>
+		<http.version>4.5.13</http.version>
 		<oval.version>1.85</oval.version>
 		<dom4j.version>2.1.3</dom4j.version>
 		<commons-beanutils.version>1.9.4</commons-beanutils.version>
@@ -129,11 +130,6 @@
 				<version>${spring-cloud-alibaba-arthas.version}</version>
 				<!--scope>runtime</scope> -->
 			</dependency>
-			<dependency>
-				<groupId>org.springframework.security.oauth.boot</groupId>
-				<artifactId>spring-security-oauth2-autoconfigure</artifactId>
-				<version>${springboot.version}</version><!--$NO-MVN-MAN-VER$ -->
-			</dependency>
 
 			<!-- mybatis -->
 			<dependency>
@@ -144,7 +140,7 @@
 			<dependency>
 				<groupId>com.baomidou</groupId>
 				<artifactId>mybatis-plus-generator</artifactId>
-				<version>${mybatis.plus.version}</version>
+				<version>${mybatis.plus.generator.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.mybatis.spring.boot</groupId>
