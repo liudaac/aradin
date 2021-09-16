@@ -24,6 +24,8 @@ import cn.aradin.spring.caffeine.manager.version.CaffeinesonVersionHandler;
 @EnableConfigurationProperties(CaffeinesonProperties.class)
 public class CaffeinesonConfiguration {
 	
+	public final static String CACHE_MANAGER = "caffeinesonCacheManager";
+	
 	@Bean
 	@ConditionalOnMissingBean
 	RemovalListener<Object, Object> removalListener() {
