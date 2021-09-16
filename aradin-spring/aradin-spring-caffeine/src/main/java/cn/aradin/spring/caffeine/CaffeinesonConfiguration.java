@@ -1,6 +1,7 @@
 package cn.aradin.spring.caffeine;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,6 +47,7 @@ public class CaffeinesonConfiguration {
 	}
 	
 	@Bean
+	@ConditionalOnProperty(name = "aradin.cache.caffeine.versioned", havingValue = "true")
 	CaffeinesonVersionHandler caffeinesonVersionHandler(CaffeinesonCacheManager caffeinesonCacheManager, CaffeinesonProperties caffeinesonProperties) {
 		return new CaffeinesonVersionHandler(caffeinesonCacheManager, caffeinesonProperties);
 	}

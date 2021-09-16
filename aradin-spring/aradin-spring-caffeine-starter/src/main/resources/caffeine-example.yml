@@ -6,6 +6,7 @@ management:
       basepath: /actuator #改变原本内建的/actuator/xxx路径
 
 aradin:
+  #aradin.cache.caffeine.versioned为true时需要配置
   version:
     register-type: zookeeper #nacos
     zookeeper-address-id: ${caffeine-version-root or projectid}
@@ -19,7 +20,7 @@ aradin:
   cache:
     caffeine:
       group: caffeine #默认caffeine
-      versiond: false #为true时接收版本变更信息
+      versioned: false #为true时启用cachename级别的版本变更控制
       defaults:
         expire-after-access: #访问后过期时间，单位毫秒
         expire-after-write: #写入后过期时间，单位毫秒
