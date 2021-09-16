@@ -3,6 +3,7 @@ package cn.aradin.version.core.dispatcher;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 import org.apache.commons.collections.CollectionUtils;
 
@@ -12,6 +13,8 @@ import cn.aradin.version.core.handler.IVersionHandler;
 public class VersionDispatcher {
 	
 	private List<IVersionHandler> versionHandlers = new ArrayList<IVersionHandler>();
+	
+	private Executor executor = AradinExecutors.newFixedThreadPool("versionevent", 4, 8, 10000, 2000l);
 	
 	public VersionDispatcher(List<IVersionHandler> versionHandlers) {
 		this.versionHandlers = versionHandlers;
@@ -27,7 +30,7 @@ public class VersionDispatcher {
 							// TODO Auto-generated method stub
 							versionHandler.changed(group, key, value);
 						}
-					}, AradinExecutors.newFixedThreadPool("versionevent", 4, 8, 10000, 2000l));
+					}, executor);
 				}
 			});
 		}

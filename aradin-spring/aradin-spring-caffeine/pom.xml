@@ -31,5 +31,9 @@
 			<groupId>cn.aradin</groupId>
 			<artifactId>aradin-version-zookeeper-starter</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.github.ben-manes.caffeine</groupId>
+			<artifactId>caffeine</artifactId>
+		</dependency>
 	</dependencies>
 </project>

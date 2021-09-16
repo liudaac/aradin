@@ -1,4 +1,4 @@
-package org.aradin.spring.caffeine.config;
+package cn.aradin.spring.caffeine.cache.config;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CaffeineConfig {
+public class CaffeinesonConfig {
 	/** 访问后过期时间，单位毫秒*/
 	private long expireAfterAccess = 120000l;
 	/** 写入后过期时间，单位毫秒*/

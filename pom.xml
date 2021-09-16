@@ -448,7 +448,12 @@
 			</dependency>
 			<dependency>
 				<groupId>cn.aradin</groupId>
-				<artifactId>aradin-spring-actuator-consul-starter</artifactId>
+				<artifactId>aradin-spring-caffeine</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-spring-caffeine-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
