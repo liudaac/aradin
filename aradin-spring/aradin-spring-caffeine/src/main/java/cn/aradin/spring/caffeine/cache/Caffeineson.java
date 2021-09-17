@@ -38,10 +38,11 @@ public class Caffeineson extends AbstractValueAdaptingCache {
 	}
 	
 	/**
-     * 构造caffeine
-     * @param caffeineProperties
-     * @return
-     */
+	 * construct caffeine
+	 * @param config to build a cache
+	 * @param listener key-remove event
+	 * @return caffeine cache
+	 */
     protected Cache<Object, Object> caffeineCache(CaffeinesonConfig config, RemovalListener<Object, Object> listener){
 		Caffeine<Object, Object> cacheBuilder = Caffeine.newBuilder();
 		if(config.getExpireAfterAccess() > 0) {
