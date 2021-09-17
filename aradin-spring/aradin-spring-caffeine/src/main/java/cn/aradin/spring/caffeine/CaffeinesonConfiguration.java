@@ -15,6 +15,7 @@ import cn.aradin.spring.caffeine.manager.VersionCacheManager;
 import cn.aradin.spring.caffeine.manager.properties.CaffeinesonProperties;
 import cn.aradin.spring.caffeine.manager.stats.CaffeinesonStatsService;
 import cn.aradin.spring.caffeine.manager.version.CaffeinesonVersionHandler;
+import cn.aradin.version.core.handler.IVersionBroadHandler;
 
 /**
  * CaffeineManager
@@ -34,13 +35,15 @@ public class CaffeinesonConfiguration {
 	
 	@Bean
 	@ConditionalOnMissingBean
-	Caffeineson Caffeineson(CaffeinesonProperties caffeinesonProperties, CaffeinesonRemovalListener removalListener) {
-		return new Caffeineson("caffeineson", caffeinesonProperties.getDefaults(), removalListener);
+	Caffeineson Caffeineson(CaffeinesonProperties caffeinesonProperties, CaffeinesonRemovalListener removalListener, IVersionBroadHandler versionBroadHandler) {
+		return new Caffeineson("caffeineson", caffeinesonProperties.getGroup(), caffeinesonProperties.isVersioned(), caffeinesonProperties.getDefaults(), removalListener, versionBroadHandler);
 	}
 	
 	@Bean
-	VersionCacheManager caffeinesonCacheManager(CaffeinesonProperties caffeinesonProperties, CaffeinesonRemovalListener removalListener) {
-		return new CaffeinesonCacheManager(caffeinesonProperties, removalListener);
+	VersionCacheManager caffeinesonCacheManager(CaffeinesonProperties caffeinesonProperties, 
+			CaffeinesonRemovalListener removalListener,
+			IVersionBroadHandler versionBroadHandler) {
+		return new CaffeinesonCacheManager(caffeinesonProperties, removalListener, versionBroadHandler);
 	}
 	
 	@Bean

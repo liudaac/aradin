@@ -11,6 +11,7 @@ import com.github.benmanes.caffeine.cache.RemovalListener;
 import cn.aradin.spring.caffeine.cache.Caffeineson;
 import cn.aradin.spring.caffeine.cache.config.CaffeinesonConfig;
 import cn.aradin.spring.caffeine.manager.properties.CaffeinesonProperties;
+import cn.aradin.version.core.handler.IVersionBroadHandler;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -26,12 +27,22 @@ public class CaffeinesonCacheManager implements VersionCacheManager{
 	
 	RemovalListener<Object, Object> listener;
 	
+	boolean versioned = false;//是否接受版本控制
+	
+	IVersionBroadHandler versionBroadHandler;
+	
+	String versionGroup;
+	
 	public CaffeinesonCacheManager(CaffeinesonProperties caffeinesonProperties,
-			RemovalListener<Object, Object> listener) {
+			RemovalListener<Object, Object> listener,
+			IVersionBroadHandler versionBroadHandler) {
 		// TODO Auto-generated constructor stub
 		this.configs = caffeinesonProperties.getConfigs();
 		this.defaultConfig = caffeinesonProperties.getDefaults();
 		this.listener = listener;
+		this.versioned = caffeinesonProperties.isVersioned();
+		this.versionBroadHandler = versionBroadHandler;
+		this.versionGroup = caffeinesonProperties.getGroup();
 	}
 	
 	protected CaffeinesonConfig createCaffeinesonConfig() {
@@ -41,7 +52,7 @@ public class CaffeinesonCacheManager implements VersionCacheManager{
 	protected Caffeineson buildCache(String name) {
 		long version = version(name);
 		String exact_name = version+"##"+name;
-		Caffeineson cache = new Caffeineson(exact_name, configs.get(name), listener);
+		Caffeineson cache = new Caffeineson(name, versionGroup, versioned, configs.get(name), listener, versionBroadHandler);
 		Caffeineson oldCache = instanceMap.putIfAbsent(exact_name, cache);
 		if (oldCache != null) {
 			cache = oldCache;

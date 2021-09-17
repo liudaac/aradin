@@ -4,6 +4,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import cn.aradin.version.core.gentor.DefaultVersionGentor;
+import cn.aradin.version.core.gentor.IVersionGentor;
 import cn.aradin.version.core.handler.DefaultVersionHandler;
 import cn.aradin.version.core.handler.IVersionHandler;
 
@@ -18,5 +20,11 @@ public class VersionConfiguration {
 	@ConditionalOnMissingBean
 	public IVersionHandler defaultVersionHandler() {
 		return new DefaultVersionHandler();
+	}
+	
+	@Bean
+	@ConditionalOnMissingBean
+	public IVersionGentor defaultVersionGentor() {
+		return new DefaultVersionGentor();
 	}
 }

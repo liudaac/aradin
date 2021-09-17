@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Import;
 
 import cn.aradin.version.core.VersionConfiguration;
 import cn.aradin.version.core.dispatcher.VersionDispatcher;
+import cn.aradin.version.core.gentor.IVersionGentor;
 import cn.aradin.version.core.handler.IVersionBroadHandler;
 import cn.aradin.version.core.properties.VersionProperties;
 import cn.aradin.version.zookeeper.starter.handler.VersionZookeeperBroadHandler;
@@ -31,7 +32,9 @@ public class VersionZookeeperAutoConfiguration {
 	}
 	
 	@Bean
-	public IVersionBroadHandler versionBroadHandler(VersionProperties versionProperties, INodeHandler versionNodeHandler) {
-		return new VersionZookeeperBroadHandler(versionProperties, versionNodeHandler);
+	public IVersionBroadHandler versionBroadHandler(VersionProperties versionProperties, 
+			INodeHandler versionNodeHandler,
+			IVersionGentor versionGentor) {
+		return new VersionZookeeperBroadHandler(versionProperties, versionNodeHandler, versionGentor);
 	}
 }

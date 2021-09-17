@@ -12,17 +12,29 @@ import com.github.benmanes.caffeine.cache.RemovalListener;
 import com.github.benmanes.caffeine.cache.stats.CacheStats;
 
 import cn.aradin.spring.caffeine.cache.config.CaffeinesonConfig;
+import cn.aradin.version.core.handler.IVersionBroadHandler;
 
 public class Caffeineson extends AbstractValueAdaptingCache {
 
 	private Cache<Object, Object> caffeineCache;
+	private final String group;
 	private final String name;
+	private final boolean versioned;
+	private IVersionBroadHandler versionBroadHandler;
 	
 	
-	public Caffeineson(String name, CaffeinesonConfig caffeineConfig, RemovalListener<Object, Object> listener) {
+	public Caffeineson(String name, 
+			String group,
+			boolean versioned, 
+			CaffeinesonConfig caffeineConfig, 
+			RemovalListener<Object, Object> listener,
+			IVersionBroadHandler versionBroadHandler) {
 		super(caffeineConfig.isAllowNullValues());
 		caffeineCache = caffeineCache(caffeineConfig, listener);
 		this.name = name;
+		this.versioned = versioned;
+		this.versionBroadHandler = versionBroadHandler;
+		this.group = group;
 	}
 	
 	/**
@@ -30,25 +42,25 @@ public class Caffeineson extends AbstractValueAdaptingCache {
      * @param caffeineProperties
      * @return
      */
-    protected Cache<Object, Object> caffeineCache(CaffeinesonConfig caffeineProperties, RemovalListener<Object, Object> listener){
+    protected Cache<Object, Object> caffeineCache(CaffeinesonConfig config, RemovalListener<Object, Object> listener){
 		Caffeine<Object, Object> cacheBuilder = Caffeine.newBuilder();
-		if(caffeineProperties.getExpireAfterAccess() > 0) {
-			cacheBuilder.expireAfterAccess(caffeineProperties.getExpireAfterAccess(), TimeUnit.MILLISECONDS);
+		if(config.getExpireAfterAccess() > 0) {
+			cacheBuilder.expireAfterAccess(config.getExpireAfterAccess(), TimeUnit.MILLISECONDS);
 		}
-		if(caffeineProperties.getExpireAfterWrite() > 0) {
-			cacheBuilder.expireAfterWrite(caffeineProperties.getExpireAfterWrite(), TimeUnit.MILLISECONDS);
+		if(config.getExpireAfterWrite() > 0) {
+			cacheBuilder.expireAfterWrite(config.getExpireAfterWrite(), TimeUnit.MILLISECONDS);
 		}
-		if(caffeineProperties.getInitialCapacity() > 0) {
-			cacheBuilder.initialCapacity(caffeineProperties.getInitialCapacity());
+		if(config.getInitialCapacity() > 0) {
+			cacheBuilder.initialCapacity(config.getInitialCapacity());
 		}
-		if(caffeineProperties.getMaximumSize() > 0) {
-			cacheBuilder.maximumSize(caffeineProperties.getMaximumSize());
+		if(config.getMaximumSize() > 0) {
+			cacheBuilder.maximumSize(config.getMaximumSize());
 		}
-		if(caffeineProperties.getRefreshAfterWrite() > 0) {
+		if(config.getRefreshAfterWrite() > 0) {
 			//该设置仅支持存在cacheloader即实现按照key构建缓存值的途径时才允许设置，此处不可用
-			cacheBuilder.refreshAfterWrite(caffeineProperties.getRefreshAfterWrite(), TimeUnit.MILLISECONDS);
+			cacheBuilder.refreshAfterWrite(config.getRefreshAfterWrite(), TimeUnit.MILLISECONDS);
 		}
-		if (caffeineProperties.isSoft()) {
+		if (config.isSoft()) {
 			cacheBuilder.softValues();//配置成软引用
 		}
 		if (listener != null) {
@@ -125,6 +137,9 @@ public class Caffeineson extends AbstractValueAdaptingCache {
 	public void evict(Object key) {
 		// TODO Auto-generated method stub
 		caffeineCache.invalidate(key);
+		if (versioned) {
+			versionBroadHandler.broadcast(group, name);
+		}
 	}
 
 	@Override
