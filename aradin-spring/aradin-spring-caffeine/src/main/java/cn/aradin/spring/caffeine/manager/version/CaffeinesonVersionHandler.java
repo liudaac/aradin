@@ -2,7 +2,7 @@ package cn.aradin.spring.caffeine.manager.version;
 
 import org.apache.commons.lang3.StringUtils;
 
-import cn.aradin.spring.caffeine.manager.CaffeinesonCacheManager;
+import cn.aradin.spring.caffeine.manager.VersionCacheManager;
 import cn.aradin.spring.caffeine.manager.properties.CaffeinesonProperties;
 import cn.aradin.version.core.handler.IVersionHandler;
 
@@ -13,10 +13,10 @@ import cn.aradin.version.core.handler.IVersionHandler;
  */
 public class CaffeinesonVersionHandler implements IVersionHandler {
 
-	private CaffeinesonCacheManager caffeinesonCacheManager;
+	private VersionCacheManager caffeinesonCacheManager;
 	private CaffeinesonProperties caffeinesonProperties;
 	
-	public CaffeinesonVersionHandler(CaffeinesonCacheManager caffeinesonCacheManager,
+	public CaffeinesonVersionHandler(VersionCacheManager caffeinesonCacheManager,
 			CaffeinesonProperties caffeinesonProperties) {
 		// TODO Auto-generated constructor stub
 		this.caffeinesonCacheManager = caffeinesonCacheManager;

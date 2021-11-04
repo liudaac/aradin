@@ -47,13 +47,13 @@ public class CaffeinesonConfiguration {
 	}
 	
 	@Bean
-	CaffeinesonStatsService caffeinesonStatsService(CaffeinesonCacheManager caffeinesonCacheManager) {
+	CaffeinesonStatsService caffeinesonStatsService(VersionCacheManager caffeinesonCacheManager) {
 		return new CaffeinesonStatsService(caffeinesonCacheManager);
 	}
 	
 	@Bean
 	@ConditionalOnProperty(name = "aradin.cache.caffeine.versioned", havingValue = "true")
-	CaffeinesonVersionHandler caffeinesonVersionHandler(CaffeinesonCacheManager caffeinesonCacheManager, CaffeinesonProperties caffeinesonProperties) {
+	CaffeinesonVersionHandler caffeinesonVersionHandler(VersionCacheManager caffeinesonCacheManager, CaffeinesonProperties caffeinesonProperties) {
 		return new CaffeinesonVersionHandler(caffeinesonCacheManager, caffeinesonProperties);
 	}
 }
