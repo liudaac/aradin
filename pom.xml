@@ -27,7 +27,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
-		<!-- Project revision -->
+		<!-- Project revision 0.0.4.x-->
 		<revision>0.0.4.0</revision>
 
 		<!-- Base Code -->
