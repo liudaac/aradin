@@ -28,9 +28,14 @@
 * 分布式内存缓存
 * 分库分表方案，支持分割算法扩展
 
-# v0.0.3 权限扩充（开发中）
-* netty grpc paxos/raft一致性组件
-* shiro集成
+# v0.0.3 权限扩充（已完成）
 * security集成
-* skywalking集成
+* skywalking集成（javaagent方式）
 * salarm告警控制模板
+* 分布式caffeine改造
+
+# v0.0.4 依赖升级（进行中）
+* springboot由2.3.x升级至2.6.0
+* springcloud升级至2020.0.4
+* 对应相应的spring版本升级
+* 说明文档补充
