@@ -23,23 +23,22 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.12.RELEASE</version><!-- 2.5.2 -->
+		<version>2.6.0</version><!-- 2.5.2 -->
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
 		<!-- Project revision -->
-		<revision>0.0.3.4</revision>
+		<revision>0.0.4.0</revision>
 
 		<!-- Base Code -->
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- Springboot -->
-		<springboot.version>2.3.12.RELEASE</springboot.version><!-- 2.5.2 -->
-		<springboot.oauth2.version>2.3.12.RELEASE</springboot.oauth2.version><!-- 2.5.2 -->
-		<springboot.solr.version>2.3.12.RELEASE</springboot.solr.version><!-- 2.4.10 -->
+		<springboot.version>2.6.0</springboot.version>
+		<springboot.solr.version>2.4.13</springboot.solr.version><!-- 2.4.10 -->
 		<!-- Springcloud -->
-		<spring-cloud.version>Hoxton.SR12</spring-cloud.version>
+		<spring-cloud.version>2020.0.4</spring-cloud.version>
 		<spring-cloud-alibaba.version>2.2.6.RELEASE</spring-cloud-alibaba.version>
 		<dubbo.version>2.7.12</dubbo.version>
 		<spring-cloud-alibaba-arthas.version>3.4.3</spring-cloud-alibaba-arthas.version>
@@ -96,7 +95,6 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<!-- Import dependency management from Spring Boot -->
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
 				<version>${springboot.version}</version>
