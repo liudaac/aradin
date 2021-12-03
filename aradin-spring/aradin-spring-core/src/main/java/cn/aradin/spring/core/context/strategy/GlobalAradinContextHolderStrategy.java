@@ -28,7 +28,7 @@ public class GlobalAradinContextHolderStrategy implements AradinContextHolderStr
 	@Override
 	public void setContext(AradinContext context) {
 		// TODO Auto-generated method stub
-		Assert.notNull(context, "Only non-null SecurityContext instances are permitted");
+		Assert.notNull(context, "Only non-null AradinContext instances are permitted");
 		contextHolder = context;
 	}
 
