@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 
 @Configuration
 @EnableTransactionManagement
@@ -15,9 +15,9 @@ public class AradinMybatisPlusAutoConfiguration {
 	 * @return
 	 */
 	@Bean
-    public PaginationInterceptor paginationInterceptor() {
-		PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
-        paginationInterceptor.setLimit(-1l);
+    public PaginationInnerInterceptor paginationInterceptor() {
+		PaginationInnerInterceptor paginationInterceptor = new PaginationInnerInterceptor();
+        paginationInterceptor.setMaxLimit(-1l);
 		return paginationInterceptor;
     }
 }
