@@ -4,7 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 import org.springframework.session.web.http.CookieSerializer;
 import org.springframework.session.web.http.DefaultCookieSerializer;
 
@@ -36,7 +35,6 @@ public class AradinSessionConfiguration {
 				cookieSerializer.setDomainName(domain);
 			}
 		}
-		cookieSerializer.setRememberMeRequestAttribute(SpringSessionRememberMeServices.REMEMBER_ME_LOGIN_ATTR);
 		return cookieSerializer;
 	}
 }
