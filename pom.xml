@@ -464,6 +464,11 @@
 			</dependency>
 			<dependency>
 				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-spring-swagger</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
 				<artifactId>aradin-spring-swagger-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>
