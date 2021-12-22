@@ -12,7 +12,7 @@ public class SwaggerProperties {
     private String title = "HTTP API";
     private String description = "Swagger 自动生成接口文档";
     private String version;
-    private Boolean enable;
+    private Boolean enable = false;
     private String contactName;
     private String contactEmail;
     private String contactUrl;
