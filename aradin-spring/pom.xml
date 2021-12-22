@@ -30,6 +30,7 @@
 		<module>aradin-spring-security</module>
 		<module>aradin-spring-security-starter</module>
 		<module>aradin-spring-salarm-starter</module>
+		<module>aradin-spring-swagger</module>
 	</modules>
 	<build>
 		<resources>
