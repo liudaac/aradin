@@ -35,7 +35,7 @@
 * 分布式caffeine改造
 
 # v0.0.4 依赖升级（进行中）
-* springboot由2.3.x升级至2.6.0
-* springcloud升级至2020.0.4
+* springboot由2.3.x升级至2.6.2
+* springcloud升级至2021.0.0
 * 对应相应的spring版本升级
 * 说明文档补充
