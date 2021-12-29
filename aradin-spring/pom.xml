@@ -23,13 +23,9 @@
 		<module>aradin-spring-caffeine-starter</module>
 		<module>aradin-spring-velocity</module>
 		<module>aradin-spring-velocity-starter</module>
-		<module>aradin-spring-shiro</module>
-		<module>aradin-spring-shiro-starter</module>
 		<module>aradin-spring-swagger</module>
 		<module>aradin-spring-swagger-starter</module>
 		<module>aradin-spring-lts-starter</module>
-		<module>aradin-spring-security</module>
-		<module>aradin-spring-security-starter</module>
 		<module>aradin-spring-salarm-starter</module>
 	</modules>
 	<build>
