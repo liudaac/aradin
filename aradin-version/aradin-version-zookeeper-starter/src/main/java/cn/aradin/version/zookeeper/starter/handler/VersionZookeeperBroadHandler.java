@@ -1,30 +1,42 @@
 package cn.aradin.version.zookeeper.starter.handler;
 
+import java.nio.charset.Charset;
+
+import org.apache.curator.framework.CuratorFramework;
+
 import cn.aradin.version.core.gentor.IVersionGentor;
 import cn.aradin.version.core.handler.IVersionBroadHandler;
 import cn.aradin.version.core.properties.VersionProperties;
-import cn.aradin.zookeeper.boot.starter.handler.INodeHandler;
+import cn.aradin.zookeeper.boot.starter.manager.ZookeeperClientManager;
 
 public class VersionZookeeperBroadHandler implements IVersionBroadHandler{
 
 	private VersionProperties versionProperties;
 	
-	private INodeHandler versionNodeHandler;
-	
 	private IVersionGentor versionGentor;
 	
+	private CuratorFramework zookeeperClient;
+	
 	public VersionZookeeperBroadHandler(VersionProperties versionProperties,
-			INodeHandler versionNodeHandler,
-			IVersionGentor versionGentor) {
+			IVersionGentor versionGentor,
+			ZookeeperClientManager zookeeperClientManager) {
 		// TODO Auto-generated constructor stub
 		this.versionProperties = versionProperties;
-		this.versionNodeHandler = versionNodeHandler;
+		this.zookeeperClient = zookeeperClientManager.getClient(versionProperties.getZookeeperAddressId());
 	}
 	
 	@Override
 	public void broadcast(String group, String key) {
 		// TODO Auto-generated method stub
 		String path = "/" + versionProperties.getZookeeperAddressId() + "/" + group + "/" + key;
-		versionNodeHandler.setValue(path, versionGentor.nextVersion(path));
+		String value = versionGentor.nextVersion(path);
+		try {
+			zookeeperClient.createContainers(path);
+			zookeeperClient.setData().forPath(path, value.getBytes(Charset.forName("utf-8")));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new RuntimeException(e.getCause());
+		}
 	}
 }

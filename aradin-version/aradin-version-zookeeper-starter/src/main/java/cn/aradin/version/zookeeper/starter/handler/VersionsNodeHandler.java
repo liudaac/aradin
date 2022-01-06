@@ -1,6 +1,5 @@
 package cn.aradin.version.zookeeper.starter.handler;
 
-import java.nio.charset.Charset;
 import java.util.Optional;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -94,18 +93,6 @@ public class VersionsNodeHandler implements INodeHandler {
 			break;
 		default:
 			break;
-		}
-	}
-
-	@Override
-	public void setValue(String path, String value) {
-		try {
-			zookeeperClient.createContainers(path);
-			zookeeperClient.setData().forPath(path, value.getBytes(Charset.forName("utf-8")));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException(e.getCause());
 		}
 	}
 

@@ -1,6 +1,7 @@
 package cn.aradin.version.zookeeper.starter;
 
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -14,6 +15,7 @@ import cn.aradin.version.zookeeper.starter.handler.VersionZookeeperBroadHandler;
 import cn.aradin.version.zookeeper.starter.handler.VersionsNodeHandler;
 import cn.aradin.zookeeper.boot.starter.ZookeeperBootAutoConfiguration;
 import cn.aradin.zookeeper.boot.starter.handler.INodeHandler;
+import cn.aradin.zookeeper.boot.starter.manager.ZookeeperClientManager;
 import cn.aradin.zookeeper.boot.starter.properties.ZookeeperProperties;
 
 /**
@@ -22,6 +24,7 @@ import cn.aradin.zookeeper.boot.starter.properties.ZookeeperProperties;
  */
 @Configuration
 @Import(VersionConfiguration.class)
+@EnableConfigurationProperties(VersionProperties.class)
 @AutoConfigureAfter(ZookeeperBootAutoConfiguration.class)
 public class VersionZookeeperAutoConfiguration {
 
@@ -34,7 +37,8 @@ public class VersionZookeeperAutoConfiguration {
 	@Bean
 	public IVersionBroadHandler versionBroadHandler(VersionProperties versionProperties, 
 			INodeHandler versionNodeHandler,
-			IVersionGentor versionGentor) {
-		return new VersionZookeeperBroadHandler(versionProperties, versionNodeHandler, versionGentor);
+			IVersionGentor versionGentor,
+			ZookeeperClientManager zookeeperClientManager) {
+		return new VersionZookeeperBroadHandler(versionProperties, versionNodeHandler, versionGentor, zookeeperClientManager);
 	}
 }
