@@ -98,18 +98,6 @@ public class VersionsNodeHandler implements INodeHandler {
 	}
 
 	@Override
-	public void setValue(String path, String value) {
-		try {
-			zookeeperClient.createContainers(path);
-			zookeeperClient.setData().forPath(path, value.getBytes(Charset.forName("utf-8")));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException(e.getCause());
-		}
-	}
-
-	@Override
 	public void stateChanged(CuratorFramework client, ConnectionState newState) {
 		// TODO Auto-generated method stub
 		log.warn("Zookeeper Version Connect Status Changed {}", newState.name());
