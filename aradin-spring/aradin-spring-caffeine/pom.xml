@@ -25,10 +25,6 @@
 		</dependency>
 		<dependency>
 			<groupId>cn.aradin</groupId>
-			<artifactId>aradin-cluster-zookeeper-starter</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>cn.aradin</groupId>
 			<artifactId>aradin-version-zookeeper-starter</artifactId>
 		</dependency>
 		<dependency>
