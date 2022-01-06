@@ -35,7 +35,7 @@ public class CaffeinesonConfiguration {
 	
 	@Bean
 	@ConditionalOnMissingBean
-	Caffeineson Caffeineson(CaffeinesonProperties caffeinesonProperties, CaffeinesonRemovalListener removalListener, IVersionBroadHandler versionBroadHandler) {
+	Caffeineson Caffeineson(CaffeinesonProperties caffeinesonProperties, RemovalListener<Object, Object> removalListener, IVersionBroadHandler versionBroadHandler) {
 		return new Caffeineson("caffeineson", caffeinesonProperties.getGroup(), caffeinesonProperties.isVersioned(), caffeinesonProperties.getDefaults(), removalListener, versionBroadHandler);
 	}
 	
