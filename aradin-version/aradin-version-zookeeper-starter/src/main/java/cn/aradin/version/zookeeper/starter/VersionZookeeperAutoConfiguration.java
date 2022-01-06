@@ -15,7 +15,6 @@ import cn.aradin.version.zookeeper.starter.handler.VersionZookeeperBroadHandler;
 import cn.aradin.version.zookeeper.starter.handler.VersionsNodeHandler;
 import cn.aradin.zookeeper.boot.starter.ZookeeperBootAutoConfiguration;
 import cn.aradin.zookeeper.boot.starter.handler.INodeHandler;
-import cn.aradin.zookeeper.boot.starter.manager.ZookeeperClientManager;
 import cn.aradin.zookeeper.boot.starter.properties.ZookeeperProperties;
 
 /**
@@ -36,8 +35,7 @@ public class VersionZookeeperAutoConfiguration {
 	
 	@Bean
 	public IVersionBroadHandler versionBroadHandler(VersionProperties versionProperties,
-			IVersionGentor versionGentor,
-			ZookeeperClientManager zookeeperClientManager) {
-		return new VersionZookeeperBroadHandler(versionProperties, versionGentor, zookeeperClientManager);
+			IVersionGentor versionGentor) {
+		return new VersionZookeeperBroadHandler(versionProperties, versionGentor);
 	}
 }
