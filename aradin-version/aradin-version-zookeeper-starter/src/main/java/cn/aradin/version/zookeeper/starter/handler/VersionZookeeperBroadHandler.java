@@ -7,7 +7,6 @@ import org.apache.curator.framework.CuratorFramework;
 import cn.aradin.version.core.gentor.IVersionGentor;
 import cn.aradin.version.core.handler.IVersionBroadHandler;
 import cn.aradin.version.core.properties.VersionProperties;
-import cn.aradin.zookeeper.boot.starter.handler.INodeHandler;
 import cn.aradin.zookeeper.boot.starter.manager.ZookeeperClientManager;
 
 public class VersionZookeeperBroadHandler implements IVersionBroadHandler{
@@ -19,7 +18,6 @@ public class VersionZookeeperBroadHandler implements IVersionBroadHandler{
 	private CuratorFramework zookeeperClient;
 	
 	public VersionZookeeperBroadHandler(VersionProperties versionProperties,
-			INodeHandler versionNodeHandler,
 			IVersionGentor versionGentor,
 			ZookeeperClientManager zookeeperClientManager) {
 		// TODO Auto-generated constructor stub
