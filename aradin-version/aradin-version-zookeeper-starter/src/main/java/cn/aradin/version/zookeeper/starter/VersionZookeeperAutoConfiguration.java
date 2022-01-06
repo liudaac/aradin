@@ -1,6 +1,7 @@
 package cn.aradin.version.zookeeper.starter;
 
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -22,6 +23,7 @@ import cn.aradin.zookeeper.boot.starter.properties.ZookeeperProperties;
  */
 @Configuration
 @Import(VersionConfiguration.class)
+@EnableConfigurationProperties(VersionProperties.class)
 @AutoConfigureAfter(ZookeeperBootAutoConfiguration.class)
 public class VersionZookeeperAutoConfiguration {
 
