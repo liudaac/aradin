@@ -13,7 +13,4 @@ public interface INodeHandler extends ConnectionStateListener{
 	public boolean support(PathChildrenCacheEvent event);
 
 	public void handler(CuratorFramework client, PathChildrenCacheEvent event);
-
-	public default void setValue(String path, String value) {
-	};
 }
