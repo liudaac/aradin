@@ -22,7 +22,14 @@ public class VersionZookeeperBroadHandler implements IVersionBroadHandler{
 			IVersionGentor versionGentor) {
 		// TODO Auto-generated constructor stub
 		this.versionProperties = versionProperties;
-		this.zookeeperClient = AradinBeanFactory.getBean(ZookeeperClientManager.class).getClient(versionProperties.getZookeeperAddressId());
+		this.versionGentor = versionGentor;
+	}
+	
+	private CuratorFramework getZookeeperClient() {
+		if(zookeeperClient == null) {
+			zookeeperClient = AradinBeanFactory.getBean(ZookeeperClientManager.class).getClient(versionProperties.getZookeeperAddressId());
+		}
+		return zookeeperClient;
 	}
 	
 	@Override
@@ -31,8 +38,8 @@ public class VersionZookeeperBroadHandler implements IVersionBroadHandler{
 		String path = "/" + versionProperties.getZookeeperAddressId() + "/" + group + "/" + key;
 		String value = versionGentor.nextVersion(path);
 		try {
-			zookeeperClient.createContainers(path);
-			zookeeperClient.setData().forPath(path, value.getBytes(Charset.forName("utf-8")));
+			getZookeeperClient().createContainers(path);
+			getZookeeperClient().setData().forPath(path, value.getBytes(Charset.forName("utf-8")));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
