@@ -41,7 +41,7 @@ public class VersionsNodeHandler implements INodeHandler {
 				&& CollectionUtils.isNotEmpty(zookeeperProperties.getAddresses())) {
 			Optional<Zookeeper> result = zookeeperProperties.getAddresses().stream()
 					.filter(zookeeper -> zookeeper.getId().equals(versionProperties.getZookeeperAddressId())).findAny();
-			if (!result.isPresent()) {
+			if (result.isPresent()) {
 				return;
 			}
 		}
