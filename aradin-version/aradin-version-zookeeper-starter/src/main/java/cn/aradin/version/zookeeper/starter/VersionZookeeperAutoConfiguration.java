@@ -36,8 +36,7 @@ public class VersionZookeeperAutoConfiguration {
 	
 	@Bean
 	public IVersionBroadHandler versionBroadHandler(VersionProperties versionProperties,
-			IVersionGentor versionGentor,
-			ZookeeperClientManager zookeeperClientManager) {
-		return new VersionZookeeperBroadHandler(versionProperties, versionGentor, zookeeperClientManager);
+			IVersionGentor versionGentor) {
+		return new VersionZookeeperBroadHandler(versionProperties, versionGentor);
 	}
 }

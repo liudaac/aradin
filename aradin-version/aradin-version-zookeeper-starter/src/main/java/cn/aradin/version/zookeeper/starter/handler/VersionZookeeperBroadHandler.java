@@ -4,6 +4,7 @@ import java.nio.charset.Charset;
 
 import org.apache.curator.framework.CuratorFramework;
 
+import cn.aradin.spring.core.bean.AradinBeanFactory;
 import cn.aradin.version.core.gentor.IVersionGentor;
 import cn.aradin.version.core.handler.IVersionBroadHandler;
 import cn.aradin.version.core.properties.VersionProperties;
@@ -18,11 +19,10 @@ public class VersionZookeeperBroadHandler implements IVersionBroadHandler{
 	private CuratorFramework zookeeperClient;
 	
 	public VersionZookeeperBroadHandler(VersionProperties versionProperties,
-			IVersionGentor versionGentor,
-			ZookeeperClientManager zookeeperClientManager) {
+			IVersionGentor versionGentor) {
 		// TODO Auto-generated constructor stub
 		this.versionProperties = versionProperties;
-		this.zookeeperClient = zookeeperClientManager.getClient(versionProperties.getZookeeperAddressId());
+		this.zookeeperClient = AradinBeanFactory.getBean(ZookeeperClientManager.class).getClient(versionProperties.getZookeeperAddressId());
 	}
 	
 	@Override
