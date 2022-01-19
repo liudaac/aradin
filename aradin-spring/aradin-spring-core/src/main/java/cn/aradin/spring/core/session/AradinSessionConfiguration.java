@@ -19,6 +19,12 @@ public class AradinSessionConfiguration {
 	@Value("${spring.session.cookie.domain:}")
 	private String domain;
 	
+	@Value("${spring.session.cookie.http-only:true}")
+	private Boolean httpOnly;
+	
+	@Value("${spring.session.cookie.security:true}")
+	private Boolean security;
+	
 	/**
 	 * 参考 SpringHttpSessionConfiguration
 	 * @return
@@ -34,6 +40,8 @@ public class AradinSessionConfiguration {
 			if (StringUtils.isNotBlank(domain)) {
 				cookieSerializer.setDomainName(domain);
 			}
+			cookieSerializer.setUseHttpOnlyCookie(httpOnly);
+			cookieSerializer.setUseSecureCookie(security);
 		}
 		return cookieSerializer;
 	}
