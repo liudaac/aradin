@@ -41,7 +41,7 @@ public class CaffeinesonConfiguration {
 	
 	@Bean
 	VersionCacheManager caffeinesonCacheManager(CaffeinesonProperties caffeinesonProperties, 
-			CaffeinesonRemovalListener removalListener,
+			RemovalListener<Object, Object> removalListener,
 			IVersionBroadHandler versionBroadHandler) {
 		return new CaffeinesonCacheManager(caffeinesonProperties, removalListener, versionBroadHandler);
 	}
