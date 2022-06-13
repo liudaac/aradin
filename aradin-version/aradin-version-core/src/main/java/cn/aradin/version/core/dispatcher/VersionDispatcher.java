@@ -23,7 +23,7 @@ public class VersionDispatcher {
 	public void dispatchVersion(String group, String key, String value) {
 		if (CollectionUtils.isNotEmpty(versionHandlers)) {
 			versionHandlers.forEach(versionHandler -> {
-				if (versionHandler.support(group, key)) {
+				if (versionHandler.support(group, key) && !value.equals(versionHandler.get(group, key))) {
 					CompletableFuture.runAsync(new Runnable() {
 						@Override
 						public void run() {
