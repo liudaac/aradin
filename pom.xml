@@ -518,6 +518,11 @@
 				<artifactId>aradin-version-zookeeper-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-version-nacos-starter</artifactId>
+				<version>${revision}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
