@@ -7,7 +7,6 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
 import org.apache.curator.framework.state.ConnectionState;
 
-import cn.aradin.spring.core.enums.RegisterType;
 import cn.aradin.version.core.dispatcher.VersionDispatcher;
 import cn.aradin.version.core.properties.VersionProperties;
 import cn.aradin.zookeeper.boot.starter.handler.INodeHandler;
@@ -31,15 +30,13 @@ public class VersionsNodeHandler implements INodeHandler {
 		if (versionProperties == null) {
 			throw new RuntimeException("Version is not config");
 		}
-		if (!RegisterType.zookeeper.equals(versionProperties.getRegisterType())) {
-			throw new RuntimeException("Version is not registed on zookeeper");
-		}
 		this.versionProperties = versionProperties;
 		this.versionDispatcher = versionDispatcher;
 		if (zookeeperProperties != null && versionProperties != null
-				&& CollectionUtils.isNotEmpty(zookeeperProperties.getAddresses())) {
+				&& CollectionUtils.isNotEmpty(zookeeperProperties.getAddresses())
+				&& versionProperties.getZookeeper() != null) {
 			Optional<Zookeeper> result = zookeeperProperties.getAddresses().stream()
-					.filter(zookeeper -> zookeeper.getId().equals(versionProperties.getZookeeperAddressId())).findAny();
+					.filter(zookeeper -> zookeeper.getId().equals(versionProperties.getZookeeper().getAddressId())).findAny();
 			if (!result.isPresent()) {
 				return;
 			}
@@ -50,7 +47,7 @@ public class VersionsNodeHandler implements INodeHandler {
 	@Override
 	public void init(ZookeeperClientManager clientManager) {
 		// TODO Auto-generated method stub
-		this.zookeeperClient = clientManager.getClient(versionProperties.getZookeeperAddressId());
+		this.zookeeperClient = clientManager.getClient(versionProperties.getZookeeper().getAddressId());
 		if (this.zookeeperClient == null) {
 			throw new RuntimeException("Version's Zookeeper Client is not exist, Please check the sync-type");
 		}
@@ -72,7 +69,7 @@ public class VersionsNodeHandler implements INodeHandler {
 			path = path.substring(0, path.lastIndexOf("/"));
 			if (path.contains("/")) {
 				String versions = path.substring(path.lastIndexOf("/") + 1);
-				if (versionProperties.getZookeeperAddressId().equalsIgnoreCase(versions)) {
+				if (versionProperties.getZookeeper().getAddressId().equalsIgnoreCase(versions)) {
 					return true;
 				}
 			}

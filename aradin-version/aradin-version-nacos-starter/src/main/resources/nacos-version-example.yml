@@ -1,0 +1,14 @@
+aradin:
+  version:
+    nacos:
+      group: 
+      data-id: 
+spring:
+  cloud:
+    nacos:
+      username: 
+      password: 
+      config:
+        enabled: true
+        server-addr: ip:port,,
+        namespace: 

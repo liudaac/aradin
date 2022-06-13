@@ -1,7 +1,7 @@
 aradin:
   version:
-    register-type: zookeeper #nacos
-    zookeeper-address-id: ${customid}
+    zookeeper:
+      address-id: ${customid}
   zookeeper:
     #enable: true
     #session-timeout: 5000

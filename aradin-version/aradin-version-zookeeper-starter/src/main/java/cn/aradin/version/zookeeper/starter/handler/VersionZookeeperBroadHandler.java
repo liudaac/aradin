@@ -26,7 +26,7 @@ public class VersionZookeeperBroadHandler implements IVersionBroadHandler{
 	
 	private CuratorFramework getZookeeperClient() {
 		if (zookeeperClient == null) {
-			zookeeperClient = AradinBeanFactory.getBean(ZookeeperClientManager.class).getClient(versionProperties.getZookeeperAddressId());
+			zookeeperClient = AradinBeanFactory.getBean(ZookeeperClientManager.class).getClient(versionProperties.getZookeeper().getAddressId());
 		}
 		return zookeeperClient;
 	}
@@ -34,7 +34,7 @@ public class VersionZookeeperBroadHandler implements IVersionBroadHandler{
 	@Override
 	public void broadcast(String group, String key) {
 		// TODO Auto-generated method stub
-		String path = "/" + versionProperties.getZookeeperAddressId() + "/" + group + "/" + key;
+		String path = "/" + versionProperties.getZookeeper().getAddressId() + "/" + group + "/" + key;
 		String value = versionGentor.nextVersion(path);
 		try {
 			getZookeeperClient().createContainers(path);
