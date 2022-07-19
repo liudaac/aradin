@@ -10,10 +10,11 @@ import org.springframework.context.annotation.Import;
 import cn.aradin.spring.caffeine.CaffeinesonConfiguration;
 import cn.aradin.spring.caffeine.manager.stats.CaffeinesonStatsService;
 import cn.aradin.spring.caffeine.starter.actuate.CaffeinesonEndpoint;
+import cn.aradin.version.core.VersionConfiguration;
 
 @EnableCaching
 @Configuration
-@Import(CaffeinesonConfiguration.class)
+@Import({CaffeinesonConfiguration.class, VersionConfiguration.class})
 public class CaffeinesonManagerAutoConfiguration {
 	
 	@Bean
