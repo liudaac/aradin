@@ -9,7 +9,9 @@ import org.springframework.context.annotation.Configuration;
 import cn.aradin.version.core.dispatcher.VersionDispatcher;
 import cn.aradin.version.core.gentor.DefaultVersionGentor;
 import cn.aradin.version.core.gentor.IVersionGentor;
+import cn.aradin.version.core.handler.DefaultVersionBroadHandler;
 import cn.aradin.version.core.handler.DefaultVersionHandler;
+import cn.aradin.version.core.handler.IVersionBroadHandler;
 import cn.aradin.version.core.handler.IVersionHandler;
 
 /**
@@ -23,6 +25,12 @@ public class VersionConfiguration {
 	@ConditionalOnMissingBean
 	public IVersionHandler defaultVersionHandler() {
 		return new DefaultVersionHandler();
+	}
+	
+	@Bean
+	@ConditionalOnMissingBean
+	public IVersionBroadHandler defaultVersionBroadHandler() {
+		return new DefaultVersionBroadHandler();
 	}
 	
 	@Bean
