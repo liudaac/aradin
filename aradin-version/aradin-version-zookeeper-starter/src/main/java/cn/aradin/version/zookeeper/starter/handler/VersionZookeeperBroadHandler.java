@@ -45,4 +45,18 @@ public class VersionZookeeperBroadHandler implements IVersionBroadHandler{
 			throw new RuntimeException(e.getCause());
 		}
 	}
+
+	@Override
+	public void broadcast(String group, String key, String version) {
+		// TODO Auto-generated method stub
+		String path = "/" + versionProperties.getZookeeper().getAddressId() + "/" + group + "/" + key;
+		try {
+			getZookeeperClient().createContainers(path);
+			getZookeeperClient().setData().forPath(path, version.getBytes(Charset.forName("utf-8")));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new RuntimeException(e.getCause());
+		}
+	}
 }

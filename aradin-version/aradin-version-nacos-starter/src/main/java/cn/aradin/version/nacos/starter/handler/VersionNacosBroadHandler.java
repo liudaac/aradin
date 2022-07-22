@@ -34,8 +34,14 @@ public class VersionNacosBroadHandler implements IVersionBroadHandler {
 	@Override
 	public void broadcast(String group, String key) {
 		// TODO Auto-generated method stub
+		broadcast(group, key, versionGentor.nextVersion(group));
+	}
+
+	@Override
+	public void broadcast(String group, String key, String version) {
+		// TODO Auto-generated method stub
 		try {
-			configService.publishConfig(key, group, versionGentor.nextVersion(group));
+			configService.publishConfig(key, group, version);
 		} catch (NacosException e) {
 			// TODO Auto-generated catch block
 			throw new RuntimeException(e);
