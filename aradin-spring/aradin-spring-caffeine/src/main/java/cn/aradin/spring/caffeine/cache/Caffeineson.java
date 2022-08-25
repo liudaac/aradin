@@ -95,7 +95,7 @@ public class Caffeineson extends AbstractValueAdaptingCache {
 						return (T)value;
 					}
 					value = valueLoader.call();
-					put(key, value);
+					put(key, toStoreValue(value));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					try {
@@ -115,7 +115,7 @@ public class Caffeineson extends AbstractValueAdaptingCache {
 	@Override
 	public void put(Object key, Object value) {
 		// TODO Auto-generated method stub
-		caffeineCache.put(key, value);
+		caffeineCache.put(key, toStoreValue(value));
 	}
 
 	@Override
@@ -126,7 +126,7 @@ public class Caffeineson extends AbstractValueAdaptingCache {
 			synchronized (key.toString().intern()) {
 				prevValue = caffeineCache.getIfPresent(key);
 				if (prevValue == null) {
-					caffeineCache.put(key, value);
+					caffeineCache.put(key, toStoreValue(value));
 					prevValue = value;
 				}
 			}
