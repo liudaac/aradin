@@ -88,5 +88,9 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
 		</dependency>
+		<dependency>
+		  <groupId>javax.annotation</groupId>
+		  <artifactId>javax.annotation-api</artifactId>
+		</dependency>
 	</dependencies>
 </project>
