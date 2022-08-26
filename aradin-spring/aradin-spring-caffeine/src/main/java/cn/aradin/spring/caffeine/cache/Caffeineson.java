@@ -95,7 +95,7 @@ public class Caffeineson extends AbstractValueAdaptingCache {
 						return (T)value;
 					}
 					value = valueLoader.call();
-					put(key, value);
+					put(key, toStoreValue(value));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					try {
