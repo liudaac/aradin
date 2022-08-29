@@ -28,23 +28,23 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 ***
 + **aradin-spring-core**
 <p>&nbsp;基础能力模块</p>
-<p>&nbsp;1.1 cn.aradin.spring.core.algo.* 算法包   目前只有SWRR负载均衡</p>
-<p>&nbsp;1.2 cn.aradin.spring.core.bean.* BEAN工具  
-<p>&nbsp;&nbsp;&nbsp;1.2.1 AradinBeanFactory BEAN工厂类支持对指定Class通过Prefix命名方式进行路由，常用于某个类需要按规则初始化数量大于1的有限个BEAN，比如分库逻辑，读写分离逻辑；</p>
-<p>&nbsp;&nbsp;&nbsp;1.2.2 AradinPropertySourceFactory 支持对yml配置文件的加载，使用方式 </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Configuration</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@PropertySource(value = "classpath:config.yml", factory = AradinPropertySourceFactory.class)</p>
+<p>&nbsp;① cn.aradin.spring.core.algo.* 算法包   目前只有SWRR负载均衡</p>
+<p>&nbsp;② cn.aradin.spring.core.bean.* BEAN工具  
+<p>&nbsp;&nbsp;&nbsp;AradinBeanFactory BEAN工厂类支持对指定Class通过Prefix命名方式进行路由，常用于某个类需要按规则初始化数量大于1的有限个BEAN，比如分库逻辑，读写分离逻辑；</p>
+<p>&nbsp;&nbsp;&nbsp;AradinPropertySourceFactory 支持对yml配置文件的加载，使用方式 </p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Configuration</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@PropertySource(value = "classpath:config.yml", factory = AradinPropertySourceFactory.class)</br>
 <p>&nbsp;&nbsp;&nbsp;方便灵活的布局配置文件</p>
-<p>&nbsp;1.3 cn.aradin.spring.core.context.* 上下文运行时变量 支持三种模式，参考SpringSecurity源码中该功能实现方式</p> 
+<p>&nbsp;③ cn.aradin.spring.core.context.* 上下文运行时变量 支持三种模式，参考SpringSecurity源码中该功能实现方式</p> 
 &nbsp;&nbsp;&nbsp;MODE_THREADLOCAL;</br>
 &nbsp;&nbsp;&nbsp;MODE_INHERITABLETHREADLOCAL;</br>
 &nbsp;&nbsp;&nbsp;MODE_GLOBAL;</p>
 &nbsp;默认为MODE_THREADLOCAL当前线程本地变量，支持配置入口 aradin.context.strategy</p>
-&nbsp;1.4 cn.aradin.spring.core.enums.* 常量包，字面理解</p>
-&nbsp;1.5 cn.aradin.spring.core.net.http.* HTTP工具包，使用入口 HttpClientUtils</p>
-&nbsp;1.6 cn.aradin.spring.core.queue.* 轻量级内存队列，可用于低可靠性要求的使用场景，参考AradinQueue构造方法可以注入生产者及消费者</p>
-&nbsp;1.7 cn.aradin.spring.core.thread.* 线程池包，使用入口AradinThreadManager</p>
-&nbsp;1.8 cn.aradin.spring.core.session.* Session配置，需要搭配@EnableSpringSession或者@EnableRedisHttpSession使用，用于替换webserver容器的默认session机制</p>
+&nbsp;④ cn.aradin.spring.core.enums.* 常量包，字面理解</p>
+&nbsp;⑤ cn.aradin.spring.core.net.http.* HTTP工具包，使用入口 HttpClientUtils</p>
+&nbsp;⑥ cn.aradin.spring.core.queue.* 轻量级内存队列，可用于低可靠性要求的使用场景，参考AradinQueue构造方法可以注入生产者及消费者</p>
+&nbsp;⑦ cn.aradin.spring.core.thread.* 线程池包，使用入口AradinThreadManager</p>
+&nbsp;⑧ cn.aradin.spring.core.session.* Session配置，需要搭配@EnableSpringSession或者@EnableRedisHttpSession使用，用于替换webserver容器的默认session机制</p>
 &nbsp;&nbsp;&nbsp;参考配置</p>
 &nbsp;&nbsp;&nbsp;spring:</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session:</br>
@@ -57,18 +57,18 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 ***
 + **aradin-spring-acutator-starter**
 <p>&nbsp;心跳组件模块，在spring原生actuator基础上增加inited,offline,online三个服务管理节点</p>
-<p>&nbsp;1.1 /inited 查看服务的初始化状态</p>
-<p>&nbsp;1.2 /online 持续集成发布时增加上线后的处理逻辑，比如容器应用启动应用后执行指定的脚本文件（如日志采集），也支持扩展Handler实现业务高度定制的启动逻辑</p>
+<p>&nbsp;① /inited 查看服务的初始化状态</p>
+<p>&nbsp;② /online 持续集成发布时增加上线后的处理逻辑，比如容器应用启动应用后执行指定的脚本文件（如日志采集），也支持扩展Handler实现业务高度定制的启动逻辑</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cn.aradin.spring.actuator.starter.extension.IOnlineHandler 会自动调用应用上下文中所有该类型的BEAN</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;此外还支持配置项 aradin.actuator.online.shell 配置启动脚本路径</p>
-<p>&nbsp;1.3 /offline 方便下线时平滑关闭应用</p>
+<p>&nbsp;③ /offline 方便下线时平滑关闭应用</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cn.aradin.spring.actuator.starter.extension.IOfflineHandler 会在自动调用应用上下文所有该类型的BEAN后才去调用Spring上下文的close方法</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;集成方式</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;management.endpoints.web.exposure.include: inited,offline,online #开启需要的endpoints
 
 ***
 + **aradin-spring-velocity-starter**
-<p>&nbsp;spring2.x以后不再支持velocity的集成，考虑到旧项目模板代码迁移的复杂性，特别提供velocity的兼容包</p>
+<p>&nbsp;spring2.x之后不支持velocity的集成，考虑到旧项目模板代码迁移的复杂性，特别提供velocity的兼容包</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;配置方式与原velocity1.x版本一致，例如</p>
 &nbsp;spring:</br>
 &nbsp;&nbsp;&nbsp;velocity:</br>
@@ -85,7 +85,25 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 
 ***
 + **aradin-spring-swagger-starter**
-<p></p>
+<p>&nbsp;Swagger-bootstrap-ui集成组件，选型的原因是相对原生UI更加友好</p>
+<p>&nbsp;① cn.aradin.spring.swagger.starter.dto。Resp 标准返回结构</p>
+<p>&nbsp;② 配置方式</p>
+&nbsp;&nbsp;aradin:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;swagger:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base-package: pk1;pkg2;pk3</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ant-path: </br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: 协议标题</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;description: 协议描述</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;version: 1.0.0</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enable: true</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contact-name: </br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contact-email: liudaax@126.com</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contact-url: </br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;license:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;license-url: </br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use-default-status: false</br>
+
+***
 + *aradin-spring-salarm-starter*
 <p></p>
 + *aradin-spring-caffeine-starter*
