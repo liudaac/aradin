@@ -16,6 +16,5 @@
 	<url>https://github.com/liudaac/aradin</url>
 	<modules>
 		<module>aradin-zookeeper-boot-starter</module>
-		<module>aradin-zookeeper-versync-starter</module>
 	</modules>
 </project>
