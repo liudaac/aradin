@@ -24,6 +24,8 @@
 ## 模块结构
 ### 1、aradin-spring
 spring加强，面向线上使用场景，扩充协议文档、缓存、模板、心跳集成能力
+
+***
 + **aradin-spring-core**
 <p>&nbsp;基础能力模块</p>
 <p>&nbsp;1.1 cn.aradin.spring.core.algo.* 算法包   目前只有SWRR负载均衡</p>
@@ -34,6 +36,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@PropertySource(value = "classpath:config.yml", factory = AradinPropertySourceFactory.class)</p>
 <p>&nbsp;&nbsp;&nbsp;方便灵活的布局配置文件</p>
 
+***
 + **aradin-spring-acutator-starter**
 <p>&nbsp;心跳组件模块，在spring原生actuator基础上增加inited,offline,online三个服务管理节点</p>
 <p>&nbsp;1.1 /inited 查看服务的初始化状态</p>
@@ -42,9 +45,27 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;此外还支持配置项 aradin.actuator.online.shell 配置启动脚本路径</p>
 <p>&nbsp;1.3 /offline 方便下线时平滑关闭应用</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cn.aradin.spring.actuator.starter.extension.IOfflineHandler 会在自动调用应用上下文所有该类型的BEAN后才去调用Spring上下文的close方法</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;集成方式</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;management.endpoints.web.exposure.include: inited,offline,online #开启需要的endpoints
 
-+ *aradin-spring-velocity-starter*
-<p></p>
+***
++ **aradin-spring-velocity-starter**
+<p>&nbsp;spring2.x以后不再支持velocity的集成，考虑到旧项目模板代码迁移的复杂性，特别提供velocity的兼容包</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;配置方式与原velocity1.x版本一致，例如</p>
+`&nbsp;spring:`</br>
+`&nbsp;&nbsp;&nbsp;velocity:`</br>
+`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled: true #设定是否允许mvc使用velocity`</br>
+`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache: true #是否开启模板缓存`</br>
+`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;check-template-location: true #是否检查模板路径是否存在`</br>
+`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prefix: null`</br>
+`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;suffix: .vm #设定velocity模板的后缀`</br>
+`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;date-tool-attribute: null`</br>
+`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number-tool-attribute: null`</br>
+`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource-loader-path: classpath:/template/ #设定模板路径，默认为:classpath:/templates/`</br>
+`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;toolbox-config-location: classpath:/toolbox.xml #设定Velocity Toolbox配置文件的路径，比如 /WEB-INF/toolbox.xml.`</br>
+`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prefer-file-system-access: true #是否优先从文件系统加载模板以支持热加载，默认为true`</br>
+
+***
 + *aradin-spring-swagger-starter*
 <p></p>
 + *aradin-spring-salarm-starter*
