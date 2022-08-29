@@ -33,7 +33,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 <p>&nbsp;&nbsp;&nbsp;&nbsp;@Configuration</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;@PropertySource(value = "classpath:config.yml", factory = AradinPropertySourceFactory.class)</p>
 <p>&nbsp;&nbsp;方便灵活的布局配置文件</p>
-<p></p>
+
 + **aradin-spring-acutator-starter**
 <p>心跳组件模块，在spring原生actuator基础上增加inited,offline,online三个服务管理节点</p>
 <p>1.1 /inited 查看服务的初始化状态</p>
