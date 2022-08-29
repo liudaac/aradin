@@ -52,18 +52,18 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 + **aradin-spring-velocity-starter**
 <p>&nbsp;spring2.x以后不再支持velocity的集成，考虑到旧项目模板代码迁移的复杂性，特别提供velocity的兼容包</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;配置方式与原velocity1.x版本一致，例如</p>
-`&nbsp;spring:`</br>
-`&nbsp;&nbsp;&nbsp;velocity:`</br>
-`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled: true #设定是否允许mvc使用velocity`</br>
-`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache: true #是否开启模板缓存`</br>
-`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;check-template-location: true #是否检查模板路径是否存在`</br>
-`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prefix: null`</br>
-`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;suffix: .vm #设定velocity模板的后缀`</br>
-`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;date-tool-attribute: null`</br>
-`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number-tool-attribute: null`</br>
-`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource-loader-path: classpath:/template/ #设定模板路径，默认为:classpath:/templates/`</br>
-`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;toolbox-config-location: classpath:/toolbox.xml #设定Velocity Toolbox配置文件的路径，比如 /WEB-INF/toolbox.xml.`</br>
-`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prefer-file-system-access: true #是否优先从文件系统加载模板以支持热加载，默认为true`</br>
+&nbsp;spring:</br>
+&nbsp;&nbsp;&nbsp;velocity:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled: true #设定是否允许mvc使用velocity</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache: true #是否开启模板缓存</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;check-template-location: true #是否检查模板路径是否存在</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prefix: null</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;suffix: .vm #设定velocity模板的后缀</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;date-tool-attribute: null</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number-tool-attribute: null</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource-loader-path: classpath:/template/ #设定模板路径，默认为:classpath:/templates/</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;toolbox-config-location: classpath:/toolbox.xml #设定Velocity Toolbox配置文件的路径，比如 /WEB-INF/toolbox.xml.</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prefer-file-system-access: true #是否优先从文件系统加载模板以支持热加载，默认为true</br>
 
 ***
 + *aradin-spring-swagger-starter*
@@ -91,3 +91,5 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 
 ### 6、aradin-version
 
+
+## JOIN US
