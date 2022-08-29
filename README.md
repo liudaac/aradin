@@ -35,6 +35,24 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Configuration</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@PropertySource(value = "classpath:config.yml", factory = AradinPropertySourceFactory.class)</p>
 <p>&nbsp;&nbsp;&nbsp;方便灵活的布局配置文件</p>
+<p>&nbsp;1.3 cn.aradin.spring.core.context.* 上下文运行时变量 支持三种模式，参考SpringSecurity源码中该功能实现方式</p> 
+&nbsp;&nbsp;&nbsp;MODE_THREADLOCAL;</br>
+&nbsp;&nbsp;&nbsp;MODE_INHERITABLETHREADLOCAL;</br>
+&nbsp;&nbsp;&nbsp;MODE_GLOBAL;</p>
+&nbsp;默认为MODE_THREADLOCAL当前线程本地变量，支持配置入口 aradin.context.strategy</p>
+&nbsp;1.4 cn.aradin.spring.core.enums.* 常量包，字面理解</p>
+&nbsp;1.5 cn.aradin.spring.core.net.http.* HTTP工具包，使用入口 HttpClientUtils</p>
+&nbsp;1.6 cn.aradin.spring.core.queue.* 轻量级内存队列，可用于低可靠性要求的使用场景，参考AradinQueue构造方法可以注入生产者及消费者</p>
+&nbsp;1.7 cn.aradin.spring.core.thread.* 线程池包，使用入口AradinThreadManager</p>
+&nbsp;1.8 cn.aradin.spring.core.session.* Session配置，需要搭配@EnableSpringSession或者@EnableRedisHttpSession使用，用于替换webserver容器的默认session机制</p>
+&nbsp;&nbsp;&nbsp;参考配置</p>
+&nbsp;&nbsp;&nbsp;spring:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cookie:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: ${COOKIE_NAME}</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max-age: 3600</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http-only: false</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;security: false</br>
 
 ***
 + **aradin-spring-acutator-starter**
@@ -66,7 +84,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prefer-file-system-access: true #是否优先从文件系统加载模板以支持热加载，默认为true</br>
 
 ***
-+ *aradin-spring-swagger-starter*
++ **aradin-spring-swagger-starter**
 <p></p>
 + *aradin-spring-salarm-starter*
 <p></p>
