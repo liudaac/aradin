@@ -106,6 +106,14 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 ***
 + **aradin-spring-caffeine-starter**
 <p>&nbsp;使用Caffeineson类包装内存缓存Caffeine，实现对应的CacheManager，支持spring-cache注解方式集成</p>
+&nbsp;&nbsp;&nbsp;一般情况下，对于内存缓存的更新机制也分为两种：</p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;① 利用Caffeine缓存自身的超时机制进行延时Evict，在触发之前持久层对应的数据可能已经发生变更，</p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以对于更新的数据一定时间内存在不一致情况，此种使用方式更适合对一致性要求不严格或者不可变数据的缓存处理，</p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;比如SessionID上的使用可以有效降低Redis调用损耗；题目的缓存；热点商品信息的缓存;</p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;② 利用分布式中间件，比如nacos，zookeeper，consul等进行变更的通知，以实现各节点内存缓存的同步更新;</p>
+&nbsp;&nbsp;&nbsp;所以该模块对应支持普通模式以及基于版本管理机制的分布式更新模式两种：</p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、普通模式，对应配置如下：</p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、分布式更新模式，对应配置如下：</p>
 
 ***
 + **aradin-spring-redis-starter**
