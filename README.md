@@ -104,14 +104,27 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use-default-status: false</br>
 
 ***
-+ *aradin-spring-salarm-starter*
-<p></p>
 + *aradin-spring-caffeine-starter*
 <p></p>
+
+***
 + *aradin-spring-redis-starter*
 <p></p>
+
+***
 + *aradin-spring-redisson-starter*
 <p></p>
+
+***
++ **aradin-spring-salarm-starter**
+<p>&nbsp;告警通知模块，类似log4j的API，实现Content的组装和发送，发送目标默认只提供控制台输出</p>
+&nbsp;&nbsp;&nbsp;① cn.aradin.spring.salarm.starter.handler.ISalarmHandler 实现该接口Bean实例，自定义各个通知渠道逻辑</p>
+&nbsp;&nbsp;&nbsp;② cn.aradin.spring.salarm.starter.notifier。ISalarm 调用入口，负责告警消息的拼装，去重以及全局ISalarmHandler的分发，引用方式为Bean引用</p>
+&nbsp;&nbsp;&nbsp;③ 配置项</p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aradin:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;salarm:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ttl: PT1H # Min interval for sending a same alarm</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;level: warn # Min level to send</br>
 
 ### 2、aradin-alibaba
 
