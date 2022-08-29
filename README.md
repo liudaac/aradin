@@ -30,7 +30,6 @@
 
 # v0.0.3 权限扩充（已完成）
 * security集成
-* skywalking集成（javaagent方式）
 * salarm告警控制模板
 * 分布式caffeine改造
 
