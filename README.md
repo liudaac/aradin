@@ -1,4 +1,4 @@
-# ARADIN
+# ARADIN（文档编写中）
 **阿拉丁基础开发框架**
 以SpringCloud及SpringCloud Alibaba为基础做上层通用功能包扩展，  
   * 规范依赖
@@ -104,15 +104,15 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use-default-status: false</br>
 
 ***
-+ *aradin-spring-caffeine-starter*
++ **aradin-spring-caffeine-starter**
+<p>&nbsp;使用Caffeineson类包装内存缓存Caffeine，实现对应的CacheManager，支持spring-cache注解方式集成</p>
+
+***
++ **aradin-spring-redis-starter**
 <p></p>
 
 ***
-+ *aradin-spring-redis-starter*
-<p></p>
-
-***
-+ *aradin-spring-redisson-starter*
++ **aradin-spring-redisson-starter**
 <p></p>
 
 ***
