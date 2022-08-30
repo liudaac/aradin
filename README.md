@@ -299,8 +299,8 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled: true<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server-addr: 192.168.1.1:8888,192.168.1.2:8888,192.168.1.3:8888<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;namespace: d78b658c-182a-420a-9005-e8e8f36a1e7d<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group-id: ${aradin.version.nacos.group}<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-id: ${aradin.version.nacos.data-id}<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group-id: `${aradin.version.nacos.group}`<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-id: `${aradin.version.nacos.data-id}`<br>
 </figure>
 </p>
 
