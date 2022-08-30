@@ -2,6 +2,7 @@ package cn.aradin.zookeeper.boot.starter.support;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.curator.framework.CuratorFramework;
@@ -18,6 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 public class ZookeeperEventDispatcher implements PathChildrenCacheListener{
 	
 	private List<INodeHandler> nodeHandlers;
+	
+	private Executor executor = AradinExecutors.newFixedThreadPool("zookeeperevent", 4, 8, 10000, 2000l);
 	
 	public ZookeeperEventDispatcher(List<INodeHandler> nodeHandlers) {
 		this.nodeHandlers = nodeHandlers;
@@ -52,7 +55,7 @@ public class ZookeeperEventDispatcher implements PathChildrenCacheListener{
 							// TODO Auto-generated method stub
 							nodeHandler.handler(client, event);
 						}
-					}, AradinExecutors.newFixedThreadPool("zookeeperevent", 4, 8, 10000, 2000l));
+					}, executor);
 				}
 			});
 		}
