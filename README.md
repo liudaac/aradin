@@ -220,6 +220,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 
 ***
 ### 5、aradin-zookeeper
++ **aradin-zookeeper-boot-starter**
 <p>&nbsp;可同时配置多个ZK集群，并绑定事件路由机制</p>
 &nbsp;&nbsp;支持的使用方式如下</p>
 &nbsp;&nbsp;① 事件接收方式 实现cn.aradin.zookeeper.boot.starter.handler.INodeHandler Bean实例 通过support方法进行事件过滤，handler方法实现事件的处理</p>
