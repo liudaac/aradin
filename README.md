@@ -35,7 +35,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Configuration</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@PropertySource(value = "classpath:config.yml", factory = AradinPropertySourceFactory.class)</br>
 <p>&nbsp;&nbsp;&nbsp;方便灵活的布局配置文件</p>
-<p>&nbsp;③ cn.aradin.spring.core.context.* 上下文运行时变量 支持三种模式，参考SpringSecurity源码中该功能实现方式</p> 
+<p>&nbsp;③ cn.aradin.spring.core.context.* 上下文运行时变量 支持三种模式，借鉴SpringSecurity源码中该功能实现方式</p> 
 &nbsp;&nbsp;&nbsp;MODE_THREADLOCAL;</br>
 &nbsp;&nbsp;&nbsp;MODE_INHERITABLETHREADLOCAL;</br>
 &nbsp;&nbsp;&nbsp;MODE_GLOBAL;</p>
@@ -106,14 +106,44 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 ***
 + **aradin-spring-caffeine-starter**
 <p>&nbsp;使用Caffeineson类包装内存缓存Caffeine，实现对应的CacheManager，支持spring-cache注解方式集成</p>
-&nbsp;&nbsp;&nbsp;一般情况下，对于内存缓存的更新机制也分为两种：</p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;① 利用Caffeine缓存自身的超时机制进行延时Evict，在触发之前持久层对应的数据可能已经发生变更，</p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以对于更新的数据一定时间内存在不一致情况，此种使用方式更适合对一致性要求不严格或者不可变数据的缓存处理，</p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;比如SessionID上的使用可以有效降低Redis调用损耗；题目的缓存；热点商品信息的缓存;</p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;② 利用分布式中间件，比如nacos，zookeeper，consul等进行变更的通知，以实现各节点内存缓存的同步更新;</p>
-&nbsp;&nbsp;&nbsp;所以该模块对应支持普通模式以及基于版本管理机制的分布式更新模式两种：</p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、普通模式，对应配置如下：</p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、分布式更新模式，对应配置如下：</p>
+<p>&nbsp;&nbsp;&nbsp;一般情况下，对于内存缓存的更新机制也分为两种：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;① 利用Caffeine缓存自身的超时机制进行延时Evict，在触发之前持久层对应的数据可能已经发生变更，</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以对于更新的数据一定时间内存在不一致情况，此种使用方式更适合对一致性要求不严格或者不可变数据的缓存处理，</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;比如SessionID上的使用可以有效降低Redis调用损耗；题目的缓存；热点商品信息的缓存;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;② 利用分布式中间件，比如nacos，zookeeper，consul等进行变更的通知，以实现各节点内存缓存的同步更新;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以该模块对应支持普通模式以及基于版本管理机制的分布式更新模式：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对应配置如下：</p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aradin:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;caffeine:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: caffeine #默认caffeine</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">versioned: false</font> #为true时启用cachename级别的版本变更控制，需要搭配**aradin-version**模块使用</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaults: #默认缓存配置</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 1200000 #访问后过期时间，单位毫秒</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 1800000 #写入后过期时间，单位毫秒</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100 #初始化大小</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 10000 #最大缓存对象个数，超过此数量时之前放入的缓存将失效</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true #是否允许空值</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true #是否启用软引用</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;configs: #自定义cacheName对应的缓存配置</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base: #具体的cache名,与springcache配合使用</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 3600000</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 3600000</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 7200000</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 7200000</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true</p>
+&nbsp;&nbsp;&nbsp;使用方式如下几种：</p>
+&nbsp;&nbsp;&nbsp;① 直接引用Caffeineson Bean，配置参考aradin.cache.caffeine.defaults</p>
+&nbsp;&nbsp;&nbsp;② 引用CaffeinesonCacheManager Bean 按CacheName获取Caffeineson实例</p>
+&nbsp;&nbsp;&nbsp;③ 搭配@EnableCache注解，使用方式@Cachable(cacheManager=CaffeinesonConfiguration.CACHE_MANAGER)</p>
 
 ***
 + **aradin-spring-redis-starter**
