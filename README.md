@@ -208,7 +208,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 ### 4、aradin-lucene
 + **aradin-lucene-solr-starter**
 <p>&nbsp;使用自定义配置初始化CloudSolrClient Bean</p>
-&nbsp;配置如下
+&nbsp;配置如下</p>
 &nbsp;&nbsp;&nbsp;spring:</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;solr:</br>
