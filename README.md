@@ -1,6 +1,6 @@
-# ARADIN（文档编写中）
+# ARADIN
 **阿拉丁基础开发框架**
-以SpringCloud及SpringCloud Alibaba为基础做上层通用功能包扩展，  
+以SpringCloud及SpringCloud Alibaba为基础做上层通用功能包扩展，已发布至https://mvnrepository.com/artifact/cn.aradin
   * 规范依赖
   * 降低集成复杂度    
   * 扩充部分必要的能力     
@@ -18,7 +18,7 @@
 <p>SpringBoot 2.7.0</p>
 <p>SpringCloudAlibaba 2021.0.1.0</p>
 
-### 推荐版本
+### 当前推荐版本
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.20</a>
 ***
 ## 模块结构
@@ -117,7 +117,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache:</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;caffeine:</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: caffeine #默认caffeine</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">versioned: false</font> #为true时启用cachename级别的版本变更控制，需要搭配**aradin-version**模块使用</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">versioned: false</font> #为true时启用cachename级别的版本变更控制，需要搭配**aradin-version**模块使用，**aradin-version-zookeeper-starter**部分提供了配置样例</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaults: #默认缓存配置</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 1200000 #访问后过期时间，单位毫秒</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 1800000 #写入后过期时间，单位毫秒</br>
@@ -234,7 +234,64 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 
 ***
 ### 6、aradin-version
+版本分发引擎，建立标准的版本控制分发机制，并支持选择性集成zookeeper，nacos中间件
++ **aradin-version-core**
+<p>&nbsp;版本分发通用模块，对版本分发的上层逻辑进行抽象，并提供分布式一致性中间件的扩展入口，目前支持zookeeper、nacos</p>
+  <figure>
+  ① cn.aradin.version.core.dispatcher.VersionDispatcher 唤起所有的IVersionHandler(Bean)进行版本变更的发布</p>
+  ② cn.aradin.version.core.gentor.IVersionGentor 新版本号生成器，提供默认实现</p>
+  ③ cn.aradin.version.core.handler.IVersionBroadHandler 版本发布逻辑，默认实现只打印至控制台，需要根据不同中间件对应不同具体实现
+   <figure>
+     aradin-version-zookeeper-starter.VersionZookeeperBroadHandler</br>
+     aradin-version-nacos-starter.VersionNacosBroadHandler
+   </figure>
+  ④ cn.aradin.version.core.properties.VersionProperties 相关配置项 **aradin.version** </br>
+  
++ **aradin-version-zookeeper-starter**
+<p>
+<figure>
+     ① cn.aradin.version.zookeeper.starter.handler.VersionsNodeHandler</br> 
+     *接收ZK事件并使用VersionDispatcher(Bean)进行分发，接收方为所有的cn.aradin.version.core.handler.IVersionHandler(Bean)*</br>
+     </br>
+     ② cn.aradin.version.zookeeper.starter.handler.VersionZookeeperBroadHandler</br>
+     *ZK的版本广播触发入口，方便人工触发版本变更事件*</br>
+     </br>
+     ③ 配置样例</br>
+     aradin:</br>
+	 &nbsp;&nbsp;version:</br>
+	 &nbsp;&nbsp;&nbsp;&nbsp;zookeeper:</br>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address-id: ${customid}</br>
+	 &nbsp;&nbsp;zookeeper:</br>
+	 &nbsp;&nbsp;&nbsp;&nbsp;enable: true #default true</br>
+	 &nbsp;&nbsp;&nbsp;&nbsp;session-timeout: 5000 #default 5000</br>
+	 &nbsp;&nbsp;&nbsp;&nbsp;connection-timeout: 5000 #default 5000</br>
+	 &nbsp;&nbsp;&nbsp;&nbsp;addresses:</br>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- id: ${customid}</br>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address:
+</figure>
+</p>
 
+***
++ **aradin-version-nacos-starter**
+<p>
+<figure>
+	<p>
+	① cn.aradin.version.nacos.starter.listener.VersionNacosConfigListener</br> 
+	*接收Nacos事件，并使用VersionDispatcher(Bean)进行分发，接收方为所有的cn.aradin.version.core.handler.IVersionHandler(Bean)*</br>
+	</br>
+	② cn.aradin.version.nacos.starter.handler.VersionNacosBroadHandler</br>
+	*Nacos的版本广播触发入口，方便人工触发版本变更事件，另外初始化时同时为指定的group data-id绑定listener*</br>
+	</br>
+	③ 配置样例</br>
+	aradin:</br>
+	&nbsp;&nbsp;version:</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;nacos:</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: </br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-id: </br>
+</figure>
+</p>
+
++ **aradin-version-zookeeper-starter整合aradin-version-caffeine-starter实现分布式内存缓存**
 
 ***
 ## JOIN US
