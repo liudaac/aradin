@@ -239,14 +239,14 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 + **aradin-version-core**
 <p>&nbsp;版本分发通用模块，对版本分发的上层逻辑进行抽象，并提供分布式一致性中间件的扩展入口，目前支持zookeeper、nacos</p>
   <figure>
-  ① cn.aradin.version.core.dispatcher.VersionDispatcher 唤起所有的IVersionHandler(Bean)进行版本变更的发布</p>
-  ② cn.aradin.version.core.gentor.IVersionGentor 新版本号生成器，提供默认实现</p>
-  ③ cn.aradin.version.core.handler.IVersionBroadHandler 版本发布逻辑，默认实现只打印至控制台，需要根据不同中间件对应不同具体实现
+  <p>① cn.aradin.version.core.dispatcher.VersionDispatcher 唤起所有的IVersionHandler(Bean)进行版本变更的发布</p>
+  <p>② cn.aradin.version.core.gentor.IVersionGentor 新版本号生成器，提供默认实现</p>
+  <p>③ cn.aradin.version.core.handler.IVersionBroadHandler 版本发布逻辑，默认实现只打印至控制台，需要根据不同中间件对应不同具体实现</p>
    <figure>
      aradin-version-zookeeper-starter.VersionZookeeperBroadHandler<br>
      aradin-version-nacos-starter.VersionNacosBroadHandler
    </figure>
-  ④ cn.aradin.version.core.properties.VersionProperties 相关配置项 **aradin.version**<br>
+  <p>④ cn.aradin.version.core.properties.VersionProperties 相关配置项 **aradin.version**<br></p>
   
 ***
 + **aradin-version-zookeeper-starter**
