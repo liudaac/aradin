@@ -147,11 +147,40 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 
 ***
 + **aradin-spring-redis-starter**
-<p></p>
+<p>&nbsp;替换spring-boot-starter-data-redis中默认CacheManager实现（由于原生实现不支持多种缓存方式共存），对于各CacheName的初始化使用自定义配置项</p>
+&nbsp;配置方式如下</p>
+&nbsp;&nbsp;首先是原生配置</p>
+&nbsp;&nbsp;&nbsp;spring:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redis:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;database: 0 #Redis数据库索引（默认为0）</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;host:  #Redis服务器地址</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;port: 6379 #Redis服务器连接端口</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password:  #Redis服务器连接密码（默认为空）</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pool: #连接池配置，不再详细列出</p>
+&nbsp;&nbsp;然后是自定义配置</p>
+&nbsp;&nbsp;aradin:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redis:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaults:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ttl: PT60M #https://blog.csdn.net/huang007guo/article/details/81625061</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache-null-values: true</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key-prefix: default_</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use-key-prefix: true</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;configs:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ttl: PT12H</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache-null-values: true</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key-prefix: base_</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use-key-prefix: true</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;client:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ttl: PT4H</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache-null-values: true</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key-prefix: client_</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use-key-prefix: true</p>
 
 ***
 + **aradin-spring-redisson-starter**
-<p></p>
+<p>&nbsp;RedissonClient实例初始化，配置方式与spring-redis配置一致，无需额外配置项</p>
 
 ***
 + **aradin-spring-salarm-starter**
