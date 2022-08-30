@@ -40,12 +40,12 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;MODE_INHERITABLETHREADLOCAL;<br>
 &nbsp;&nbsp;&nbsp;MODE_GLOBAL;</p>
 &nbsp;默认为MODE_THREADLOCAL当前线程本地变量，支持配置入口 aradin.context.strategy</p>
-&nbsp;④ cn.aradin.spring.core.enums.* 常量包，字面理解</p>
-&nbsp;⑤ cn.aradin.spring.core.net.http.* HTTP工具包，使用入口 HttpClientUtils</p>
-&nbsp;⑥ cn.aradin.spring.core.queue.* 轻量级内存队列，可用于低可靠性要求的使用场景，参考AradinQueue构造方法可以注入生产者及消费者</p>
-&nbsp;⑦ cn.aradin.spring.core.thread.* 线程池包，使用入口AradinThreadManager</p>
-&nbsp;⑧ cn.aradin.spring.core.session.* Session配置，需要搭配@EnableSpringSession或者@EnableRedisHttpSession使用，用于替换webserver容器的默认session机制</p>
-&nbsp;&nbsp;&nbsp;参考配置</p>
+<p>&nbsp;④ cn.aradin.spring.core.enums.* 常量包，字面理解</p>
+<p>&nbsp;⑤ cn.aradin.spring.core.net.http.* HTTP工具包，使用入口 HttpClientUtils</p>
+<p>&nbsp;⑥ cn.aradin.spring.core.queue.* 轻量级内存队列，可用于低可靠性要求的使用场景，参考AradinQueue构造方法可以注入生产者及消费者</p>
+<p>&nbsp;⑦ cn.aradin.spring.core.thread.* 线程池包，使用入口AradinThreadManager</p>
+<p>&nbsp;⑧ cn.aradin.spring.core.session.* Session配置，需要搭配@EnableSpringSession或者@EnableRedisHttpSession使用，用于替换webserver容器的默认session机制</p>
+<p>&nbsp;&nbsp;&nbsp;参考配置</p>
 &nbsp;&nbsp;&nbsp;spring:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cookie:<br>
@@ -140,17 +140,17 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true</p>
-&nbsp;&nbsp;&nbsp;使用方式如下几种：</p>
-&nbsp;&nbsp;&nbsp;① 直接引用Caffeineson Bean，配置参考aradin.cache.caffeine.defaults</p>
-&nbsp;&nbsp;&nbsp;② 引用CaffeinesonCacheManager Bean 按CacheName获取Caffeineson实例</p>
-&nbsp;&nbsp;&nbsp;③ 搭配@EnableCache注解，使用方式@Cachable(cacheManager=CaffeinesonConfiguration.CACHE_MANAGER)</p>
-&nbsp;&nbsp;&nbsp;④ 提供Endpoint入口查询Caffeine状态 /caffeineson 可以按照aradin-spring-acutator-starter的配置方式进行开放
+<p>&nbsp;&nbsp;&nbsp;使用方式如下几种：</p>
+<p>&nbsp;&nbsp;&nbsp;① 直接引用Caffeineson Bean，配置参考aradin.cache.caffeine.defaults</p>
+<p>&nbsp;&nbsp;&nbsp;② 引用CaffeinesonCacheManager Bean 按CacheName获取Caffeineson实例</p>
+<p>&nbsp;&nbsp;&nbsp;③ 搭配@EnableCache注解，使用方式@Cachable(cacheManager=CaffeinesonConfiguration.CACHE_MANAGER)</p>
+<p>&nbsp;&nbsp;&nbsp;④ 提供Endpoint入口查询Caffeine状态 /caffeineson 可以按照aradin-spring-acutator-starter的配置方式进行开放
 
 ***
 + **aradin-spring-redis-starter**
 <p>&nbsp;替换spring-boot-starter-data-redis中默认CacheManager实现（由于原生实现不支持多种缓存方式共存），对于各CacheName的初始化使用自定义配置项</p>
-&nbsp;配置方式如下</p>
-&nbsp;&nbsp;首先是原生配置</p>
+<p>&nbsp;配置方式如下</p>
+<p>&nbsp;&nbsp;首先是原生配置</p>
 &nbsp;&nbsp;&nbsp;spring:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redis:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;database: 0 #Redis数据库索引（默认为0）<br>
@@ -223,15 +223,15 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 ### 5、aradin-zookeeper
 + **aradin-zookeeper-boot-starter**
 <p>&nbsp;可同时配置多个ZK集群，并绑定事件路由机制</p>
-&nbsp;&nbsp;支持的使用方式如下</p>
-&nbsp;&nbsp;① 事件接收方式 实现cn.aradin.zookeeper.boot.starter.handler.INodeHandler Bean实例 通过support方法进行事件过滤，handler方法实现事件的处理</p>
-&nbsp;&nbsp;② ZK集群配置方式</p>
+<p>&nbsp;&nbsp;支持的使用方式如下</p>
+<p>&nbsp;&nbsp;① 事件接收方式 实现cn.aradin.zookeeper.boot.starter.handler.INodeHandler Bean实例 通过support方法进行事件过滤，handler方法实现事件的处理</p>
+<p>&nbsp;&nbsp;② ZK集群配置方式</p>
 &nbsp;&nbsp;&nbsp;&nbsp;aradin:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zookeeper:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addresses: #支持多组<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;id: CUSTOMIZED-ZOOKEEPER-ADDRESS-ID<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address: 192.168.1.1:2181,192.168.1.2:2181,192.168.1.3:2181/CHROOT</p>
-&nbsp;&nbsp;③ ZKClient获取方式 ZookeeperClientManager.getClient(String id)</p>
+<p>&nbsp;&nbsp;③ ZKClient获取方式 ZookeeperClientManager.getClient(String id)</p>
 
 ***
 ### 6、aradin-version
