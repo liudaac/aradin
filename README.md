@@ -229,8 +229,8 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;aradin:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zookeeper:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addresses: #支持多组<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;id: ${customized-zookeeper-address-id}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address: 192.168.1.1:2181,192.168.1.2:2181,192.168.1.3:2181/${chroot}</p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;id: CUSTOMIZED-ZOOKEEPER-ADDRESS-ID<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address: 192.168.1.1:2181,192.168.1.2:2181,192.168.1.3:2181/CHROOT</p>
 &nbsp;&nbsp;③ ZKClient获取方式 ZookeeperClientManager.getClient(String id)</p>
 
 ***
