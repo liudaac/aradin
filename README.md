@@ -262,13 +262,13 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
      aradin:<br>
 	 &nbsp;&nbsp;version:<br>
 	 &nbsp;&nbsp;&nbsp;&nbsp;zookeeper:<br>
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address-id: ${customid}<br>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address-id: CUSTOMIZED-ID<br>
 	 &nbsp;&nbsp;zookeeper:<br>
 	 &nbsp;&nbsp;&nbsp;&nbsp;enable: true #default true<br>
 	 &nbsp;&nbsp;&nbsp;&nbsp;session-timeout: 5000 #default 5000<br>
 	 &nbsp;&nbsp;&nbsp;&nbsp;connection-timeout: 5000 #default 5000<br>
 	 &nbsp;&nbsp;&nbsp;&nbsp;addresses:<br>
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- id: ${customid}<br>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- id: CUSTOMIZED-ID<br>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address:
 </figure>
 </p>
