@@ -245,8 +245,9 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
      aradin-version-zookeeper-starter.VersionZookeeperBroadHandler</br>
      aradin-version-nacos-starter.VersionNacosBroadHandler
    </figure>
-  ④ cn.aradin.version.core.properties.VersionProperties 相关配置项 **aradin.version** </br>
+  ④ cn.aradin.version.core.properties.VersionProperties 相关配置项 **aradin.version**</br>
   
+***
 + **aradin-version-zookeeper-starter**
 <p>
 <figure>
