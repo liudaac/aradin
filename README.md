@@ -274,7 +274,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 </p>
 
 ***
-+ **aradin-version-nacos-starter**
++ **aradin-version-nacos-starter(v0.0.4+)**
 <p>
 <figure>
 	<p>
