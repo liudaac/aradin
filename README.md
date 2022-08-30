@@ -355,6 +355,11 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 + **aradin-cluster-zookeeper-starter**
 
 ***
+## 进展阶段
+<p>&nbsp;目前0.0.3.x版本已经趋于相对成熟，满足日常项目快速搭建需求，主要是BUG修复阶段。</p>
+<p>&nbsp;新模块开发工作主要是基于0.0.4.x，由于虽然0.0.3.x系列依赖的SpringBoot2.3.12仍是SpringCloud目前生态最完整的版本，但官方已经于今年停止了该版本的维护，后续必然会基于新的SpringBoot版本进行相关生态的发布，所以后续0.0.4.x也会以此为准进行迭代升级，紧跟SpringCloud的生态升级</p>
+
+***
 ## JOIN US
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们致力于为Javaer提供更加快捷的项目搭建途径，所以无论对该项目有任何的见解，都欢迎来交流，如果有其他需要补充的功能或者对现有模块的Fix，也欢迎不吝提交你的issue，审核通过即可加入本项目开发 </p>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开发者邮箱 liudaax@126.com </p>
