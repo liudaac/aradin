@@ -34,7 +34,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- Springboot -->
-		<springboot.version>2.7.0</springboot.version>
+		<springboot.version>2.7.3</springboot.version>
 		<springboot.solr.version>2.4.13</springboot.solr.version><!-- 2.4.10 -->
 		<!-- Springcloud -->
 		<spring-cloud.version>2021.0.3</spring-cloud.version>
