@@ -144,6 +144,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;① 直接引用Caffeineson Bean，配置参考aradin.cache.caffeine.defaults</p>
 &nbsp;&nbsp;&nbsp;② 引用CaffeinesonCacheManager Bean 按CacheName获取Caffeineson实例</p>
 &nbsp;&nbsp;&nbsp;③ 搭配@EnableCache注解，使用方式@Cachable(cacheManager=CaffeinesonConfiguration.CACHE_MANAGER)</p>
+&nbsp;&nbsp;&nbsp;④ 提供Endpoint入口查询Caffeine状态 /caffeineson 可以按照aradin-spring-acutator-starter的配置方式进行开放
 
 ***
 + **aradin-spring-redis-starter**
@@ -283,16 +284,73 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 	② cn.aradin.version.nacos.starter.handler.VersionNacosBroadHandler</br>
 	*Nacos的版本广播触发入口，方便人工触发版本变更事件，另外初始化时同时为指定的group data-id绑定listener*</br>
 	</br>
-	③ 配置样例</br>
+	③ 配置样例</p>
 	aradin:</br>
 	&nbsp;&nbsp;version:</br>
 	&nbsp;&nbsp;&nbsp;&nbsp;nacos:</br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: </br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-id: </br>
+	spring:</br>
+	&nbsp;&nbsp;cloud:</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;nacos:</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username: </br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: </br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;config:</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled: true</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server-addr: 192.168.1.1:8888,192.168.1.2:8888,192.168.1.3:8888</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;namespace: d78b658c-182a-420a-9005-e8e8f36a1e7d</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group-id: ${aradin.version.nacos.group}</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-id: ${aradin.version.nacos.data-id}</br>
 </figure>
 </p>
 
-+ **aradin-version-zookeeper-starter整合aradin-version-caffeine-starter实现分布式内存缓存**
+***
++ **aradin-version-caffeine-starter整合aradin-version-zookeeper-starter实现分布式内存缓存**
+<p>&nbsp;aradin-version-caffeine-starter中实现了位于VersionDispatcher(Bean)下游的IVersionHandler（cn.aradin.spring.caffeine.manager.version.CaffeinesonVersionHandler）实现内存信息的版本淘汰机制</br>
+<p>&nbsp;① 相关配置如下：可以参考复用至nacos集成</p>
+	aradin:</br>
+	&nbsp;&nbsp;version:</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;zookeeper:</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address-id: ${customid}</br>
+	&nbsp;&nbsp;zookeeper:</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;addresses:</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- id: ${aradin.version.zookeeper-address-id}</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address: 192.168.1.1:2181,192.168.1.2:2181,192.168.1.3:2181/chroot</br>
+	&nbsp;&nbsp;cache:</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;caffeine:</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: caffeine #默认caffeine</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">versioned: true</font> #为true时启用cachename级别的版本变更控制，需要搭配**aradin-version**模块使用，**aradin-version-zookeeper-starter**部分提供了配置样例</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaults: #默认缓存配置</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 1200000 #访问后过期时间，单位毫秒</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 1800000 #写入后过期时间，单位毫秒</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100 #初始化大小</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 10000 #最大缓存对象个数，超过此数量时之前放入的缓存将失效</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true #是否允许空值</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true #是否启用软引用</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;configs: #自定义cacheName对应的缓存配置</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base: #具体的cache名,与springcache配合使用</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 3600000</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 3600000</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session:</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 7200000</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 7200000</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true</p>
+<p>&nbsp;② 缓存失效的手动触发</p>
+	&nbsp;**IVersionBroadHandler(Bean).broadcast(String group, String key);**</br> 
+	&nbsp;group为aradin.cache.caffeine.group，key为cacheName，对应的cache将被清空达到被动更新的目的</br>
+
+***
+### 7、aradin-cluster
+<p>&nbsp;集群模块，可以借助zookeeper实现集群节点的注册和节点列表的获取</p>
++ **aradin-cluster-core**
++ **aradin-cluster-zookeeper-starter**
 
 ***
 ## JOIN US
