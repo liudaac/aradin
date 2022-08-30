@@ -20,7 +20,7 @@ public class ZookeeperEventDispatcher implements PathChildrenCacheListener{
 	
 	private List<INodeHandler> nodeHandlers;
 	
-	private Executor executor = AradinExecutors.newFixedThreadPool("zookeeperevent", 4, 8, 10000, 2000l);
+	private final Executor executor = AradinExecutors.newFixedThreadPool("zookeeperevent", 4, 8, 10000, 2000l);
 	
 	public ZookeeperEventDispatcher(List<INodeHandler> nodeHandlers) {
 		this.nodeHandlers = nodeHandlers;
