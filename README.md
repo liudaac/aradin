@@ -19,7 +19,7 @@
 <p>SpringCloudAlibaba 2021.0.1.0</p>
 
 ### 推荐版本
-*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.19</a>
+*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.20</a>
 ***
 ## 模块结构
 ### 1、aradin-spring
@@ -220,7 +220,16 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 
 ***
 ### 5、aradin-zookeeper
-
+<p>&nbsp;可同时配置多个ZK集群，并绑定事件路由机制</p>
+&nbsp;&nbsp;支持的使用方式如下</p>
+&nbsp;&nbsp;① 事件接收方式 实现cn.aradin.zookeeper.boot.starter.handler.INodeHandler Bean实例 通过support方法进行事件过滤，handler方法实现事件的处理</p>
+&nbsp;&nbsp;② ZK集群配置方式</p>
+&nbsp;&nbsp;&nbsp;&nbsp;aradin:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zookeeper:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addresses: #支持多组</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;id: ${customized-zookeeper-address-id}</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address: 192.168.1.1:2181,192.168.1.2:2181,192.168.1.3:2181/${chroot}</p>
+&nbsp;&nbsp;③ ZKClient获取方式 ZookeeperClientManager.getClient(String id)</p>
 
 ***
 ### 6、aradin-version
