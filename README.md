@@ -194,20 +194,37 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;level: warn # Min level to send</br>
 
 ### 2、aradin-alibaba
+合并了必要的依赖项和配置样例，并未做额外开发
++ **aradin-alibaba-nacos-starter**
 
++ **aradin-alibaba-nacos-starter**
 
+***
 ### 3、aradin-mybatis
++ **aradin-mybatis-plus-starter**
+<p>&nbsp;增加了开启分页的配置，由于默认情况下Page查询是必要的，无需下沉到项目实现中再开启</p>
 
-
+***
 ### 4、aradin-lucene
++ **aradin-lucene-solr-starter**
+<p>&nbsp;使用自定义配置初始化CloudSolrClient Bean</p>
+&nbsp;配置如下
+&nbsp;&nbsp;&nbsp;spring:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;solr:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zk-hosts:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 192.168.1.1:8080</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 192.168.1.2:8080</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 192.168.1.3:8080</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;chroot:</p>
 
-
+***
 ### 5、aradin-zookeeper
 
-
+***
 ### 6、aradin-version
 
-
+***
 ## JOIN US
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们致力于为Javaer提供更加快捷的项目搭建途径，所以无论对该项目有任何的见解，都欢迎来交流，如果有其他需要补充的功能或者对现有模块的Fix，也欢迎不吝提交你的issue，审核通过即可加入本项目开发 </p>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开发者邮箱 liudaax@126.com </p>
