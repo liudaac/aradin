@@ -41,6 +41,7 @@
 		<!-- Springcloud -->
 		<spring-cloud.version>Hoxton.SR12</spring-cloud.version>
 		<spring-cloud-alibaba.version>2.2.8.RELEASE</spring-cloud-alibaba.version>
+		<spring-cloud-dubbo.version>2.2.7.RELEASE</spring-cloud-dubbo.version>
 		<dubbo.version>2.7.17</dubbo.version>
 		<spring-cloud-alibaba-arthas.version>3.4.3</spring-cloud-alibaba-arthas.version>
 		<sentinel.version>1.8.5</sentinel.version>
@@ -121,10 +122,21 @@
 			</dependency>
 			<!-- Apache Dubbo -->
 			<dependency>
+			    <groupId>com.alibaba.cloud</groupId>
+			    <artifactId>spring-cloud-starter-dubbo</artifactId>
+			    <version>${spring-cloud-dubbo.version}</version>
+			</dependency>
+			<dependency>
 			    <groupId>org.apache.dubbo</groupId>
 			    <artifactId>dubbo-spring-boot-starter</artifactId>
 			    <version>${dubbo.version}</version>
 			</dependency>
+			<dependency>
+			    <groupId>org.apache.dubbo</groupId>
+			    <artifactId>dubbo-metadata-report-nacos</artifactId>
+			    <version>${dubbo.version}</version>
+			</dependency>
+			
 			<dependency>
 				<groupId>com.alibaba.csp</groupId>
 				<artifactId>sentinel-apache-dubbo-adapter</artifactId>
