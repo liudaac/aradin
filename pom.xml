@@ -136,6 +136,11 @@
 			    <artifactId>dubbo-metadata-report-nacos</artifactId>
 			    <version>${dubbo.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.apache.dubbo</groupId>
+				<artifactId>dubbo-spring-boot-autoconfigure</artifactId>
+				<version>${dubbo.version}</version>
+			</dependency>
 			
 			<dependency>
 				<groupId>com.alibaba.csp</groupId>
