@@ -8,6 +8,8 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -126,9 +128,9 @@ public class ExcelUtil {
 
 	@SuppressWarnings("static-access")
 	private static String getValue(XSSFCell xssfCell) {
-		if (xssfCell.getCellType() == xssfCell.CELL_TYPE_BOOLEAN) {
+		if (xssfCell.getCellType() == CellType.BOOLEAN) {
 			return String.valueOf(xssfCell.getBooleanCellValue());
-		} else if (xssfCell.getCellType() == xssfCell.CELL_TYPE_NUMERIC) {
+		} else if (xssfCell.getCellType() == CellType.NUMERIC) {
 			return String.valueOf((long) (xssfCell.getNumericCellValue()));
 		} else {
 			return String.valueOf(xssfCell.getStringCellValue());
@@ -178,7 +180,7 @@ public class ExcelUtil {
 		XSSFRow row = sheet.createRow(0);
 		// 第四步，创建单元格，并设置值表头 设置表头居中
 		XSSFCellStyle style = xb.createCellStyle();
-		style.setAlignment(XSSFCellStyle.ALIGN_CENTER);
+		style.setAlignment(HorizontalAlignment.CENTER);
 
 		if (cellnames == null || cellnames.length <= 0) {
 			throw new Exception("表头信息为空");
