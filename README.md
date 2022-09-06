@@ -1,6 +1,6 @@
 # ARADIN
 **阿拉丁基础开发框架**
-以SpringCloud及SpringCloud Alibaba为基础做上层通用功能包扩展，已发布至https://mvnrepository.com/artifact/cn.aradin
+以SpringCloud及SpringCloud Alibaba<https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E>为基础做上层通用功能包扩展，已发布至https://mvnrepository.com/artifact/cn.aradin
   * 规范依赖
   * 降低集成复杂度    
   * 扩充部分必要的能力     
