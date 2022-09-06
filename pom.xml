@@ -131,13 +131,6 @@
 				<version>${sentinel.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.alibaba.csp</groupId>
-    			<artifactId>sentinel-parent</artifactId>
-    			<version>${sentinel.version}</version>
-    			<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			<dependency>
 				<groupId>com.taobao.arthas</groupId>
 				<artifactId>arthas-spring-boot-starter</artifactId>
 				<version>${spring-cloud-alibaba-arthas.version}</version>
