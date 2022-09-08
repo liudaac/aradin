@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Deprecated
 public class Resp<T> implements Serializable {
 	private int code = 0;
 	private String msg;
