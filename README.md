@@ -22,7 +22,7 @@
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.20</a><br>
 ***
 依赖管理
-&nbsp;&nbsp;&nbsp;%3CdependencyManagement%3E<br>
+&nbsp;&nbsp;&nbsp;<dependencyManagement><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<dependencies><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<dependency><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<groupId>cn.aradin</groupId><br>
