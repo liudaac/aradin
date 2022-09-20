@@ -33,6 +33,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependencies&gt;<br>
 &nbsp;&nbsp;&nbsp;&lt;/dependencyManagement&gt;<br>
+
 ***
 ## 模块结构
 ### 1、aradin-spring
