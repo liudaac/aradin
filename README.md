@@ -21,7 +21,7 @@
 ### 当前推荐版本
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.20</a><br>
 ***
-依赖管理
+<p>依赖管理</p>
 &nbsp;&nbsp;&nbsp;&lt;dependencyManagement&gt;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependencies&gt;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;<br>
