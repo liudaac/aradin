@@ -19,7 +19,20 @@
 <p>SpringCloudAlibaba 2021.0.1.0</p>
 
 ### 当前推荐版本
-*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.20</a>
+*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.20</a><br/>
+***
+依赖管理
+&nbsp;&nbsp;&nbsp;<dependencyManagement>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<dependencies>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<dependency>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<groupId>cn.aradin</groupId>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<artifactId>aradin</artifactId>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<version>${aradin.version}</version>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<type>pom</type>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<scope>import</scope>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</dependency>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</dependencies>
+&nbsp;&nbsp;&nbsp;</dependencyManagement>	
 ***
 ## 模块结构
 ### 1、aradin-spring
