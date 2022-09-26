@@ -65,7 +65,7 @@
 		<zookeeper.version>3.4.14</zookeeper.version>
 		<curator.version>2.13.0</curator.version>
 		<!-- Swagger -->
-		<swagger.version>2.9.2</swagger.version>
+		<swagger.version>3.0.0</swagger.version>
 		<swagger.ui.version>1.9.6</swagger.ui.version>
 		<!-- Old velocity -->
 		<velocity.version>1.7</velocity.version>
