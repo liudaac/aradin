@@ -40,7 +40,7 @@ import static springfox.documentation.schema.Types.*;
 import static springfox.documentation.swagger2.mappers.EnumMapper.*;
 import static springfox.documentation.swagger2.mappers.Properties.*;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public class ParameterMapper {
 
   private static final VendorExtensionsMapper vendorMapper = new VendorExtensionsMapper();

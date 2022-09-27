@@ -30,7 +30,7 @@ import java.util.TreeMap;
 
 import static com.google.common.collect.Maps.*;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public class SecurityMapper {
   private Map<String, SecuritySchemeFactory> factories = ImmutableMap.<String, SecuritySchemeFactory>builder()
       .put("oauth2", new OAuth2AuthFactory())

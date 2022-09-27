@@ -60,7 +60,7 @@ import static springfox.documentation.swagger2.mappers.ModelMapper.*;
     SecurityMapper.class,
     LicenseMapper.class,
     VendorExtensionsMapper.class
-})
+}, componentModel = "spring")
 public abstract class ServiceModelToSwagger2Mapper {
 
   @Mappings({

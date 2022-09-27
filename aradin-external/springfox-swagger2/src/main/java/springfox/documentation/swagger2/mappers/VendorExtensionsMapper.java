@@ -32,7 +32,7 @@ import static com.google.common.base.Strings.*;
 import static com.google.common.collect.FluentIterable.*;
 import static com.google.common.collect.Maps.*;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public class VendorExtensionsMapper {
 
   public Map<String, Object> mapExtensions(List<VendorExtension> from) {
