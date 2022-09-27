@@ -127,7 +127,7 @@ public class WebMvcRequestHandler implements RequestHandler {
   @Override
   public RequestHandlerKey key() {
     return new RequestHandlerKey(
-        requestMapping.getPatternsCondition().getPatterns(),
+        requestMapping.getPathPatternsCondition().getPatternValues(),
         requestMapping.getMethodsCondition().getMethods(),
         requestMapping.getConsumesCondition().getConsumableMediaTypes(),
         requestMapping.getProducesCondition().getProducibleMediaTypes());
