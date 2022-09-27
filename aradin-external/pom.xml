@@ -16,7 +16,8 @@
     <module>springfox-spring-web</module>
     <module>springfox-swagger-common</module>
     <module>springfox-swagger2</module>
-	</modules>
+    <module>swagger-bootstrap-ui</module>
+  </modules>
 	<build>
     	<resources>
 			<resource>

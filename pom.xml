@@ -586,6 +586,10 @@
 		      <artifactId>springfox-swagger2</artifactId>
 		      <version>${revision}</version>
 		    </dependency>
+		    <dependency>
+		    	<groupId>cn.aradin</groupId>
+		    	<artifactId>swagger-bootstrap-ui</artifactId>
+		    </dependency>
 		</dependencies>
 	</dependencyManagement>
 
