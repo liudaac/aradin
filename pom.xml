@@ -18,6 +18,7 @@
 		<module>aradin-zookeeper</module>
 		<module>aradin-cluster</module>
 		<module>aradin-version</module>
+		<module>aradin-external</module>
 		<!-- <module>aradin-wechat</module> <module>aradin-examples</module> -->
 	</modules>
 	<parent>
@@ -570,6 +571,21 @@
 				<artifactId>aradin-version-nacos-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>
+			<dependency>
+		      <groupId>cn.aradin</groupId>
+		      <artifactId>springfox-spring-web</artifactId>
+		      <version>${revision}</version>
+		    </dependency>
+		    <dependency>
+		      <groupId>cn.aradin</groupId>
+		      <artifactId>springfox-swagger-common</artifactId>
+		      <version>${revision}</version>
+		    </dependency>
+		    <dependency>
+		      <groupId>cn.aradin</groupId>
+		      <artifactId>springfox-swagger2</artifactId>
+		      <version>${revision}</version>
+		    </dependency>
 		</dependencies>
 	</dependencyManagement>
 
