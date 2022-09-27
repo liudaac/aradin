@@ -32,7 +32,7 @@
 			<artifactId>spring-boot</artifactId>
 		</dependency>
 		<dependency>
-            <groupId>com.github.xiaoymin</groupId>
+            <groupId>cn.aradin</groupId>
             <artifactId>swagger-bootstrap-ui</artifactId>
         </dependency>
 	</dependencies>

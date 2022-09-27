@@ -589,6 +589,7 @@
 		    <dependency>
 		    	<groupId>cn.aradin</groupId>
 		    	<artifactId>swagger-bootstrap-ui</artifactId>
+		    	<version>${revision}</version>
 		    </dependency>
 		</dependencies>
 	</dependencyManagement>
