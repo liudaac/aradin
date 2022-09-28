@@ -59,8 +59,7 @@ public class ApiSelectorBuilder {
     return new Predicate<RequestHandler>() {
       @Override
       public boolean apply(RequestHandler input) {
-    	WebMvcRequestHandler mvcRequestHandler = (WebMvcRequestHandler)input;
-        return Iterables.any(mvcRequestHandler.getPathPatternsCondition().getPatternValues(), pathSelector);
+        return Iterables.any(input.getPathPatternsCondition().getPatternValues(), pathSelector);
       }
     };
   }

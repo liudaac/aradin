@@ -80,6 +80,7 @@ public class WebMvcRequestHandler implements RequestHandler {
    * @since 5.3 replace getPatternsCondition
    * @return PathPatternsRequestCondition
    */
+  @Override
   public PathPatternsRequestCondition getPathPatternsCondition() {
 	  return requestMapping.getPathPatternsCondition();
   }

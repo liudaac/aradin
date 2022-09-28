@@ -30,8 +30,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import springfox.documentation.RequestHandler;
 import springfox.documentation.spi.service.RequestHandlerCombiner;
-import springfox.documentation.spring.web.WebMvcRequestHandler;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -51,9 +49,7 @@ class DefaultRequestHandlerCombiner implements RequestHandlerCombiner {
 		LOGGER.warn("Total number of request handlers {}", nullToEmptyList(source).size());
 		LOGGER.error("TEST LINE .............");
 		for (RequestHandler each : nullToEmptyList(source)) {
-			WebMvcRequestHandler mvcRequestHandler = (WebMvcRequestHandler) each;
-			LOGGER.info("Adding key: {}, {}", patternsCondition(mvcRequestHandler).toString(), each.toString());
-			byPath.put(patternsCondition(mvcRequestHandler).toString(), each);
+			byPath.put(patternsCondition(each).toString(), each);
 		}
 		for (String key : byPath.keySet()) {
 			combined.addAll(combined(byPath.get(key)));

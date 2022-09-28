@@ -36,7 +36,7 @@ class PathAndParametersEquivalence extends Equivalence<RequestHandler> {
   @Override
   protected boolean doEquivalent(RequestHandler a, RequestHandler b) {
 
-    return a.getPatternsCondition().equals(b.getPatternsCondition())
+    return a.getPathPatternsCondition().equals(b.getPathPatternsCondition())
         && !Sets.intersection(a.supportedMethods(), b.supportedMethods()).isEmpty()
         && a.params().equals(b.params())
         && Sets.symmetricDifference(wrapped(a.getParameters()), wrapped(b.getParameters())).isEmpty();
@@ -60,7 +60,7 @@ class PathAndParametersEquivalence extends Equivalence<RequestHandler> {
   @Override
   protected int doHash(RequestHandler requestHandler) {
     return Objects.hashCode(
-        requestHandler.getPatternsCondition().getPatterns(),
+        requestHandler.getPathPatternsCondition().getPatternValues(),
         requestHandler.supportedMethods(),
         requestHandler.params(),
         wrapped(requestHandler.getParameters()));

@@ -36,7 +36,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- Springboot -->
 		<springboot.version>2.7.4</springboot.version>
-		<springboot.oauth2.version>2.3.12.RELEASE</springboot.oauth2.version>
+		<springboot.oauth2.version>2.6.8</springboot.oauth2.version>
 		<springboot.solr.version>2.4.13</springboot.solr.version><!-- 2.4.10 -->
 		<!-- Springcloud -->
 		<spring-cloud.version>2021.0.3</spring-cloud.version>
@@ -66,7 +66,6 @@
 		<zookeeper.version>3.4.14</zookeeper.version>
 		<curator.version>2.13.0</curator.version>
 		<!-- Swagger -->
-		<swagger.version>3.0.0</swagger.version>
 		<swagger.ui.version>1.9.6</swagger.ui.version>
 		<!-- Old velocity -->
 		<velocity.version>1.7</velocity.version>
@@ -307,29 +306,6 @@
 				<groupId>org.apache.zookeeper</groupId>
 				<artifactId>zookeeper</artifactId>
 				<version>${zookeeper.version}</version>
-			</dependency>
-
-			<!-- swagger -->
-			<dependency>
-				<groupId>io.springfox</groupId>
-				<artifactId>springfox-swagger2</artifactId>
-				<version>${swagger.version}</version>
-				<exclusions>
-					<exclusion>
-						<artifactId>guava</artifactId>
-						<groupId>com.google.guava</groupId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<dependency>
-				<groupId>io.springfox</groupId>
-				<artifactId>springfox-swagger-ui</artifactId>
-				<version>${swagger.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.github.xiaoymin</groupId>
-				<artifactId>swagger-bootstrap-ui</artifactId>
-				<version>${swagger.ui.version}</version>
 			</dependency>
 
 			<!-- Old Velocity -->
@@ -589,6 +565,16 @@
 		    <dependency>
 		    	<groupId>cn.aradin</groupId>
 		    	<artifactId>swagger-bootstrap-ui</artifactId>
+		    	<version>${revision}</version>
+		    </dependency>
+		    <dependency>
+		    	<groupId>cn.aradin</groupId>
+		    	<artifactId>springfox-spi</artifactId>
+		    	<version>${revision}</version>
+		    </dependency>
+		    <dependency>
+		    	<groupId>cn.aradin</groupId>
+		    	<artifactId>springfox-core</artifactId>
 		    	<version>${revision}</version>
 		    </dependency>
 		</dependencies>

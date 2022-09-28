@@ -10,7 +10,6 @@ import org.springframework.web.servlet.mvc.condition.PathPatternsRequestConditio
 import com.google.common.collect.Ordering;
 
 import springfox.documentation.RequestHandler;
-import springfox.documentation.spring.web.WebMvcRequestHandler;
 
 public class Orderings {
 
@@ -27,13 +26,13 @@ public class Orderings {
 		return Ordering.from(new Comparator<RequestHandler>() {
 			@Override
 			public int compare(RequestHandler first, RequestHandler second) {
-				return patternsCondition((WebMvcRequestHandler) first).toString()
-						.compareTo(patternsCondition((WebMvcRequestHandler) second).toString());
+				return patternsCondition(first).toString()
+						.compareTo(patternsCondition(second).toString());
 			}
 		});
 	}
 
-	public static Comparator<WebMvcRequestHandler> byPathPatternsCondition() {
+	public static Comparator<RequestHandler> byPathPatternsCondition() {
 		return Comparator.comparing(requestHandler -> sortedPaths(requestHandler.getPathPatternsCondition()));
 	}
 
@@ -42,7 +41,7 @@ public class Orderings {
 		return paths.stream().filter(Objects::nonNull).collect(Collectors.joining(","));
 	}
 
-	public static PathPatternsRequestCondition patternsCondition(WebMvcRequestHandler handler) {
+	public static PathPatternsRequestCondition patternsCondition(RequestHandler handler) {
 		return handler.getPathPatternsCondition();
 	}
 }

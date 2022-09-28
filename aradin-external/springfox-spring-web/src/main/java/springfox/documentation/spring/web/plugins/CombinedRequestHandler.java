@@ -25,6 +25,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.condition.NameValueExpression;
+import org.springframework.web.servlet.mvc.condition.PathPatternsRequestCondition;
 import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import springfox.documentation.RequestHandler;
@@ -108,7 +109,7 @@ public class CombinedRequestHandler implements RequestHandler {
   @Override
   public RequestHandlerKey key() {
     return new RequestHandlerKey(
-        getPatternsCondition().getPatterns(),
+        getPathPatternsCondition().getPatternValues(),
         supportedMethods(),
         consumes(),
         produces());
@@ -153,4 +154,10 @@ public class CombinedRequestHandler implements RequestHandler {
     sb.append('}');
     return sb.toString();
   }
+
+@Override
+public PathPatternsRequestCondition getPathPatternsCondition() {
+	// TODO Auto-generated method stub
+	return first.getPathPatternsCondition().combine(second.getPathPatternsCondition());
+}
 }
