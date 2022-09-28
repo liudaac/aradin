@@ -369,6 +369,10 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 + **aradin-cluster-zookeeper-starter**
 
 ***
+### 8、aradin-external
+<p>&nbsp;外部模块重写，目前包含springfox-swagger，原因是swagger近两年未做更新，与spring新版有兼容问题，所以做了本地化适配修改，0.0.4.x兼容springboot2.7.4</p>
+
+***
 ## 进展阶段
 <p>&nbsp;目前0.0.3.x版本已经趋于相对成熟，满足日常项目快速搭建需求，主要是BUG修复阶段。</p>
 <p>&nbsp;而后续开发工作主要是基于0.0.4+，由于虽然0.0.3.x系列依赖的SpringBoot2.3.12仍是SpringCloud目前生态最完整的版本，但官方已经于今年停止了该版本的维护，后续必然会基于新的SpringBoot版本进行相关生态的发布，所以后续0.0.4.x也会以此为准进行迭代，紧跟SpringCloud的生态升级</p>
