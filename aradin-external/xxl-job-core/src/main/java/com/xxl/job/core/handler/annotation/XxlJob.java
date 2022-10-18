@@ -14,16 +14,19 @@ public @interface XxlJob {
 
     /**
      * jobhandler name
+     * @return value
      */
     String value();
 
     /**
      * init handler, invoked when JobThread init
+     * @return value
      */
     String init() default "";
 
     /**
      * destroy handler, invoked when JobThread destroy
+     * @return value
      */
     String destroy() default "";
 

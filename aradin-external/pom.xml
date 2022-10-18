@@ -11,7 +11,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>aradin-external</artifactId>
 	<packaging>pom</packaging>
-	<name>Aradin External</name>
+	<name>aradin-external</name>
 	<description>External showing how to user features of Aradin</description>
 	<modules>
 		<module>xxl-job-core</module>

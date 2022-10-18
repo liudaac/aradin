@@ -22,9 +22,9 @@ public class ScriptUtil {
     /**
      * make script file
      *
-     * @param scriptFileName
-     * @param content
-     * @throws IOException
+     * @param scriptFileName scriptFileName
+     * @param content content
+     * @throws IOException IOException
      */
     public static void markScriptFile(String scriptFileName, String content) throws IOException {
         // make file,   filePath/gluesource/666-123456789.py
@@ -45,12 +45,12 @@ public class ScriptUtil {
     /**
      * 脚本执行，日志文件实时输出
      *
-     * @param command
-     * @param scriptFile
-     * @param logFile
-     * @param params
-     * @return
-     * @throws IOException
+     * @param command command
+     * @param scriptFile scriptFile
+     * @param logFile logFile
+     * @param params params
+     * @return int
+     * @throws IOException IOException
      */
     public static int execToFile(String command, String scriptFile, String logFile, String... params) throws IOException {
 
@@ -132,10 +132,10 @@ public class ScriptUtil {
     /**
      * 数据流Copy（Input自动关闭，Output不处理）
      *
-     * @param inputStream
-     * @param outputStream
-     * @param buffer
-     * @return
+     * @param inputStream inputStream
+     * @param outputStream outputStream
+     * @param buffer buffer
+     * @return long
      * @throws IOException
      */
     private static long copy(InputStream inputStream, OutputStream outputStream, byte[] buffer) throws IOException {
@@ -180,11 +180,11 @@ public class ScriptUtil {
      * 			<version>${commons-exec.version}</version>
      * 		</dependency>
      *
-     * @param command
-     * @param scriptFile
-     * @param logFile
+     * @param command command
+     * @param scriptFile scriptFile
+     * @param logFile logFile
      * @param params
-     * @return
+     * @return int
      * @throws IOException
      */
     /*public static int execToFileB(String command, String scriptFile, String logFile, String... params) throws IOException {

@@ -16,13 +16,6 @@ import java.io.IOException;
 public class FileUtil {
     private static Logger logger = LoggerFactory.getLogger(FileUtil.class);
 
-
-    /**
-     * delete recursively
-     *
-     * @param root
-     * @return
-     */
     public static boolean deleteRecursively(File root) {
         if (root != null && root.exists()) {
             if (root.isDirectory()) {

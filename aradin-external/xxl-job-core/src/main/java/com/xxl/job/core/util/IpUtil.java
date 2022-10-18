@@ -172,12 +172,6 @@ public class IpUtil {
         return getLocalAddress().getHostAddress();
     }
 
-    /**
-     * get ip:port
-     *
-     * @param port
-     * @return String
-     */
     public static String getIpPort(int port){
         String ip = getIp();
         return getIpPort(ip, port);

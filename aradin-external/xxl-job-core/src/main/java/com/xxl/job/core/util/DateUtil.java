@@ -49,9 +49,8 @@ public class DateUtil {
     /**
      * format datetime. like "yyyy-MM-dd"
      *
-     * @param date
-     * @return
-     * @throws ParseException
+     * @param date format datetime. like "yyyy-MM-dd"
+     * @return yyyy-MM-dd
      */
     public static String formatDate(Date date) {
         return format(date, DATE_FORMAT);
@@ -60,9 +59,8 @@ public class DateUtil {
     /**
      * format date. like "yyyy-MM-dd HH:mm:ss"
      *
-     * @param date
-     * @return
-     * @throws ParseException
+     * @param date date
+     * @return yyyy-MM-dd HH:mm:ss
      */
     public static String formatDateTime(Date date) {
         return format(date, DATETIME_FORMAT);
@@ -71,10 +69,9 @@ public class DateUtil {
     /**
      * format date
      *
-     * @param date
-     * @param patten
-     * @return
-     * @throws ParseException
+     * @param date date
+     * @param patten patten
+     * @return format
      */
     public static String format(Date date, String patten) {
         return getDateFormat(patten).format(date);
@@ -83,9 +80,8 @@ public class DateUtil {
     /**
      * parse date string, like "yyyy-MM-dd HH:mm:s"
      *
-     * @param dateString
-     * @return
-     * @throws ParseException
+     * @param dateString yyyy-MM-dd
+     * @return Date
      */
     public static Date parseDate(String dateString){
         return parse(dateString, DATE_FORMAT);
@@ -94,9 +90,8 @@ public class DateUtil {
     /**
      * parse datetime string, like "yyyy-MM-dd HH:mm:ss"
      *
-     * @param dateString
-     * @return
-     * @throws ParseException
+     * @param dateString yyyy-MM-dd HH:mm:ss
+     * @return Date
      */
     public static Date parseDateTime(String dateString) {
         return parse(dateString, DATETIME_FORMAT);
@@ -105,10 +100,9 @@ public class DateUtil {
     /**
      * parse date
      *
-     * @param dateString
-     * @param pattern
-     * @return
-     * @throws ParseException
+     * @param dateString dateString
+     * @param pattern pattern
+     * @return Date
      */
     public static Date parse(String dateString, String pattern) {
         try {

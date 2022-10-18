@@ -9,36 +9,36 @@ public interface ExecutorBiz {
 
     /**
      * beat
-     * @return
+     * @return ReturnT
      */
     public ReturnT<String> beat();
 
     /**
      * idle beat
      *
-     * @param idleBeatParam
-     * @return
+     * @param idleBeatParam idleBeatParam
+     * @return ReturnT
      */
     public ReturnT<String> idleBeat(IdleBeatParam idleBeatParam);
 
     /**
      * run
-     * @param triggerParam
-     * @return
+     * @param triggerParam triggerParam
+     * @return ReturnT
      */
     public ReturnT<String> run(TriggerParam triggerParam);
 
     /**
      * kill
-     * @param killParam
-     * @return
+     * @param killParam killParam
+     * @return ReturnT
      */
     public ReturnT<String> kill(KillParam killParam);
 
     /**
      * log
-     * @param logParam
-     * @return
+     * @param logParam logParam
+     * @return ReturnT
      */
     public ReturnT<LogResult> log(LogParam logParam);
 

@@ -36,13 +36,7 @@ public class GlueFactory {
 	private GroovyClassLoader groovyClassLoader = new GroovyClassLoader();
 	private ConcurrentMap<String, Class<?>> CLASS_CACHE = new ConcurrentHashMap<>();
 
-	/**
-	 * load new instance, prototype
-	 *
-	 * @param codeSource
-	 * @return
-	 * @throws Exception
-	 */
+	//load new instance, prototype
 	@SuppressWarnings("deprecation")
 	public IJobHandler loadNewInstance(String codeSource) throws Exception{
 		if (codeSource!=null && codeSource.trim().length()>0) {
@@ -79,11 +73,7 @@ public class GlueFactory {
 		}
 	}
 
-	/**
-	 * inject service of bean field
-	 *
-	 * @param instance
-	 */
+	//inject service of bean field
 	public void injectService(Object instance) {
 		// do something
 	}

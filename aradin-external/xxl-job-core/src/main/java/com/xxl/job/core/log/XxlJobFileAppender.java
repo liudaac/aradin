@@ -56,13 +56,7 @@ public class XxlJobFileAppender {
 		return glueSrcPath;
 	}
 
-	/**
-	 * log filename, like "logPath/yyyy-MM-dd/9999.log"
-	 *
-	 * @param triggerDate
-	 * @param logId
-	 * @return
-	 */
+	//log filename, like "logPath/yyyy-MM-dd/9999.log"
 	public static String makeLogFileName(Date triggerDate, long logId) {
 
 		// filePath/yyyy-MM-dd
@@ -80,12 +74,7 @@ public class XxlJobFileAppender {
 		return logFileName;
 	}
 
-	/**
-	 * append log
-	 *
-	 * @param logFileName
-	 * @param appendLog
-	 */
+	//append log
 	public static void appendLog(String logFileName, String appendLog) {
 
 		// log file
@@ -129,12 +118,7 @@ public class XxlJobFileAppender {
 		
 	}
 
-	/**
-	 * support read log-file
-	 *
-	 * @param logFileName
-	 * @return log content
-	 */
+	//support read log-file
 	public static LogResult readLog(String logFileName, int fromLineNum){
 
 		// valid log file
@@ -186,11 +170,7 @@ public class XxlJobFileAppender {
         */
 	}
 
-	/**
-	 * read log data
-	 * @param logFile
-	 * @return log line content
-	 */
+	//read log data
 	public static String readLines(File logFile){
 		BufferedReader reader = null;
 		try {

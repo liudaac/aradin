@@ -17,8 +17,8 @@ public class NetUtil {
     /**
      * find avaliable port
      *
-     * @param defaultPort
-     * @return
+     * @param defaultPort defaultPort
+     * @return avaliable port
      */
     public static int findAvailablePort(int defaultPort) {
         int portTmp = defaultPort;
@@ -43,8 +43,8 @@ public class NetUtil {
     /**
      * check port used
      *
-     * @param port
-     * @return
+     * @param port port
+     * @return port used
      */
     public static boolean isPortUsed(int port) {
         boolean used = false;
