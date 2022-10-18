@@ -14,18 +14,7 @@
 	<name>Aradin External</name>
 	<description>External showing how to user features of Aradin</description>
 	<modules>
+		<module>xxl-job-core</module>
+		<module>aradin-external-xxljob-starter</module>
 	</modules>
-	
-	<build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>

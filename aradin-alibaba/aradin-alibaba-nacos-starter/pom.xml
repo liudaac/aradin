@@ -26,6 +26,10 @@
 		</dependency>
 		<!-- Nacos Discovery -->
 		<dependency>
+			<groupId>org.springframework</groupId>
+  			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
 		</dependency>

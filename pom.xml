@@ -29,7 +29,7 @@
 	</parent>
 	<properties>
 		<!-- Project revision -->
-		<revision>0.0.3.23</revision>
+		<revision>0.0.3.24</revision>
 
 		<!-- Base Code -->
 		<java.version>1.8</java.version>
@@ -559,6 +559,16 @@
 			<dependency>
 				<groupId>cn.aradin</groupId>
 				<artifactId>aradin-version-zookeeper-starter</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>xxl-job-core</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-external-xxljob-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>
 		</dependencies>
