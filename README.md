@@ -15,7 +15,7 @@
 
 ### 0.0.4.x （体验版）
 <p>SpringCloud 2021.0.3</p>
-<p>SpringBoot 2.7.3</p>
+<p>SpringBoot 2.7.4</p>
 <p>SpringCloudAlibaba 2021.0.1.0</p>
 
 ### 当前推荐版本
