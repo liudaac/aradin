@@ -73,7 +73,7 @@
 		<velocity.version>1.7</velocity.version>
 		<velocity-tools.version>2.0</velocity-tools.version>
 		<!-- Netty -->
-		<netty.version>4.1.55.Final</netty.version>
+		<netty.version>4.1.84.Final</netty.version>
 		<!-- WEIXIN -->
 		<wechat.version>2.8.31</wechat.version>
 		<!-- TOOLS -->
