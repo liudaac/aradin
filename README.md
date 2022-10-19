@@ -208,6 +208,10 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ttl: PT1H # Min interval for sending a same alarm<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;level: warn # Min level to send<br>
 
+***
++ **aradin-spring-xxljob-starter**
+<p>&nbsp;Xxljob自动配置，配置项与官方建议一致</p>
+
 ### 2、aradin-alibaba
 合并了必要的依赖项和配置样例，并未做额外开发
 + **aradin-alibaba-nacos-starter**
@@ -371,6 +375,14 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 ***
 ### 8、aradin-external
 <p>&nbsp;外部模块重写，目前包含springfox-swagger，原因是swagger近两年未做更新，与spring新版有兼容问题，所以做了本地化适配修改，0.0.4.x兼容springboot2.7.4</p>
+
+***
++ **springfox-swagger**
+<p>&nbsp;swagger近两年未做更新，与spring新版有兼容问题，所以做了本地化适配修改，0.0.4.x兼容springboot2.7.4，可直接引用aradin-spring-swagger-starter</p>
+
+***
++ **xxl-job-core**
+<p>&nbsp;原版core包在log4j和spring-context存在强依赖，导致jar包出现包冲突，本地化适配修改，可直接引用aradin-spring-xxljob-starter</p>
 
 ***
 ## 进展阶段
