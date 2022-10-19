@@ -19,6 +19,7 @@
 		<module>swagger-bootstrap-ui</module>
     	<module>springfox-spi</module>
       	<module>springfox-core</module>
+		<module>xxl-job-core</module>
   </modules>
 	<build>
 		<resources>

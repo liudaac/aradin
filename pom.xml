@@ -518,6 +518,11 @@
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
+		    	<groupId>cn.aradin</groupId>
+		    	<artifactId>aradin-spring-xxljob-starter</artifactId>
+		    	<version>${revision}</version>
+		    </dependency>
+			<dependency>
 				<groupId>cn.aradin</groupId>
 				<artifactId>aradin-zookeeper-boot-starter</artifactId>
 				<version>${revision}</version>
@@ -575,6 +580,11 @@
 		    <dependency>
 		    	<groupId>cn.aradin</groupId>
 		    	<artifactId>springfox-core</artifactId>
+		    	<version>${revision}</version>
+		    </dependency>
+		    <dependency>
+		    	<groupId>cn.aradin</groupId>
+		    	<artifactId>xxl-job-core</artifactId>
 		    	<version>${revision}</version>
 		    </dependency>
 		</dependencies>
