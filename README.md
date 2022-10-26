@@ -14,9 +14,9 @@
 <p>SpringCloudAlibaba 2.2.6.RELEASE</p>
 
 ### 0.0.4.x （体验版）
-<p>SpringCloud 2021.0.3</p>
-<p>SpringBoot 2.7.4</p>
-<p>SpringCloudAlibaba 2021.0.1.0</p>
+<p>SpringCloud 2021.0.4</p>
+<p>SpringBoot 2.7.5</p>
+<p>SpringCloudAlibaba 2021.0.4.0</p>
 
 ### 当前推荐版本
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.24</a><br>
