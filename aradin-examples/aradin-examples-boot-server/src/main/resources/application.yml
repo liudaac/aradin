@@ -1,0 +1,59 @@
+server:
+  port: 60006
+  address: 0.0.0.0
+
+dubbo:
+  scan:
+    base-packages: cn.aradin.examples.boot.server
+  protocol:
+    name: dubbo
+    port: 60005
+  cloud:
+    subscribed-services: 
+  application:
+    name: ${spring.application.name}
+  registry:
+    register-mode: instance
+    address: nacos://${spring.cloud.nacos.discovery.server-addr}
+    parameters:
+      username: ${spring.cloud.nacos.discovery.username}
+      password: ${spring.cloud.nacos.discovery.password}
+      namespace: ${spring.cloud.nacos.discovery.namespace}
+      group: ${spring.cloud.nacos.discovery.group}_DUBBO
+  metadata-report:
+    address: nacos://${spring.cloud.nacos.discovery.server-addr}
+    username: ${spring.cloud.nacos.discovery.username}
+    password: ${spring.cloud.nacos.discovery.password}
+    cluster: true
+
+#mybatis配置
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+
+mybatis-plus:
+   configuration:
+      map-underscore-to-camel-case: false    
+
+logging:
+  level:
+    root: debug
+            
+info:
+  app:
+    name: ${spring.application.name}
+    version: 0.0.1
+
+management:
+  health:
+    db:
+      enabled: false #打开后shardingsphere5.0以前会报错
+  endpoints:
+    web:
+      exposure:
+        include: info,health,metrics,inited,offline,online,cluster #开启指定的actuator
+      basepath: /actuator #改变原本内建的/actuator/xxx路径
+  endpoint:
+    shutdown:
+      enabled: false #开启shutdown
