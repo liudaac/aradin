@@ -1,0 +1,9 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 500000000
+      max-request-size: 500000000
+  profiles:
+    active: ${spring.profiles.active}
+  application:
+    name: test-${spring.profiles.active}

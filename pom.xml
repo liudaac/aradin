@@ -42,7 +42,7 @@
 		<!-- Springcloud -->
 		<spring-cloud.version>Hoxton.SR12</spring-cloud.version>
 		<spring-cloud-alibaba.version>2.2.8.RELEASE</spring-cloud-alibaba.version>
-		<spring-cloud-dubbo.version>2.2.7.RELEASE</spring-cloud-dubbo.version>
+		<!--<spring-cloud-dubbo.version>2.2.7.RELEASE</spring-cloud-dubbo.version>-->
 		<dubbo.version>2.7.18</dubbo.version>
 		<spring-cloud-alibaba-arthas.version>3.4.3</spring-cloud-alibaba-arthas.version>
 		<sentinel.version>1.8.5</sentinel.version>
@@ -115,6 +115,11 @@
 				<scope>import</scope>
 			</dependency>
 			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${springboot.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>com.alibaba.cloud</groupId>
 				<artifactId>spring-cloud-alibaba-dependencies</artifactId>
 				<version>${spring-cloud-alibaba.version}</version>
@@ -132,11 +137,14 @@
 			    <artifactId>dubbo-spring-boot-starter</artifactId>
 			    <version>${dubbo.version}</version>
 			</dependency>
-			<dependency>
+			<!-- Not suggest to use spring-cloud-starter-dubbo as alibaba removed it after version 2.2.8.RELEASE.
+			  And it also not supported with dubbo 3+ versions. So we recommend developers to use dubbo-spring-boot-starter instead 
+			  or it will register service with dubbo.metadata-service.urls which is highly-cutomized by springcloud-dubbo2 -->
+			<!--<dependency>
 			    <groupId>com.alibaba.cloud</groupId>
 			    <artifactId>spring-cloud-starter-dubbo</artifactId>
 			    <version>${spring-cloud-dubbo.version}</version>
-			</dependency>
+			</dependency>-->
 			
 			<dependency>
 			    <groupId>org.apache.dubbo</groupId>
