@@ -11,7 +11,7 @@
 ### 0.0.3.x （发布版）
 <p>SpringCloud Hoxton.SR12</p>
 <p>SpringBoot 2.3.12.RELEASE</p>
-<p>SpringCloudAlibaba 2.2.6.RELEASE</p>
+<p>SpringCloudAlibaba 2.2.8.RELEASE</p>
 
 ### 0.0.4.x （体验版）
 <p>SpringCloud 2021.0.4</p>
@@ -19,8 +19,8 @@
 <p>SpringCloudAlibaba 2021.0.4.0</p>
 
 ### 当前推荐版本
-*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.24</a><br>
-*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.4.1</a><br>
+*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.25</a><br>
+*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.4.2</a><br>
 
 ***
 <p>依赖管理</p>
