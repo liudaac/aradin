@@ -143,6 +143,14 @@
 				<artifactId>dubbo-spring-boot-autoconfigure</artifactId>
 				<version>${dubbo.version}</version>
 			</dependency>
+			<!-- Not suggest to use spring-cloud-starter-dubbo as alibaba removed it after version 2.2.8.RELEASE.
+			  And it also not supported with dubbo 3+ versions. So we recommend developers to use dubbo-spring-boot-starter instead 
+			  or it will register service with dubbo.metadata-service.urls which is highly-cutomized by springcloud-dubbo2 -->
+			<!--<dependency>
+			    <groupId>com.alibaba.cloud</groupId>
+			    <artifactId>spring-cloud-starter-dubbo</artifactId>
+			    <version>${spring-cloud-dubbo.version}</version>
+			</dependency>-->
 			
 			<dependency>
 				<groupId>com.alibaba.csp</groupId>
