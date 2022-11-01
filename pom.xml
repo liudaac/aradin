@@ -29,7 +29,7 @@
 	</parent>
 	<properties>
 		<!-- Project revision -->
-		<revision>0.0.3.26</revision>
+		<revision>0.0.3.25</revision>
 
 		<!-- Base Code -->
 		<java.version>1.8</java.version>
@@ -43,7 +43,7 @@
 		<spring-cloud.version>Hoxton.SR12</spring-cloud.version>
 		<spring-cloud-alibaba.version>2.2.8.RELEASE</spring-cloud-alibaba.version>
 		<!--<spring-cloud-dubbo.version>2.2.7.RELEASE</spring-cloud-dubbo.version>-->
-		<dubbo.version>3.1.1</dubbo.version>
+		<dubbo.version>2.7.18</dubbo.version>
 		<spring-cloud-alibaba-arthas.version>3.4.3</spring-cloud-alibaba-arthas.version>
 		<sentinel.version>1.8.5</sentinel.version>
 		<!-- Mybatis And DB -->
