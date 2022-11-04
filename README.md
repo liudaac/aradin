@@ -15,7 +15,7 @@
 <p>0.0.3.25及以前对应dubbo2.7.x</p>
 <p>0.0.3.26开始对应dubbo3.1.x，主要由于在测试过程中dubbo3虽然兼容dubbo2发现逻辑，但dubbo2反过来调用dubbo3目前存在问题，所以在springboot低版本的基础上单独对dubbo做了升级</p>
 
-### 0.0.4.x （体验版）
+### 0.0.4.x （发布版）
 <p>SpringCloud 2021.0.4</p>
 <p>SpringBoot 2.7.5</p>
 <p>SpringCloudAlibaba 2021.0.4.0</p>
