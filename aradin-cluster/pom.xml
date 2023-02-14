@@ -16,6 +16,7 @@
 	<modules>
 		<module>aradin-cluster-core</module>
 		<module>aradin-cluster-zookeeper-starter</module>
+		<module>aradin-cluster-nacos-starter</module>
 	</modules>
 	<build>
 		<resources>
