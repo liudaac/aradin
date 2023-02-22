@@ -26,6 +26,9 @@ public class AradinSessionConfiguration {
 	@Value("${spring.session.cookie.security:true}")
 	private Boolean security;
 	
+	@Value("${spring.session.cookie.same-site:Lax}")
+	private String sameSite;
+	
 	/**
 	 * 参考 SpringHttpSessionConfiguration
 	 * @return
@@ -42,7 +45,12 @@ public class AradinSessionConfiguration {
 				cookieSerializer.setDomainName(domain);
 			}
 			cookieSerializer.setUseHttpOnlyCookie(httpOnly);
-			cookieSerializer.setUseSecureCookie(security);
+			cookieSerializer.setSameSite(sameSite);
+			if ("None".equals(sameSite)) {
+				cookieSerializer.setUseSecureCookie(true);
+			}else {
+				cookieSerializer.setUseSecureCookie(security);
+			}
 		}
 		return cookieSerializer;
 	}
