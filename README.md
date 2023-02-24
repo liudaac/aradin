@@ -12,7 +12,7 @@
 <p>SpringCloud Hoxton.SR12</p>
 <p>SpringBoot 2.3.12.RELEASE</p>
 <p>SpringCloudAlibaba 2.2.8.RELEASE</p>
-<p>0.0.3.25及以前对应dubbo2.7.x</p>
+<p>0.0.3.26及以前对应dubbo2.7.x</p>
 <p>0.0.3.26开始对应dubbo3.1.x，主要由于在测试过程中dubbo3虽然兼容dubbo2发现逻辑，但dubbo2反过来调用dubbo3目前存在问题，所以在springboot低版本的基础上单独对dubbo做了升级</p>
 
 ### 0.0.4.x （发布版）
@@ -404,7 +404,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 ***
 ## 进展阶段
 <p>&nbsp;目前0.0.3.x版本已经趋于相对成熟，满足日常项目快速搭建需求，主要是BUG修复阶段。</p>
-<p>&nbsp;而后续开发工作主要是基于0.0.4+，由于虽然0.0.3.x系列依赖的SpringBoot2.3.12仍是SpringCloud目前生态最完整的版本，但官方已经于今年停止了该版本的维护，后续必然会基于新的SpringBoot版本进行相关生态的发布，所以后续0.0.4.x也会以此为准进行迭代，紧跟SpringCloud的生态升级</p>
+<p>&nbsp;而后续开发工作主要是基于0.0.4+，由于虽然0.0.3.x系列依赖的SpringBoot2.3.12仍是SpringCloud目前生态最完整的版本，但官方已经于2022停止了该版本的维护，后续必然会基于新的SpringBoot版本进行相关生态的发布，所以后续0.0.4.x也会以此为准进行迭代，紧跟SpringCloud的生态升级</p>
 
 ***
 ## JOIN US
