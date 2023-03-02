@@ -6,12 +6,7 @@ import java.util.Collection;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 @SuppressWarnings("serial")
-@NoArgsConstructor
-@Data
 public class CollectionData<T> implements Serializable {
 	
 	private long total;
@@ -26,6 +21,22 @@ public class CollectionData<T> implements Serializable {
 		this.records = records;
 	}
     
+	public long getTotal() {
+		return total;
+	}
+
+	public void setTotal(long total) {
+		this.total = total;
+	}
+
+	public Collection<T> getRecords() {
+		return records;
+	}
+
+	public void setRecords(Collection<T> records) {
+		this.records = records;
+	}
+
 	public String toString() {
 		return JSONObject.toJSONString(this);
 	}

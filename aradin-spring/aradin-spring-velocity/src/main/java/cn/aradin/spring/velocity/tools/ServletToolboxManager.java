@@ -36,12 +36,13 @@ import org.apache.velocity.tools.view.XMLToolboxManager;
 import org.apache.velocity.tools.view.context.ViewContext;
 import org.apache.velocity.tools.view.servlet.ServletToolInfo;
 import org.apache.velocity.tools.view.servlet.ServletToolboxRuleSet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
 import cn.aradin.spring.core.bean.AradinBeanFactory;
 import cn.aradin.spring.velocity.ui.SpringResourceLoader;
-import lombok.extern.slf4j.Slf4j;
 
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.tools.view.ServletUtils;
@@ -104,10 +105,11 @@ import org.apache.velocity.tools.view.ServletUtils;
  */
 @Deprecated
 @SuppressWarnings("rawtypes")
-@Slf4j
 public class ServletToolboxManager extends XMLToolboxManager
 {
 
+	private final static Logger log = LoggerFactory.getLogger(ServletToolboxManager.class);
+	
     // --------------------------------------------------- Properties ---------
 
     public static final String SESSION_TOOLS_KEY =

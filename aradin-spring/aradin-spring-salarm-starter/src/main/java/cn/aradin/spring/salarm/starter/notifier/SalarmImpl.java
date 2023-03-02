@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.helpers.MessageFormatter;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -15,10 +17,10 @@ import cn.aradin.spring.salarm.starter.enums.SalarmDuty;
 import cn.aradin.spring.salarm.starter.enums.SalarmLevel;
 import cn.aradin.spring.salarm.starter.handler.ISalarmHandler;
 import cn.aradin.spring.salarm.starter.properties.SalarmProperties;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class SalarmImpl implements ISalarm {
+	
+	private final static Logger log = LoggerFactory.getLogger(SalarmImpl.class);
 	
 	private SalarmProperties salarmProperties;
 	

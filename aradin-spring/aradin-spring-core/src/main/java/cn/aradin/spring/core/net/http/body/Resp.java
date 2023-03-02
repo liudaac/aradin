@@ -8,19 +8,37 @@ import com.alibaba.fastjson.JSONObject;
 
 import cn.aradin.spring.core.net.http.code.AradinCodedEnum;
 import cn.aradin.spring.core.net.http.error.HttpError;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @SuppressWarnings("serial")
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 @Deprecated
 public class Resp<T> implements Serializable {
 	private int code = 0;
 	private String msg;
 	private T data;
+
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public T getData() {
+		return data;
+	}
+
+	public void setData(T data) {
+		this.data = data;
+	}
 
 	public Resp<T> data(T data) {
 		this.data = data;

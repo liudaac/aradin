@@ -7,19 +7,20 @@ import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 
 import cn.aradin.spring.actuator.starter.extension.IOnlineHandler;
 import cn.aradin.spring.actuator.starter.properties.ActuatorOnlineProperties;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Endpoint(id = "online", enableByDefault = true)
 public class OnlineEndpoint {
 	
 	private static final Map<String, String> ONLINE_MESSAGE = Collections
 			.unmodifiableMap(Collections.singletonMap("message", "Online Success"));
+	private final static Logger log = LoggerFactory.getLogger(OnlineEndpoint.class);
 	
 	private final ActuatorOnlineProperties actuatorOnlineProperties;
 	

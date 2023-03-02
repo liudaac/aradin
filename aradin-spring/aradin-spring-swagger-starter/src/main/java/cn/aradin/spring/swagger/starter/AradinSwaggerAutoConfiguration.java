@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +18,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
 import cn.aradin.spring.swagger.starter.properties.SwaggerProperties;
-import lombok.extern.slf4j.Slf4j;
 import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -30,11 +31,13 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
-@Slf4j
 @EnableConfigurationProperties({SwaggerProperties.class})
 @EnableSwagger2
 @EnableSwaggerBootstrapUI
 public class AradinSwaggerAutoConfiguration {
+	
+	private final static Logger log = LoggerFactory.getLogger(AradinSwaggerAutoConfiguration.class);
+	
 	@Autowired
 	private SwaggerProperties swaggerProperties;
 	

@@ -1,10 +1,12 @@
 package cn.aradin.spring.actuator.starter.extension;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Slf4j
 public class DefaultOnlineHandler implements IOnlineHandler {
 
+	private final static Logger log = LoggerFactory.getLogger(DefaultOnlineHandler.class);
+	
 	@Override
 	public void online() {
 		// TODO Auto-generated method stub

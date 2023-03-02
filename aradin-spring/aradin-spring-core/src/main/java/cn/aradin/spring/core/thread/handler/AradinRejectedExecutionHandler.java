@@ -3,11 +3,13 @@ package cn.aradin.spring.core.thread.handler;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Slf4j
 public class AradinRejectedExecutionHandler implements RejectedExecutionHandler {
 
+	private final static Logger log = LoggerFactory.getLogger(AradinRejectedExecutionHandler.class);
+	
 	private final String group;
 	
 	public AradinRejectedExecutionHandler(String group) {

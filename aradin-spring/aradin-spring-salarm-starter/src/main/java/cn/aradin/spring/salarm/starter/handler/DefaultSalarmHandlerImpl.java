@@ -1,11 +1,14 @@
 package cn.aradin.spring.salarm.starter.handler;
 
-import cn.aradin.spring.salarm.starter.enums.SalarmLevel;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Slf4j
+import cn.aradin.spring.salarm.starter.enums.SalarmLevel;
+
 public class DefaultSalarmHandlerImpl implements ISalarmHandler {
 
+	private final static Logger log = LoggerFactory.getLogger(DefaultSalarmHandlerImpl.class);
+	
 	@Override
 	public void notify(SalarmLevel level, String type, String content) {
 		// TODO Auto-generated method stub

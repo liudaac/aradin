@@ -2,9 +2,6 @@ package cn.aradin.version.core.properties;
 
 import java.io.Serializable;
 
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
 public class VersionZookeeper implements Serializable {
 	
 	/**

@@ -68,6 +68,7 @@ import org.springframework.web.util.NestedServletException;
  * @see VelocityConfig
  * @see VelocityConfigurer
  */
+@SuppressWarnings("deprecation")
 public class VelocityView extends AbstractTemplateView {
 
 	private Map<String, Class<?>> toolAttributes;

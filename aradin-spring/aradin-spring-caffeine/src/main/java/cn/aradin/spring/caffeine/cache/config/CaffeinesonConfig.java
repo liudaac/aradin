@@ -1,12 +1,5 @@
 package cn.aradin.spring.caffeine.cache.config;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class CaffeinesonConfig {
 	/** 访问后过期时间，单位毫秒*/
 	private long expireAfterAccess = 120000l;
@@ -24,4 +17,75 @@ public class CaffeinesonConfig {
 	private boolean allowNullValues = true;
 	/**是否启用软引用*/
 	private boolean isSoft = true;
+	
+	public CaffeinesonConfig(long expireAfterAccess,
+			long expireAfterWrite,
+			long refreshAfterWrite,
+			int initialCapacity,
+			long maximumSize,
+			long maximumWeight,
+			boolean allowNullValues,
+			boolean isSoft) {
+		this.expireAfterAccess = expireAfterAccess;
+		this.expireAfterWrite = expireAfterWrite;
+		this.refreshAfterWrite = refreshAfterWrite;
+		this.initialCapacity = initialCapacity;
+		this.maximumSize = maximumSize;
+		this.maximumWeight = maximumWeight;
+		this.allowNullValues = allowNullValues;
+		this.isSoft = isSoft;
+	}
+	
+	public CaffeinesonConfig() {
+		
+	}
+	
+	public long getExpireAfterAccess() {
+		return expireAfterAccess;
+	}
+	public void setExpireAfterAccess(long expireAfterAccess) {
+		this.expireAfterAccess = expireAfterAccess;
+	}
+	public long getExpireAfterWrite() {
+		return expireAfterWrite;
+	}
+	public void setExpireAfterWrite(long expireAfterWrite) {
+		this.expireAfterWrite = expireAfterWrite;
+	}
+	public long getRefreshAfterWrite() {
+		return refreshAfterWrite;
+	}
+	public void setRefreshAfterWrite(long refreshAfterWrite) {
+		this.refreshAfterWrite = refreshAfterWrite;
+	}
+	public int getInitialCapacity() {
+		return initialCapacity;
+	}
+	public void setInitialCapacity(int initialCapacity) {
+		this.initialCapacity = initialCapacity;
+	}
+	public long getMaximumSize() {
+		return maximumSize;
+	}
+	public void setMaximumSize(long maximumSize) {
+		this.maximumSize = maximumSize;
+	}
+	public long getMaximumWeight() {
+		return maximumWeight;
+	}
+	public void setMaximumWeight(long maximumWeight) {
+		this.maximumWeight = maximumWeight;
+	}
+	public boolean isAllowNullValues() {
+		return allowNullValues;
+	}
+	public void setAllowNullValues(boolean allowNullValues) {
+		this.allowNullValues = allowNullValues;
+	}
+	public boolean isSoft() {
+		return isSoft;
+	}
+	public void setSoft(boolean isSoft) {
+		this.isSoft = isSoft;
+	}
 }

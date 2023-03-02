@@ -10,13 +10,14 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public class ResponseHandlerFactory {
+	
+	private final static Logger log = LoggerFactory.getLogger(ResponseHandlerFactory.class);
 	
 	private static Map<String, ResponseHandler<Object>> map = new HashMap<String, ResponseHandler<Object>>();
 	

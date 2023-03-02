@@ -13,6 +13,8 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
 import org.apache.curator.framework.state.ConnectionState;
 import org.apache.zookeeper.CreateMode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
@@ -24,11 +26,11 @@ import cn.aradin.zookeeper.boot.starter.handler.INodeHandler;
 import cn.aradin.zookeeper.boot.starter.manager.ZookeeperClientManager;
 import cn.aradin.zookeeper.boot.starter.properties.Zookeeper;
 import cn.aradin.zookeeper.boot.starter.properties.ZookeeperProperties;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class ClusterNodeHandler implements INodeHandler {
 
+	private final static Logger log = LoggerFactory.getLogger(ClusterNodeHandler.class);
+	
 	private ClusterProperties clusterProperties;
 
 	private IClusterNodeManager clusterNodeManager;

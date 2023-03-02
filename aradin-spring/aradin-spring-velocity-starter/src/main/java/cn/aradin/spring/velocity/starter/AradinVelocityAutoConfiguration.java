@@ -10,6 +10,8 @@ import javax.servlet.Servlet;
 
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.VelocityException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -32,15 +34,15 @@ import cn.aradin.spring.velocity.ui.VelocityEngineFactory;
 import cn.aradin.spring.velocity.ui.VelocityEngineFactoryBean;
 import cn.aradin.spring.velocity.view.VelocityConfig;
 import cn.aradin.spring.velocity.view.VelocityConfigurer;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Configuration
 @ConditionalOnClass({ VelocityEngine.class, VelocityEngineFactory.class })
 @AutoConfigureAfter(WebMvcAutoConfiguration.class)
 @EnableConfigurationProperties(VelocityProperties.class)
 public class AradinVelocityAutoConfiguration {
 
+	private final static Logger log = LoggerFactory.getLogger(AradinVelocityAutoConfiguration.class);
+	
 	private final ApplicationContext applicationContext;
 
 	private final VelocityProperties properties;

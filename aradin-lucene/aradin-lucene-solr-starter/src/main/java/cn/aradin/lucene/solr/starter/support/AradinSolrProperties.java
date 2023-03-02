@@ -4,15 +4,20 @@ import java.util.List;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 @ConfigurationProperties(prefix = "spring.data.solr")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class AradinSolrProperties {
 	private List<String> zkHosts;
 	private String chroot;
+	public List<String> getZkHosts() {
+		return zkHosts;
+	}
+	public void setZkHosts(List<String> zkHosts) {
+		this.zkHosts = zkHosts;
+	}
+	public String getChroot() {
+		return chroot;
+	}
+	public void setChroot(String chroot) {
+		this.chroot = chroot;
+	}
 }

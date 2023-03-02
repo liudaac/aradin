@@ -3,21 +3,22 @@ package cn.aradin.spring.core.bean.support;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.core.env.PropertiesPropertySource;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.support.DefaultPropertySourceFactory;
 import org.springframework.core.io.support.EncodedResource;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * Support Importing YML Property File To Configuration Class
  * @author liudaac
  *
  */
-@Slf4j
 public class AradinPropertySourceFactory extends DefaultPropertySourceFactory {
+	
+	private final static Logger log = LoggerFactory.getLogger(AradinPropertySourceFactory.class);
 	
 	@Override
 	public PropertySource<?> createPropertySource(String name, EncodedResource resource) throws IOException {

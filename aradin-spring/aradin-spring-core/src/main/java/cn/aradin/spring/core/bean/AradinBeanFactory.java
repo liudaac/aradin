@@ -3,6 +3,8 @@ package cn.aradin.spring.core.bean;
 import java.beans.Introspector;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -11,11 +13,10 @@ import org.springframework.util.ClassUtils;
 
 import com.alibaba.fastjson.parser.ParserConfig;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Component
 public class AradinBeanFactory implements ApplicationContextAware {
+	
+	private final static Logger log = LoggerFactory.getLogger(AradinBeanFactory.class);
 	
 	private static ApplicationContext applicationContext = null;
 

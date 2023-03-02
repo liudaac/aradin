@@ -12,6 +12,7 @@ import cn.aradin.spring.core.net.http.code.AradinCodedEnum;
 import cn.aradin.spring.core.net.http.error.HttpError;
 
 
+@SuppressWarnings("deprecation")
 public class AradinHttpBlockExceptionHandler implements BlockExceptionHandler {
 
 	@Override
@@ -24,7 +25,7 @@ public class AradinHttpBlockExceptionHandler implements BlockExceptionHandler {
             url.append("?").append(request.getQueryString());
         }
         PrintWriter out = response.getWriter();
-        out.print(Resp.error(HttpError.builder().coded(AradinCodedEnum.TOOFAST).build(), url.toString()));
+        out.print(Resp.error(new HttpError(AradinCodedEnum.TOOFAST, null), url.toString()));
         out.flush();
         out.close();
 	}

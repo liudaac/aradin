@@ -9,14 +9,16 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent.Type;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.aradin.spring.core.thread.AradinExecutors;
 import cn.aradin.zookeeper.boot.starter.handler.INodeHandler;
 import cn.aradin.zookeeper.boot.starter.manager.ZookeeperClientManager;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class ZookeeperEventDispatcher implements PathChildrenCacheListener{
+	
+	private final static Logger log = LoggerFactory.getLogger(ZookeeperEventDispatcher.class);
 	
 	private List<INodeHandler> nodeHandlers;
 	

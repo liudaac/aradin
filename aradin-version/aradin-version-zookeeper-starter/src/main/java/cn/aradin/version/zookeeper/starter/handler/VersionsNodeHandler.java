@@ -6,6 +6,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
 import org.apache.curator.framework.state.ConnectionState;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.aradin.version.core.dispatcher.VersionDispatcher;
 import cn.aradin.version.core.properties.VersionProperties;
@@ -13,11 +15,11 @@ import cn.aradin.zookeeper.boot.starter.handler.INodeHandler;
 import cn.aradin.zookeeper.boot.starter.manager.ZookeeperClientManager;
 import cn.aradin.zookeeper.boot.starter.properties.Zookeeper;
 import cn.aradin.zookeeper.boot.starter.properties.ZookeeperProperties;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class VersionsNodeHandler implements INodeHandler {
 
+	private final static Logger log = LoggerFactory.getLogger(VersionsNodeHandler.class);
+	
 	private VersionProperties versionProperties;
 
 	private VersionDispatcher versionDispatcher;

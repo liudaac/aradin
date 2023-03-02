@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.Cache;
 
 import com.github.benmanes.caffeine.cache.RemovalListener;
@@ -12,11 +14,11 @@ import cn.aradin.spring.caffeine.cache.Caffeineson;
 import cn.aradin.spring.caffeine.cache.config.CaffeinesonConfig;
 import cn.aradin.spring.caffeine.manager.properties.CaffeinesonProperties;
 import cn.aradin.version.core.handler.IVersionBroadHandler;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class CaffeinesonCacheManager implements VersionCacheManager{
 
+	private static final Logger log = LoggerFactory.getLogger(CaffeinesonCacheManager.class);
+	
 	ConcurrentHashMap<String, Long> versionMap = new ConcurrentHashMap<String, Long>();
 	
 	ConcurrentHashMap<String, Caffeineson> instanceMap = new ConcurrentHashMap<String, Caffeineson>();

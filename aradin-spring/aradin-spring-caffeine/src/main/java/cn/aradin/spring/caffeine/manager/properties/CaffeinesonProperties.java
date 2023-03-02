@@ -6,14 +6,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import cn.aradin.spring.caffeine.cache.config.CaffeinesonConfig;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @ConfigurationProperties(prefix = "aradin.cache.caffeine")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class CaffeinesonProperties {
 	
 	private String group = "caffeine";
@@ -29,4 +23,36 @@ public class CaffeinesonProperties {
 	 * 每个caffeine的单独配置
 	 */
 	private Map<String, CaffeinesonConfig> configs = new ConcurrentHashMap<String, CaffeinesonConfig>();
+
+	public String getGroup() {
+		return group;
+	}
+
+	public void setGroup(String group) {
+		this.group = group;
+	}
+
+	public boolean isVersioned() {
+		return versioned;
+	}
+
+	public void setVersioned(boolean versioned) {
+		this.versioned = versioned;
+	}
+
+	public CaffeinesonConfig getDefaults() {
+		return defaults;
+	}
+
+	public void setDefaults(CaffeinesonConfig defaults) {
+		this.defaults = defaults;
+	}
+
+	public Map<String, CaffeinesonConfig> getConfigs() {
+		return configs;
+	}
+
+	public void setConfigs(Map<String, CaffeinesonConfig> configs) {
+		this.configs = configs;
+	}
 }
