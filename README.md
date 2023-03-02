@@ -21,8 +21,9 @@
 <p>SpringCloudAlibaba 2021.0.4.0</p>
 
 ### 当前推荐版本
-*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.25</a><br>
-*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.4.2</a><br>
+*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.25(dubbo2)</a><br>
+*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.26(dubbo3)</a><br>
+*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.4.3(dubbo3)</a><br>
 
 ***
 <p>依赖管理</p>
@@ -403,8 +404,8 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 
 ***
 ## 进展阶段
-<p>&nbsp;目前0.0.3.x版本已经趋于相对成熟，满足日常项目快速搭建需求，主要是BUG修复阶段。</p>
-<p>&nbsp;而后续开发工作主要是基于0.0.4+，由于虽然0.0.3.x系列依赖的SpringBoot2.3.12仍是SpringCloud目前生态最完整的版本，但官方已经于2022停止了该版本的维护，后续必然会基于新的SpringBoot版本进行相关生态的发布，所以后续0.0.4.x也会以此为准进行迭代，紧跟SpringCloud的生态升级</p>
+<p>&nbsp;目前0.0.3.x,0.0.4.x版本已经趋于相对成熟，满足日常项目快速搭建需求，且已经普遍运行于线上环境。0.0.3.x系列依赖的SpringBoot2.3.12官方已经于2022停止了该版本的维护, 所以该版本不再迭代升级。</p>
+<p>&nbsp;0.0.4.x支持springboot2.7.5，该版本进入BUG修复阶段。同时经过线上服务的深度使用和验证，Aradin正式迈入1.x版本开发阶段，后续必然会基于新的SpringBoot版本进行相关生态的发布，紧跟SpringCloud及Alibaba全家桶的生态升级</p>
 
 ***
 ## JOIN US

@@ -25,8 +25,12 @@
 * salarm告警控制模板
 * 分布式caffeine改造
 
-# v0.0.4 依赖升级（进行中）
-* springboot由2.3.x升级至2.6.2
-* springcloud升级至2021.0.0
+# v0.0.4 依赖升级（已完成）
+* springboot由2.3.x升级至2.7.5
+* springcloud升级至2021.0.4
 * 对应相应的spring版本升级
 * 说明文档补充
+
+# v1.0.0 （开发中）
+* springboot 2.7.8
+* dubbo 3.1.7
