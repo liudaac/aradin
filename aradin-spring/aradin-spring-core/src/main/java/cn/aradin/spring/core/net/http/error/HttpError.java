@@ -28,7 +28,7 @@ public class HttpError implements Serializable {
 		this.coded = coded;
 		this.msg = msg;
 	}
-
+	
 	public CodedEnum getCoded() {
 		return coded;
 	}
@@ -51,5 +51,9 @@ public class HttpError implements Serializable {
 
 	public void setMsg(String msg) {
 		this.msg = msg;
+	}
+	
+	public static HttpError instance(CodedEnum coded, String msg) {
+		return new HttpError(coded, msg);
 	}
 }

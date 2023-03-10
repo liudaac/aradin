@@ -6,12 +6,19 @@ import java.util.Collection;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 
-@SuppressWarnings("serial")
 public class CollectionData<T> implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 404940008791914053L;
 	private long total;
     private Collection<T> records = Lists.newArrayList();
 	
+    public CollectionData() {
+    	this.total = 0l;
+    }
+    
 	public CollectionData(long total) {
 		this.total = total;
 	}
