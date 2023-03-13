@@ -23,7 +23,7 @@
 ### 当前推荐版本
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.25(dubbo2)</a><br>
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.26(dubbo3)</a><br>
-*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.4.3(dubbo3)</a><br>
+*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.4.2(dubbo3)</a><br>
 
 ***
 <p>依赖管理</p>
