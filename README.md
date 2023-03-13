@@ -8,7 +8,7 @@
 
 ***
 ## 主框架版本说明
-### 0.0.3.x （发布版）
+### 0.0.3.x （发布版，BUG修复阶段）
 <p>SpringCloud Hoxton.SR12</p>
 <p>SpringBoot 2.3.12.RELEASE</p>
 <p>SpringCloudAlibaba 2.2.8.RELEASE</p>
@@ -411,7 +411,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 ***
 ## 进展阶段
 <p>&nbsp;目前0.0.3.x,0.0.4.x版本已经趋于相对成熟，满足日常项目快速搭建需求，且已经普遍运行于线上环境。0.0.3.x系列依赖的SpringBoot2.3.12官方已经于2022停止了该版本的维护, 所以该版本不再迭代升级。</p>
-<p>&nbsp;0.0.4.x支持springboot2.7.5，该版本进入BUG修复阶段。同时经过线上服务的深度使用和验证，Aradin正式迈入1.x版本开发阶段，后续必然会基于新的SpringBoot版本进行相关生态的发布，紧跟SpringCloud及Alibaba全家桶的生态升级</p>
+<p>&nbsp;0.0.4.x支持springboot2.7.5，该版本进入BUG修复阶段。同时经过线上服务的深度使用和验证，Aradin正式迈入1.x版本开发阶段，JVM兼容jdk8至17，后续会基于新的SpringBoot版本进行相关生态的发布，紧跟SpringCloud及Alibaba全家桶的生态升级</p>
 
 ***
 ## JOIN US
