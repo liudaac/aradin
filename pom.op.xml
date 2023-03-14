@@ -153,9 +153,15 @@
 			    <version>${spring-cloud-dubbo.version}</version>
 			</dependency>-->
 			
+			<!-- sentinel -->
 			<dependency>
 				<groupId>com.alibaba.csp</groupId>
 				<artifactId>sentinel-apache-dubbo-adapter</artifactId>
+				<version>${sentinel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba.csp</groupId>
+				<artifactId>sentinel-apache-dubbo3-adapter</artifactId>
 				<version>${sentinel.version}</version>
 			</dependency>
 			
