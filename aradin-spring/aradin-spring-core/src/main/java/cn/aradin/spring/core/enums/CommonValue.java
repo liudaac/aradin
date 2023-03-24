@@ -1,11 +1,6 @@
 package cn.aradin.spring.core.enums;
 
 public enum CommonValue {
-	
-	@Deprecated
-	COMMON_VALUE_YES(1,"yes"),
-	@Deprecated
-	COMMON_VALUE_NO(0,"no"),
 	YES(1,"yes"),
 	NO(0,"no");
 	

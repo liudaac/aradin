@@ -12,7 +12,8 @@ public enum AradinCodedEnum implements CodedEnum {
 	CONFLICT(409),
 	TOOLARGE(413),
 	TOOFAST(429),
-	INTERNAL(500);
+	INTERNAL(500),
+	MQERROR(600);
 	
 	private final int code;
 
