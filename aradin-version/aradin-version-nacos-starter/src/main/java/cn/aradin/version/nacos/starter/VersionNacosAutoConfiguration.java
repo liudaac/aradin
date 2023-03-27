@@ -9,13 +9,13 @@ import org.springframework.context.annotation.Import;
 
 import com.alibaba.cloud.nacos.NacosConfigAutoConfiguration;
 import com.alibaba.cloud.nacos.NacosConfigManager;
-
 import cn.aradin.version.core.VersionConfiguration;
 import cn.aradin.version.core.dispatcher.VersionDispatcher;
 import cn.aradin.version.core.gentor.IVersionGentor;
 import cn.aradin.version.core.handler.IVersionBroadHandler;
 import cn.aradin.version.core.properties.VersionProperties;
 import cn.aradin.version.nacos.starter.handler.VersionNacosBroadHandler;
+import cn.aradin.version.nacos.starter.handler.VersionNacosListenerHandler;
 
 @Configuration
 @Import(VersionConfiguration.class)
@@ -25,13 +25,19 @@ public class VersionNacosAutoConfiguration {
 	
 	@Bean
 	@ConditionalOnProperty("aradin.version.nacos.data-id")
-	public IVersionBroadHandler versionBroadHandler(VersionProperties versionProperties,
+	public VersionNacosListenerHandler versionNacosListenerHandler(VersionProperties versionProperties,
 			NacosConfigManager nacosConfigManager, 
-			VersionDispatcher versionDispatcher,
+			VersionDispatcher versionDispatcher) {
+		return new VersionNacosListenerHandler(versionProperties.getNacos(), nacosConfigManager, versionDispatcher);
+	}
+	
+	@Bean
+	@ConditionalOnProperty("aradin.version.nacos.data-id")
+	public IVersionBroadHandler versionBroadHandler(VersionProperties versionProperties,
+			NacosConfigManager nacosConfigManager,
 			IVersionGentor versionGentor) {
 		return new VersionNacosBroadHandler(versionProperties.getNacos(), 
-				nacosConfigManager, 
-				versionDispatcher,
+				nacosConfigManager,
 				versionGentor);
 	}
 }
