@@ -17,6 +17,7 @@ public class VersionNacosBroadHandler implements IVersionBroadHandler {
 			NacosConfigManager nacosConfigManager,
 			IVersionGentor versionGentor) {
 		this.configService = nacosConfigManager.getConfigService();
+		this.versionGentor = versionGentor;
 	}
 	
 	@Override
