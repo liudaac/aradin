@@ -15,7 +15,6 @@ import cn.aradin.version.core.VersionConfiguration;
 import cn.aradin.version.core.dispatcher.VersionDispatcher;
 import cn.aradin.version.core.gentor.IVersionGentor;
 import cn.aradin.version.core.handler.IVersionBroadHandler;
-import cn.aradin.version.core.properties.VersionNacos;
 import cn.aradin.version.core.properties.VersionProperties;
 import cn.aradin.version.nacos.starter.handler.VersionNacosBroadHandler;
 import cn.aradin.version.nacos.starter.handler.VersionNacosListenerHandler;
