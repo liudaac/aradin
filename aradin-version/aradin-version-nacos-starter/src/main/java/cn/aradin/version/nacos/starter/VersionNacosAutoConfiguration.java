@@ -28,14 +28,14 @@ import cn.aradin.version.nacos.starter.manager.VersionNacosConfigManager;
 public class VersionNacosAutoConfiguration {
 	
 	@Bean
-	@ConditionalOnProperty("aradin.version.nacos.data-id")
+	@ConditionalOnProperty("aradin.version.nacos.data-ids")
 	public VersionNacosConfigManager versionNacosConfigManager(NacosConfigProperties nacosConfigProperties,
 			VersionNacos versionNacos) {
 		return new VersionNacosConfigManager(nacosConfigProperties, versionNacos);
 	}
 	
 	@Bean
-	@ConditionalOnProperty("aradin.version.nacos.data-id")
+	@ConditionalOnProperty("aradin.version.nacos.data-ids")
 	public VersionNacosListenerHandler versionNacosListenerHandler(VersionProperties versionProperties,
 			VersionNacosConfigManager versionNacosConfigManager, 
 			VersionDispatcher versionDispatcher) {
@@ -43,7 +43,7 @@ public class VersionNacosAutoConfiguration {
 	}
 	
 	@Bean
-	@ConditionalOnProperty("aradin.version.nacos.data-id")
+	@ConditionalOnProperty("aradin.version.nacos.data-ids")
 	public IVersionBroadHandler versionBroadHandler(VersionProperties versionProperties,
 			VersionNacosConfigManager versionNacosConfigManager,
 			IVersionGentor versionGentor) {
