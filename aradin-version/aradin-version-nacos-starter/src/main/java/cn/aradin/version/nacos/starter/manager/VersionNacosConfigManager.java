@@ -30,7 +30,7 @@ public class VersionNacosConfigManager {
 			this.nacosConfigProperties.setServerAddr(versionNacos.getServerAddr());
 		}
 		if (StringUtils.isNotBlank(versionNacos.getNamespace())) {
-			this.nacosConfigProperties.setServerAddr(versionNacos.getNamespace());
+			this.nacosConfigProperties.setNamespace(versionNacos.getNamespace());
 		}
 		if (StringUtils.isNotBlank(versionNacos.getUsername())) {
 			this.nacosConfigProperties.setUsername(versionNacos.getUsername());
