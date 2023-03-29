@@ -45,10 +45,10 @@ public class VersionNacosAutoConfiguration {
 	@Bean
 	@ConditionalOnProperty("aradin.version.nacos.data-id")
 	public IVersionBroadHandler versionBroadHandler(VersionProperties versionProperties,
-			NacosConfigManager nacosConfigManager,
+			VersionNacosConfigManager versionNacosConfigManager,
 			IVersionGentor versionGentor) {
 		return new VersionNacosBroadHandler(versionProperties.getNacos(), 
-				nacosConfigManager,
+				versionNacosConfigManager,
 				versionGentor);
 	}
 }
