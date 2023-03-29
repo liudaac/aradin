@@ -30,8 +30,8 @@ public class VersionNacosAutoConfiguration {
 	@Bean
 	@ConditionalOnProperty(value = "aradin.version.nacos.group", havingValue = "")
 	public VersionNacosConfigManager versionNacosConfigManager(NacosConfigProperties nacosConfigProperties,
-			VersionNacos versionNacos) {
-		return new VersionNacosConfigManager(nacosConfigProperties, versionNacos);
+			VersionProperties versionProperties) {
+		return new VersionNacosConfigManager(nacosConfigProperties, versionProperties.getNacos());
 	}
 	
 	@Bean
