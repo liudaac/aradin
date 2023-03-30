@@ -22,9 +22,9 @@
 
 ### 1.0.0 (发布版，从0.0.4.x可直接升级)
 <p>SpringCloud 2021.0.6</p>
-<p>SpringBoot 2.7.9</p>
+<p>SpringBoot 2.7.10</p>
 <p>SpringCloudAlibaba 2021.0.4.0</p>
-<p>Dubbo 3.1.7</p>
+<p>Dubbo 3.1.8</p>
 
 ### 当前推荐版本
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.25(springboot2.3.12.RELEASE+dubbo2)</a><br>
