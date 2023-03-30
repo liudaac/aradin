@@ -8,7 +8,7 @@
 
 ***
 ## 主框架版本说明
-### 0.0.3.x （发布版）
+### 0.0.3.x （发布版，BUG修复阶段）
 <p>SpringCloud Hoxton.SR12</p>
 <p>SpringBoot 2.3.12.RELEASE</p>
 <p>SpringCloudAlibaba 2.2.8.RELEASE</p>
@@ -20,16 +20,17 @@
 <p>SpringBoot 2.7.5</p>
 <p>SpringCloudAlibaba 2021.0.4.0</p>
 
-### 1.0.0 (开发中)
+### 1.0.0 (发布版，从0.0.4.x可直接升级)
 <p>SpringCloud 2021.0.6</p>
-<p>SpringBoot 2.7.9</p>
+<p>SpringBoot 2.7.10</p>
 <p>SpringCloudAlibaba 2021.0.4.0</p>
-<p>Dubbo 3.1.7</p>
+<p>Dubbo 3.1.8</p>
 
-### 当前推荐版本
+### 历史版本
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.25(springboot2.3.12.RELEASE+dubbo2)</a><br>
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.26(springboot2.3.12.RELEASE+dubbo3)</a><br>
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.4.2(springboot2.7.5+dubbo3)</a><br>
+*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">1.0.0(springboot2.7.10+dubbo3 推荐使用)</a><br>
 
 ***
 <p>依赖管理</p>
@@ -330,8 +331,12 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 	aradin:<br>
 	&nbsp;&nbsp;version:<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;nacos:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-id: <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server-addr: #若不配置与spring.cloud.nacos一致<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username: #若不配置与spring.cloud.nacos一致<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: #若不配置与spring.cloud.nacos一致<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;namespace: #若不配置与spring.cloud.nacos一致<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: #必填<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-ids: #必填，data-id列表<br>
 	spring:<br>
 	&nbsp;&nbsp;cloud:<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;nacos:<br>
@@ -389,6 +394,45 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 	&nbsp;group为aradin.cache.caffeine.group，key为cacheName，对应的cache将被清空达到被动更新的目的<br>
 
 ***
++ **aradin-version-caffeine-starter整合aradin-version-nacos-starter实现分布式内存缓存**
+<p>&nbsp;aradin-version-caffeine-starter中实现了位于VersionDispatcher(Bean)下游的IVersionHandler（cn.aradin.spring.caffeine.manager.version.CaffeinesonVersionHandler）实现内存信息的版本淘汰机制<br>
+<p>&nbsp;① 相关配置如下：可以参考复用至nacos集成</p>
+	aradin:<br>
+	&nbsp;&nbsp;version:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;nacos:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: #必填<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-ids: #必填，data-id列表，需要管理的cacheName加进来即可<br>
+	&nbsp;&nbsp;cache:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;caffeine:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: ${aradin.version.nacos.group} #默认caffeine<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">versioned: true</font> #为true时启用cachename级别的版本变更控制<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaults: #默认缓存配置<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 1200000 #访问后过期时间，单位毫秒<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 1800000 #写入后过期时间，单位毫秒<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100 #初始化大小<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 10000 #最大缓存对象个数，超过此数量时之前放入的缓存将失效<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true #是否允许空值<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true #是否启用软引用<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;configs: #自定义cacheName对应的缓存配置<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base: #具体的cache名,与springcache配合使用<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 3600000<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 3600000<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 7200000<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 7200000<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true</p>
+<p>&nbsp;② 缓存失效的手动触发</p>
+	&nbsp;**IVersionBroadHandler(Bean).broadcast(String group, String key);**<br> 
+	&nbsp;group为aradin.cache.caffeine.group，key为cacheName，对应的cache将被清空达到被动更新的目的<br>
+
+***
 ### 7、aradin-cluster
 <p>&nbsp;集群模块，可以借助zookeeper实现集群节点的注册和节点列表的获取</p>
 
@@ -411,7 +455,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 ***
 ## 进展阶段
 <p>&nbsp;目前0.0.3.x,0.0.4.x版本已经趋于相对成熟，满足日常项目快速搭建需求，且已经普遍运行于线上环境。0.0.3.x系列依赖的SpringBoot2.3.12官方已经于2022停止了该版本的维护, 所以该版本不再迭代升级。</p>
-<p>&nbsp;0.0.4.x支持springboot2.7.5，该版本进入BUG修复阶段。同时经过线上服务的深度使用和验证，Aradin正式迈入1.x版本开发阶段，后续必然会基于新的SpringBoot版本进行相关生态的发布，紧跟SpringCloud及Alibaba全家桶的生态升级</p>
+<p>&nbsp;0.0.4.x支持springboot2.7.5，该版本进入BUG修复阶段。同时经过线上服务的深度使用和验证，Aradin正式迈入1.x版本开发阶段，JVM兼容jdk8至17，后续会基于新的SpringBoot版本进行相关生态的发布，紧跟SpringCloud及Alibaba全家桶的生态升级</p>
 
 ***
 ## JOIN US

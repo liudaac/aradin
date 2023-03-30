@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Import;
 
 import com.alibaba.cloud.nacos.NacosConfigAutoConfiguration;
 import com.alibaba.cloud.nacos.NacosConfigManager;
+import com.alibaba.cloud.nacos.NacosConfigProperties;
 
 import cn.aradin.version.core.VersionConfiguration;
 import cn.aradin.version.core.dispatcher.VersionDispatcher;
@@ -16,6 +17,8 @@ import cn.aradin.version.core.gentor.IVersionGentor;
 import cn.aradin.version.core.handler.IVersionBroadHandler;
 import cn.aradin.version.core.properties.VersionProperties;
 import cn.aradin.version.nacos.starter.handler.VersionNacosBroadHandler;
+import cn.aradin.version.nacos.starter.handler.VersionNacosListenerHandler;
+import cn.aradin.version.nacos.starter.manager.VersionNacosConfigManager;
 
 @Configuration
 @Import(VersionConfiguration.class)
@@ -24,14 +27,27 @@ import cn.aradin.version.nacos.starter.handler.VersionNacosBroadHandler;
 public class VersionNacosAutoConfiguration {
 	
 	@Bean
-	@ConditionalOnProperty("aradin.version.nacos.data-id")
+	@ConditionalOnProperty(value = "aradin.version.nacos.group", havingValue = "")
+	public VersionNacosConfigManager versionNacosConfigManager(NacosConfigProperties nacosConfigProperties,
+			VersionProperties versionProperties) {
+		return new VersionNacosConfigManager(nacosConfigProperties, versionProperties.getNacos());
+	}
+	
+	@Bean
+	@ConditionalOnProperty(value = "aradin.version.nacos.group", havingValue = "")
+	public VersionNacosListenerHandler versionNacosListenerHandler(VersionProperties versionProperties,
+			VersionNacosConfigManager versionNacosConfigManager, 
+			VersionDispatcher versionDispatcher) {
+		return new VersionNacosListenerHandler(versionProperties.getNacos(), versionNacosConfigManager, versionDispatcher);
+	}
+	
+	@Bean
+	@ConditionalOnProperty(value = "aradin.version.nacos.group", havingValue = "")
 	public IVersionBroadHandler versionBroadHandler(VersionProperties versionProperties,
-			NacosConfigManager nacosConfigManager, 
-			VersionDispatcher versionDispatcher,
+			VersionNacosConfigManager versionNacosConfigManager,
 			IVersionGentor versionGentor) {
 		return new VersionNacosBroadHandler(versionProperties.getNacos(), 
-				nacosConfigManager, 
-				versionDispatcher,
+				versionNacosConfigManager,
 				versionGentor);
 	}
 }

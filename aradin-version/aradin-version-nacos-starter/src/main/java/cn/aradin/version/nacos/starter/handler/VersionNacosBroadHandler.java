@@ -1,14 +1,12 @@
 package cn.aradin.version.nacos.starter.handler;
 
-import com.alibaba.cloud.nacos.NacosConfigManager;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.exception.NacosException;
 
-import cn.aradin.version.core.dispatcher.VersionDispatcher;
 import cn.aradin.version.core.gentor.IVersionGentor;
 import cn.aradin.version.core.handler.IVersionBroadHandler;
 import cn.aradin.version.core.properties.VersionNacos;
-import cn.aradin.version.nacos.starter.listener.VersionNacosConfigListener;
+import cn.aradin.version.nacos.starter.manager.VersionNacosConfigManager;
 
 public class VersionNacosBroadHandler implements IVersionBroadHandler {
 	
@@ -16,19 +14,10 @@ public class VersionNacosBroadHandler implements IVersionBroadHandler {
 	private IVersionGentor versionGentor;
 	
 	public VersionNacosBroadHandler(VersionNacos versionNacos, 
-			NacosConfigManager nacosConfigManager, 
-			VersionDispatcher versionDispatcher,
+			VersionNacosConfigManager versionNacosConfigManager,
 			IVersionGentor versionGentor) {
-		
-		try {
-			this.configService = nacosConfigManager.getConfigService();
-			configService.addListener(versionNacos.getDataId(),
-					versionNacos.getGroup(), 
-					new VersionNacosConfigListener(versionDispatcher, versionNacos.getGroup(), versionNacos.getDataId()));
-		} catch (NacosException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException("VersionNacosBroadHandler Init-Failed "+e.getMessage());
-		}
+		this.configService = versionNacosConfigManager.getConfigService();
+		this.versionGentor = versionGentor;
 	}
 	
 	@Override
