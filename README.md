@@ -330,8 +330,12 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 	aradin:<br>
 	&nbsp;&nbsp;version:<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;nacos:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-id: <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server-addr: #若不配置与spring.cloud.nacos一致<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username: #若不配置与spring.cloud.nacos一致<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: #若不配置与spring.cloud.nacos一致<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;namespace: #若不配置与spring.cloud.nacos一致<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: #必填<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-ids: #必填，data-id列表<br>
 	spring:<br>
 	&nbsp;&nbsp;cloud:<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;nacos:<br>
@@ -361,6 +365,45 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 	&nbsp;&nbsp;cache:<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;caffeine:<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: caffeine #默认caffeine<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">versioned: true</font> #为true时启用cachename级别的版本变更控制<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaults: #默认缓存配置<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 1200000 #访问后过期时间，单位毫秒<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 1800000 #写入后过期时间，单位毫秒<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100 #初始化大小<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 10000 #最大缓存对象个数，超过此数量时之前放入的缓存将失效<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true #是否允许空值<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true #是否启用软引用<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;configs: #自定义cacheName对应的缓存配置<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base: #具体的cache名,与springcache配合使用<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 3600000<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 3600000<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 7200000<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 7200000<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true</p>
+<p>&nbsp;② 缓存失效的手动触发</p>
+	&nbsp;**IVersionBroadHandler(Bean).broadcast(String group, String key);**<br> 
+	&nbsp;group为aradin.cache.caffeine.group，key为cacheName，对应的cache将被清空达到被动更新的目的<br>
+
+***
++ **aradin-version-caffeine-starter整合aradin-version-nacos-starter实现分布式内存缓存**
+<p>&nbsp;aradin-version-caffeine-starter中实现了位于VersionDispatcher(Bean)下游的IVersionHandler（cn.aradin.spring.caffeine.manager.version.CaffeinesonVersionHandler）实现内存信息的版本淘汰机制<br>
+<p>&nbsp;① 相关配置如下：可以参考复用至nacos集成</p>
+	aradin:<br>
+	&nbsp;&nbsp;version:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;nacos:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: #必填<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-ids: #必填，data-id列表，需要管理的cacheName加进来即可<br>
+	&nbsp;&nbsp;cache:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;caffeine:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: ${aradin.version.nacos.group} #默认caffeine<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">versioned: true</font> #为true时启用cachename级别的版本变更控制<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaults: #默认缓存配置<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 1200000 #访问后过期时间，单位毫秒<br>
