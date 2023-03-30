@@ -20,7 +20,7 @@
 <p>SpringBoot 2.7.5</p>
 <p>SpringCloudAlibaba 2021.0.4.0</p>
 
-### 1.0.0 (开发中)
+### 1.0.0 (发布版，从0.0.4.x可直接升级)
 <p>SpringCloud 2021.0.6</p>
 <p>SpringBoot 2.7.9</p>
 <p>SpringCloudAlibaba 2021.0.4.0</p>
