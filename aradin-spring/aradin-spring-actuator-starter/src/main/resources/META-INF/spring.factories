@@ -3,4 +3,4 @@ cn.aradin.spring.actuator.starter.AradinActuatorAutoConfiguration,\
 cn.aradin.spring.actuator.starter.configure.InitedEndpointAutoConfiguration,\
 cn.aradin.spring.actuator.starter.configure.OfflineEndpointAutoConfiguration,\
 cn.aradin.spring.actuator.starter.configure.OnlineEndpointAutoConfiguration,\
-cn.aradin.spring.actuator.starter.configure.HealthStateEndpointAutoConfiguration
+cn.aradin.spring.actuator.starter.configure.StateEndpointAutoConfiguration
