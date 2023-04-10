@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.dubbo.registry.client.metadata.ServiceInstanceMetadataUtils;
+import org.apache.dubbo.rpc.model.ApplicationModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
@@ -12,16 +16,19 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import cn.aradin.spring.actuator.starter.context.DeployContext;
 import cn.aradin.spring.actuator.starter.extension.IOfflineHandler;
 
 @Endpoint(id = "offline", enableByDefault = true)
 public class OfflineEndpoint implements ApplicationContextAware{
 	
+	private final static Logger log = LoggerFactory.getLogger(OfflineEndpoint.class);
+	
 	private static final Map<String, String> NO_CONTEXT_MESSAGE = Collections
-			.unmodifiableMap(Collections.singletonMap("message", "No context to shutdown."));
+			.unmodifiableMap(Collections.singletonMap("message", "No context to offline."));
 
-	private static final Map<String, String> SHUTDOWN_MESSAGE = Collections
-			.unmodifiableMap(Collections.singletonMap("message", "Shutting down, bye..."));
+	private static final Map<String, String> OFFLINE_MESSAGE = Collections
+			.unmodifiableMap(Collections.singletonMap("message", "Offlining, bye..."));
 
 	private ConfigurableApplicationContext context;
 	
@@ -37,29 +44,30 @@ public class OfflineEndpoint implements ApplicationContextAware{
 		if (this.context == null) {
 			return NO_CONTEXT_MESSAGE;
 		}
-		try {
-			return SHUTDOWN_MESSAGE;
+		if (!DeployContext.isStopping()
+				&&!DeployContext.isStopped()) {
+			DeployContext.setStopping();
+			if (CollectionUtils.isNotEmpty(offlineHandlers)) {
+				offlineHandlers.forEach(handler->{
+					try {
+						handler.offline(context);
+					} catch (Exception e) {
+						// TODO: handle exception
+						log.warn("Offline handler failed as {}", e.getMessage());
+					}
+				});
+			}
+			try {
+				Class.forName("org.apache.dubbo.registry.client.metadata.ServiceInstanceMetadataUtils");
+				ApplicationModel applicationModel = ApplicationModel.defaultModel();
+				ServiceInstanceMetadataUtils.unregisterMetadataAndInstance(applicationModel);
+			} catch (ClassNotFoundException e) {
+				// TODO: handle exception
+				log.info("Dubbo class is not exist, no need to unregister");
+			}
+			DeployContext.setStopped();
 		}
-		finally {
-			Thread thread = new Thread(this::performShutdown);
-			thread.setContextClassLoader(getClass().getClassLoader());
-			thread.start();
-		}
-	}
-
-	private void performShutdown() {
-		try {
-			Thread.sleep(500L);
-		}
-		catch (InterruptedException ex) {
-			Thread.currentThread().interrupt();
-		}
-		if (CollectionUtils.isNotEmpty(offlineHandlers)) {
-			offlineHandlers.forEach(handler->{
-				handler.offline(context);
-			});
-		}
-		this.context.close();
+		return OFFLINE_MESSAGE;
 	}
 
 	@Override

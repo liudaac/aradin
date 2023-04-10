@@ -10,6 +10,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import cn.aradin.spring.actuator.starter.context.DeployContext;
+
 @Endpoint(id = "inited", enableByDefault = true)
 public class InitedEndpoint implements ApplicationContextAware{
 	
@@ -22,7 +24,7 @@ public class InitedEndpoint implements ApplicationContextAware{
 	
 	@ReadOperation
 	public Map<String, String> inited() {
-		if (this.context != null && this.context.isActive()) {
+		if (this.context != null && this.context.isActive() && DeployContext.isStarted()) {
 			return INITED_MESSAGE;
 		}
 		return NO_INITED_MESSAGE;
