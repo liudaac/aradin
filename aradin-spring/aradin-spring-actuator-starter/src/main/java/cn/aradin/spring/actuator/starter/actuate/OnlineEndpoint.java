@@ -7,8 +7,6 @@ import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.dubbo.registry.client.metadata.ServiceInstanceMetadataUtils;
-import org.apache.dubbo.rpc.model.ApplicationModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
@@ -76,19 +74,8 @@ public class OnlineEndpoint {
 				e.printStackTrace();
 			}
 		}
-		if (DeployContext.isStopping()) {
-			throw new RuntimeException("Application is stopping, cannot do online-process");
-		}
-		if (DeployContext.isStopped()) {
-			try {
-				DeployContext.setStarting();
-				Class.forName("org.apache.dubbo.registry.client.metadata.ServiceInstanceMetadataUtils");
-				ApplicationModel applicationModel = ApplicationModel.defaultModel();
-				ServiceInstanceMetadataUtils.registerMetadataAndInstance(applicationModel);
-			} catch (ClassNotFoundException e) {
-				// TODO: handle exception
-				log.info("Dubbo class is not exist, no need to register");
-			}
+		if (DeployContext.isStopping()||DeployContext.isStopped()) {
+			throw new RuntimeException("Application is stopping or stopped, cannot do online-process");
 		}
 		DeployContext.setStarted();
         return ONLINE_MESSAGE;
