@@ -450,7 +450,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 
 ***
 + **springfox-swagger**
-<p>&nbsp;swagger近两年未做更新，与spring新版有兼容问题，所以做了本地化适配修改，0.0.4.x兼容springboot2.7.4，可直接引用aradin-spring-swagger-starter</p>
+<p>&nbsp;swagger近两年未做更新，与spring新版有兼容问题，所以做了本地化适配修改，0.0.4.x+版本兼容springboot2.7.x，可直接引用aradin-spring-swagger-starter</p>
 
 ***
 + **xxl-job-core**
@@ -459,7 +459,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 ***
 ## 进展阶段
 <p>&nbsp;目前0.0.3.x,0.0.4.x版本已经趋于相对成熟，满足日常项目快速搭建需求，且已经普遍运行于线上环境。0.0.3.x系列依赖的SpringBoot2.3.12官方已经于2022停止了该版本的维护, 所以该版本不再迭代升级。</p>
-<p>&nbsp;0.0.4.x支持springboot2.7.5，该版本进入BUG修复阶段。同时经过线上服务的深度使用和验证，Aradin正式迈入1.x版本开发阶段，JVM兼容jdk8至17，后续会基于新的SpringBoot版本进行相关生态的发布，紧跟SpringCloud及Alibaba全家桶的生态升级</p>
+<p>&nbsp;0.0.4.x支持springboot2.7.5，该版本进入BUG修复阶段。同时经过线上服务的深度使用和验证，Aradin正式迈入1.x版本开发阶段，JVM兼容jdk8至17，当前支持springboot2.7.10，紧跟SpringCloud及Alibaba全家桶的生态升级</p>
 
 ***
 ## JOIN US
