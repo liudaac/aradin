@@ -317,7 +317,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 </p>
 
 ***
-+ **aradin-version-nacos-starter(v0.0.4+)**
++ **aradin-version-nacos-starter(v1.0.0+)**
 <p>
 <figure>
 	<p>
@@ -400,6 +400,10 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 	aradin:<br>
 	&nbsp;&nbsp;version:<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;nacos:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username: #选填，默认与spring.cloud.nacos一致<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: #选填，默认与spring.cloud.nacos一致<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server-addr: #选填，默认与spring.cloud.nacos一致<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;namespace: #选填，建议与项目配置做隔离<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: #必填<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-ids: #必填，data-id列表，需要管理的cacheName加进来即可<br>
 	&nbsp;&nbsp;cache:<br>
