@@ -65,11 +65,22 @@ public class OfflineEndpoint implements ApplicationContextAware{
 				// TODO: handle exception
 				log.info("Dubbo class is not exist, no need to unregister");
 			}
+			performShutdown();
 			DeployContext.setStopped();
 		}
 		return OFFLINE_MESSAGE;
 	}
 
+	private void performShutdown() {
+		try {
+			Thread.sleep(5000L);
+		}
+		catch (InterruptedException ex) {
+			Thread.currentThread().interrupt();
+		}
+		this.context.close();
+	}
+	
 	@Override
 	public void setApplicationContext(ApplicationContext context) throws BeansException {
 		if (context instanceof ConfigurableApplicationContext) {
