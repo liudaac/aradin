@@ -9,6 +9,7 @@ import org.apache.dubbo.registry.client.metadata.ServiceInstanceMetadataUtils;
 import org.apache.dubbo.rpc.model.ApplicationModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
@@ -79,12 +80,28 @@ public class OfflineEndpoint implements ApplicationContextAware{
 	
 	private void performDeregistry() {
 		try {
+			Class.forName("org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry");
+			RabbitListenerEndpointRegistry rabbitListenerEndpointRegistry = context.getBean(RabbitListenerEndpointRegistry.class);
+			if (rabbitListenerEndpointRegistry != null) {
+				rabbitListenerEndpointRegistry.stop();
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO: handle exception
+			log.warn("Rabbit listener is not exist, no need to stop");
+		} catch (Exception e) {
+			// TODO: handle exception
+			log.warn("Rabbit listener stoped with error {}", e.getMessage());
+		}
+		try {
 			Class.forName("org.apache.dubbo.registry.client.metadata.ServiceInstanceMetadataUtils");
 			ApplicationModel applicationModel = ApplicationModel.defaultModel();
 			ServiceInstanceMetadataUtils.unregisterMetadataAndInstance(applicationModel);
 		} catch (ClassNotFoundException e) {
 			// TODO: handle exception
 			log.warn("Dubbo class is not exist, no need to unregister");
+		} catch (Exception e) {
+			// TODO: handle exception
+			log.warn("Dubbo deregistered with error {}", e.getMessage());
 		}
 	}
 	

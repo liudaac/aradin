@@ -41,5 +41,10 @@
 			<artifactId>dubbo-registry-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-rabbit</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 </project>
