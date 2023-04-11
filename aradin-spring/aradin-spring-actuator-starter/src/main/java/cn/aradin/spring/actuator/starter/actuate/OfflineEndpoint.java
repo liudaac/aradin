@@ -54,10 +54,11 @@ public class OfflineEndpoint implements ApplicationContextAware{
 			try {
 				performHandlers();
 				performDeregistry();
-				performDestroy();
 			} finally {
 				// TODO: handle finally clause
-				DeployContext.setStopped();
+				Thread thread = new Thread(this::performDestroy);
+				thread.setContextClassLoader(getClass().getClassLoader());
+				thread.start();
 			}
 		}
 		return OFFLINE_MESSAGE;
@@ -90,8 +91,8 @@ public class OfflineEndpoint implements ApplicationContextAware{
 	private void performDestroy() {
 		try {
 			Long wait = offlineProperties.getShutWait();
-			if (wait == null || wait < 1000l) {
-				wait = 1000l;
+			if (wait == null || wait <= 0) {
+				wait = 2000l;
 			}
 			Thread.sleep(wait);
 		}
@@ -99,6 +100,7 @@ public class OfflineEndpoint implements ApplicationContextAware{
 			Thread.currentThread().interrupt();
 		}
 		this.context.close();
+		DeployContext.setStopped();
 	}
 	
 	@Override
