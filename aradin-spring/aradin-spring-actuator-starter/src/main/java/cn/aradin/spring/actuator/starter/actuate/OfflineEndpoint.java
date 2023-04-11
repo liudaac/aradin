@@ -47,31 +47,39 @@ public class OfflineEndpoint implements ApplicationContextAware{
 		if (!DeployContext.isStopping()
 				&&!DeployContext.isStopped()) {
 			DeployContext.setStopping();
-			if (CollectionUtils.isNotEmpty(offlineHandlers)) {
-				offlineHandlers.forEach(handler->{
-					try {
-						handler.offline(context);
-					} catch (Exception e) {
-						// TODO: handle exception
-						log.warn("Offline handler failed as {}", e.getMessage());
-					}
-				});
-			}
-			try {
-				Class.forName("org.apache.dubbo.registry.client.metadata.ServiceInstanceMetadataUtils");
-				ApplicationModel applicationModel = ApplicationModel.defaultModel();
-				ServiceInstanceMetadataUtils.unregisterMetadataAndInstance(applicationModel);
-			} catch (ClassNotFoundException e) {
-				// TODO: handle exception
-				log.info("Dubbo class is not exist, no need to unregister");
-			}
-			performShutdown();
+			performHandlers();
+			performDeregistry();
+			performDestroy();
 			DeployContext.setStopped();
 		}
 		return OFFLINE_MESSAGE;
 	}
 
-	private void performShutdown() {
+	private void performHandlers() {
+		if (CollectionUtils.isNotEmpty(offlineHandlers)) {
+			offlineHandlers.forEach(handler->{
+				try {
+					handler.offline(context);
+				} catch (Exception e) {
+					// TODO: handle exception
+					log.warn("Offline handler failed as {}", e.getMessage());
+				}
+			});
+		}
+	}
+	
+	private void performDeregistry() {
+		try {
+			Class.forName("org.apache.dubbo.registry.client.metadata.ServiceInstanceMetadataUtils");
+			ApplicationModel applicationModel = ApplicationModel.defaultModel();
+			ServiceInstanceMetadataUtils.unregisterMetadataAndInstance(applicationModel);
+		} catch (ClassNotFoundException e) {
+			// TODO: handle exception
+			log.warn("Dubbo class is not exist, no need to unregister");
+		}
+	}
+	
+	private void performDestroy() {
 		try {
 			Thread.sleep(5000L);
 		}
