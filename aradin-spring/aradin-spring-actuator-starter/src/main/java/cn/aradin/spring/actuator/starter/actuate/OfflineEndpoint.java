@@ -47,10 +47,14 @@ public class OfflineEndpoint implements ApplicationContextAware{
 		if (!DeployContext.isStopping()
 				&&!DeployContext.isStopped()) {
 			DeployContext.setStopping();
-			performHandlers();
-			performDeregistry();
-			performDestroy();
-			DeployContext.setStopped();
+			try {
+				performHandlers();
+				performDeregistry();
+				performDestroy();
+			} finally {
+				// TODO: handle finally clause
+				DeployContext.setStopped();
+			}
 		}
 		return OFFLINE_MESSAGE;
 	}
