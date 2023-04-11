@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import cn.aradin.spring.actuator.starter.AradinActuatorAutoConfiguration;
 import cn.aradin.spring.actuator.starter.actuate.OfflineEndpoint;
 import cn.aradin.spring.actuator.starter.extension.IOfflineHandler;
+import cn.aradin.spring.actuator.starter.properties.ActuatorOfflineProperties;
 
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnAvailableEndpoint(endpoint = OfflineEndpoint.class)
@@ -19,7 +20,7 @@ public class OfflineEndpointAutoConfiguration {
 	
 	@Bean
 	@ConditionalOnMissingBean
-	public OfflineEndpoint offlineEndpoint(List<IOfflineHandler> offlineHandlers) {
-		return new OfflineEndpoint(offlineHandlers);
+	public OfflineEndpoint offlineEndpoint(ActuatorOfflineProperties offlineProperties, List<IOfflineHandler> offlineHandlers) {
+		return new OfflineEndpoint(offlineProperties, offlineHandlers);
 	}
 }

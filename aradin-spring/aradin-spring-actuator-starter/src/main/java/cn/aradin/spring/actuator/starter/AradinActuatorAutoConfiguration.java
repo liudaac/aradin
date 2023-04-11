@@ -9,10 +9,11 @@ import cn.aradin.spring.actuator.starter.extension.DefaultOfflineHandler;
 import cn.aradin.spring.actuator.starter.extension.DefaultOnlineHandler;
 import cn.aradin.spring.actuator.starter.extension.IOfflineHandler;
 import cn.aradin.spring.actuator.starter.extension.IOnlineHandler;
+import cn.aradin.spring.actuator.starter.properties.ActuatorOfflineProperties;
 import cn.aradin.spring.actuator.starter.properties.ActuatorOnlineProperties;
 
 @Configuration
-@EnableConfigurationProperties(ActuatorOnlineProperties.class)
+@EnableConfigurationProperties({ActuatorOnlineProperties.class, ActuatorOfflineProperties.class})
 public class AradinActuatorAutoConfiguration {
 	
 	@Bean

@@ -18,6 +18,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import cn.aradin.spring.actuator.starter.context.DeployContext;
 import cn.aradin.spring.actuator.starter.extension.IOfflineHandler;
+import cn.aradin.spring.actuator.starter.properties.ActuatorOfflineProperties;
 
 @Endpoint(id = "offline", enableByDefault = true)
 public class OfflineEndpoint implements ApplicationContextAware{
@@ -33,9 +34,12 @@ public class OfflineEndpoint implements ApplicationContextAware{
 	private ConfigurableApplicationContext context;
 	
 	private final List<IOfflineHandler> offlineHandlers;
+	private final ActuatorOfflineProperties offlineProperties;
 	
-	public OfflineEndpoint(List<IOfflineHandler> handlers) {
+	
+	public OfflineEndpoint(ActuatorOfflineProperties offlineProperties, List<IOfflineHandler> handlers) {
 		// TODO Auto-generated constructor stub
+		this.offlineProperties = offlineProperties;
 		this.offlineHandlers = handlers;
 	}
 	
@@ -85,7 +89,11 @@ public class OfflineEndpoint implements ApplicationContextAware{
 	
 	private void performDestroy() {
 		try {
-			Thread.sleep(5000L);
+			Long wait = offlineProperties.getShutWait();
+			if (wait == null || wait < 1000l) {
+				wait = 1000l;
+			}
+			Thread.sleep(wait);
 		}
 		catch (InterruptedException ex) {
 			Thread.currentThread().interrupt();
