@@ -89,6 +89,8 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;此外还支持配置项 aradin.actuator.online.shell 配置启动脚本路径</p>
 <p>&nbsp;③ /offline 方便下线时平滑关闭应用</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cn.aradin.spring.actuator.starter.extension.IOfflineHandler 会在自动调用应用上下文所有该类型的BEAN后才去调用Spring上下文的close方法</p>
+<p>&nbsp;④ /state 运行状态检查</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offline调用后会实时变更状态，替换原生的/health</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;集成方式</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;management.endpoints.web.exposure.include: inited,offline,online #开启需要的endpoints
 <p>&nbsp;&nbsp;&nbsp;补充配置</p>
