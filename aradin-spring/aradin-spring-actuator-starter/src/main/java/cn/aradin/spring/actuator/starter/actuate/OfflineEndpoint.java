@@ -13,6 +13,8 @@ import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
+import org.springframework.cloud.client.serviceregistry.Registration;
+import org.springframework.cloud.client.serviceregistry.ServiceRegistry;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -78,9 +80,11 @@ public class OfflineEndpoint implements ApplicationContextAware{
 		}
 	}
 	
+	@SuppressWarnings({"unchecked","rawtypes"})
 	private void performDeregistry() {
 		try {
 			Class.forName("org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry");
+			log.info("Rabbit listener deregistering");
 			RabbitListenerEndpointRegistry rabbitListenerEndpointRegistry = context.getBean(RabbitListenerEndpointRegistry.class);
 			if (rabbitListenerEndpointRegistry != null) {
 				rabbitListenerEndpointRegistry.stop();
@@ -90,10 +94,11 @@ public class OfflineEndpoint implements ApplicationContextAware{
 			log.warn("Rabbit listener is not exist, no need to stop");
 		} catch (Exception e) {
 			// TODO: handle exception
-			log.warn("Rabbit listener stoped with error {}", e.getMessage());
+			log.error("Rabbit listener stoped with error {}", e.getMessage());
 		}
 		try {
 			Class.forName("org.apache.dubbo.registry.client.metadata.ServiceInstanceMetadataUtils");
+			log.info("Dubbo deregistering");
 			ApplicationModel applicationModel = ApplicationModel.defaultModel();
 			ServiceInstanceMetadataUtils.unregisterMetadataAndInstance(applicationModel);
 		} catch (ClassNotFoundException e) {
@@ -101,7 +106,24 @@ public class OfflineEndpoint implements ApplicationContextAware{
 			log.warn("Dubbo class is not exist, no need to unregister");
 		} catch (Exception e) {
 			// TODO: handle exception
-			log.warn("Dubbo deregistered with error {}", e.getMessage());
+			log.error("Dubbo deregistered with error {}", e.getMessage());
+		}
+		try {
+			Class.forName("org.springframework.cloud.client.serviceregistry.ServiceRegistryAutoConfiguration");
+			Registration registration = context.getBean(Registration.class);
+			if (registration != null) {
+				ServiceRegistry serviceRegistry = context.getBean(ServiceRegistry.class);
+				if (serviceRegistry != null) {
+					log.info("Springcloud deregistering");
+					serviceRegistry.deregister(registration);
+				}
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO: handle exception
+			log.warn("SpringCloud Register class is not exist, no need to unregister");
+		} catch (Exception e) {
+			// TODO: handle exception
+			log.error("SpringCloud deregistered with error {}", e.getMessage());
 		}
 	}
 	

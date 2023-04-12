@@ -46,5 +46,10 @@
 			<artifactId>spring-rabbit</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-commons</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 </project>
