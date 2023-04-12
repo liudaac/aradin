@@ -93,7 +93,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offline调用后会实时变更状态，替换原生的/health</p>
 <p>&nbsp;集成方式</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;management.endpoints.web.exposure.include: inited,offline,online,state #开启需要的endpoints
-<p>&nbsp;&nbsp;&nbsp;补充配置</p>
+<p>&nbsp;补充配置</p>
 &nbsp;&nbsp;&nbsp;aradin:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;acutator:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;online:<br>
