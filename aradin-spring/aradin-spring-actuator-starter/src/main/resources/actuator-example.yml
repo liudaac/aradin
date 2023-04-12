@@ -17,3 +17,5 @@ aradin:
   actuator:
     online:
       shell: /filebeat-start.sh
+    offline:
+      shut-wait: 2000

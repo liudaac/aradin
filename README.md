@@ -91,6 +91,13 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cn.aradin.spring.actuator.starter.extension.IOfflineHandler 会在自动调用应用上下文所有该类型的BEAN后才去调用Spring上下文的close方法</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;集成方式</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;management.endpoints.web.exposure.include: inited,offline,online #开启需要的endpoints
+<p>&nbsp;&nbsp;&nbsp;补充配置</p>
+&nbsp;&nbsp;&nbsp;aradin:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;acutator:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;online:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shell: #定制启动脚本<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offline:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shut-wait: #优雅停机配置，服务注销和销毁context间的时间间隔，单位ms<br>
 
 ***
 + **aradin-spring-velocity-starter**
