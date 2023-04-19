@@ -28,8 +28,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
-		<!-- Project revision 0.0.4.x -->
-		<revision>1.0.0</revision>
+		<revision>1.0.1</revision>
 		<!-- Base Code -->
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -128,6 +127,16 @@
 			    <groupId>org.apache.dubbo</groupId>
 			    <artifactId>dubbo</artifactId>
 			    <version>${dubbo.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.dubbo</groupId>
+				<artifactId>dubbo-common</artifactId>
+				<version>${dubbo.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.dubbo</groupId>
+				<artifactId>dubbo-registry-api</artifactId>
+				<version>${dubbo.version}</version>
 			</dependency>
 			<dependency>
 			    <groupId>org.apache.dubbo</groupId>
