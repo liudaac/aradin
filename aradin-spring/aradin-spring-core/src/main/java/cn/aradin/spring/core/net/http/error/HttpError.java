@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import cn.aradin.spring.core.net.http.code.CodedEnum;
 
-@SuppressWarnings("serial")
-public class HttpError implements Serializable {
-	private CodedEnum coded;
+public class HttpError<C extends CodedEnum> implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5427190417681581618L;
+	private C coded;
 	private Integer code;
 	private String msg;
 
@@ -19,12 +22,12 @@ public class HttpError implements Serializable {
 		this.msg = msg;
 	}
 
-	public HttpError(CodedEnum coded, String msg) {
+	public HttpError(C coded, String msg) {
 		this.coded = coded;
 		this.msg = msg;
 	}
 	
-	public HttpError(CodedEnum coded, Integer code, String msg) {
+	public HttpError(C coded, Integer code, String msg) {
 		this.coded = coded;
 		this.msg = msg;
 	}
@@ -33,7 +36,7 @@ public class HttpError implements Serializable {
 		return coded;
 	}
 
-	public void setCoded(CodedEnum coded) {
+	public void setCoded(C coded) {
 		this.coded = coded;
 	}
 
@@ -53,7 +56,7 @@ public class HttpError implements Serializable {
 		this.msg = msg;
 	}
 	
-	public static HttpError instance(CodedEnum coded, String msg) {
-		return new HttpError(coded, msg);
+	public static <C extends CodedEnum> HttpError<C> instance(C coded, String msg) {
+		return new HttpError<C>(coded, msg);
 	}
 }
