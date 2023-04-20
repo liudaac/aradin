@@ -32,7 +32,7 @@ public class HttpError<C extends CodedEnum> implements Serializable {
 		this.msg = msg;
 	}
 	
-	public CodedEnum getCoded() {
+	public C getCoded() {
 		return coded;
 	}
 

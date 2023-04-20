@@ -77,11 +77,11 @@ public class Resp<C extends CodedEnum, T> implements Serializable{
 		resp.setData(data);
 		return resp;
 	}
-	public static Resp<CodedEnum, Object> error(HttpError error) {
+	public static <C extends CodedEnum> Resp<C, Object> error(HttpError<C> error) {
 		return error(error, null);
 	}
-	public static Resp<CodedEnum, Object> error(HttpError error, String alias) {
-		return new Resp<CodedEnum, Object>()
+	public static <C extends CodedEnum> Resp<C, Object> error(HttpError<C> error, String alias) {
+		return new Resp<C, Object>()
 			.code(error.getCoded())
 			.msg(StringUtils.isNotBlank(alias)?alias:error.getMsg());
 	}
