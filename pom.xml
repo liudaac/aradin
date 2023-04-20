@@ -19,6 +19,7 @@
 		<module>aradin-cluster</module>
 		<module>aradin-version</module>
 		<module>aradin-external</module>
+		<module>aradin-client</module>
 		<!-- <module>aradin-wechat</module> <module>aradin-examples</module> -->
 	</modules>
 	<parent>
