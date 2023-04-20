@@ -36,12 +36,12 @@ public class EasyBuilder {
 		return factory;
 	}
 
-	public <T> T createService(Class<T> serviceInterface) {
-		return createService(serviceInterface, null);
+	public <T> T service(Class<T> serviceInterface) {
+		return service(serviceInterface, null);
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> T createService(Class<T> serviceInterface, RequestConfig requestConfig) {
+	public <T> T service(Class<T> serviceInterface, RequestConfig requestConfig) {
 		if (serviceMap.containsKey(serviceInterface)) {
 			logger.debug("Service存在" + serviceInterface);
 			return (T) serviceMap.get(serviceInterface);
