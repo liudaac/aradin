@@ -1,4 +1,4 @@
-package cn.aradin.client.http.annotation;
+package cn.aradin.easy.http.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

@@ -1,4 +1,4 @@
-package cn.aradin.client.http;
+package cn.aradin.easy.http;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -18,12 +18,12 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson2.JSONObject;
 
-import cn.aradin.client.http.annotation.Controller;
-import cn.aradin.client.http.annotation.RequestBody;
-import cn.aradin.client.http.annotation.RequestHeader;
-import cn.aradin.client.http.annotation.RequestMapping;
-import cn.aradin.client.http.annotation.RequestParam;
-import cn.aradin.client.http.support.RequestMethod;
+import cn.aradin.easy.http.annotation.Controller;
+import cn.aradin.easy.http.annotation.RequestBody;
+import cn.aradin.easy.http.annotation.RequestHeader;
+import cn.aradin.easy.http.annotation.RequestMapping;
+import cn.aradin.easy.http.annotation.RequestParam;
+import cn.aradin.easy.http.support.RequestMethod;
 
 public class EasyInvocation implements InvocationHandler {
 
@@ -43,18 +43,8 @@ public class EasyInvocation implements InvocationHandler {
 
 	private RequestConfig requestConfig;
 
-	private Integer maxAutoRetries;
-
 	public EasyInvocation(EasyRequest client, RequestConfig requestConfig) {
 		// TODO Auto-generated constructor stub
-		String retries = System.getProperty("aradin.http.retries");
-		if (StringUtils.isNumeric(retries)) {
-			maxAutoRetries = Integer.parseInt(retries);
-		}
-		if (maxAutoRetries == null || maxAutoRetries <= 0) {
-			maxAutoRetries = 1;
-		}
-		logger.info("retries>>>>>>>>>>>>>>>>>" + retries);
 		this.clent = client;
 		this.requestConfig = requestConfig;
 	}
@@ -94,11 +84,10 @@ public class EasyInvocation implements InvocationHandler {
 			logger.error(target.getName() + "." + method.getName() + ",没有定义@MyMethod!");
 			return null;
 		} else {
-			// 拼接URL
+			int retries = m.retries();
 			int i = 0;
 			while (true) {
 				try {
-					i++;
 					String contentType = m.contentType();
 					StringBuilder builder = new StringBuilder(domain);
 					builder.append(m.value());
@@ -129,10 +118,12 @@ public class EasyInvocation implements InvocationHandler {
 				} catch (Exception e) {
 					// TODO: handle exception
 					logger.error(target.getName() + "." + method.getName() + ",调用异常,重试!");
-					if (i >= maxAutoRetries) {
+					if (i >= retries) {
 						logger.error(target.getName() + "." + method.getName() + ",超出重试次数!");
 						return null;
 					}
+				} finally {
+					i++;
 				}
 			}
 		}

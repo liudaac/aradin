@@ -1,4 +1,4 @@
-package cn.aradin.client.http.support;
+package cn.aradin.easy.http.support;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

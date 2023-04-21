@@ -1,4 +1,4 @@
-package cn.aradin.client.http;
+package cn.aradin.easy.http;
 
 import java.util.HashMap;
 import java.util.Map;

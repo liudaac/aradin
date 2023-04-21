@@ -6,11 +6,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>cn.aradin</groupId>
-		<artifactId>aradin-client</artifactId>
+		<artifactId>aradin-easy</artifactId>
 		<version>${revision}</version>
 	</parent>
-	<artifactId>aradin-client-http</artifactId>
-	<name>aradin-client-http</name>
+	<artifactId>aradin-easy-http</artifactId>
+	<name>aradin-easy-http</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

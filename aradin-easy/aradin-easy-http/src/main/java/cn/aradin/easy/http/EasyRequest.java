@@ -1,4 +1,4 @@
-package cn.aradin.client.http;
+package cn.aradin.easy.http;
 
 import java.lang.reflect.Type;
 import java.net.URLEncoder;
@@ -17,8 +17,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cn.aradin.client.http.support.LocalHttpClient;
-import cn.aradin.client.http.support.RequestMethod;
+import cn.aradin.easy.http.support.LocalHttpClient;
+import cn.aradin.easy.http.support.RequestMethod;
 
 public class EasyRequest {
 
