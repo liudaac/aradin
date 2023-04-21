@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 
 import cn.aradin.spring.core.net.http.code.AradinCodedEnum;
 import cn.aradin.spring.core.net.http.error.HttpError;

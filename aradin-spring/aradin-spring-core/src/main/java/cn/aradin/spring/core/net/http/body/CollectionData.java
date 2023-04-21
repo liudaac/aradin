@@ -3,7 +3,7 @@ package cn.aradin.spring.core.net.http.body;
 import java.io.Serializable;
 import java.util.Collection;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.google.common.collect.Lists;
 
 public class CollectionData<T> implements Serializable {

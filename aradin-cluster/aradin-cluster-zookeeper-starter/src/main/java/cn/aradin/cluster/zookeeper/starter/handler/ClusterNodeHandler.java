@@ -16,7 +16,7 @@ import org.apache.zookeeper.CreateMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.google.common.collect.Lists;
 
 import cn.aradin.cluster.core.manager.IClusterNodeManager;

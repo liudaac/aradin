@@ -11,8 +11,6 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ClassUtils;
 
-import com.alibaba.fastjson.parser.ParserConfig;
-
 @Component
 public class AradinBeanFactory implements ApplicationContextAware {
 	
@@ -29,7 +27,6 @@ public class AradinBeanFactory implements ApplicationContextAware {
 		if (log.isDebugEnabled()) {
 			log.debug("Context初始化");
 		}
-		ParserConfig.getGlobalInstance().setAutoTypeSupport(false);
 	}
 
 	// 获取applicationContext

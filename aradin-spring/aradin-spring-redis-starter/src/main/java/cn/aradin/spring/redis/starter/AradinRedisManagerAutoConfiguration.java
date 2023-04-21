@@ -33,7 +33,7 @@ import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer
 import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair;
 import org.springframework.util.Assert;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 
 import cn.aradin.spring.redis.starter.properties.RedisCacheManagerProperties;
 
