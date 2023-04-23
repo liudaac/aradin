@@ -139,7 +139,7 @@ public class EasyInvocation implements InvocationHandler {
 					Parameter parameter = parameters[i];
 					RequestHeader requestHeader = parameter.getAnnotation(RequestHeader.class);
 					if (requestHeader != null) {
-						values.put(requestHeader.value(), requestHeader.encrypt()==null?String.valueOf(args[i]):EncryptHolder.function(requestHeader.encrypt()).apply(String.valueOf(args[i])));
+						values.put(requestHeader.value(), EncryptHolder.function(requestHeader.encrypt()).apply(String.valueOf(args[i])));
 					}
 				}
 			}
@@ -214,7 +214,7 @@ public class EasyInvocation implements InvocationHandler {
 						} else {
 							result = JSONObject.toJSONString(args[i]);
 						}
-						return requestBody.encrypt()==null?result:EncryptHolder.function(requestBody.encrypt()).apply(result);
+						return EncryptHolder.function(requestBody.encrypt()).apply(result);
 					}
 				}
 			}

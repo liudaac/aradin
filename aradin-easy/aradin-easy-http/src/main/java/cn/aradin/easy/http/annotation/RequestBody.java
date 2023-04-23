@@ -12,5 +12,5 @@ import java.util.function.Function;
 @Target(PARAMETER)
 @Documented
 public @interface RequestBody {
-	Class<? extends Function<String, String>> encrypt();
+	Class<? extends Function<String, String>> encrypt() default NoEncrypt.class;
 }

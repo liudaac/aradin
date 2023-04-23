@@ -13,5 +13,5 @@ import java.util.function.Function;
 @Target(PARAMETER)
 public @interface RequestHeader {
 	String value();
-	Class<? extends Function<String, String>> encrypt();
+	Class<? extends Function<String, String>> encrypt() default NoEncrypt.class;
 }
