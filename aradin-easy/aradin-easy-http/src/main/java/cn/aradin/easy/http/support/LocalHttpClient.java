@@ -46,7 +46,6 @@ public class LocalHttpClient {
 		try {
 			KeyStore keyStore = KeyStore.getInstance(keyStoreName);
 			InputStream instream = LocalHttpClient.class.getClassLoader().getResourceAsStream(keyStoreFilePath);
-//			 FileInputStream instream = new FileInputStream(new File(keyStoreFilePath));
 			keyStore.load(instream, mch_id.toCharArray());
 			instream.close();
 			HttpClient httpClient = HttpClientFactory.createKeyMaterialHttpClient(keyStore, mch_id,
