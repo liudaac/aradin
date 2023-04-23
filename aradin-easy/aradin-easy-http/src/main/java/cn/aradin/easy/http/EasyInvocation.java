@@ -3,6 +3,7 @@ package cn.aradin.easy.http;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.lang.reflect.Proxy;
@@ -138,7 +139,13 @@ public class EasyInvocation implements InvocationHandler {
 					Parameter parameter = parameters[i];
 					RequestHeader requestHeader = parameter.getAnnotation(RequestHeader.class);
 					if (requestHeader != null) {
-						values.put(requestHeader.value(), String.valueOf(args[i]));
+						try {
+							values.put(requestHeader.value(), requestHeader.encrypt()==null?String.valueOf(args[i]):requestHeader.encrypt().getDeclaredConstructor().newInstance().apply(String.valueOf(args[i])));
+						} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+								| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				}
 			}
@@ -202,15 +209,23 @@ public class EasyInvocation implements InvocationHandler {
 					Parameter parameter = parameters[i];
 					RequestBody requestBody = parameter.getAnnotation(RequestBody.class);
 					if (requestBody != null) {
+						String result = null;
 						if (parameter.getType().isAssignableFrom(String.class)
 								|| parameter.getType().isAssignableFrom(Integer.class)
 								|| parameter.getType().isAssignableFrom(Long.class)
 								|| parameter.getType().isAssignableFrom(Float.class)
 								|| parameter.getType().isAssignableFrom(Double.class)
 								|| parameter.getType().isAssignableFrom(Boolean.class)) {
-							return String.valueOf(args[i]);
+							result = String.valueOf(args[i]);
 						} else {
-							return JSONObject.toJSONString(args[i]);
+							result = JSONObject.toJSONString(args[i]);
+						}
+						try {
+							return requestBody.encrypt()==null?result:requestBody.encrypt().getDeclaredConstructor().newInstance().apply(result);
+						} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+								| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
 					}
 				}
