@@ -3,7 +3,6 @@ package cn.aradin.easy.http;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.lang.reflect.Proxy;
@@ -24,6 +23,7 @@ import cn.aradin.easy.http.annotation.RequestBody;
 import cn.aradin.easy.http.annotation.RequestHeader;
 import cn.aradin.easy.http.annotation.RequestMapping;
 import cn.aradin.easy.http.annotation.RequestParam;
+import cn.aradin.easy.http.annotation.support.EncryptHolder;
 import cn.aradin.easy.http.support.RequestMethod;
 
 public class EasyInvocation implements InvocationHandler {
@@ -139,13 +139,7 @@ public class EasyInvocation implements InvocationHandler {
 					Parameter parameter = parameters[i];
 					RequestHeader requestHeader = parameter.getAnnotation(RequestHeader.class);
 					if (requestHeader != null) {
-						try {
-							values.put(requestHeader.value(), requestHeader.encrypt()==null?String.valueOf(args[i]):requestHeader.encrypt().getDeclaredConstructor().newInstance().apply(String.valueOf(args[i])));
-						} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-								| InvocationTargetException | NoSuchMethodException | SecurityException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						values.put(requestHeader.value(), requestHeader.encrypt()==null?String.valueOf(args[i]):EncryptHolder.function(requestHeader.encrypt()).apply(String.valueOf(args[i])));
 					}
 				}
 			}
@@ -220,13 +214,7 @@ public class EasyInvocation implements InvocationHandler {
 						} else {
 							result = JSONObject.toJSONString(args[i]);
 						}
-						try {
-							return requestBody.encrypt()==null?result:requestBody.encrypt().getDeclaredConstructor().newInstance().apply(result);
-						} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-								| InvocationTargetException | NoSuchMethodException | SecurityException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						return requestBody.encrypt()==null?result:EncryptHolder.function(requestBody.encrypt()).apply(result);
 					}
 				}
 			}
