@@ -14,23 +14,23 @@ public class EncryptHolder {
 	
 	public static Map<Class<?>, Function<String, String>> serviceMap = new HashMap<Class<?>, Function<String, String>>();
 	
-	public static Function<String, String> function(Class<? extends Function<String, String>> serviceInterface) {
-		if (!serviceMap.containsKey(serviceInterface)) {
+	public static Function<String, String> function(Class<? extends Function<String, String>> funClass) {
+		if (!serviceMap.containsKey(funClass)) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Function存在" + serviceInterface);
+				logger.debug("Function存在" + funClass);
 			}
 		} else {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Function不存在" + serviceInterface);
+				logger.debug("Function不存在" + funClass);
 			}
 			try {
-				serviceMap.put(serviceInterface, serviceInterface.getDeclaredConstructor().newInstance());
+				serviceMap.put(funClass, funClass.getDeclaredConstructor().newInstance());
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 					| InvocationTargetException | NoSuchMethodException | SecurityException e) {
 				// TODO Auto-generated catch block
 				throw new RuntimeException(e.getCause());
 			}
 		}
-		return serviceMap.get(serviceInterface);
+		return serviceMap.get(funClass);
 	}
 }
