@@ -31,7 +31,7 @@
 
 		<module>aradin-easy-http</module>
 
-		<!-- <module>aradin-easy-http-buddy</module> -->
+		<module>aradin-easy-http-buddy</module>
 
 	</modules>
 
