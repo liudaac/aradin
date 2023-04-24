@@ -48,7 +48,7 @@ public class BuddyInvocation {
     	RequestMapping m = method.getAnnotation(RequestMapping.class);
 		Type returnClaz = method.getGenericReturnType();
 		if (m == null) {
-			logger.error(returnClaz.getTypeName() + "." + method.getName() + ",没有定义@MyMethod!");
+			logger.error(returnClaz.getTypeName() + "." + method.getName() + ",没有定义@RequestMapping!");
 			return null;
 		} else {
 			int retries = m.retries();
