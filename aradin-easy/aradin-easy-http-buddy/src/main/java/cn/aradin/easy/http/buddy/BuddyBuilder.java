@@ -1,8 +1,12 @@
 package cn.aradin.easy.http.buddy;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.client.config.RequestConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +19,45 @@ import net.bytebuddy.matcher.ElementMatchers;
 public class BuddyBuilder {
 
 	private static final Logger logger = LoggerFactory.getLogger(BuddyBuilder.class);
+	
+	public Map<Class<?>, Object> serviceMap = new HashMap<Class<?>, Object>();
+	
+	private static BuddyBuilder factory;
+
+	private static ReentrantLock lock = new ReentrantLock();
+
+	public static BuddyBuilder ins() {
+		if (factory == null) {
+			lock.lock();
+			if (factory == null) {
+				factory = new BuddyBuilder();
+			}
+			lock.unlock();
+		}
+		return factory;
+	}
+	
+	public <T> T service(Class<T> serviceInterface) {
+		return service(serviceInterface, null);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> T service(Class<T> serviceInterface, RequestConfig requestConfig) {
+		if (serviceMap.containsKey(serviceInterface)) {
+			logger.debug("Service存在" + serviceInterface);
+			return (T) serviceMap.get(serviceInterface);
+		} else {
+			logger.debug("Service不存在" + serviceInterface);
+			try {
+				T t = create(serviceInterface);
+				serviceMap.put(serviceInterface, t);
+				return t;
+			} catch (Exception e) {
+				// TODO: handle exception
+				throw new RuntimeException(e.getCause());
+			}
+		}
+	}
 	
 	public <T> T create(Class<T> interfaceClazz) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		Controller s = interfaceClazz.getAnnotation(Controller.class);
