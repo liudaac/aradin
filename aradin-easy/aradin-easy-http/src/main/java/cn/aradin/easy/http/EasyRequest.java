@@ -24,7 +24,7 @@ public class EasyRequest {
 
 	private static final Logger logger = LoggerFactory.getLogger(EasyRequest.class);
 
-	protected EasyRequest() {
+	public EasyRequest() {
 	}
 
 	public <T> T request(String url, Type returnClaz, RequestMethod method, Map<String, String> headers,
