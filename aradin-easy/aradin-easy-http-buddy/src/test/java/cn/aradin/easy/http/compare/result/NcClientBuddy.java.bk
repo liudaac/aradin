@@ -1,0 +1,74 @@
+import cn.aradin.easy.http.compare.GdPoiDto;
+import cn.aradin.easy.http.compare.StatusResultDto;
+import cn.aradin.easy.http.compare.StatusDto;
+import cn.aradin.easy.http.compare.ContentOptDto;
+import cn.aradin.easy.http.compare.ContentResultDto;
+import cn.aradin.easy.http.compare.NcResp;
+import cn.aradin.easy.http.compare.DynamicDto;
+import java.lang.reflect.Method;
+import cn.aradin.easy.http.buddy.BuddyInvocation;
+import cn.aradin.easy.http.compare.result.NcClient;
+
+//
+// Decompiled by Procyon v0.6-prerelease
+//
+
+public class NcClientBuddy implements NcClient
+{
+    public static volatile /* synthetic */ BuddyInvocation delegate$2ms4e00;
+    private static final /* synthetic */ Method cachedValue$vTBw6mAn$4cscpe1;
+    private static final /* synthetic */ Method cachedValue$vTBw6mAn$7mdacq2;
+    private static final /* synthetic */ Method cachedValue$vTBw6mAn$ea32092;
+    private static final /* synthetic */ Method cachedValue$vTBw6mAn$0scuqt3;
+    private static final /* synthetic */ Method cachedValue$vTBw6mAn$5j4bem0;
+    private static final /* synthetic */ Method cachedValue$vTBw6mAn$7m9oaq0;
+    private static final /* synthetic */ Method cachedValue$vTBw6mAn$9pqdof1;
+    private static final /* synthetic */ Method cachedValue$vTBw6mAn$ju1rrj2;
+
+    @Override
+    public boolean equals(final Object o) {
+        return (boolean)NcClientBuddy.delegate$2ms4e00.intercept(NcClientBuddy.cachedValue$vTBw6mAn$5j4bem0, new Object[] { o });
+    }
+
+    @Override
+    public String toString() {
+        return (String)NcClientBuddy.delegate$2ms4e00.intercept(NcClientBuddy.cachedValue$vTBw6mAn$4cscpe1, new Object[0]);
+    }
+
+    @Override
+    public int hashCode() {
+        return (int)NcClientBuddy.delegate$2ms4e00.intercept(NcClientBuddy.cachedValue$vTBw6mAn$9pqdof1, new Object[0]);
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return NcClientBuddy.delegate$2ms4e00.intercept(NcClientBuddy.cachedValue$vTBw6mAn$7m9oaq0, new Object[0]);
+    }
+
+    public NcResp<ContentResultDto> add(final String userU, final String userAgent, final DynamicDto reqDto) {
+        return (NcResp<ContentResultDto>)NcClientBuddy.delegate$2ms4e00.intercept(NcClientBuddy.cachedValue$vTBw6mAn$ea32092, new Object[] { userU, userAgent, reqDto });
+    }
+
+    public NcResp<Boolean> delete(final ContentOptDto reqDto) {
+        return (NcResp<Boolean>)NcClientBuddy.delegate$2ms4e00.intercept(NcClientBuddy.cachedValue$vTBw6mAn$ju1rrj2, new Object[] { reqDto });
+    }
+
+    public NcResp<StatusResultDto> rec(final StatusDto reqDto) {
+        return (NcResp<StatusResultDto>)NcClientBuddy.delegate$2ms4e00.intercept(NcClientBuddy.cachedValue$vTBw6mAn$0scuqt3, new Object[] { reqDto });
+    }
+
+    public NcResp<GdPoiDto> poi(final String lonAndLat) {
+        return (NcResp<GdPoiDto>)NcClientBuddy.delegate$2ms4e00.intercept(NcClientBuddy.cachedValue$vTBw6mAn$7mdacq2, new Object[] { lonAndLat });
+    }
+
+    static {
+        cachedValue$vTBw6mAn$4cscpe1 = Object.class.getMethod("toString", (Class<?>[])new Class[0]);
+        cachedValue$vTBw6mAn$7mdacq2 = NcClient.class.getMethod("poi", String.class);
+        cachedValue$vTBw6mAn$ea32092 = NcClient.class.getMethod("add", String.class, String.class, DynamicDto.class);
+        cachedValue$vTBw6mAn$0scuqt3 = NcClient.class.getMethod("rec", StatusDto.class);
+        cachedValue$vTBw6mAn$5j4bem0 = Object.class.getMethod("equals", Object.class);
+        cachedValue$vTBw6mAn$7m9oaq0 = Object.class.getDeclaredMethod("clone", (Class<?>[])new Class[0]);
+        cachedValue$vTBw6mAn$9pqdof1 = Object.class.getMethod("hashCode", (Class<?>[])new Class[0]);
+        cachedValue$vTBw6mAn$ju1rrj2 = NcClient.class.getMethod("delete", ContentOptDto.class);
+    }
+}

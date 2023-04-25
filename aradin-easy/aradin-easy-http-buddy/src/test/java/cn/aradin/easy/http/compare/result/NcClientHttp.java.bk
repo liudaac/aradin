@@ -1,0 +1,130 @@
+import cn.aradin.easy.http.compare.StatusDto;
+import cn.aradin.easy.http.compare.ContentOptDto;
+import cn.aradin.easy.http.compare.NcResp;
+import cn.aradin.easy.http.compare.DynamicDto;
+import java.lang.reflect.UndeclaredThrowableException;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import cn.aradin.easy.http.compare.result.NcClient;
+import java.lang.reflect.Proxy;
+
+//
+// Decompiled by Procyon v0.6-prerelease
+//
+
+public final class NcClientHttp extends Proxy implements NcClient
+{
+    private static Method m1;
+    private static Method m3;
+    private static Method m2;
+    private static Method m6;
+    private static Method m4;
+    private static Method m0;
+    private static Method m5;
+
+    public NcClientHttp(final InvocationHandler h) {
+        super(h);
+    }
+
+    public final boolean equals(final Object o) {
+        try {
+            return (boolean)super.h.invoke(this, NcClientHttp.m1, new Object[] { o });
+        }
+        catch (Error | RuntimeException error) {
+            throw;
+        }
+        catch (Throwable undeclaredThrowable) {
+            throw new UndeclaredThrowableException(undeclaredThrowable);
+        }
+    }
+
+    public final NcResp add(final String s, final String s2, final DynamicDto dynamicDto) {
+        try {
+            return (NcResp)super.h.invoke(this, NcClientHttp.m3, new Object[] { s, s2, dynamicDto });
+        }
+        catch (Error | RuntimeException error) {
+            throw;
+        }
+        catch (Throwable undeclaredThrowable) {
+            throw new UndeclaredThrowableException(undeclaredThrowable);
+        }
+    }
+
+    public final String toString() {
+        try {
+            return (String)super.h.invoke(this, NcClientHttp.m2, null);
+        }
+        catch (Error | RuntimeException error) {
+            throw;
+        }
+        catch (Throwable undeclaredThrowable) {
+            throw new UndeclaredThrowableException(undeclaredThrowable);
+        }
+    }
+
+    public final NcResp poi(final String s) {
+        try {
+            return (NcResp)super.h.invoke(this, NcClientHttp.m6, new Object[] { s });
+        }
+        catch (Error | RuntimeException error) {
+            throw;
+        }
+        catch (Throwable undeclaredThrowable) {
+            throw new UndeclaredThrowableException(undeclaredThrowable);
+        }
+    }
+
+    public final NcResp delete(final ContentOptDto contentOptDto) {
+        try {
+            return (NcResp)super.h.invoke(this, NcClientHttp.m4, new Object[] { contentOptDto });
+        }
+        catch (Error | RuntimeException error) {
+            throw;
+        }
+        catch (Throwable undeclaredThrowable) {
+            throw new UndeclaredThrowableException(undeclaredThrowable);
+        }
+    }
+
+    public final int hashCode() {
+        try {
+            return (int)super.h.invoke(this, NcClientHttp.m0, null);
+        }
+        catch (Error | RuntimeException error) {
+            throw;
+        }
+        catch (Throwable undeclaredThrowable) {
+            throw new UndeclaredThrowableException(undeclaredThrowable);
+        }
+    }
+
+    public final NcResp rec(final StatusDto statusDto) {
+        try {
+            return (NcResp)super.h.invoke(this, NcClientHttp.m5, new Object[] { statusDto });
+        }
+        catch (Error | RuntimeException error) {
+            throw;
+        }
+        catch (Throwable undeclaredThrowable) {
+            throw new UndeclaredThrowableException(undeclaredThrowable);
+        }
+    }
+
+    static {
+        try {
+            NcClientHttp.m1 = Class.forName("java.lang.Object").getMethod("equals", Class.forName("java.lang.Object"));
+            NcClientHttp.m3 = Class.forName("cn.aradin.easy.http.compare.result.NcClient").getMethod("add", Class.forName("java.lang.String"), Class.forName("java.lang.String"), Class.forName("cn.aradin.easy.http.compare.DynamicDto"));
+            NcClientHttp.m2 = Class.forName("java.lang.Object").getMethod("toString", (Class<?>[])new Class[0]);
+            NcClientHttp.m6 = Class.forName("cn.aradin.easy.http.compare.result.NcClient").getMethod("poi", Class.forName("java.lang.String"));
+            NcClientHttp.m4 = Class.forName("cn.aradin.easy.http.compare.result.NcClient").getMethod("delete", Class.forName("cn.aradin.easy.http.compare.ContentOptDto"));
+            NcClientHttp.m0 = Class.forName("java.lang.Object").getMethod("hashCode", (Class<?>[])new Class[0]);
+            NcClientHttp.m5 = Class.forName("cn.aradin.easy.http.compare.result.NcClient").getMethod("rec", Class.forName("cn.aradin.easy.http.compare.StatusDto"));
+        }
+        catch (NoSuchMethodException ex) {
+            throw new NoSuchMethodError(ex.getMessage());
+        }
+        catch (ClassNotFoundException ex2) {
+            throw new NoClassDefFoundError(ex2.getMessage());
+        }
+    }
+}
