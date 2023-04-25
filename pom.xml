@@ -593,6 +593,11 @@
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-easy-http-buddy</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
 		      <groupId>cn.aradin</groupId>
 		      <artifactId>springfox-spring-web</artifactId>
 		      <version>${revision}</version>
