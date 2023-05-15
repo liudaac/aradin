@@ -15,7 +15,7 @@ public class EncryptHolder {
 	public static Map<Class<?>, Function<String, String>> serviceMap = new HashMap<Class<?>, Function<String, String>>();
 	
 	public static Function<String, String> function(Class<? extends Function<String, String>> funClass) {
-		if (!serviceMap.containsKey(funClass)) {
+		if (serviceMap.containsKey(funClass)) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Function存在" + funClass);
 			}
