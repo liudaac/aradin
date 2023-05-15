@@ -120,6 +120,7 @@ public class EasyInvocation implements InvocationHandler {
 					// TODO: handle exception
 					logger.error(target.getName() + "." + method.getName() + ",调用异常,重试!\n{}", e.getMessage());
 					if (i >= retries) {
+						e.printStackTrace();
 						logger.error(target.getName() + "." + method.getName() + ",超出重试次数!\\n{}", e.getMessage());
 						return null;
 					}
