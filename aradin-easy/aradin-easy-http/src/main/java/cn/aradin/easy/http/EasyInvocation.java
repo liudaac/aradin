@@ -93,6 +93,9 @@ public class EasyInvocation implements InvocationHandler {
 					StringBuilder builder = new StringBuilder(domain);
 					builder.append(m.value());
 					String body = parseBody(method, args);
+					if (logger.isDebugEnabled()) {
+						logger.debug("Invoke body {}", body);
+					}
 					Map<String, String> headers = parseHeaders(method, args);
 					if (RequestMethod.POST.equals(m.method())) {
 						Map<String, String> values = null;
