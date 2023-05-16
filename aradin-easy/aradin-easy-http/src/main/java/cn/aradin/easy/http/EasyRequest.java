@@ -1,7 +1,6 @@
 package cn.aradin.easy.http;
 
 import java.lang.reflect.Type;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +52,7 @@ public class EasyRequest {
 					}
 					builder.setEntity(new UrlEncodedFormEntity(array, "UTF-8"));
 				} else if (StringUtils.isNotBlank(postBody)) {
-					builder.setEntity(new StringEntity(URLEncoder.encode(postBody, "UTF-8"),
+					builder.setEntity(new StringEntity(postBody,
 							StringUtils.isNotBlank(contentType) ? ContentType.parse(contentType)
 									: ContentType.APPLICATION_JSON));
 				}
