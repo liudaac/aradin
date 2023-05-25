@@ -54,7 +54,7 @@ public class CaffeinesonCacheManager implements VersionCacheManager{
 	protected Caffeineson buildCache(String name) {
 		long version = version(name);
 		String exact_name = version+"##"+name;
-		Caffeineson cache = new Caffeineson(name, versionGroup, versioned, configs.get(name), listener, versionBroadHandler);
+		Caffeineson cache = new Caffeineson(name, versionGroup, versioned, configs.get(name), versionBroadHandler);
 		Caffeineson oldCache = instanceMap.putIfAbsent(exact_name, cache);
 		if (oldCache != null) {
 			cache = oldCache;

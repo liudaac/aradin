@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import com.github.benmanes.caffeine.cache.RemovalListener;
 
 import cn.aradin.spring.caffeine.cache.Caffeineson;
-import cn.aradin.spring.caffeine.cache.listener.CaffeinesonRemovalListener;
 import cn.aradin.spring.caffeine.manager.CaffeinesonCacheManager;
 import cn.aradin.spring.caffeine.manager.VersionCacheManager;
 import cn.aradin.spring.caffeine.manager.properties.CaffeinesonProperties;
@@ -29,14 +28,8 @@ public class CaffeinesonConfiguration {
 	
 	@Bean
 	@ConditionalOnMissingBean
-	RemovalListener<Object, Object> removalListener() {
-		return new CaffeinesonRemovalListener();
-	}
-	
-	@Bean
-	@ConditionalOnMissingBean
 	Caffeineson Caffeineson(CaffeinesonProperties caffeinesonProperties, RemovalListener<Object, Object> removalListener, IVersionBroadHandler versionBroadHandler) {
-		return new Caffeineson("caffeineson", caffeinesonProperties.getGroup(), caffeinesonProperties.isVersioned(), caffeinesonProperties.getDefaults(), removalListener, versionBroadHandler);
+		return new Caffeineson("caffeineson", caffeinesonProperties.getGroup(), caffeinesonProperties.isVersioned(), caffeinesonProperties.getDefaults(), versionBroadHandler);
 	}
 	
 	@Bean

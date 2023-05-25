@@ -3,38 +3,57 @@ package cn.aradin.spring.caffeine.cache;
 import java.lang.reflect.Constructor;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.support.AbstractValueAdaptingCache;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.github.benmanes.caffeine.cache.RemovalCause;
 import com.github.benmanes.caffeine.cache.RemovalListener;
 import com.github.benmanes.caffeine.cache.stats.CacheStats;
 
 import cn.aradin.spring.caffeine.cache.config.CaffeinesonConfig;
 import cn.aradin.version.core.handler.IVersionBroadHandler;
 
-public class Caffeineson extends AbstractValueAdaptingCache {
+public class Caffeineson extends AbstractValueAdaptingCache implements RemovalListener<Object, Object> {
 
+	private final static Logger log = LoggerFactory.getLogger(Caffeineson.class);
+	
 	private Cache<Object, Object> caffeineCache;
 	private final String group;
 	private final String name;
 	private final boolean versioned;
 	private IVersionBroadHandler versionBroadHandler;
-	
+	private AtomicLong invalidCount = new AtomicLong(0l);
 	
 	public Caffeineson(String name, 
 			String group,
 			boolean versioned, 
-			CaffeinesonConfig caffeineConfig, 
-			RemovalListener<Object, Object> listener,
+			CaffeinesonConfig caffeineConfig,
 			IVersionBroadHandler versionBroadHandler) {
 		super(caffeineConfig.isAllowNullValues());
-		caffeineCache = caffeineCache(caffeineConfig, listener);
+		caffeineCache = caffeineCache(caffeineConfig, this);
 		this.name = name;
 		this.versioned = versioned;
 		this.versionBroadHandler = versionBroadHandler;
 		this.group = group;
+	}
+	
+	@Override
+	public void onRemoval(@Nullable Object key, @Nullable Object value, @NonNull RemovalCause cause) {
+		// TODO Auto-generated method stub
+		if (log.isDebugEnabled()) {
+			log.debug("Caffeine {} key has been removed {} , {} ", name, key, cause.name());
+		}
+		if (invalidCount.incrementAndGet()%500 == 0) {
+			//Manual cleanUp to avoid Mem-Problem 
+			caffeineCache.cleanUp();
+		}
 	}
 	
 	/**
