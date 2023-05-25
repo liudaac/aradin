@@ -6,8 +6,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.github.benmanes.caffeine.cache.RemovalListener;
-
 import cn.aradin.spring.caffeine.cache.Caffeineson;
 import cn.aradin.spring.caffeine.manager.CaffeinesonCacheManager;
 import cn.aradin.spring.caffeine.manager.VersionCacheManager;
