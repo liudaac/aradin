@@ -8,8 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.Cache;
 
-import com.github.benmanes.caffeine.cache.RemovalListener;
-
 import cn.aradin.spring.caffeine.cache.Caffeineson;
 import cn.aradin.spring.caffeine.cache.config.CaffeinesonConfig;
 import cn.aradin.spring.caffeine.manager.properties.CaffeinesonProperties;
@@ -27,8 +25,6 @@ public class CaffeinesonCacheManager implements VersionCacheManager{
 	
 	CaffeinesonConfig defaultConfig = new CaffeinesonConfig();
 	
-	RemovalListener<Object, Object> listener;
-	
 	boolean versioned = false;//是否接受版本控制
 	
 	IVersionBroadHandler versionBroadHandler;
@@ -36,12 +32,10 @@ public class CaffeinesonCacheManager implements VersionCacheManager{
 	String versionGroup;
 	
 	public CaffeinesonCacheManager(CaffeinesonProperties caffeinesonProperties,
-			RemovalListener<Object, Object> listener,
 			IVersionBroadHandler versionBroadHandler) {
 		// TODO Auto-generated constructor stub
 		this.configs = caffeinesonProperties.getConfigs();
 		this.defaultConfig = caffeinesonProperties.getDefaults();
-		this.listener = listener;
 		this.versioned = caffeinesonProperties.isVersioned();
 		this.versionBroadHandler = versionBroadHandler;
 		this.versionGroup = caffeinesonProperties.getGroup();

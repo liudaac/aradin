@@ -33,10 +33,9 @@ public class CaffeinesonConfiguration {
 	}
 	
 	@Bean
-	VersionCacheManager caffeinesonCacheManager(CaffeinesonProperties caffeinesonProperties, 
-			RemovalListener<Object, Object> removalListener,
+	VersionCacheManager caffeinesonCacheManager(CaffeinesonProperties caffeinesonProperties,
 			IVersionBroadHandler versionBroadHandler) {
-		return new CaffeinesonCacheManager(caffeinesonProperties, removalListener, versionBroadHandler);
+		return new CaffeinesonCacheManager(caffeinesonProperties, versionBroadHandler);
 	}
 	
 	@Bean
