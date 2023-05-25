@@ -52,6 +52,7 @@ public class Caffeineson extends AbstractValueAdaptingCache implements RemovalLi
 		}
 		if (invalidCount.incrementAndGet()%1000 == 0) {
 			//Manual cleanUp to avoid Mem-Problem 
+			log.warn("Caffeine {} is ready to cleaned up", name);
 			caffeineCache.cleanUp();
 		}
 		if (invalidCount.get() > Integer.MAX_VALUE) {
