@@ -48,7 +48,7 @@ public class Caffeineson extends AbstractValueAdaptingCache implements RemovalLi
 	public void onRemoval(@Nullable Object key, @Nullable Object value, @NonNull RemovalCause cause) {
 		// TODO Auto-generated method stub
 		if (log.isDebugEnabled()) {
-			log.debug("Caffeine {} key has been removed {} , {} ", name, key, cause.name());
+			log.debug("Caffeine {} key {} has been removed {} ", name, key, cause.name());
 		}
 		if (invalidCount.incrementAndGet()%500 == 0) {
 			//Manual cleanUp to avoid Mem-Problem 
