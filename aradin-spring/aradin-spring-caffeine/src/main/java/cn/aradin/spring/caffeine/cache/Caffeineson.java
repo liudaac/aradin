@@ -50,7 +50,7 @@ public class Caffeineson extends AbstractValueAdaptingCache implements RemovalLi
 		if (log.isDebugEnabled()) {
 			log.debug("Caffeine {} key {} has been removed {} ", name, key, cause.name());
 		}
-		if (invalidCount.incrementAndGet()%500 == 0) {
+		if (invalidCount.incrementAndGet()%1000 == 0) {
 			//Manual cleanUp to avoid Mem-Problem 
 			caffeineCache.cleanUp();
 		}
