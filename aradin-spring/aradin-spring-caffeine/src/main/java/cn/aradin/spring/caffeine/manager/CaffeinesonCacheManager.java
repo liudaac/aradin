@@ -51,7 +51,7 @@ public class CaffeinesonCacheManager implements VersionCacheManager{
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					if (instanceMap != null) {
+					if (instanceMap != null && instanceMap.size() > 0) {
 						Iterator<String> iterator = instanceMap.keySet().iterator();
 						while (iterator.hasNext()) {
 							String name = iterator.next();
