@@ -1,5 +1,6 @@
 package cn.aradin.spring.caffeine.manager.properties;
 
+import java.time.Duration;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -13,6 +14,8 @@ public class CaffeinesonProperties {
 	private String group = "caffeine";
 	
 	private boolean versioned = false;
+	
+	private Duration cleanInterval;
 	
 	/**
 	 * 默认配置
@@ -38,6 +41,14 @@ public class CaffeinesonProperties {
 
 	public void setVersioned(boolean versioned) {
 		this.versioned = versioned;
+	}
+
+	public Duration getCleanInterval() {
+		return cleanInterval;
+	}
+
+	public void setCleanInterval(Duration cleanInterval) {
+		this.cleanInterval = cleanInterval;
 	}
 
 	public CaffeinesonConfig getDefaults() {

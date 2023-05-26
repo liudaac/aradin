@@ -1,7 +1,10 @@
 package cn.aradin.spring.caffeine.manager;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
@@ -31,6 +34,8 @@ public class CaffeinesonCacheManager implements VersionCacheManager{
 	
 	String versionGroup;
 	
+	private Timer timer;
+	
 	public CaffeinesonCacheManager(CaffeinesonProperties caffeinesonProperties,
 			IVersionBroadHandler versionBroadHandler) {
 		// TODO Auto-generated constructor stub
@@ -39,6 +44,35 @@ public class CaffeinesonCacheManager implements VersionCacheManager{
 		this.versioned = caffeinesonProperties.isVersioned();
 		this.versionBroadHandler = versionBroadHandler;
 		this.versionGroup = caffeinesonProperties.getGroup();
+		if (caffeinesonProperties.getCleanInterval() != null) {
+			log.info("Start cleanUp timer for interval {} ms", caffeinesonProperties.getCleanInterval().toMillis());
+			timer = new Timer();
+			timer.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					if (instanceMap != null) {
+						Iterator<String> iterator = instanceMap.keySet().iterator();
+						while (iterator.hasNext()) {
+							String name = iterator.next();
+							Caffeineson cache = instanceMap.get(name);
+							if (cache != null) {
+								CaffeinesonConfig config = configs.get(name);
+								if (cache.estimatedSize() > config.getInitialCapacity()) {
+									log.info("CleanUp cache {}", name);
+									try {
+										cache.cleanUp();
+									} catch (Exception e) {
+										// TODO: handle exception
+										log.error("Cache {} cleanUp failed for the reason: {}", name, e.getMessage());
+									}
+								}
+							}
+						}
+					}
+				}
+			}, 0, caffeinesonProperties.getCleanInterval().toMillis());
+		}
 	}
 	
 	protected CaffeinesonConfig createCaffeinesonConfig() {

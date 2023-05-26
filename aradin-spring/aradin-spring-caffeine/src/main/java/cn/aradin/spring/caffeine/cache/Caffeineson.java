@@ -84,6 +84,14 @@ public class Caffeineson extends AbstractValueAdaptingCache {
 		return caffeineCache;
 	}
 
+	public long estimatedSize() {
+		return caffeineCache.estimatedSize();
+	}
+	
+	public void cleanUp() {
+		caffeineCache.cleanUp();
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T get(Object key, Callable<T> valueLoader) {
