@@ -19,31 +19,31 @@
 		<module>aradin-cluster</module>
 		<module>aradin-version</module>
 		<module>aradin-external</module>
+		<module>aradin-easy</module>
 		<!-- <module>aradin-wechat</module> <module>aradin-examples</module> -->
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.10</version>
+		<version>2.7.12</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
-		<!-- Project revision 0.0.4.x -->
 		<revision>1.0.1</revision>
 		<!-- Base Code -->
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- Springboot -->
-		<springboot.version>2.7.10</springboot.version>
+		<springboot.version>2.7.12</springboot.version>
 		<springboot.oauth2.version>2.6.8</springboot.oauth2.version>
 		<springboot.solr.version>2.4.13</springboot.solr.version><!-- 2.4.10 -->
 		<!-- Springcloud -->
 		<spring-cloud.version>2021.0.6</spring-cloud.version>
 		<spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
-		<dubbo.version>3.1.8</dubbo.version>
+		<dubbo.version>3.1.10</dubbo.version>
 		<sentinel.version>1.8.6</sentinel.version>
-		<nacos.version>2.2.0</nacos.version>
+		<nacos.version>2.2.2</nacos.version>
 		<!-- Mybatis And DB -->
 		<mybatis.version>2.3.0</mybatis.version><!-- 2.1.3 -->
 		<mybatis.plus.version>3.5.3.1</mybatis.plus.version>
@@ -75,8 +75,9 @@
 		<!-- WEIXIN -->
 		<wechat.version>2.8.32</wechat.version>
 		<!-- TOOLS -->
+		<buddy.version>1.14.4</buddy.version>
 		<jacoco.version>0.8.3</jacoco.version>
-		<fastjson.version>2.0.24</fastjson.version>
+		<fastjson.version>2.0.33</fastjson.version>
 		<gson.version>2.10.1</gson.version>
 		<logback.version>1.2.11</logback.version><!-- for 1.4.5 need slf4j-api 2.x -->
 		<guava.version>31.1-jre</guava.version>
@@ -140,6 +141,11 @@
 				<version>${dubbo.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>org.apache.dubbo</groupId>
+				<artifactId>dubbo-rpc-api</artifactId>
+				<version>${dubbo.version}</version>
+			</dependency>
+			<dependency>
 			    <groupId>org.apache.dubbo</groupId>
 			    <artifactId>dubbo-spring-boot-starter</artifactId>
 			    <version>${dubbo.version}</version>
@@ -162,6 +168,11 @@
 			    <artifactId>spring-cloud-starter-dubbo</artifactId>
 			    <version>${spring-cloud-dubbo.version}</version>
 			</dependency>-->
+			<dependency>
+			    <groupId>com.alibaba.fastjson2</groupId>
+			    <artifactId>fastjson2</artifactId>
+			    <version>${fastjson.version}</version>
+			</dependency>
 			
 			<!-- sentinel -->
 			<dependency>
@@ -369,11 +380,6 @@
 			</dependency>
 
 			<!-- tools -->
-			<dependency>
-				<groupId>com.alibaba</groupId>
-				<artifactId>fastjson</artifactId>
-				<version>${fastjson.version}</version>
-			</dependency>
 			<dependency>
 				<groupId>com.google.code.gson</groupId>
 				<artifactId>gson</artifactId>
@@ -587,6 +593,16 @@
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-easy-http</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-easy-http-buddy</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
 		      <groupId>cn.aradin</groupId>
 		      <artifactId>springfox-spring-web</artifactId>
 		      <version>${revision}</version>
@@ -621,6 +637,11 @@
 		    	<artifactId>xxl-job-core</artifactId>
 		    	<version>${revision}</version>
 		    </dependency>
+		    <dependency>
+			    <groupId>net.bytebuddy</groupId>
+			    <artifactId>byte-buddy</artifactId>
+			    <version>${buddy.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
