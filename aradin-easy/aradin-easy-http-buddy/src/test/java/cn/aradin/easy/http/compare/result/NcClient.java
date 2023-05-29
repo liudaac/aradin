@@ -1,6 +1,7 @@
 package cn.aradin.easy.http.compare.result;
 
 import cn.aradin.easy.http.annotation.Controller;
+import cn.aradin.easy.http.annotation.NoEncrypt;
 import cn.aradin.easy.http.annotation.RequestBody;
 import cn.aradin.easy.http.annotation.RequestHeader;
 import cn.aradin.easy.http.annotation.RequestMapping;
@@ -24,7 +25,7 @@ public interface NcClient {
 	public NcResp<ContentResultDto> add(@RequestHeader(value = "User-U")String userU, @RequestHeader("User-Agent")String userAgent, @RequestBody DynamicDto reqDto);
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/rec")
-	public NcResp<StatusResultDto> rec(@RequestBody StatusDto reqDto);
+	public NcResp<StatusResultDto> rec(@RequestBody(encrypt = NoEncrypt.class) StatusDto reqDto);
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/delete")
 	public NcResp<Boolean> delete(@RequestBody ContentOptDto reqDto);
