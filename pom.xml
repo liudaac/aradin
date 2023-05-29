@@ -49,7 +49,7 @@
 		<mybatis.plus.version>3.5.3.1</mybatis.plus.version>
 		<mysqlconnect.version>8.0.32</mysqlconnect.version>
 		<!-- Lucene -->
-		<elasticsearch.version>7.17.6</elasticsearch.version>
+		<elasticsearch.version>7.17.9</elasticsearch.version>
 		<solr.version>8.4.0</solr.version>
 		<camel.version>3.5.0</camel.version>
 		<!-- Caches -->
