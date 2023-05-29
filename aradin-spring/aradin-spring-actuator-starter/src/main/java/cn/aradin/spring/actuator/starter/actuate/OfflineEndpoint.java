@@ -18,6 +18,7 @@ import org.springframework.cloud.client.serviceregistry.ServiceRegistry;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.kafka.config.KafkaListenerEndpointRegistry;
 
 import cn.aradin.spring.actuator.starter.context.DeployContext;
 import cn.aradin.spring.actuator.starter.extension.IOfflineHandler;
@@ -82,6 +83,20 @@ public class OfflineEndpoint implements ApplicationContextAware{
 	
 	@SuppressWarnings({"unchecked","rawtypes"})
 	private void performDeregistry() {
+		try {
+			Class.forName("org.springframework.kafka.config.KafkaListenerEndpointRegistry");
+			log.info("Kafka listener deregistering");
+			KafkaListenerEndpointRegistry kafkaListenerEndpointRegistry = context.getBean(KafkaListenerEndpointRegistry.class);
+			if (kafkaListenerEndpointRegistry != null) {
+				kafkaListenerEndpointRegistry.stop();
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO: handle exception
+			log.warn("Kafka listener is not exist, no need to stop");
+		} catch (Exception e) {
+			// TODO: handle exception
+			log.error("Kafka listener stoped with error {}", e.getMessage());
+		}
 		try {
 			Class.forName("org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry");
 			log.info("Rabbit listener deregistering");
