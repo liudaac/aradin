@@ -5,6 +5,8 @@
   * 降低集成复杂度    
   * 扩充部分必要的能力     
   * 解决部分新旧组件交替淘汰时发生的兼容性问题
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;钉群</p>
+<img style="width:20%;" src="https://blogsolo.oss-cn-qingdao.aliyuncs.com/592503b6-0f88-4ee3-b003-da5cc7384c1d.jpg"/></p>
 
 ***
 ## 主框架版本说明
@@ -507,5 +509,3 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 ## JOIN US
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们致力于为Javaer提供更加快捷的项目搭建途径，所以无论对该项目有任何的见解，都欢迎来交流，如果有其他需要补充的功能或者对现有模块的Fix，也欢迎不吝提交你的issue，审核通过即可加入本项目开发 </p>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开发者邮箱 liudaax@126.com </p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;钉群</p>
-<img style="width:20%;" src="https://blogsolo.oss-cn-qingdao.aliyuncs.com/592503b6-0f88-4ee3-b003-da5cc7384c1d.jpg"/></p>
