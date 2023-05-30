@@ -15,22 +15,35 @@
 <p>0.0.3.26及以前对应dubbo2.7.x</p>
 <p>0.0.3.26开始对应dubbo3.1.x，主要由于在测试过程中dubbo3虽然兼容dubbo2发现逻辑，但dubbo2反过来调用dubbo3目前存在问题，所以在springboot低版本的基础上单独对dubbo做了升级</p>
 
-### 0.0.4.x （发布版）
+### 0.0.4.x（发布版，BUG修复阶段，建议使用1.0.1）
 <p>SpringCloud 2021.0.4</p>
 <p>SpringBoot 2.7.5</p>
 <p>SpringCloudAlibaba 2021.0.4.0</p>
 
-### 1.0.0 (发布版，从0.0.4.x可直接升级)
+### 1.0.0 (发布版，BUG修复阶段，建议使用1.0.1)
 <p>SpringCloud 2021.0.6</p>
 <p>SpringBoot 2.7.10</p>
 <p>SpringCloudAlibaba 2021.0.4.0</p>
 <p>Dubbo 3.1.8</p>
 
+### 1.0.0 (发布版，BUG修复阶段，建议使用1.0.1)
+<p>SpringCloud 2021.0.6</p>
+<p>SpringBoot 2.7.10</p>
+<p>SpringCloudAlibaba 2021.0.4.0</p>
+<p>Dubbo 3.1.8</p>
+
+### 1.0.1 (发布版)
+<p>SpringCloud 2021.0.6</p>
+<p>SpringBoot 2.7.12</p>
+<p>SpringCloudAlibaba 2021.0.4.0</p>
+<p>Dubbo 3.1.10</p>
+
 ### 历史版本
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.25(springboot2.3.12.RELEASE+dubbo2)</a><br>
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.26(springboot2.3.12.RELEASE+dubbo3)</a><br>
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.4.2(springboot2.7.5+dubbo3)</a><br>
-*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">1.0.0(springboot2.7.10+dubbo3 推荐使用)</a><br>
+*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">1.0.0(springboot2.7.10+dubbo3)</a><br>
+*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">1.0.1(springboot2.7.12+dubbo3 推荐使用)</a><br>
 
 ***
 <p>依赖管理</p>
@@ -89,6 +102,8 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;此外还支持配置项 aradin.actuator.online.shell 配置启动脚本路径</p>
 <p>&nbsp;③ /offline 方便下线时平滑关闭应用</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cn.aradin.spring.actuator.starter.extension.IOfflineHandler 会在自动调用应用上下文所有该类型的BEAN后才去调用Spring上下文的close方法</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;平滑下线处理逻辑中包含Kafka消费端注销、Rabbit消费端注销、Dubbo服务端下线、SpringCloud服务下线（以各项只有存在对应的依赖时才会执行对应的下线动作）</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;平滑下线增加等待时间配置，即在上述注销动作结束后会Sleep配置的等待时间才会执行context的destroy动作</p>
 <p>&nbsp;④ /state 运行状态检查</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offline调用后会实时变更状态，替换原生的/health</p>
 <p>&nbsp;集成方式</p>
@@ -153,6 +168,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;caffeine:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: caffeine #默认caffeine<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">versioned: false</font> #为true时启用cachename级别的版本变更控制，需要搭配**aradin-version**模块使用，**aradin-version-zookeeper-starter**部分提供了配置样例<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="green">clean-interval: PT20M</font> #1.0.1之后增加定时执行cleanUp逻辑，此处为执行间隔，主要原因是Caffeine的缓存过期逻辑为惰性清理，可能造成内存无法及时释放，线上场景建议按照实际需求进行适配<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaults: #默认缓存配置<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 1200000 #访问后过期时间，单位毫秒<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 1800000 #写入后过期时间，单位毫秒<br>
@@ -455,7 +471,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 
 ***
 ### 8、aradin-external
-<p>&nbsp;外部模块重写，目前包含springfox-swagger，原因是swagger近两年未做更新，与spring新版有兼容问题，所以做了本地化适配修改，0.0.4.x兼容springboot2.7.4</p>
+<p>&nbsp;外部模块重写，目前包含springfox-swagger，原因是swagger近两年未做更新，与spring新版有兼容问题，所以做了本地化适配修改，0.0.4.x以后，兼容springboot2.7.X</p>
 
 ***
 + **springfox-swagger**
@@ -466,9 +482,24 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 <p>&nbsp;原版core包在log4j和spring-context存在强依赖，导致jar包出现包冲突，本地化适配修改，可直接引用aradin-spring-xxljob-starter</p>
 
 ***
+### 9、aradin-easy
+<p>&nbsp;方便客户端调用方的构造，目前先对Http各种请求模式进行了支持，</p>
+
+***
++ **aradin-easy-http**
+<p>&nbsp;参考springmvc注解方式提供Http接口类的注解及执行代理，同时做到对spring无依赖，新旧项目均能接入，基于反射实现对Http接口类的代理</p>
+
+***
++ **aradin-easy-http-buddy**
+<p>&nbsp;对aradin-easy-http中代理实现的构造进行了重写，基于ByteBuddy实现对Http接口类的代理</p>
+<p>接口类可以参考 https://github.com/liudaac/aradin/blob/main/aradin-easy/aradin-easy-http-buddy/src/test/java/cn/aradin/easy/http/compare/result/NcClient.java </p>
+<p>代理类构造，使用工厂模式 EasyBuilder.ins().service(NcClient.class)</p>
+<p>请求方法支持GET、POST，请求体支持QueryParam, Formdata, JSON, String，同时支持加密方法的注册，实现传参前的编码</p>
+
+***
 ## 进展阶段
-<p>&nbsp;目前0.0.3.x,0.0.4.x版本已经趋于相对成熟，满足日常项目快速搭建需求，且已经普遍运行于线上环境。0.0.3.x系列依赖的SpringBoot2.3.12官方已经于2022停止了该版本的维护, 所以该版本不再迭代升级。</p>
-<p>&nbsp;0.0.4.x支持springboot2.7.5，该版本进入BUG修复阶段。同时经过线上服务的深度使用和验证，Aradin正式迈入1.x版本开发阶段，JVM兼容jdk8至17，当前支持springboot2.7.10，紧跟SpringCloud及Alibaba全家桶的生态升级</p>
+<p>&nbsp;目前0.0.3.x进入bug修复阶段，0.0.4.x全量迁移至1.0.x版本，满足日常项目快速搭建需求，且已经普遍运行于线上环境。0.0.3.x系列依赖的SpringBoot2.3.12官方已经于2022停止了该版本的维护, 所以该版本不再迭代升级。</p>
+<p>&nbsp;同时经过线上服务的深度使用和验证，Aradin正式迈入1.x版本开发阶段，当前最新发布版本为1.0.1，JVM兼容jdk8至17，当前支持springboot2.7.12，紧跟SpringCloud及Alibaba全家桶的生态升级</p>
 
 ***
 ## JOIN US
