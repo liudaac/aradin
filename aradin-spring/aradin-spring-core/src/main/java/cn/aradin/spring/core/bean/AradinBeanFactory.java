@@ -11,6 +11,11 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ClassUtils;
 
+/**
+ * BeanFactory
+ * @author daliu
+ *
+ */
 @Component
 public class AradinBeanFactory implements ApplicationContextAware {
 	
@@ -29,7 +34,10 @@ public class AradinBeanFactory implements ApplicationContextAware {
 		}
 	}
 
-	// 获取applicationContext
+	/**
+	 * 获取applicationContext
+	 * @return ApplicationContext
+	 */
 	@SuppressWarnings("static-access")
 	public static ApplicationContext getApplicationContext() {
 		while (applicationContext == null) {
@@ -46,26 +54,55 @@ public class AradinBeanFactory implements ApplicationContextAware {
 		return applicationContext;
 	}
 
-	// 通过name获取 Bean.
+	/**
+	 * 通过name获取 Bean.
+	 * @param name Bean-Name
+	 * @return Instance
+	 */
 	public static Object getBean(String name) {
 		return getApplicationContext().getBean(name);
 	}
 
-	// 通过class获取Bean.
+	/**
+	 * 通过class获取Bean.
+	 * @param <T> 指定类型
+	 * @param clazz Class
+	 * @return Instance
+	 */
 	public static <T> T getBean(Class<T> clazz) {
 		return getApplicationContext().getBean(clazz);
 	}
 
-	// 通过name,以及Clazz返回指定的Bean
+	/**
+	 * 通过name,以及Clazz返回指定的Bean
+	 * @param <T> 指定类型
+	 * @param name Bean-Name
+	 * @param clazz Class
+	 * @return Instance
+	 */
 	public static <T> T getBean(String name, Class<T> clazz) {
 		return getApplicationContext().getBean(name, clazz);
 	}
 
-	// 获取带header prefix的bean
+	/**
+	 * 获取带header prefix的bean，方便同一个类构造多组实例
+	 * @param <T> 指定类型
+	 * @param prefix Bean-Name前缀
+	 * @param clazz Class
+	 * @return Instance
+	 */
 	public static <T> T getPrefixBean(String prefix, Class<T> clazz) {
 		return getPrefixBean(prefix, clazz, null);
 	}
 
+	/**
+	 * 获取带header prefix的bean，方便同一个类构造多组实例
+	 * @param <T> 指定类型
+	 * @param prefix Bean-Name前缀
+	 * @param clazz Class
+	 * @param pathPrefix 指定路径前缀
+	 * @return Instance
+	 */
 	public static <T> T getPrefixBean(String prefix, Class<T> clazz, String pathPrefix) {
 		if (applicationContext != null) {
 			String path = ClassUtils.getPackageName(clazz);
