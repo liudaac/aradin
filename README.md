@@ -487,7 +487,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 
 ***
 + **aradin-easy-http**
-<p>&nbsp;参考springmvc注解方式提供Http接口类的注解及执行代理，同时做到对spring无依赖，新旧项目均能接入，基于反射实现对Http接口类的代理</p>
+<p>&nbsp;参考springmvc注解方式提供Http接口类的注解及执行代理，同时做到对spring无依赖，新旧项目均能接入，基于jdk动态代理实现对Http接口类的代理</p>
 
 ***
 + **aradin-easy-http-buddy**
@@ -495,6 +495,8 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 <p>接口类可以参考 https://github.com/liudaac/aradin/blob/main/aradin-easy/aradin-easy-http-buddy/src/test/java/cn/aradin/easy/http/compare/result/NcClient.java </p>
 <p>代理类构造，使用工厂模式 EasyBuilder.ins().service(NcClient.class)</p>
 <p>请求方法支持GET、POST，请求体支持QueryParam, Formdata, JSON, String，同时支持加密方法的注册，实现传参前的编码</p>
+
+<p>在Http接口类的代理构造上，对jdk动态代理和bytebuddy字节码增强进行了对比，参考https://github.com/liudaac/aradin/issues/6</p>
 
 ***
 ## 进展阶段
