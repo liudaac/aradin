@@ -57,6 +57,7 @@ public class CaffeinesonCacheManager implements VersionCacheManager{
 							String name = iterator.next();
 							Caffeineson cache = instanceMap.get(name);
 							if (cache != null) {
+								name = name.substring(name.lastIndexOf("#")+1);
 								CaffeinesonConfig config = configs.get(name);
 								if (cache.estimatedSize() > config.getInitialCapacity()) {
 									log.info("CleanUp cache {}", name);
