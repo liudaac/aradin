@@ -25,6 +25,7 @@ public class CaffeinesonStatsService {
 			for(String cacheName:cacheNames) {
 				Caffeineson cache = (Caffeineson)cacheManager.getCache(cacheName);
 				if (cache != null) {
+					cacheName = cacheName.substring(cacheName.lastIndexOf("#")+1);
 					statMap.put(cacheName, cache.stats());
 				}
 			}

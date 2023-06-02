@@ -111,7 +111,7 @@ public class CaffeinesonCacheManager implements VersionCacheManager{
 	@Override
 	public Collection<String> getCacheNames() {
 		// TODO Auto-generated method stub
-		return versionMap.keySet();
+		return instanceMap.keySet();
 	}
 
 	@Override
