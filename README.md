@@ -15,20 +15,14 @@
 <p>SpringBoot 2.3.12.RELEASE</p>
 <p>SpringCloudAlibaba 2.2.8.RELEASE</p>
 <p>0.0.3.26及以前对应dubbo2.7.x</p>
-<p>0.0.3.26开始对应dubbo3.1.x，主要由于在测试过程中dubbo3虽然兼容dubbo2发现逻辑，但dubbo2反过来调用dubbo3目前存在问题，所以在springboot低版本的基础上单独对dubbo做了升级</p>
+<p>后续版本开始对应dubbo3.1.x，主要由于在测试过程中dubbo3虽然兼容dubbo2发现逻辑，但dubbo2反过来调用dubbo3目前存在问题，所以在springboot低版本的基础上单独对dubbo做了升级</p>
 
-### 0.0.4.x（发布版，BUG修复阶段，建议使用1.0.1）
+### 0.0.4.x（发布版，BUG修复阶段，1.0.1可平迁）
 <p>SpringCloud 2021.0.4</p>
 <p>SpringBoot 2.7.5</p>
 <p>SpringCloudAlibaba 2021.0.4.0</p>
 
-### 1.0.0 (发布版，BUG修复阶段，建议使用1.0.1)
-<p>SpringCloud 2021.0.6</p>
-<p>SpringBoot 2.7.10</p>
-<p>SpringCloudAlibaba 2021.0.4.0</p>
-<p>Dubbo 3.1.8</p>
-
-### 1.0.0 (发布版，BUG修复阶段，建议使用1.0.1)
+### 1.0.0 (发布版，BUG修复阶段，1.0.1可平迁)
 <p>SpringCloud 2021.0.6</p>
 <p>SpringBoot 2.7.10</p>
 <p>SpringCloudAlibaba 2021.0.4.0</p>
