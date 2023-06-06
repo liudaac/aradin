@@ -33,11 +33,11 @@ public class Caffeineson extends AbstractValueAdaptingCache {
 			CaffeinesonConfig caffeineConfig,
 			IVersionBroadHandler versionBroadHandler) {
 		super(caffeineConfig.isAllowNullValues());
-		caffeineCache = caffeineCache(caffeineConfig, new CaffeinesonRemovalListener(name));
 		this.name = name;
 		this.versioned = versioned;
 		this.versionBroadHandler = versionBroadHandler;
 		this.group = group;
+		caffeineCache = caffeineCache(caffeineConfig, new CaffeinesonRemovalListener(name));
 	}
 	
 	/**
