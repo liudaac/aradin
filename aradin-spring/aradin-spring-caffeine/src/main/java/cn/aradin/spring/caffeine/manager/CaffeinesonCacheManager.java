@@ -158,7 +158,7 @@ public class CaffeinesonCacheManager implements VersionCacheManager{
 		}
 		Long cur_version = versionMap.get(cacheName);
 		if (cur_version == null) {
-			versionMap.put(cacheName, cur_version);
+			versionMap.put(cacheName, version);
 		}
 	}
 

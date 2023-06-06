@@ -23,9 +23,9 @@ public class CaffeinesonStatsService {
 		if (cacheNames != null) {
 			Map<String, CacheStats> statMap = new HashMap<String, CacheStats>();
 			for(String cacheName:cacheNames) {
+				cacheName = cacheName.substring(cacheName.lastIndexOf("#")+1);
 				Caffeineson cache = (Caffeineson)cacheManager.getCache(cacheName);
 				if (cache != null) {
-					cacheName = cacheName.substring(cacheName.lastIndexOf("#")+1);
 					statMap.put(cacheName, cache.stats());
 				}
 			}
