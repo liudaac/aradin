@@ -69,6 +69,9 @@ public class Caffeineson extends AbstractValueAdaptingCache {
 		if (listener != null) {
 			cacheBuilder.removalListener(listener);
 		}
+		if (config.isRecordStats()) {
+			cacheBuilder.recordStats();
+		}
 		return cacheBuilder.build();
 	}
 	

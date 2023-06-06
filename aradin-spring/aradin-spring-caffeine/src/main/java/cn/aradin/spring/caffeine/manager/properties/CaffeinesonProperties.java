@@ -20,7 +20,7 @@ public class CaffeinesonProperties {
 	/**
 	 * 默认配置
 	 */
-	private CaffeinesonConfig defaults = new CaffeinesonConfig(120000, 120000, 0, 1000, 10000, 10, false, true);
+	private CaffeinesonConfig defaults = new CaffeinesonConfig(120000, 120000, 0, 1000, 10000, 10, false, true, false);
 	
 	/**
 	 * 每个caffeine的单独配置
