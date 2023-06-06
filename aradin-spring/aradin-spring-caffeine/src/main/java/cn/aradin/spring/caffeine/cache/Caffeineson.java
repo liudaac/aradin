@@ -12,6 +12,7 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.RemovalListener;
 import com.github.benmanes.caffeine.cache.stats.CacheStats;
+import com.github.benmanes.caffeine.cache.stats.ConcurrentStatsCounter;
 
 import cn.aradin.spring.caffeine.cache.config.CaffeinesonConfig;
 import cn.aradin.spring.caffeine.cache.listener.CaffeinesonRemovalListener;
@@ -71,7 +72,8 @@ public class Caffeineson extends AbstractValueAdaptingCache {
 			cacheBuilder.removalListener(listener);
 		}
 		if (config.isRecordStats()) {
-			cacheBuilder.recordStats();
+//			cacheBuilder.recordStats();
+			cacheBuilder.recordStats(ConcurrentStatsCounter::new);
 		}
 		if (log.isDebugEnabled()) {
 			log.debug("初始化Caffeine实例 {},配置信息{}", name, JSONObject.toJSONString(config));
