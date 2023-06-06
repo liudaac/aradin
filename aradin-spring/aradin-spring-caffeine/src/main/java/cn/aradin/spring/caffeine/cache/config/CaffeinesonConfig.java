@@ -16,7 +16,7 @@ public class CaffeinesonConfig {
 	/**是否允许空值*/
 	private boolean allowNullValues = true;
 	/**是否启用软引用*/
-	private boolean isSoft = true;
+	private boolean soft = true;
 	/**是否开启统计功能 */
 	private boolean recordStats = false;
 	
@@ -27,7 +27,7 @@ public class CaffeinesonConfig {
 			long maximumSize,
 			long maximumWeight,
 			boolean allowNullValues,
-			boolean isSoft,
+			boolean soft,
 			boolean recordStats) {
 		this.expireAfterAccess = expireAfterAccess;
 		this.expireAfterWrite = expireAfterWrite;
@@ -36,7 +36,7 @@ public class CaffeinesonConfig {
 		this.maximumSize = maximumSize;
 		this.maximumWeight = maximumWeight;
 		this.allowNullValues = allowNullValues;
-		this.isSoft = isSoft;
+		this.soft = soft;
 		this.recordStats = recordStats;
 	}
 	
@@ -87,10 +87,10 @@ public class CaffeinesonConfig {
 		this.allowNullValues = allowNullValues;
 	}
 	public boolean isSoft() {
-		return isSoft;
+		return soft;
 	}
-	public void setSoft(boolean isSoft) {
-		this.isSoft = isSoft;
+	public void setSoft(boolean soft) {
+		this.soft = soft;
 	}
 	public boolean isRecordStats() {
 		return recordStats;
