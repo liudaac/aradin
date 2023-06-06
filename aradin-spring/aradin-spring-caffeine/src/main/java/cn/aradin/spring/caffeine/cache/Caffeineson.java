@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.support.AbstractValueAdaptingCache;
 
+import com.alibaba.fastjson2.JSONObject;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.RemovalListener;
@@ -71,6 +72,9 @@ public class Caffeineson extends AbstractValueAdaptingCache {
 		}
 		if (config.isRecordStats()) {
 			cacheBuilder.recordStats();
+		}
+		if (log.isDebugEnabled()) {
+			log.debug("初始化Caffeine实例 {},配置信息{}", name, JSONObject.toJSONString(config));
 		}
 		return cacheBuilder.build();
 	}

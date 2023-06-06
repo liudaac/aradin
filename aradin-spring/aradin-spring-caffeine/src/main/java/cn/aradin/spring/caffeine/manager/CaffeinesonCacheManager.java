@@ -77,6 +77,7 @@ public class CaffeinesonCacheManager implements VersionCacheManager{
 	}
 	
 	protected CaffeinesonConfig createCaffeinesonConfig() {
+		log.info("创建默认Caffeine配置");
 		return defaultConfig;
 	}
 	
