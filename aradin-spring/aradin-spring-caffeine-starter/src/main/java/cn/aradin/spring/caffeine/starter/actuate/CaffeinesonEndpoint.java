@@ -5,8 +5,6 @@ import java.util.Map;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 
-import com.github.benmanes.caffeine.cache.stats.CacheStats;
-
 import cn.aradin.spring.caffeine.manager.stats.CaffeinesonStatsService;
 
 @Endpoint(id = "caffeineson", enableByDefault = true)
@@ -20,7 +18,7 @@ public class CaffeinesonEndpoint {
 	}
 	
 	@ReadOperation
-	public Map<String, CacheStats> caffeineson() {
+	public Map<String, Map<String, Object>> caffeineson() {
 		return caffeinesonStatsService.getStats();
 	}
 }
