@@ -194,7 +194,8 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 <p>&nbsp;&nbsp;&nbsp;① 直接引用Caffeineson Bean，配置参考aradin.cache.caffeine.defaults</p>
 <p>&nbsp;&nbsp;&nbsp;② 引用CaffeinesonCacheManager Bean 按CacheName获取Caffeineson实例</p>
 <p>&nbsp;&nbsp;&nbsp;③ 搭配@EnableCache注解，使用方式@Cachable(cacheManager=CaffeinesonConfiguration.CACHE_MANAGER)</p>
-<p>&nbsp;&nbsp;&nbsp;④ 提供Endpoint入口查询Caffeine状态 caffeineson，参考record-stats配置说明，可以按照aradin-spring-acutator-starter的配置方式进行开放
+<p>&nbsp;&nbsp;&nbsp;④ 提供Endpoint入口查询Caffeine状态 caffeineson，参考record-stats配置说明，可以按照aradin-spring-acutator-starter的配置方式进行开放</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;监控项参考 https://github.com/liudaac/aradin/blob/main/aradin-spring/aradin-spring-caffeine/src/main/java/cn/aradin/spring/caffeine/manager/stats/CaffeinesonStatsService.java</p>
 
 ***
 + **aradin-spring-redis-starter**
