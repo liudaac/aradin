@@ -28,6 +28,7 @@ public class CaffeinesonStatsService {
 				if (cache != null) {
 					CacheStats stats = cache.stats();
 					Map<String, Object> stat = new HashMap<>();
+					stat.put("size", cache.estimatedSize());
 					stat.put("evictionCount", stats.evictionCount());
 					stat.put("evictionWeight", stats.evictionWeight());
 					stat.put("hitCount", stats.hitCount());
