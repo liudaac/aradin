@@ -39,7 +39,7 @@
 		<springboot.oauth2.version>2.6.8</springboot.oauth2.version>
 		<springboot.solr.version>2.4.13</springboot.solr.version><!-- 2.4.10 -->
 		<!-- Springcloud -->
-		<spring-cloud.version>2021.0.7</spring-cloud.version>
+		<spring-cloud.version>2021.0.8</spring-cloud.version>
 		<spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
 		<dubbo.version>3.1.10</dubbo.version>
 		<sentinel.version>1.8.6</sentinel.version>
