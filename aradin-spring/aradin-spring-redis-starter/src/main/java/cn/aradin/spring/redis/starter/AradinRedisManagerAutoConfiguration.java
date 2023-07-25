@@ -28,7 +28,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheManager.RedisCacheManagerBuilder;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair;
 import org.springframework.util.Assert;
@@ -82,7 +82,7 @@ public class AradinRedisManagerAutoConfiguration {
 	 */
 	@Bean
 	@Primary
-	public RedisCacheManager cacheManager(RedisConnectionFactory redisConnectionFactory, ResourceLoader resourceLoader,
+	public RedisCacheManager cacheManager(RedisCacheWriter redisCacheWriter, ResourceLoader resourceLoader,
 			RedisCacheManagerProperties redisCacheManagerProperties, CacheManagerCustomizers cacheManagerCustomizers) {
 		log.debug("RedisCacheManager Initial");
 		CacheProperties cacheProperties = new CacheProperties();
@@ -91,7 +91,7 @@ public class AradinRedisManagerAutoConfiguration {
 		cacheProperties.getRedis().setKeyPrefix(redisCacheManagerProperties.getDefaults().getKeyPrefix());
 		cacheProperties.getRedis().setUseKeyPrefix(redisCacheManagerProperties.getDefaults().isUsePrefix());
 		RedisCacheManagerBuilder builder = org.springframework.data.redis.cache.RedisCacheManager
-				.builder(redisConnectionFactory)
+				.builder(redisCacheWriter)
 				.cacheDefaults(determineConfiguration(resourceLoader.getClassLoader(), cacheProperties));
 		List<String> cacheNames = cacheProperties.getCacheNames();
 		if (!cacheNames.isEmpty()) {

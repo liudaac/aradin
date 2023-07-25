@@ -9,9 +9,13 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.BatchStrategies;
+import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
+
+import cn.aradin.spring.redis.starter.cache.AradinRedisCacheWriter;
 
 @Configuration
 @EnableCaching
@@ -28,5 +32,11 @@ public class AradinRedisAutoConfiguration {
 //		template.setEnableDefaultSerializer(false);
 		template.setKeySerializer(RedisSerializer.string());
 		return template;
+	}
+	
+	@ConditionalOnMissingBean(name = "redisCacheWriter")
+	@Bean(name = "redisCacheWriter")
+	public RedisCacheWriter redisCacheWriter(RedisConnectionFactory redisConnectionFactory) {
+		return new AradinRedisCacheWriter(redisConnectionFactory, BatchStrategies.keys());
 	}
 }
