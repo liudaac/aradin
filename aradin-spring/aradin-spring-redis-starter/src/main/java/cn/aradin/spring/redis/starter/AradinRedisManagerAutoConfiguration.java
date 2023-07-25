@@ -25,9 +25,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.data.redis.cache.BatchStrategies;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheManager.RedisCacheManagerBuilder;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair;
@@ -35,6 +37,7 @@ import org.springframework.util.Assert;
 
 import com.alibaba.fastjson2.JSONObject;
 
+import cn.aradin.spring.redis.starter.cache.AradinRedisCacheWriter;
 import cn.aradin.spring.redis.starter.properties.RedisCacheManagerProperties;
 
 /**
@@ -71,6 +74,12 @@ public class AradinRedisManagerAutoConfiguration {
 		return new CacheManagerValidator(cacheManager);
 	}
 
+	@ConditionalOnMissingBean(name = "redisCacheWriter")
+	@Bean(name = "redisCacheWriter")
+	public RedisCacheWriter redisCacheWriter(RedisConnectionFactory redisConnectionFactory, RedisCacheManagerProperties redisCacheManagerProperties) {
+		return new AradinRedisCacheWriter(redisConnectionFactory, BatchStrategies.keys(), redisCacheManagerProperties);
+	}
+	
 	/**
 	 * 原生实现，由于原生存在对CacheManager的单实例限制
 	 * 

@@ -18,6 +18,8 @@ import org.springframework.data.redis.core.types.Expiration;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
+import cn.aradin.spring.redis.starter.properties.RedisCacheManagerProperties;
+
 /**
  * 自定义RedisCacheWriter扩展默认的org.springframework.data.redis.cache.DefaultRedisCacheWriter实现
  * 实例构造参考 RedisCacheWriter.nonLockingRedisCacheWriter(connectionFactory)
@@ -30,13 +32,14 @@ public class AradinRedisCacheWriter implements RedisCacheWriter {
 	private final Duration sleepTime;
 	private final CacheStatisticsCollector statistics;
 	private final BatchStrategy batchStrategy;
+	private final RedisCacheManagerProperties redisCacheManagerProperties;
 
 	/**
 	 * @param connectionFactory must not be {@literal null}.
 	 * @param batchStrategy must not be {@literal null}.
 	 */
-	public AradinRedisCacheWriter(RedisConnectionFactory connectionFactory, BatchStrategy batchStrategy) {
-		this(connectionFactory, Duration.ZERO, batchStrategy);
+	public AradinRedisCacheWriter(RedisConnectionFactory connectionFactory, BatchStrategy batchStrategy, RedisCacheManagerProperties redisCacheManagerProperties) {
+		this(connectionFactory, Duration.ZERO, batchStrategy, redisCacheManagerProperties);
 	}
 
 	/**
@@ -45,8 +48,8 @@ public class AradinRedisCacheWriter implements RedisCacheWriter {
 	 *          to disable locking.
 	 * @param batchStrategy must not be {@literal null}.
 	 */
-	AradinRedisCacheWriter(RedisConnectionFactory connectionFactory, Duration sleepTime, BatchStrategy batchStrategy) {
-		this(connectionFactory, sleepTime, CacheStatisticsCollector.none(), batchStrategy);
+	AradinRedisCacheWriter(RedisConnectionFactory connectionFactory, Duration sleepTime, BatchStrategy batchStrategy, RedisCacheManagerProperties redisCacheManagerProperties) {
+		this(connectionFactory, sleepTime, CacheStatisticsCollector.none(), batchStrategy, redisCacheManagerProperties);
 	}
 
 	/**
@@ -57,7 +60,7 @@ public class AradinRedisCacheWriter implements RedisCacheWriter {
 	 * @param batchStrategy must not be {@literal null}.
 	 */
 	AradinRedisCacheWriter(RedisConnectionFactory connectionFactory, Duration sleepTime,
-			CacheStatisticsCollector cacheStatisticsCollector, BatchStrategy batchStrategy) {
+			CacheStatisticsCollector cacheStatisticsCollector, BatchStrategy batchStrategy, RedisCacheManagerProperties redisCacheManagerProperties) {
 
 		Assert.notNull(connectionFactory, "ConnectionFactory must not be null!");
 		Assert.notNull(sleepTime, "SleepTime must not be null!");
@@ -68,6 +71,7 @@ public class AradinRedisCacheWriter implements RedisCacheWriter {
 		this.sleepTime = sleepTime;
 		this.statistics = cacheStatisticsCollector;
 		this.batchStrategy = batchStrategy;
+		this.redisCacheManagerProperties = redisCacheManagerProperties;
 	}
 
 	/*
@@ -216,7 +220,7 @@ public class AradinRedisCacheWriter implements RedisCacheWriter {
 	 */
 	@Override
 	public RedisCacheWriter withStatisticsCollector(CacheStatisticsCollector cacheStatisticsCollector) {
-		return new AradinRedisCacheWriter(connectionFactory, sleepTime, cacheStatisticsCollector, this.batchStrategy);
+		return new AradinRedisCacheWriter(connectionFactory, sleepTime, cacheStatisticsCollector, this.batchStrategy, redisCacheManagerProperties);
 	}
 
 	/**
