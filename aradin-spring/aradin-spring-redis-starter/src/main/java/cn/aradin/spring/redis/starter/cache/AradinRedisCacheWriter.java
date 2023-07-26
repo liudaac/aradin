@@ -2,6 +2,7 @@ package cn.aradin.spring.redis.starter.cache;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -18,6 +19,7 @@ import org.springframework.data.redis.core.types.Expiration;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
+import cn.aradin.spring.redis.starter.properties.RedisCacheConfiguration;
 import cn.aradin.spring.redis.starter.properties.RedisCacheManagerProperties;
 
 /**
@@ -74,6 +76,23 @@ public class AradinRedisCacheWriter implements RedisCacheWriter {
 		this.redisCacheManagerProperties = redisCacheManagerProperties;
 	}
 
+	private Duration getTtlOffset(String name) {
+		RedisCacheConfiguration cacheConfiguration = redisCacheManagerProperties.getConfigs().get(name);
+		if (cacheConfiguration == null) {
+			return redisCacheManagerProperties.getDefaults().getTtlOffset();
+		}
+		return cacheConfiguration.getTtlOffset();
+	}
+	
+	private Expiration computeExpiration(String name, Duration ttl) {
+		long expiration = ttl.toMillis();
+		Duration ttlOffset = getTtlOffset(name);
+		if (shouldExpireWithin(ttlOffset)) {
+			expiration += ThreadLocalRandom.current().nextLong(ttlOffset.toMillis());
+		}
+		return Expiration.from(expiration, TimeUnit.MILLISECONDS);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.springframework.data.redis.cache.RedisCacheWriter#put(java.lang.String, byte[], byte[], java.time.Duration)
@@ -84,10 +103,10 @@ public class AradinRedisCacheWriter implements RedisCacheWriter {
 		Assert.notNull(name, "Name must not be null!");
 		Assert.notNull(key, "Key must not be null!");
 		Assert.notNull(value, "Value must not be null!");
-
+		
 		execute(name, connection -> {
 			if (shouldExpireWithin(ttl)) {
-				connection.set(key, value, Expiration.from(ttl.toMillis(), TimeUnit.MILLISECONDS), SetOption.upsert());
+				connection.set(key, value, computeExpiration(name, ttl), SetOption.upsert());
 			} else {
 				connection.set(key, value);
 			}
@@ -133,7 +152,7 @@ public class AradinRedisCacheWriter implements RedisCacheWriter {
 			try {
 				boolean put;
 				if (shouldExpireWithin(ttl)) {
-					put = connection.set(key, value, Expiration.from(ttl), SetOption.ifAbsent());
+					put = connection.set(key, value, computeExpiration(name, ttl), SetOption.ifAbsent());
 				} else {
 					put = connection.setNX(key, value);
 				}

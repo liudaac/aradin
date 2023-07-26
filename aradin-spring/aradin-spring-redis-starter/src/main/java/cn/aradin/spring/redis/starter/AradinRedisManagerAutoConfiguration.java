@@ -77,6 +77,7 @@ public class AradinRedisManagerAutoConfiguration {
 	@ConditionalOnMissingBean(name = "redisCacheWriter")
 	@Bean(name = "redisCacheWriter")
 	public RedisCacheWriter redisCacheWriter(RedisConnectionFactory redisConnectionFactory, RedisCacheManagerProperties redisCacheManagerProperties) {
+		log.debug("RedisCacheWriter Initial");
 		return new AradinRedisCacheWriter(redisConnectionFactory, BatchStrategies.keys(), redisCacheManagerProperties);
 	}
 	
