@@ -59,7 +59,7 @@
 		<caffeine.version>2.9.3</caffeine.version>
 		<druid.version>1.2.16</druid.version>
 		<!-- RDBC -->
-		<shiro.version>1.11.0</shiro.version>
+		<shiro.version>1.12.0</shiro.version>
 		<spring.social.version>1.1.6.RELEASE</spring.social.version>
 		<java-jwt.version>3.4.1</java-jwt.version>
 		<jjwt.version>0.9.1</jjwt.version>
