@@ -24,4 +24,8 @@ public class TransferUtils {
 		B b = trans.transTo(source);
 		return b;
 	}
+	
+	public static <A, B> void transObjectFill(A source, B target, TransferHandler<A, B> trans) {
+		trans.transToFill(source, target);
+	}
 }
