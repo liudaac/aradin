@@ -16,4 +16,6 @@ public abstract class TransferHandler<A, B> {
 	}
 	
 	public abstract B transTo(A a);
+	
+	public abstract B transToFill(A a, B b);
 }
