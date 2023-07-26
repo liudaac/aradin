@@ -25,7 +25,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.12</version>
+		<version>2.7.14</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
@@ -35,11 +35,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- Springboot -->
-		<springboot.version>2.7.12</springboot.version>
+		<springboot.version>2.7.14</springboot.version>
 		<springboot.oauth2.version>2.6.8</springboot.oauth2.version>
 		<springboot.solr.version>2.4.13</springboot.solr.version><!-- 2.4.10 -->
 		<!-- Springcloud -->
-		<spring-cloud.version>2021.0.6</spring-cloud.version>
+		<spring-cloud.version>2021.0.8</spring-cloud.version>
 		<spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
 		<dubbo.version>3.1.10</dubbo.version>
 		<sentinel.version>1.8.6</sentinel.version>
@@ -49,17 +49,17 @@
 		<mybatis.plus.version>3.5.3.1</mybatis.plus.version>
 		<mysqlconnect.version>8.0.32</mysqlconnect.version>
 		<!-- Lucene -->
-		<elasticsearch.version>7.17.6</elasticsearch.version>
+		<elasticsearch.version>7.17.9</elasticsearch.version>
 		<solr.version>8.4.0</solr.version>
 		<camel.version>3.5.0</camel.version>
 		<!-- Caches -->
 		<redis.version>4.3.1</redis.version>
 		<redisson.version>3.19.3</redisson.version>
-		<!-- <caffeine.version>3.1.4</caffeine.version> 3.x need jdk11+ -->
+		<!-- <caffeine.version>3.1.6</caffeine.version> 3.x need jdk11+ -->
 		<caffeine.version>2.9.3</caffeine.version>
 		<druid.version>1.2.16</druid.version>
 		<!-- RDBC -->
-		<shiro.version>1.11.0</shiro.version>
+		<shiro.version>1.12.0</shiro.version>
 		<spring.social.version>1.1.6.RELEASE</spring.social.version>
 		<java-jwt.version>3.4.1</java-jwt.version>
 		<jjwt.version>0.9.1</jjwt.version>
@@ -80,7 +80,7 @@
 		<fastjson.version>2.0.33</fastjson.version>
 		<gson.version>2.10.1</gson.version>
 		<logback.version>1.2.11</logback.version><!-- for 1.4.5 need slf4j-api 2.x -->
-		<guava.version>31.1-jre</guava.version>
+		<guava.version>32.1.1-jre</guava.version>
 		<joda.version>2.12.2</joda.version>
 		<lombok.version>1.18.26</lombok.version>
 		<http.version>4.5.14</http.version>
@@ -219,7 +219,7 @@
 			<dependency>
 				<groupId>com.baomidou</groupId>
 				<artifactId>mybatis-plus-generator</artifactId>
-				<version>3.5.1</version>
+				<version>${mybatis.plus.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.mybatis.spring.boot</groupId>
