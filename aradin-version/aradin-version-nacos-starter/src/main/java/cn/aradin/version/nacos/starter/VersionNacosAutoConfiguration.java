@@ -1,14 +1,12 @@
 package cn.aradin.version.nacos.starter;
 
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import com.alibaba.cloud.nacos.NacosConfigAutoConfiguration;
-import com.alibaba.cloud.nacos.NacosConfigManager;
 import com.alibaba.cloud.nacos.NacosConfigProperties;
 
 import cn.aradin.version.core.VersionConfiguration;
@@ -23,7 +21,6 @@ import cn.aradin.version.nacos.starter.manager.VersionNacosConfigManager;
 @Configuration
 @Import(VersionConfiguration.class)
 @AutoConfigureAfter({NacosConfigAutoConfiguration.class})
-@ConditionalOnBean({NacosConfigManager.class})
 public class VersionNacosAutoConfiguration {
 	
 	@Bean
