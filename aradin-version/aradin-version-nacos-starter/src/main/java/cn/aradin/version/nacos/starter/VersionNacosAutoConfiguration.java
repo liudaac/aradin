@@ -31,7 +31,7 @@ public class VersionNacosAutoConfiguration {
 	}
 	
 	@Bean
-	@ConditionalOnProperty(value = "aradin.version.nacos.group", havingValue = "")
+	@ConditionalOnProperty(value = "aradin.version.nacos.listen", havingValue = "true", matchIfMissing = true)
 	public VersionNacosListenerHandler versionNacosListenerHandler(VersionProperties versionProperties,
 			VersionNacosConfigManager versionNacosConfigManager, 
 			VersionDispatcher versionDispatcher) {

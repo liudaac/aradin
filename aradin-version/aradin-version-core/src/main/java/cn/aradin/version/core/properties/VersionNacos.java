@@ -17,6 +17,7 @@ public class VersionNacos implements Serializable {
 	private String namespace;
 	private String group;
 	private List<String> dataIds = Lists.newArrayList();
+	private boolean listen = false;
 	public String getUsername() {
 		return username;
 	}
@@ -52,5 +53,11 @@ public class VersionNacos implements Serializable {
 	}
 	public void setDataIds(List<String> dataIds) {
 		this.dataIds = dataIds;
+	}
+	public boolean isListen() {
+		return listen;
+	}
+	public void setListen(boolean listen) {
+		this.listen = listen;
 	}
 }
