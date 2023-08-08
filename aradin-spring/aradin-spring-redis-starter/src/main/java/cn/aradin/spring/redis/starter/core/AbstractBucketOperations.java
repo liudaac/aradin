@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import org.springframework.data.geo.GeoResults;
@@ -27,6 +28,8 @@ import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 public abstract class AbstractBucketOperations<K, V> {
+	
+	Random random = new Random();
 	// utility methods for the template internal methods
 	abstract class ValueDeserializingRedisCallback implements RedisCallback<V> {
 		private Object key;
@@ -44,10 +47,12 @@ public abstract class AbstractBucketOperations<K, V> {
 		protected abstract byte[] inRedis(byte[] rawKey, RedisConnection connection);
 	}
 
+	final int bucket;
 	final RedisTemplate<K, V> template;
 
-	AbstractBucketOperations(RedisTemplate<K, V> template) {
+	AbstractBucketOperations(RedisTemplate<K, V> template, int bucket) {
 		this.template = template;
+		this.bucket = bucket;
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -84,6 +89,23 @@ public abstract class AbstractBucketOperations<K, V> {
 		return template;
 	}
 
+	int bucket(Object hashKey) {
+		return hashKey.hashCode()%bucket;
+	}
+	
+	byte[] rawRandomKey(Object key) {
+		return rawKey(key+"-"+random.nextInt(bucket));
+	}
+	
+	byte[] rawKey(Object key, int index) {
+		return rawKey(key+"-"+index);
+	}
+	
+	byte[] rawKey(Object key, Object hashKey) {
+		int index = bucket(hashKey);
+		return rawKey(key+"-"+index);
+	}
+	
 	@SuppressWarnings("unchecked")
 	byte[] rawKey(Object key) {
 

@@ -14,7 +14,7 @@ import org.springframework.data.redis.core.SetOperations;
 public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> implements SetOperations<K, V>{
 
 	BucketSetOperations(RedisTemplate<K, V> template, int bucket) {
-		super(template);
+		super(template, bucket);
 		// TODO Auto-generated constructor stub
 	}
 

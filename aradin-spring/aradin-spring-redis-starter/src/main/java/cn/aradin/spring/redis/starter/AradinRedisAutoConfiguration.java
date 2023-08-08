@@ -33,8 +33,8 @@ public class AradinRedisAutoConfiguration {
 	
 	@Bean
 	@ConditionalOnMissingBean(name = "redisBucketTemplate")
-	public RedisBucketTemplate<Object, Object> redisBucketTemplate(RedisConnectionFactory redisConnectionFactory) {
-		RedisBucketTemplate<Object, Object> template = new RedisBucketTemplate<>();
+	public RedisBucketTemplate<Object> redisBucketTemplate(RedisConnectionFactory redisConnectionFactory) {
+		RedisBucketTemplate<Object> template = new RedisBucketTemplate<>();
 		template.setConnectionFactory(redisConnectionFactory);
 		return template;
 	}
