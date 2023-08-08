@@ -7,10 +7,16 @@ import java.util.Set;
 
 import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.SetOperations;
 
-public class BucketSetOperations<K, V> implements SetOperations<K, V>{
+public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> implements SetOperations<K, V>{
+
+	BucketSetOperations(RedisTemplate<K, V> template, int bucket) {
+		super(template);
+		// TODO Auto-generated constructor stub
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override

@@ -26,7 +26,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
-public abstract class AbstractOperations<K, V> {
+public abstract class AbstractBucketOperations<K, V> {
 	// utility methods for the template internal methods
 	abstract class ValueDeserializingRedisCallback implements RedisCallback<V> {
 		private Object key;
@@ -46,7 +46,7 @@ public abstract class AbstractOperations<K, V> {
 
 	final RedisTemplate<K, V> template;
 
-	AbstractOperations(RedisTemplate<K, V> template) {
+	AbstractBucketOperations(RedisTemplate<K, V> template) {
 		this.template = template;
 	}
 
