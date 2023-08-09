@@ -17,7 +17,6 @@ import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.SetOperations;
-
 import com.google.common.collect.Lists;
 
 import cn.aradin.spring.redis.starter.core.annotation.NotSuggest;
@@ -239,14 +238,27 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 	}
 	
 	@Override
+	@NotSuggest
 	public V randomMember(K key) {
 		// TODO Auto-generated method stub
-		return execute(new ValueDeserializingRedisCallback(key) {
+		return execute(new ValueDeserializingRedisCallback(key, random.nextInt(bucket)) {
 			@Override
 			protected byte[] inRedis(byte[] rawKey, RedisConnection connection) {
 				return connection.sRandMember(rawKey);
 			}
 		});
+	}
+	
+	@Override
+	public Set<V> distinctRandomMembers(K key, long count) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Bucket distinctRandomMembers is not supported");
+	}
+
+	@Override
+	public List<V> randomMembers(K key, long count) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	@Override
@@ -305,18 +317,6 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 
 	@Override
 	public Long unionAndStore(Collection<K> keys, K destKey) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Set<V> distinctRandomMembers(K key, long count) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<V> randomMembers(K key, long count) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -33,16 +33,17 @@ public abstract class AbstractBucketOperations<K, V> {
 	// utility methods for the template internal methods
 	abstract class ValueDeserializingRedisCallback implements RedisCallback<V> {
 		private Object key;
-		private int bucket = -1;
+		private int bucketIndex = -1;
 		public ValueDeserializingRedisCallback(Object key) {
 			this.key = key;
 		}
-		public ValueDeserializingRedisCallback(Object key, int bucket) {
+		public ValueDeserializingRedisCallback(Object key, int bucketIndex) {
 			this.key = key;
-			this.bucket = bucket;
+			this.bucketIndex = bucketIndex;
 		}
 		public final V doInRedis(RedisConnection connection) {
-			byte[] result = inRedis(rawKey(key), connection);
+			byte[] rawKey = bucketIndex>=0?rawKey(key, bucketIndex):rawKey(key);
+			byte[] result = inRedis(rawKey, connection);
 			return deserializeValue(result);
 		}
 
