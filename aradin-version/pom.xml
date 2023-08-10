@@ -19,7 +19,7 @@
     <module>aradin-version-core</module>	
     <module>aradin-version-zookeeper-starter</module>    
     <module>aradin-version-nacos-starter</module>     
-    <module>aradin-version-redis-starter</module>     
+    <!--<module>aradin-version-redis-starter</module>-->
   </modules>
   	
   <build>  		
