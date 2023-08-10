@@ -3,23 +3,23 @@ package cn.aradin.spring.redis.starter.core;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
-import org.springframework.data.geo.GeoResults;
 import org.springframework.data.redis.connection.DefaultTuple;
 import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.connection.RedisGeoCommands.GeoLocation;
 import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
-import org.springframework.data.redis.connection.convert.Converters;
 import org.springframework.data.redis.core.DefaultTypedTuple;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.TimeoutUtils;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationUtils;
@@ -33,17 +33,18 @@ public abstract class AbstractBucketOperations<K, V> {
 	// utility methods for the template internal methods
 	abstract class ValueDeserializingRedisCallback implements RedisCallback<V> {
 		private Object key;
-		private int bucketIndex = -1;
 		public ValueDeserializingRedisCallback(Object key) {
 			this.key = key;
 		}
-		public ValueDeserializingRedisCallback(Object key, int bucketIndex) {
-			this.key = key;
-			this.bucketIndex = bucketIndex;
-		}
 		public final V doInRedis(RedisConnection connection) {
-			byte[] rawKey = bucketIndex>=0?rawKey(key, bucketIndex):rawKey(key);
-			byte[] result = inRedis(rawKey, connection);
+			byte[] result = null;
+			for(int i=0; i<bucket; i++) {
+				byte[] rawKey = rawKey(key);
+				result = inRedis(rawKey, connection);
+				if (result == null) {
+					continue;
+				}
+			}
 			return deserializeValue(result);
 		}
 
@@ -408,26 +409,56 @@ public abstract class AbstractBucketOperations<K, V> {
 		}
 		return (HV) hashValueSerializer().deserialize(value);
 	}
-
-	/**
-	 * Deserialize {@link GeoLocation} of {@link GeoResults}.
-	 *
-	 * @param source can be {@literal null}.
-	 * @return converted or {@literal null}.
-	 * @since 1.8
-	 */
-	@SuppressWarnings("unchecked")
-	@Nullable
-	GeoResults<GeoLocation<V>> deserializeGeoResults(@Nullable GeoResults<GeoLocation<byte[]>> source) {
-
-		if (source == null) {
-			return null;
+	
+	public Boolean expire(K key, final long timeout, final TimeUnit unit) {
+		Boolean result = true;
+		for(int i=0; i<bucket; i++) {
+			byte[] rawKey = rawKey(key, i);
+			long rawTimeout = TimeoutUtils.toMillis(timeout, unit);
+			result = result&template.execute(connection -> {
+				try {
+					return connection.pExpire(rawKey, rawTimeout);
+				} catch (Exception e) {
+					// Driver may not support pExpire or we may be running on Redis 2.4
+					return connection.expire(rawKey, TimeoutUtils.toSeconds(timeout, unit));
+				}
+			}, true);
 		}
-
-		if (valueSerializer() == null) {
-			return (GeoResults<GeoLocation<V>>) (Object) source;
+		return result;
+	}
+	
+	public Boolean expireAt(K key, final Date date) {
+		Boolean result = true;
+		for(int i=0; i<bucket; i++) {
+			byte[] rawKey = rawKey(key, i);
+			result = result&template.execute(connection -> {
+				try {
+					return connection.pExpireAt(rawKey, date.getTime());
+				} catch (Exception e) {
+					return connection.expireAt(rawKey, date.getTime() / 1000);
+				}
+			}, true);
 		}
-
-		return Converters.deserializingGeoResultsConverter((RedisSerializer<V>) valueSerializer()).convert(source);
+		return result;
+	}
+	
+	public Boolean delete(K key) {
+		for(int i=0; i<bucket; i++) {
+			byte[] rawKey = rawKey(key, i);
+			template.execute(connection -> connection.del(rawKey), true);
+		}
+		return true;
+	}
+	
+	public Long delete(Collection<K> keys) {
+		if (CollectionUtils.isEmpty(keys)) {
+			return 0L;
+		}
+		Long count = 0l;
+		for(int i=0; i<bucket; i++) {
+			byte[][] rawKeys = rawKeys(keys, i);
+			count+=template.execute(connection -> connection.del(rawKeys), true);
+		}
+		return count;
 	}
 }

@@ -13,7 +13,6 @@ import java.util.Set;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.Cursor;
-import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.SetOperations;
@@ -21,7 +20,7 @@ import com.google.common.collect.Lists;
 
 import cn.aradin.spring.redis.starter.core.annotation.NotSuggest;
 
-public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> implements SetOperations<K, V>{
+public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> implements SetOperations<K, V> {
 
 	BucketSetOperations(RedisTemplate<K, V> template, int bucket) {
 		super(template, bucket);
@@ -37,9 +36,9 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 			byte[] rawKey = rawKey(key, values[0]);
 			byte[] rawValue = rawValue(values[0]);
 			count += execute(connection -> connection.sAdd(rawKey, rawValue));
-		}else {
+		} else {
 			Map<Integer, Collection<V>> bucketValues = new HashMap<>();
-			for(V value:values) {
+			for (V value : values) {
 				if (value != null) {
 					Integer bucket = bucket(value);
 					if (bucketValues.get(bucket) == null) {
@@ -48,7 +47,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 					bucketValues.get(bucket).add(value);
 				}
 			}
-			for(Entry<Integer, Collection<V>> entry:bucketValues.entrySet()) {
+			for (Entry<Integer, Collection<V>> entry : bucketValues.entrySet()) {
 				byte[] rawKey = rawKey(key, entry.getKey());
 				byte[][] rawValues = rawValues(entry.getValue().toArray());
 				count += execute(connection -> connection.sAdd(rawKey, rawValues));
@@ -67,8 +66,8 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 	public Set<V> difference(K key, Collection<K> otherKeys) {
 		// TODO Auto-generated method stub
 		Set<byte[]> rawValues = new HashSet<>();
-		for(int i=0; i<bucket; i++) {
-			byte[][] rawKeys = rawKeys(key, otherKeys, bucket);
+		for (int i = 0; i < bucket; i++) {
+			byte[][] rawKeys = rawKeys(key, otherKeys, i);
 			Set<byte[]> rawValue = execute(connection -> connection.sDiff(rawKeys));
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
@@ -81,8 +80,8 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 	public Set<V> difference(Collection<K> keys) {
 		// TODO Auto-generated method stub
 		Set<byte[]> rawValues = new HashSet<>();
-		for(int i=0; i<bucket; i++) {
-			byte[][] rawKeys = rawKeys(keys, bucket);
+		for (int i = 0; i < bucket; i++) {
+			byte[][] rawKeys = rawKeys(keys, i);
 			Set<byte[]> rawValue = execute(connection -> connection.sDiff(rawKeys));
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
@@ -101,9 +100,9 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 	public Long differenceAndStore(K key, Collection<K> otherKeys, K destKey) {
 		// TODO Auto-generated method stub
 		Long count = 0l;
-		for(int i=0; i<bucket; i++) {
-			byte[][] rawKeys = rawKeys(key, otherKeys, bucket);
-			byte[] rawDestKey = rawKey(destKey, bucket);
+		for (int i = 0; i < bucket; i++) {
+			byte[][] rawKeys = rawKeys(key, otherKeys, i);
+			byte[] rawDestKey = rawKey(destKey, i);
 			count += execute(connection -> connection.sDiffStore(rawDestKey, rawKeys));
 		}
 		return count;
@@ -113,9 +112,9 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 	public Long differenceAndStore(Collection<K> keys, K destKey) {
 		// TODO Auto-generated method stub
 		Long count = 0l;
-		for(int i=0; i<bucket; i++) {
-			byte[][] rawKeys = rawKeys(keys, bucket);
-			byte[] rawDestKey = rawKey(destKey, bucket);
+		for (int i = 0; i < bucket; i++) {
+			byte[][] rawKeys = rawKeys(keys, i);
+			byte[] rawDestKey = rawKey(destKey, i);
 			count += execute(connection -> connection.sDiffStore(rawDestKey, rawKeys));
 		}
 		return count;
@@ -131,8 +130,8 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 	public Set<V> intersect(K key, Collection<K> otherKeys) {
 		// TODO Auto-generated method stub
 		Set<byte[]> rawValues = new HashSet<>();
-		for(int i=0; i<bucket; i++) {
-			byte[][] rawKeys = rawKeys(key, otherKeys, bucket);
+		for (int i = 0; i < bucket; i++) {
+			byte[][] rawKeys = rawKeys(key, otherKeys, i);
 			Set<byte[]> rawValue = execute(connection -> connection.sInter(rawKeys));
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
@@ -145,8 +144,8 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 	public Set<V> intersect(Collection<K> keys) {
 		// TODO Auto-generated method stub
 		Set<byte[]> rawValues = new HashSet<>();
-		for(int i=0; i<bucket; i++) {
-			byte[][] rawKeys = rawKeys(keys, bucket);
+		for (int i = 0; i < bucket; i++) {
+			byte[][] rawKeys = rawKeys(keys, i);
 			Set<byte[]> rawValue = execute(connection -> connection.sInter(rawKeys));
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
@@ -165,9 +164,9 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 	public Long intersectAndStore(K key, Collection<K> otherKeys, K destKey) {
 		// TODO Auto-generated method stub
 		Long count = 0l;
-		for(int i=0; i<bucket; i++) {
-			byte[][] rawKeys = rawKeys(key, otherKeys, bucket);
-			byte[] rawDestKey = rawKey(destKey, bucket);
+		for (int i = 0; i < bucket; i++) {
+			byte[][] rawKeys = rawKeys(key, otherKeys, i);
+			byte[] rawDestKey = rawKey(destKey, i);
 			count += execute(connection -> connection.sInterStore(rawDestKey, rawKeys));
 		}
 		return count;
@@ -177,14 +176,14 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 	public Long intersectAndStore(Collection<K> keys, K destKey) {
 		// TODO Auto-generated method stub
 		Long count = 0l;
-		for(int i=0; i<bucket; i++) {
-			byte[][] rawKeys = rawKeys(keys, bucket);
-			byte[] rawDestKey = rawKey(destKey, bucket);
+		for (int i = 0; i < bucket; i++) {
+			byte[][] rawKeys = rawKeys(keys, i);
+			byte[] rawDestKey = rawKey(destKey, i);
 			count += execute(connection -> connection.sInterStore(rawDestKey, rawKeys));
 		}
 		return count;
 	}
-	
+
 	@Override
 	public Boolean isMember(K key, Object o) {
 		// TODO Auto-generated method stub
@@ -200,25 +199,25 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		// TODO Auto-generated method stub
 		return execute(connection -> {
 			Map<Object, Boolean> isMember = new LinkedHashMap<>(objects.length);
-			for(Object object:objects) {
+			for (Object object : objects) {
 				byte[] rawKey = rawKey(key, object);
 				Boolean result = connection.sIsMember(rawKey, rawValue(object));
 				if (result == null || !result) {
 					isMember.put(object, false);
-				}else {
+				} else {
 					isMember.put(object, true);
 				}
 			}
 			return isMember;
 		});
 	}
-	
+
 	@Override
 	public Set<V> members(K key) {
 		// TODO Auto-generated method stub
 		Set<byte[]> rawValues = new HashSet<>();
-		for(int i=0; i<bucket; i++) {
-			byte[] rawKey = rawKey(key, bucket);
+		for (int i = 0; i < bucket; i++) {
+			byte[] rawKey = rawKey(key, i);
 			Set<byte[]> rawValue = execute(connection -> connection.sMembers(rawKey));
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
@@ -226,7 +225,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		}
 		return deserializeValues(rawValues);
 	}
-	
+
 	@Override
 	public Boolean move(K key, V value, K destKey) {
 		// TODO Auto-generated method stub
@@ -236,101 +235,153 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 
 		return execute(connection -> connection.sMove(rawKey, rawDestKey, rawValue));
 	}
-	
+
 	@Override
 	@NotSuggest
 	public V randomMember(K key) {
 		// TODO Auto-generated method stub
-		return execute(new ValueDeserializingRedisCallback(key, random.nextInt(bucket)) {
+		return execute(new ValueDeserializingRedisCallback(key) {
 			@Override
 			protected byte[] inRedis(byte[] rawKey, RedisConnection connection) {
 				return connection.sRandMember(rawKey);
 			}
 		});
 	}
-	
+
 	@Override
+	@Deprecated
 	public Set<V> distinctRandomMembers(K key, long count) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Bucket distinctRandomMembers is not supported");
 	}
 
 	@Override
+	@Deprecated
 	public List<V> randomMembers(K key, long count) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Bucket randomMembers is not supported");
 	}
-	
+
 	@Override
 	public Long remove(K key, Object... values) {
 		// TODO Auto-generated method stub
-		return null;
+		Long count = 0l;
+		for (Object value : values) {
+			byte[] rawKey = rawKey(key, value);
+			byte[][] rawValues = rawValues(values);
+			count += execute(connection -> connection.sRem(rawKey, rawValues));
+		}
+		return count;
 	}
 
 	@Override
 	public V pop(K key) {
 		// TODO Auto-generated method stub
-		return null;
+		return execute(new ValueDeserializingRedisCallback(key) {
+			@Override
+			protected byte[] inRedis(byte[] rawKey, RedisConnection connection) {
+				return connection.sPop(rawKey);
+			}
+		});
 	}
 
 	@Override
+	@NotSuggest
 	public List<V> pop(K key, long count) {
 		// TODO Auto-generated method stub
-		return null;
+		List<V> values = null;
+		while (count-- > 0) {
+			V value = pop(key);
+			if (value == null) {
+				break;
+			} else {
+				if (values == null) {
+					values = Lists.newArrayList();
+				}
+				values.add(value);
+			}
+		}
+		return values;
 	}
 
 	@Override
 	public Long size(K key) {
 		// TODO Auto-generated method stub
-		return null;
+		Long size = 0l;
+		for(int i=0; i<bucket; i++) {
+			byte[] rawKey = rawKey(key, i);
+			size += execute(connection -> connection.sCard(rawKey));
+		}
+		return size;
 	}
 
 	@Override
 	public Set<V> union(K key, K otherKey) {
 		// TODO Auto-generated method stub
-		return null;
+		return union(Arrays.asList(key, otherKey));
 	}
 
 	@Override
 	public Set<V> union(K key, Collection<K> otherKeys) {
 		// TODO Auto-generated method stub
-		return null;
+		Set<byte[]> rawValues = new HashSet<>();
+		for(int i=0; i<bucket; i++) {
+			byte[][] rawKeys = rawKeys(key, otherKeys, i);
+			Set<byte[]> rawValue = execute(connection -> connection.sUnion(rawKeys));
+			if (CollectionUtils.isNotEmpty(rawValue)) {
+				rawValues.addAll(rawValue);
+			}
+		}
+		return deserializeValues(rawValues);
 	}
 
 	@Override
 	public Set<V> union(Collection<K> keys) {
 		// TODO Auto-generated method stub
-		return null;
+		Set<byte[]> rawValues = new HashSet<>();
+		for(int i=0; i<bucket; i++) {
+			byte[][] rawKeys = rawKeys(keys, i);
+			Set<byte[]> rawValue = execute(connection -> connection.sUnion(rawKeys));
+			if (CollectionUtils.isNotEmpty(rawValue)) {
+				rawValues.addAll(rawValue);
+			}
+		}
+		return deserializeValues(rawValues);
 	}
 
 	@Override
 	public Long unionAndStore(K key, K otherKey, K destKey) {
 		// TODO Auto-generated method stub
-		return null;
+		return unionAndStore(Arrays.asList(key, otherKey), destKey);
 	}
 
 	@Override
 	public Long unionAndStore(K key, Collection<K> otherKeys, K destKey) {
 		// TODO Auto-generated method stub
-		return null;
+		Long count = 0l;
+		for(int i=0; i<bucket; i++) {
+			byte[][] rawKeys = rawKeys(key, otherKeys, i);
+			byte[] rawDestKey = rawKey(destKey, i);
+			count += execute(connection -> connection.sUnionStore(rawDestKey, rawKeys));
+		}
+		return count;
 	}
 
 	@Override
 	public Long unionAndStore(Collection<K> keys, K destKey) {
 		// TODO Auto-generated method stub
-		return null;
+		Long count = 0l;
+		for(int i=0; i<bucket; i++) {
+			byte[][] rawKeys = rawKeys(keys, i);
+			byte[] rawDestKey = rawKey(destKey, i);
+			count += execute(connection -> connection.sUnionStore(rawDestKey, rawKeys));
+		}
+		return count;
 	}
 
 	@Override
 	public Cursor<V> scan(K key, ScanOptions options) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Bucket scan is not supported");
 	}
-
-	@Override
-	public RedisOperations<K, V> getOperations() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

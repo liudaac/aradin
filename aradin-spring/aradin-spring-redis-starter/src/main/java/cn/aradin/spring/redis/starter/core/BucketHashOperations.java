@@ -21,6 +21,8 @@ import org.springframework.util.Assert;
 
 import com.google.common.collect.Lists;
 
+import cn.aradin.spring.redis.starter.core.annotation.NotSuggest;
+
 public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<String, Object> implements HashOperations<String, HK, HV> {
 
 	@SuppressWarnings("unchecked")
@@ -65,6 +67,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 	
 	@Nullable
 	@Override
+	@NotSuggest
 	public HK randomKey(String key) {
 		// TODO Auto-generated method stub
 		byte[] rawKey = rawRandomKey(key);
@@ -73,6 +76,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 	
 	@Nullable
 	@Override
+	@NotSuggest
 	public Entry<HK, HV> randomEntry(String key) {
 		// TODO Auto-generated method stub
 		byte[] rawKey = rawRandomKey(key);
@@ -83,6 +87,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 	
 	@Nullable
 	@Override
+	@Deprecated
 	public List<HK> randomKeys(String key, long count) {
 		// TODO Auto-generated method stub
 		byte[] rawKey = rawRandomKey(key);
@@ -92,6 +97,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 	
 	@Nullable
 	@Override
+	@Deprecated
 	public Map<HK, HV> randomEntries(String key, long count) {
 		// TODO Auto-generated method stub
 		Assert.isTrue(count > 0, "Count must not be negative");
@@ -112,7 +118,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		// TODO Auto-generated method stub
 		Set<byte[]> allRawValues = new HashSet<>();
 		for(int i=0; i<bucket; i++) {
-			byte[] rawKey = rawKey(key);
+			byte[] rawKey = rawKey(key, i);
 			Set<byte[]> rawValues = execute(connection -> connection.hKeys(rawKey));
 			if (rawValues != null) {
 				allRawValues.addAll(rawValues);
@@ -126,7 +132,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		// TODO Auto-generated method stub
 		Long size = 0l;
 		for(int i=0; i<bucket; i++) {
-			byte[] rawKey = rawKey(key, bucket);
+			byte[] rawKey = rawKey(key, i);
 			size += execute(connection -> connection.hLen(rawKey));
 		}
 		return size;
@@ -221,7 +227,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		// TODO Auto-generated method stub
 		List<byte[]> rawValues = Lists.newArrayList();
 		for(int i=0; i<bucket; i++) {
-			byte[] rawKey = rawKey(key);
+			byte[] rawKey = rawKey(key, i);
 			List<byte[]> rawValue = execute(connection -> connection.hVals(rawKey));
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
@@ -250,7 +256,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		// TODO Auto-generated method stub
 		Map<byte[], byte[]> entries = null;
 		for(int i=0; i<bucket; i++) {
-			byte[] rawKey = rawKey(key, bucket);
+			byte[] rawKey = rawKey(key, i);
 			Map<byte[], byte[]> entry = execute(connection -> connection.hGetAll(rawKey));
 			if (entry != null) {
 				if (entries == null) {
@@ -264,6 +270,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 	}
 
 	@Override
+	@Deprecated
 	public Cursor<Entry<HK, HV>> scan(String key, ScanOptions options) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Bucket scan is not supported");
