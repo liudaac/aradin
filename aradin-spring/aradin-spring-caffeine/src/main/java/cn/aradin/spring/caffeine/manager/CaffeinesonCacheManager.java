@@ -28,8 +28,6 @@ public class CaffeinesonCacheManager implements VersionCacheManager{
 	
 	CaffeinesonConfig defaultConfig = new CaffeinesonConfig();
 	
-	boolean versioned = false;//是否接受版本控制
-	
 	IVersionBroadHandler versionBroadHandler;
 	
 	String versionGroup;
@@ -41,9 +39,7 @@ public class CaffeinesonCacheManager implements VersionCacheManager{
 		// TODO Auto-generated constructor stub
 		this.configs = caffeinesonProperties.getConfigs();
 		this.defaultConfig = caffeinesonProperties.getDefaults();
-		this.versioned = caffeinesonProperties.isVersioned();
 		this.versionBroadHandler = versionBroadHandler;
-		this.versionGroup = caffeinesonProperties.getGroup();
 		if (caffeinesonProperties.getCleanInterval() != null) {
 			log.info("Start cleanUp timer for interval {} ms", caffeinesonProperties.getCleanInterval().toMillis());
 			timer = new Timer();
@@ -84,7 +80,7 @@ public class CaffeinesonCacheManager implements VersionCacheManager{
 	protected Caffeineson buildCache(String name) {
 		long version = version(name);
 		String exact_name = version+"##"+name;
-		Caffeineson cache = new Caffeineson(name, versionGroup, versioned, configs.get(name), versionBroadHandler);
+		Caffeineson cache = new Caffeineson(name, configs.get(name), versionBroadHandler);
 		Caffeineson oldCache = instanceMap.putIfAbsent(exact_name, cache);
 		if (oldCache != null) {
 			cache = oldCache;

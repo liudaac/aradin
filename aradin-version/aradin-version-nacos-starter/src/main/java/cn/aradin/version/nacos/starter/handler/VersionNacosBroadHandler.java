@@ -12,22 +12,24 @@ public class VersionNacosBroadHandler implements IVersionBroadHandler {
 	
 	private ConfigService configService;
 	private IVersionGentor versionGentor;
+	private String group;
 	
 	public VersionNacosBroadHandler(VersionNacos versionNacos, 
 			VersionNacosConfigManager versionNacosConfigManager,
 			IVersionGentor versionGentor) {
 		this.configService = versionNacosConfigManager.getConfigService();
 		this.versionGentor = versionGentor;
+		this.group = versionNacos.getGroup();
 	}
 	
 	@Override
-	public void broadcast(String group, String key) {
+	public void broadcast(String key) {
 		// TODO Auto-generated method stub
-		broadcast(group, key, versionGentor.nextVersion(group));
+		broadcast(key, versionGentor.nextVersion(key));
 	}
 
 	@Override
-	public void broadcast(String group, String key, String version) {
+	public void broadcast(String key, String version) {
 		// TODO Auto-generated method stub
 		try {
 			configService.publishConfig(key, group, version);

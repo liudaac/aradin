@@ -68,12 +68,9 @@ public class VersionsNodeHandler implements INodeHandler {
 		}
 		path = path.substring(0, path.lastIndexOf("/"));
 		if (path.contains("/")) {
-			path = path.substring(0, path.lastIndexOf("/"));
-			if (path.contains("/")) {
-				String versions = path.substring(path.lastIndexOf("/") + 1);
-				if (versionProperties.getZookeeper().getAddressId().equalsIgnoreCase(versions)) {
-					return true;
-				}
+			String versions = path.substring(path.lastIndexOf("/") + 1);
+			if (versionProperties.getZookeeper().getAddressId().equalsIgnoreCase(versions)) {
+				return true;
 			}
 		}
 		return false;

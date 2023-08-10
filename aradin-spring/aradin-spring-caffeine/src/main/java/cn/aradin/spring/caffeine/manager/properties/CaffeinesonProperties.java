@@ -11,37 +11,17 @@ import cn.aradin.spring.caffeine.cache.config.CaffeinesonConfig;
 @ConfigurationProperties(prefix = "aradin.cache.caffeine")
 public class CaffeinesonProperties {
 	
-	private String group = "caffeine";
-	
-	private boolean versioned = false;
-	
 	private Duration cleanInterval;
 	
 	/**
 	 * 默认配置
 	 */
-	private CaffeinesonConfig defaults = new CaffeinesonConfig(120000, 120000, 0, 1000, 10000, 10, false, true, false);
+	private CaffeinesonConfig defaults = new CaffeinesonConfig(120000, 120000, 0, 1000, 10000, 10, false, true, false, false);
 	
 	/**
 	 * 每个caffeine的单独配置
 	 */
 	private Map<String, CaffeinesonConfig> configs = new ConcurrentHashMap<String, CaffeinesonConfig>();
-
-	public String getGroup() {
-		return group;
-	}
-
-	public void setGroup(String group) {
-		this.group = group;
-	}
-
-	public boolean isVersioned() {
-		return versioned;
-	}
-
-	public void setVersioned(boolean versioned) {
-		this.versioned = versioned;
-	}
 
 	public Duration getCleanInterval() {
 		return cleanInterval;

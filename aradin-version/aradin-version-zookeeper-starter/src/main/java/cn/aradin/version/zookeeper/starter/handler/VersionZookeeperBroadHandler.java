@@ -32,9 +32,9 @@ public class VersionZookeeperBroadHandler implements IVersionBroadHandler{
 	}
 	
 	@Override
-	public void broadcast(String group, String key) {
+	public void broadcast(String key) {
 		// TODO Auto-generated method stub
-		String path = "/" + versionProperties.getZookeeper().getAddressId() + "/" + group + "/" + key;
+		String path = "/" + versionProperties.getZookeeper().getAddressId() + "/" + key;
 		String value = versionGentor.nextVersion(path);
 		try {
 			getZookeeperClient().createContainers(path);
@@ -47,9 +47,9 @@ public class VersionZookeeperBroadHandler implements IVersionBroadHandler{
 	}
 
 	@Override
-	public void broadcast(String group, String key, String version) {
+	public void broadcast(String key, String version) {
 		// TODO Auto-generated method stub
-		String path = "/" + versionProperties.getZookeeper().getAddressId() + "/" + group + "/" + key;
+		String path = "/" + versionProperties.getZookeeper().getAddressId() + "/" + key;
 		try {
 			getZookeeperClient().createContainers(path);
 			getZookeeperClient().setData().forPath(path, version.getBytes(Charset.forName("utf-8")));
