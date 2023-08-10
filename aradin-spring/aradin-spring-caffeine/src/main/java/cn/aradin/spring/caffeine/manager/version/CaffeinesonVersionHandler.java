@@ -33,7 +33,7 @@ public class CaffeinesonVersionHandler implements IVersionHandler {
 	public boolean support(String group, String key) {
 		// TODO Auto-generated method stub
 		if ("defaults".equals(key) 
-				|| (caffeinesonProperties.getConfigs() != null && caffeinesonProperties.getConfigs().containsKey(key))) {
+				|| (caffeinesonProperties.getConfigs() != null && caffeinesonProperties.getConfigs().containsKey(key) && caffeinesonProperties.getConfigs().get(key).isVersioned())) {
 			return true;
 		}
 		return false;

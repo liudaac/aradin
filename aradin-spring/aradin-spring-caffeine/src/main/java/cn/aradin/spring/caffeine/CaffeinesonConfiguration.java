@@ -1,5 +1,7 @@
 package cn.aradin.spring.caffeine;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -23,6 +25,7 @@ import cn.aradin.version.core.handler.IVersionBroadHandler;
 public class CaffeinesonConfiguration {
 	
 	public final static String CACHE_MANAGER = "caffeinesonCacheManager";
+	private static final Logger log = LoggerFactory.getLogger(CaffeinesonConfiguration.class);
 	
 	@Bean
 	@ConditionalOnMissingBean
@@ -42,8 +45,9 @@ public class CaffeinesonConfiguration {
 	}
 	
 	@Bean
-	@ConditionalOnProperty(name = "aradin.cache.caffeine.versioned", havingValue = "true")
+	@ConditionalOnProperty(name = "aradin.cache.caffeine", havingValue = "")
 	CaffeinesonVersionHandler caffeinesonVersionHandler(VersionCacheManager caffeinesonCacheManager, CaffeinesonProperties caffeinesonProperties) {
+		log.warn("CaffeinesonVersionHandler Initing");
 		return new CaffeinesonVersionHandler(caffeinesonCacheManager, caffeinesonProperties);
 	}
 }
