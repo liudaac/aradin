@@ -250,7 +250,9 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 			byte[] rawKey = rawKey(key, hashKey);
 			byte[] rawHashKey = rawHashKey(hashKey);
 			Long count = execute(connection -> connection.hDel(rawKey, rawHashKey));
-			counts += count;
+			if (count != null) {
+				counts += count;
+			}
 		}
 		return counts;
 	}
