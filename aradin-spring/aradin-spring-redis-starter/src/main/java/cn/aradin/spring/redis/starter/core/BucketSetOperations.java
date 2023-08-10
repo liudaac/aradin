@@ -31,11 +31,14 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 	@Override
 	public Long add(K key, V... values) {
 		// TODO Auto-generated method stub
-		Long count = 0l;
+		Long counts = 0l;
 		if (values.length == 1) {
 			byte[] rawKey = rawKey(key, values[0]);
 			byte[] rawValue = rawValue(values[0]);
-			count += execute(connection -> connection.sAdd(rawKey, rawValue));
+			Long count = execute(connection -> connection.sAdd(rawKey, rawValue));
+			if (count != null) {
+				counts += count;
+			}
 		} else {
 			Map<Integer, Collection<V>> bucketValues = new HashMap<>();
 			for (V value : values) {
@@ -50,10 +53,13 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 			for (Entry<Integer, Collection<V>> entry : bucketValues.entrySet()) {
 				byte[] rawKey = rawKey(key, entry.getKey());
 				byte[][] rawValues = rawValues(entry.getValue().toArray());
-				count += execute(connection -> connection.sAdd(rawKey, rawValues));
+				Long count = execute(connection -> connection.sAdd(rawKey, rawValues));
+				if (count != null) {
+					counts += count;
+				}
 			}
 		}
-		return count;
+		return counts;
 	}
 
 	@Override
@@ -99,25 +105,31 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 	@Override
 	public Long differenceAndStore(K key, Collection<K> otherKeys, K destKey) {
 		// TODO Auto-generated method stub
-		Long count = 0l;
+		Long counts = 0l;
 		for (int i = 0; i < bucket; i++) {
 			byte[][] rawKeys = rawKeys(key, otherKeys, i);
 			byte[] rawDestKey = rawKey(destKey, i);
-			count += execute(connection -> connection.sDiffStore(rawDestKey, rawKeys));
+			Long count = execute(connection -> connection.sDiffStore(rawDestKey, rawKeys));
+			if (count != null) {
+				counts += count;
+			}
 		}
-		return count;
+		return counts;
 	}
 
 	@Override
 	public Long differenceAndStore(Collection<K> keys, K destKey) {
 		// TODO Auto-generated method stub
-		Long count = 0l;
+		Long counts = 0l;
 		for (int i = 0; i < bucket; i++) {
 			byte[][] rawKeys = rawKeys(keys, i);
 			byte[] rawDestKey = rawKey(destKey, i);
-			count += execute(connection -> connection.sDiffStore(rawDestKey, rawKeys));
+			Long count = execute(connection -> connection.sDiffStore(rawDestKey, rawKeys));
+			if (count != null) {
+				counts += count;
+			}
 		}
-		return count;
+		return counts;
 	}
 
 	@Override
@@ -163,25 +175,31 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 	@Override
 	public Long intersectAndStore(K key, Collection<K> otherKeys, K destKey) {
 		// TODO Auto-generated method stub
-		Long count = 0l;
+		Long counts = 0l;
 		for (int i = 0; i < bucket; i++) {
 			byte[][] rawKeys = rawKeys(key, otherKeys, i);
 			byte[] rawDestKey = rawKey(destKey, i);
-			count += execute(connection -> connection.sInterStore(rawDestKey, rawKeys));
+			Long count = execute(connection -> connection.sInterStore(rawDestKey, rawKeys));
+			if (count != null) {
+				counts += count;
+			}
 		}
-		return count;
+		return counts;
 	}
 
 	@Override
 	public Long intersectAndStore(Collection<K> keys, K destKey) {
 		// TODO Auto-generated method stub
-		Long count = 0l;
+		Long counts = 0l;
 		for (int i = 0; i < bucket; i++) {
 			byte[][] rawKeys = rawKeys(keys, i);
 			byte[] rawDestKey = rawKey(destKey, i);
-			count += execute(connection -> connection.sInterStore(rawDestKey, rawKeys));
+			Long count = execute(connection -> connection.sInterStore(rawDestKey, rawKeys));
+			if (count != null) {
+				counts += count;
+			}
 		}
-		return count;
+		return counts;
 	}
 
 	@Override
@@ -265,13 +283,16 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 	@Override
 	public Long remove(K key, Object... values) {
 		// TODO Auto-generated method stub
-		Long count = 0l;
+		Long counts = 0l;
 		for (Object value : values) {
 			byte[] rawKey = rawKey(key, value);
 			byte[][] rawValues = rawValues(values);
-			count += execute(connection -> connection.sRem(rawKey, rawValues));
+			Long count = execute(connection -> connection.sRem(rawKey, rawValues));
+			if (count != null) {
+				counts += count;
+			}
 		}
-		return count;
+		return counts;
 	}
 
 	@Override
@@ -307,12 +328,15 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 	@Override
 	public Long size(K key) {
 		// TODO Auto-generated method stub
-		Long size = 0l;
+		Long sizes = 0l;
 		for(int i=0; i<bucket; i++) {
 			byte[] rawKey = rawKey(key, i);
-			size += execute(connection -> connection.sCard(rawKey));
+			Long size = execute(connection -> connection.sCard(rawKey));
+			if (size != null) {
+				sizes += size;
+			}
 		}
-		return size;
+		return sizes;
 	}
 
 	@Override
@@ -358,25 +382,31 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 	@Override
 	public Long unionAndStore(K key, Collection<K> otherKeys, K destKey) {
 		// TODO Auto-generated method stub
-		Long count = 0l;
+		Long counts = 0l;
 		for(int i=0; i<bucket; i++) {
 			byte[][] rawKeys = rawKeys(key, otherKeys, i);
 			byte[] rawDestKey = rawKey(destKey, i);
-			count += execute(connection -> connection.sUnionStore(rawDestKey, rawKeys));
+			Long count = execute(connection -> connection.sUnionStore(rawDestKey, rawKeys));
+			if (count != null) {
+				counts += count;
+			}
 		}
-		return count;
+		return counts;
 	}
 
 	@Override
 	public Long unionAndStore(Collection<K> keys, K destKey) {
 		// TODO Auto-generated method stub
-		Long count = 0l;
+		Long counts = 0l;
 		for(int i=0; i<bucket; i++) {
 			byte[][] rawKeys = rawKeys(keys, i);
 			byte[] rawDestKey = rawKey(destKey, i);
-			count += execute(connection -> connection.sUnionStore(rawDestKey, rawKeys));
+			Long count = execute(connection -> connection.sUnionStore(rawDestKey, rawKeys));
+			if (count != null) {
+				counts += count;
+			}
 		}
-		return count;
+		return counts;
 	}
 
 	@Override

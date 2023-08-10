@@ -130,12 +130,15 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 	@Override
 	public Long size(String key) {
 		// TODO Auto-generated method stub
-		Long size = 0l;
+		Long sizes = 0l;
 		for(int i=0; i<bucket; i++) {
 			byte[] rawKey = rawKey(key, i);
-			size += execute(connection -> connection.hLen(rawKey));
+			Long size = execute(connection -> connection.hLen(rawKey));
+			if (size != null) {
+				sizes+=size;
+			}
 		}
-		return size;
+		return sizes;
 	}
 
 	@Override
@@ -242,13 +245,14 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 	@Override
 	public Long delete(String key, Object... hashKeys) {
 		// TODO Auto-generated method stub
-		Long count = 0l;
+		Long counts = 0l;
 		for(Object hashKey:hashKeys) {
 			byte[] rawKey = rawKey(key, hashKey);
 			byte[] rawHashKey = rawHashKey(hashKey);
-			count += execute(connection -> connection.hDel(rawKey, rawHashKey));
+			Long count = execute(connection -> connection.hDel(rawKey, rawHashKey));
+			counts += count;
 		}
-		return count;
+		return counts;
 	}
 	
 	@Override

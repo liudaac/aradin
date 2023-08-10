@@ -415,14 +415,14 @@ public abstract class AbstractBucketOperations<K, V> {
 		for(int i=0; i<bucket; i++) {
 			byte[] rawKey = rawKey(key, i);
 			long rawTimeout = TimeoutUtils.toMillis(timeout, unit);
-			result = result&template.execute(connection -> {
+			result = result&execute(connection -> {
 				try {
 					return connection.pExpire(rawKey, rawTimeout);
 				} catch (Exception e) {
 					// Driver may not support pExpire or we may be running on Redis 2.4
 					return connection.expire(rawKey, TimeoutUtils.toSeconds(timeout, unit));
 				}
-			}, true);
+			});
 		}
 		return result;
 	}
@@ -431,13 +431,13 @@ public abstract class AbstractBucketOperations<K, V> {
 		Boolean result = true;
 		for(int i=0; i<bucket; i++) {
 			byte[] rawKey = rawKey(key, i);
-			result = result&template.execute(connection -> {
+			result = result&execute(connection -> {
 				try {
 					return connection.pExpireAt(rawKey, date.getTime());
 				} catch (Exception e) {
 					return connection.expireAt(rawKey, date.getTime() / 1000);
 				}
-			}, true);
+			});
 		}
 		return result;
 	}
@@ -445,7 +445,7 @@ public abstract class AbstractBucketOperations<K, V> {
 	public Boolean delete(K key) {
 		for(int i=0; i<bucket; i++) {
 			byte[] rawKey = rawKey(key, i);
-			template.execute(connection -> connection.del(rawKey), true);
+			execute(connection -> connection.del(rawKey));
 		}
 		return true;
 	}
@@ -457,7 +457,7 @@ public abstract class AbstractBucketOperations<K, V> {
 		Long count = 0l;
 		for(int i=0; i<bucket; i++) {
 			byte[][] rawKeys = rawKeys(keys, i);
-			count+=template.execute(connection -> connection.del(rawKeys), true);
+			count+=execute(connection -> connection.del(rawKeys));
 		}
 		return count;
 	}
