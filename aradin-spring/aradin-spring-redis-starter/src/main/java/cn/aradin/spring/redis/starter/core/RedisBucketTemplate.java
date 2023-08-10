@@ -16,6 +16,10 @@ public class RedisBucketTemplate<V> extends RedisTemplate<String, V> {
 		return new BucketSetOperations<String, V>(this, bucket);
 	}
 	
+	public ClusterBucketSetOperations<String, V> opsForClusterSet(int bucket) {
+		return new ClusterBucketSetOperations<>(this, bucket);
+	}
+	
 	@Override
 	public Boolean expire(String key, final long timeout, final TimeUnit unit) {
 		throw new UnsupportedOperationException("Bucket expire at key-level is not supported. You need operate it at bucket-level from operations-class.");
