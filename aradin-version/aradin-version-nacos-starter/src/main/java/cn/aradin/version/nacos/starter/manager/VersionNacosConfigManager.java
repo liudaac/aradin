@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 
-import com.alibaba.cloud.nacos.NacosConfigManager;
 import com.alibaba.cloud.nacos.NacosConfigProperties;
 import com.alibaba.cloud.nacos.diagnostics.analyzer.NacosConnectionFailureException;
 import com.alibaba.nacos.api.NacosFactory;
@@ -17,7 +16,7 @@ import com.alibaba.nacos.api.exception.NacosException;
 import cn.aradin.version.core.properties.VersionNacos;
 
 public class VersionNacosConfigManager {
-	private static final Logger log = LoggerFactory.getLogger(NacosConfigManager.class);
+	private static final Logger log = LoggerFactory.getLogger(VersionNacosConfigManager.class);
 
 	private static ConfigService service = null;
 
@@ -55,7 +54,7 @@ public class VersionNacosConfigManager {
 	static ConfigService createConfigService(
 			NacosConfigProperties nacosConfigProperties) {
 		if (Objects.isNull(service)) {
-			synchronized (NacosConfigManager.class) {
+			synchronized (VersionNacosConfigManager.class) {
 				try {
 					if (Objects.isNull(service)) {
 						service = NacosFactory.createConfigService(

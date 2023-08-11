@@ -7,9 +7,12 @@ import java.util.Set;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.data.redis.core.RedisTemplate;
+
+import cn.aradin.spring.core.annotation.UnSafe;
 import cn.aradin.spring.redis.starter.core.annotation.NotSupport;
 import cn.aradin.spring.redis.starter.core.enums.RedisModel;
 
+@UnSafe("Multi-keys operation in local memory")
 @NotSupport({RedisModel.SINGLE, RedisModel.MASTER_SLAVE})
 public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> {
 
@@ -18,6 +21,22 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		// TODO Auto-generated constructor stub
 	}
 
+	private Collection<byte[]> difference(byte[][] rawKeys) {
+		return execute(connection -> {
+			Set<byte[]> result = new HashSet<>();
+			if (rawKeys.length > 1) {
+				Set<byte[]> base = connection.sMembers(rawKeys[0]);
+				for(int j=1; j<rawKeys.length; j++) {
+					Set<byte[]> set = connection.sMembers(rawKeys[j]);
+					if (CollectionUtils.isNotEmpty(set)) {
+						result.addAll(CollectionUtils.subtract(set, base));
+					}
+				}
+			}
+			return result;
+		});
+	}
+	
 	@Override
 	public Set<V> difference(K key, K otherKey) {
 		// TODO Auto-generated method stub
@@ -30,19 +49,7 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		Set<byte[]> rawValues = new HashSet<>();
 		for (int i = 0; i < bucket; i++) {
 			byte[][] rawKeys = rawKeys(key, otherKeys, i);
-			Set<byte[]> rawValue = execute(connection -> {
-				Set<byte[]> result = new HashSet<>();
-				if (rawKeys.length > 1) {
-					Set<byte[]> base = connection.sMembers(rawKeys[0]);
-					for(int j=1; j<rawKeys.length; j++) {
-						Set<byte[]> set = connection.sMembers(rawKeys[j]);
-						if (CollectionUtils.isNotEmpty(set)) {
-							result.addAll(CollectionUtils.subtract(set, base));
-						}
-					}
-				}
-				return result;
-			});
+			Collection<byte[]> rawValue = difference(rawKeys);
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
 			}
@@ -56,19 +63,7 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		Set<byte[]> rawValues = new HashSet<>();
 		for (int i = 0; i < bucket; i++) {
 			byte[][] rawKeys = rawKeys(keys, i);
-			Set<byte[]> rawValue = execute(connection -> {
-				Set<byte[]> result = new HashSet<>();
-				if (rawKeys.length > 1) {
-					Set<byte[]> base = connection.sMembers(rawKeys[0]);
-					for(int j=1; j<rawKeys.length; j++) {
-						Set<byte[]> set = connection.sMembers(rawKeys[j]);
-						if (CollectionUtils.isNotEmpty(set)) {
-							result.addAll(CollectionUtils.subtract(set, base));
-						}
-					}
-				}
-				return result;
-			});
+			Collection<byte[]> rawValue = difference(rawKeys);
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
 			}
@@ -76,6 +71,30 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		return deserializeValues(rawValues);
 	}
 
+	private Long differenceAndStore(byte[][] rawKeys, byte[] rawDestKey) {
+		return execute(connection -> {
+			Set<byte[]> result = new HashSet<>();
+			if (rawKeys.length > 1) {
+				Set<byte[]> base = connection.sMembers(rawKeys[0]);
+				for(int j=1; j<rawKeys.length; j++) {
+					Set<byte[]> set = connection.sMembers(rawKeys[j]);
+					if (CollectionUtils.isNotEmpty(set)) {
+						result.addAll(CollectionUtils.subtract(set, base));
+					}
+				}
+				if (CollectionUtils.isNotEmpty(result)) {
+					byte[][] rawValues = new byte[result.size()][];
+					int j = 0;
+					for(byte[] rawValue:result) {
+						rawValues[j++] = rawValue;
+					}
+					connection.sAdd(rawDestKey, rawValues);
+				}
+			}
+			return (long)result.size();
+		});
+	}
+	
 	@Override
 	public Long differenceAndStore(K key, K otherKey, K destKey) {
 		// TODO Auto-generated method stub
@@ -89,27 +108,7 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		for (int i = 0; i < bucket; i++) {
 			byte[] rawDestKey = rawKey(destKey);
 			byte[][] rawKeys = rawKeys(key, otherKeys, i);
-			Long count = execute(connection -> {
-				Set<byte[]> result = new HashSet<>();
-				if (rawKeys.length > 1) {
-					Set<byte[]> base = connection.sMembers(rawKeys[0]);
-					for(int j=1; j<rawKeys.length; j++) {
-						Set<byte[]> set = connection.sMembers(rawKeys[j]);
-						if (CollectionUtils.isNotEmpty(set)) {
-							result.addAll(CollectionUtils.subtract(set, base));
-						}
-					}
-					if (CollectionUtils.isNotEmpty(result)) {
-						byte[][] rawValues = new byte[result.size()][];
-						int j = 0;
-						for(byte[] rawValue:result) {
-							rawValues[j++] = rawValue;
-						}
-						connection.sAdd(rawDestKey, rawValues);
-					}
-				}
-				return (long)result.size();
-			});
+			Long count = differenceAndStore(rawKeys, rawDestKey);
 			counts += count;
 		}
 		return counts;
@@ -122,27 +121,7 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		for (int i = 0; i < bucket; i++) {
 			byte[][] rawKeys = rawKeys(keys, i);
 			byte[] rawDestKey = rawKey(destKey, i);
-			Long count = execute(connection -> {
-				Set<byte[]> result = new HashSet<>();
-				if (rawKeys.length > 1) {
-					Set<byte[]> base = connection.sMembers(rawKeys[0]);
-					for(int j=1; j<rawKeys.length; j++) {
-						Set<byte[]> set = connection.sMembers(rawKeys[j]);
-						if (CollectionUtils.isNotEmpty(set)) {
-							result.addAll(CollectionUtils.subtract(set, base));
-						}
-					}
-					if (CollectionUtils.isNotEmpty(result)) {
-						byte[][] rawValues = new byte[result.size()][];
-						int j = 0;
-						for(byte[] rawValue:result) {
-							rawValues[j++] = rawValue;
-						}
-						connection.sAdd(rawDestKey, rawValues);
-					}
-				}
-				return (long)result.size();
-			});
+			Long count = differenceAndStore(rawKeys, rawDestKey);
 			if (count != null) {
 				counts += count;
 			}
@@ -156,30 +135,31 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		return intersect(Arrays.asList(key, otherKey));
 	}
 
+	private Collection<byte[]> intersect(byte[][] rawKeys) {
+		return execute(connection -> {
+			Collection<byte[]> base = null;
+			for(int j=0; j<rawKeys.length; j++) {
+				Set<byte[]> set = connection.sMembers(rawKeys[j]);
+				if (base == null) {
+					base = set;
+				}else {
+					base = CollectionUtils.intersection(base, set);
+				}
+				if (CollectionUtils.isEmpty(base)) {
+					break;
+				}
+			}
+			return base;
+		});
+	}
+	
 	@Override
 	public Set<V> intersect(K key, Collection<K> otherKeys) {
 		// TODO Auto-generated method stub
 		Set<byte[]> rawValues = new HashSet<>();
 		for (int i = 0; i < bucket; i++) {
 			byte[][] rawKeys = rawKeys(key, otherKeys, i);
-			Set<byte[]> rawValue = execute(connection -> {
-				Set<byte[]> result = new HashSet<>();
-				if (rawKeys.length > 1) {
-					Collection<byte[]> base = null;
-					for(int j=0; j<rawKeys.length; j++) {
-						Set<byte[]> set = connection.sMembers(rawKeys[j]);
-						if (base == null) {
-							base = set;
-						}else {
-							base = CollectionUtils.intersection(base, set);
-						}
-						if (CollectionUtils.isNotEmpty(base)) {
-							
-						}
-					}
-				}
-				return result;
-			});
+			Collection<byte[]> rawValue = intersect(rawKeys);
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
 			}
@@ -193,7 +173,7 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		Set<byte[]> rawValues = new HashSet<>();
 		for (int i = 0; i < bucket; i++) {
 			byte[][] rawKeys = rawKeys(keys, i);
-			Set<byte[]> rawValue = execute(connection -> connection.sInter(rawKeys));
+			Collection<byte[]> rawValue = intersect(rawKeys);
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
 			}
@@ -201,6 +181,33 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		return deserializeValues(rawValues);
 	}
 
+	private Long intersectAndStore(byte[][] rawKeys, byte[] rawDestKey) {
+		return execute(connection -> {
+			Long count = 0l;
+			Collection<byte[]> base = null;
+			for(int j=0; j<rawKeys.length; j++) {
+				Set<byte[]> set = connection.sMembers(rawKeys[j]);
+				if (base == null) {
+					base = set;
+				}else if (set != null) {
+					base = CollectionUtils.intersection(base, set);
+				}
+				if (CollectionUtils.isEmpty(base)) {
+					break;
+				}
+			}
+			if (CollectionUtils.isNotEmpty(base)) {
+				byte[][] rawValues = new byte[base.size()][];
+				int j = 0;
+				for(byte[] rawValue:base) {
+					rawValues[j++] = rawValue;
+				}
+				count += connection.sAdd(rawDestKey, rawValues);
+			}
+			return count;
+		});
+	}
+	
 	@Override
 	public Long intersectAndStore(K key, K otherKey, K destKey) {
 		// TODO Auto-generated method stub
@@ -214,7 +221,7 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		for (int i = 0; i < bucket; i++) {
 			byte[][] rawKeys = rawKeys(key, otherKeys, i);
 			byte[] rawDestKey = rawKey(destKey, i);
-			Long count = execute(connection -> connection.sInterStore(rawDestKey, rawKeys));
+			Long count = intersectAndStore(rawKeys, rawDestKey);
 			if (count != null) {
 				counts += count;
 			}
@@ -229,7 +236,7 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		for (int i = 0; i < bucket; i++) {
 			byte[][] rawKeys = rawKeys(keys, i);
 			byte[] rawDestKey = rawKey(destKey, i);
-			Long count = execute(connection -> connection.sInterStore(rawDestKey, rawKeys));
+			Long count = intersectAndStore(rawKeys, rawDestKey);
 			if (count != null) {
 				counts += count;
 			}
@@ -244,9 +251,28 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		byte[] rawDestKey = rawKey(destKey, value);
 		byte[] rawValue = rawValue(value);
 
-		return execute(connection -> connection.sMove(rawKey, rawDestKey, rawValue));
+		return execute(connection -> {
+			connection.sRem(rawKey, rawValue);
+			connection.sAdd(rawDestKey, rawValue);
+			return true;
+		});
 	}
 
+	private Collection<byte[]> union(byte[][] rawKeys) {
+		return execute(connection -> {
+			Collection<byte[]> base = null;
+			for(int i=0; i<rawKeys.length; i++) {
+				Set<byte[]> set = connection.sMembers(rawKeys[i]);
+				if (base == null) {
+					base = set;
+				}else if (set != null){
+					base = CollectionUtils.union(base, set);
+				}
+			}
+			return base;
+		});
+	}
+	
 	@Override
 	public Set<V> union(K key, K otherKey) {
 		// TODO Auto-generated method stub
@@ -259,7 +285,7 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		Set<byte[]> rawValues = new HashSet<>();
 		for(int i=0; i<bucket; i++) {
 			byte[][] rawKeys = rawKeys(key, otherKeys, i);
-			Set<byte[]> rawValue = execute(connection -> connection.sUnion(rawKeys));
+			Collection<byte[]> rawValue = union(rawKeys);
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
 			}
@@ -273,7 +299,7 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		Set<byte[]> rawValues = new HashSet<>();
 		for(int i=0; i<bucket; i++) {
 			byte[][] rawKeys = rawKeys(keys, i);
-			Set<byte[]> rawValue = execute(connection -> connection.sUnion(rawKeys));
+			Collection<byte[]> rawValue = union(rawKeys);
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
 			}
@@ -281,6 +307,30 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		return deserializeValues(rawValues);
 	}
 
+	private Long unionAndStore(byte[][] rawKeys, byte[] rawDestKey) {
+		return execute(connection -> {
+			Long count = 0l;
+			Collection<byte[]> base = null;
+			for(int i=0; i<rawKeys.length; i++) {
+				Set<byte[]> set = connection.sMembers(rawKeys[i]);
+				if (base == null) {
+					base = set;
+				}else if (set != null){
+					base = CollectionUtils.union(base, set);
+				}
+			}
+			if (CollectionUtils.isNotEmpty(base)) {
+				byte[][] rawValues = new byte[base.size()][];
+				int j = 0;
+				for(byte[] rawValue:base) {
+					rawValues[j++] = rawValue;
+				}
+				count += connection.sAdd(rawDestKey, rawValues);
+			}
+			return count;
+		});
+	}
+	
 	@Override
 	public Long unionAndStore(K key, K otherKey, K destKey) {
 		// TODO Auto-generated method stub
@@ -294,7 +344,7 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		for(int i=0; i<bucket; i++) {
 			byte[][] rawKeys = rawKeys(key, otherKeys, i);
 			byte[] rawDestKey = rawKey(destKey, i);
-			Long count = execute(connection -> connection.sUnionStore(rawDestKey, rawKeys));
+			Long count = unionAndStore(rawKeys, rawDestKey);
 			if (count != null) {
 				counts += count;
 			}
@@ -309,7 +359,7 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		for(int i=0; i<bucket; i++) {
 			byte[][] rawKeys = rawKeys(keys, i);
 			byte[] rawDestKey = rawKey(destKey, i);
-			Long count = execute(connection -> connection.sUnionStore(rawDestKey, rawKeys));
+			Long count = unionAndStore(rawKeys, rawDestKey);
 			if (count != null) {
 				counts += count;
 			}
