@@ -13,7 +13,7 @@ import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.exception.NacosException;
 
-import cn.aradin.version.core.properties.VersionNacos;
+import cn.aradin.version.nacos.starter.properties.VersionNacosProperties;
 
 public class VersionNacosConfigManager {
 	private static final Logger log = LoggerFactory.getLogger(VersionNacosConfigManager.class);
@@ -23,7 +23,7 @@ public class VersionNacosConfigManager {
 	private NacosConfigProperties nacosConfigProperties = new NacosConfigProperties();
 
 	public VersionNacosConfigManager(NacosConfigProperties nacosConfigProperties,
-			VersionNacos versionNacos) {
+			VersionNacosProperties versionNacos) {
 		BeanUtils.copyProperties(nacosConfigProperties, this.nacosConfigProperties);
 		if (StringUtils.isNotBlank(versionNacos.getServerAddr())) {
 			this.nacosConfigProperties.setServerAddr(versionNacos.getServerAddr());

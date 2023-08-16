@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cn.aradin.version.core.dispatcher.VersionDispatcher;
-import cn.aradin.version.core.properties.VersionProperties;
+import cn.aradin.version.zookeeper.starter.properties.VersionZookeeperProperties;
 import cn.aradin.zookeeper.boot.starter.handler.INodeHandler;
 import cn.aradin.zookeeper.boot.starter.manager.ZookeeperClientManager;
 import cn.aradin.zookeeper.boot.starter.properties.Zookeeper;
@@ -20,13 +20,13 @@ public class VersionsNodeHandler implements INodeHandler {
 
 	private final static Logger log = LoggerFactory.getLogger(VersionsNodeHandler.class);
 	
-	private VersionProperties versionProperties;
+	private VersionZookeeperProperties versionProperties;
 
 	private VersionDispatcher versionDispatcher;
 	
 	private CuratorFramework zookeeperClient;
 
-	public VersionsNodeHandler(VersionProperties versionProperties, ZookeeperProperties zookeeperProperties,
+	public VersionsNodeHandler(VersionZookeeperProperties versionProperties, ZookeeperProperties zookeeperProperties,
 			VersionDispatcher versionDispatcher) {
 		// TODO Auto-generated constructor stub
 		if (versionProperties == null) {
@@ -36,9 +36,9 @@ public class VersionsNodeHandler implements INodeHandler {
 		this.versionDispatcher = versionDispatcher;
 		if (zookeeperProperties != null && versionProperties != null
 				&& CollectionUtils.isNotEmpty(zookeeperProperties.getAddresses())
-				&& versionProperties.getZookeeper() != null) {
+				&& versionProperties != null) {
 			Optional<Zookeeper> result = zookeeperProperties.getAddresses().stream()
-					.filter(zookeeper -> zookeeper.getId().equals(versionProperties.getZookeeper().getAddressId())).findAny();
+					.filter(zookeeper -> zookeeper.getId().equals(versionProperties.getAddressId())).findAny();
 			if (!result.isPresent()) {
 				return;
 			}
@@ -49,7 +49,7 @@ public class VersionsNodeHandler implements INodeHandler {
 	@Override
 	public void init(ZookeeperClientManager clientManager) {
 		// TODO Auto-generated method stub
-		this.zookeeperClient = clientManager.getClient(versionProperties.getZookeeper().getAddressId());
+		this.zookeeperClient = clientManager.getClient(versionProperties.getAddressId());
 		if (this.zookeeperClient == null) {
 			throw new RuntimeException("Version's Zookeeper Client is not exist, Please check the sync-type");
 		}
@@ -69,7 +69,7 @@ public class VersionsNodeHandler implements INodeHandler {
 		path = path.substring(0, path.lastIndexOf("/"));
 		if (path.contains("/")) {
 			String versions = path.substring(path.lastIndexOf("/") + 1);
-			if (versionProperties.getZookeeper().getAddressId().equalsIgnoreCase(versions)) {
+			if (versionProperties.getAddressId().equalsIgnoreCase(versions)) {
 				return true;
 			}
 		}

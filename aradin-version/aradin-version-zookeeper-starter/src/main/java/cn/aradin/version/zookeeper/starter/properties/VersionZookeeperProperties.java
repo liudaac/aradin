@@ -1,8 +1,11 @@
-package cn.aradin.version.core.properties;
+package cn.aradin.version.zookeeper.starter.properties;
 
 import java.io.Serializable;
 
-public class VersionZookeeper implements Serializable {
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+@ConfigurationProperties(prefix = "aradin.version.zookeeper")
+public class VersionZookeeperProperties implements Serializable {
 	
 	/**
 	 * 

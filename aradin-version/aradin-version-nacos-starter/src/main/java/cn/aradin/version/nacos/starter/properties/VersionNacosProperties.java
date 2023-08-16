@@ -1,11 +1,14 @@
-package cn.aradin.version.core.properties;
+package cn.aradin.version.nacos.starter.properties;
 
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
 import com.google.common.collect.Lists;
 
-public class VersionNacos implements Serializable {
+@ConfigurationProperties(prefix = "aradin.version.nacos")
+public class VersionNacosProperties implements Serializable {
 
 	/**
 	 * 

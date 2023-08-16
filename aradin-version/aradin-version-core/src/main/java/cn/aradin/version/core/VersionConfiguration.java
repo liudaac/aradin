@@ -3,7 +3,6 @@ package cn.aradin.version.core;
 import java.util.List;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,14 +13,12 @@ import cn.aradin.version.core.handler.DefaultVersionBroadHandler;
 import cn.aradin.version.core.handler.DefaultVersionHandler;
 import cn.aradin.version.core.handler.IVersionBroadHandler;
 import cn.aradin.version.core.handler.IVersionHandler;
-import cn.aradin.version.core.properties.VersionProperties;
 
 /**
  * Version Configuration
  *
  */
 @Configuration
-@EnableConfigurationProperties(VersionProperties.class)
 public class VersionConfiguration {
 	
 	@Bean

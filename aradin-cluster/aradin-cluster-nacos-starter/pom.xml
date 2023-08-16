@@ -25,5 +25,9 @@
 			<groupId>cn.aradin</groupId>
 			<artifactId>aradin-cluster-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.alibaba.nacos</groupId>
+			<artifactId>nacos-client</artifactId>
+		</dependency>
 	</dependencies>
 </project>

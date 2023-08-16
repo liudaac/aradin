@@ -5,8 +5,8 @@ import com.alibaba.nacos.api.exception.NacosException;
 
 import cn.aradin.version.core.gentor.IVersionGentor;
 import cn.aradin.version.core.handler.IVersionBroadHandler;
-import cn.aradin.version.core.properties.VersionNacos;
 import cn.aradin.version.nacos.starter.manager.VersionNacosConfigManager;
+import cn.aradin.version.nacos.starter.properties.VersionNacosProperties;
 
 public class VersionNacosBroadHandler implements IVersionBroadHandler {
 	
@@ -14,7 +14,7 @@ public class VersionNacosBroadHandler implements IVersionBroadHandler {
 	private IVersionGentor versionGentor;
 	private String group;
 	
-	public VersionNacosBroadHandler(VersionNacos versionNacos, 
+	public VersionNacosBroadHandler(VersionNacosProperties versionNacos, 
 			VersionNacosConfigManager versionNacosConfigManager,
 			IVersionGentor versionGentor) {
 		this.configService = versionNacosConfigManager.getConfigService();
