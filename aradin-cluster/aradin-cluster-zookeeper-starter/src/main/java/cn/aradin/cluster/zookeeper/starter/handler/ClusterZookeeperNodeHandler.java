@@ -1,7 +1,5 @@
 package cn.aradin.cluster.zookeeper.starter.handler;
 
-import java.net.Inet4Address;
-import java.net.UnknownHostException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -27,9 +25,9 @@ import cn.aradin.zookeeper.boot.starter.manager.ZookeeperClientManager;
 import cn.aradin.zookeeper.boot.starter.properties.Zookeeper;
 import cn.aradin.zookeeper.boot.starter.properties.ZookeeperProperties;
 
-public class ClusterNodeHandler implements INodeHandler {
+public class ClusterZookeeperNodeHandler implements INodeHandler {
 
-	private final static Logger log = LoggerFactory.getLogger(ClusterNodeHandler.class);
+	private final static Logger log = LoggerFactory.getLogger(ClusterZookeeperNodeHandler.class);
 	
 	private ClusterZookeeperProperties clusterZookeeperProperties;
 	
@@ -39,7 +37,7 @@ public class ClusterNodeHandler implements INodeHandler {
 
 	private Integer registerRetry = 0;
 
-	public ClusterNodeHandler(ClusterZookeeperProperties clusterZookeeperProperties, ClusterProperties clusterProperties, ZookeeperProperties zookeeperProperties,
+	public ClusterZookeeperNodeHandler(ClusterZookeeperProperties clusterZookeeperProperties, ClusterProperties clusterProperties, ZookeeperProperties zookeeperProperties,
 			IClusterNodeManager clusterNodeManager) {
 		// TODO Auto-generated constructor stub
 		if (clusterZookeeperProperties == null || StringUtils.isBlank(clusterZookeeperProperties.getAddressId())) {
@@ -117,19 +115,6 @@ public class ClusterNodeHandler implements INodeHandler {
 	@Override
 	public void init(ZookeeperClientManager clientManager) {
 		// TODO Auto-generated method stub
-		if (StringUtils.isBlank(clusterProperties.getNodeName())) {
-			try {
-				if (clusterProperties.isPreferIpAddress()) {
-					clusterProperties.setNodeName(Inet4Address.getLocalHost().getHostAddress());
-				} else {
-					clusterProperties.setNodeName(Inet4Address.getLocalHost().getHostName());
-				}
-			} catch (UnknownHostException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				throw new RuntimeException(e.getCause());
-			}
-		}
 		if (log.isDebugEnabled()) {
 			log.debug("Node Registing, {}", clusterProperties.getNodeName());
 		}

@@ -1,15 +1,21 @@
 package cn.aradin.cluster.core.manager;
 
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.aradin.cluster.core.properties.ClusterProperties;
 
 public class DefaultClusterNodeManager implements IClusterNodeManager {
 
+	private final static Logger log = LoggerFactory.getLogger(DefaultClusterNodeManager.class);
+	
 	private Map<Integer, String> nodes = new ConcurrentHashMap<Integer, String>();
 	
 	private int currentIndex = -1;
@@ -18,6 +24,20 @@ public class DefaultClusterNodeManager implements IClusterNodeManager {
 	
 	public DefaultClusterNodeManager(ClusterProperties clusterProperties) {
 		// TODO Auto-generated constructor stub
+		if (StringUtils.isBlank(clusterProperties.getNodeName())) {
+			try {
+				if (clusterProperties.isPreferIpAddress()) {
+					clusterProperties.setNodeName(Inet4Address.getLocalHost().getHostAddress());
+				} else {
+					clusterProperties.setNodeName(Inet4Address.getLocalHost().getHostName());
+				}
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				log.error("Cluster init failed for the reason {}", e.getMessage());
+				throw new RuntimeException(e.getCause());
+			}
+		}
 		this.clusterProperties = clusterProperties;
 	}
 	

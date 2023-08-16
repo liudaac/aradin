@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
 import cn.aradin.cluster.core.ClusterConfiguration;
 import cn.aradin.cluster.core.manager.IClusterNodeManager;
 import cn.aradin.cluster.core.properties.ClusterProperties;
-import cn.aradin.cluster.zookeeper.starter.handler.ClusterNodeHandler;
+import cn.aradin.cluster.zookeeper.starter.handler.ClusterZookeeperNodeHandler;
 import cn.aradin.cluster.zookeeper.starter.properties.ClusterZookeeperProperties;
 import cn.aradin.zookeeper.boot.starter.ZookeeperBootAutoConfiguration;
 import cn.aradin.zookeeper.boot.starter.handler.INodeHandler;
@@ -29,6 +29,6 @@ public class ClusterZookeeperAutoConfiguration {
 	public INodeHandler clusterNodeHandler(ClusterZookeeperProperties clusterZookeeperProperties, ClusterProperties clusterProperties, 
 			ZookeeperProperties zookeeperProperties,
 			IClusterNodeManager clusterNodeManager) {
-		return new ClusterNodeHandler(clusterZookeeperProperties, clusterProperties, zookeeperProperties, clusterNodeManager);
+		return new ClusterZookeeperNodeHandler(clusterZookeeperProperties, clusterProperties, zookeeperProperties, clusterNodeManager);
 	}
 }
