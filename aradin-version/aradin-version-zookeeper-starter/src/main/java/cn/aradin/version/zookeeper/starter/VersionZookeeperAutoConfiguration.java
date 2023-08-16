@@ -29,14 +29,14 @@ import cn.aradin.zookeeper.boot.starter.properties.ZookeeperProperties;
 public class VersionZookeeperAutoConfiguration {
 
 	@Bean
-	@ConditionalOnProperty("aradin.version.zookeeper.address-id")
+	@ConditionalOnProperty(value = "aradin.version.zookeeper.address-id", havingValue = "")
 	public INodeHandler versionNodeHandler(VersionZookeeperProperties versionZookeeperProperties, ZookeeperProperties zookeeperProperties,
 			VersionDispatcher versionDispatcher) {
 		return new VersionsNodeHandler(versionZookeeperProperties, zookeeperProperties, versionDispatcher);
 	}
 	
 	@Bean
-	@ConditionalOnProperty("aradin.version.zookeeper.address-id")
+	@ConditionalOnProperty(value = "aradin.version.zookeeper.address-id", havingValue = "")
 	public IVersionBroadHandler versionBroadHandler(VersionZookeeperProperties versionZookeeperProperties,
 			IVersionGentor versionGentor) {
 		return new VersionZookeeperBroadHandler(versionZookeeperProperties, versionGentor);
