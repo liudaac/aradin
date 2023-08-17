@@ -36,7 +36,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		// TODO Auto-generated method stub
 		Long counts = 0l;
 		if (values.length == 1) {
-			byte[] rawKey = rawKey(key);
+			byte[] rawKey = rawKey(key, values[0]);
 			byte[] rawValue = rawValue(values[0]);
 			Long count = execute(connection -> connection.sAdd(rawKey, rawValue));
 			if (count != null) {
