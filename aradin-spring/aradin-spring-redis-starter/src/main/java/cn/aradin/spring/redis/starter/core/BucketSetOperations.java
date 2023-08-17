@@ -36,7 +36,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		// TODO Auto-generated method stub
 		Long counts = 0l;
 		if (values.length == 1) {
-			byte[] rawKey = rawKey(key, values[0]);
+			byte[] rawKey = rawKey(key);
 			byte[] rawValue = rawValue(values[0]);
 			Long count = execute(connection -> connection.sAdd(rawKey, rawValue));
 			if (count != null) {
@@ -54,7 +54,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 				}
 			}
 			for (Entry<Integer, Collection<V>> entry : bucketValues.entrySet()) {
-				byte[] rawKey = rawKey(key, entry.getKey());
+				byte[] rawKey = rawKey(key, entry.getKey().intValue());
 				byte[][] rawValues = rawValues(entry.getValue().toArray());
 				Long count = execute(connection -> connection.sAdd(rawKey, rawValues));
 				if (count != null) {
