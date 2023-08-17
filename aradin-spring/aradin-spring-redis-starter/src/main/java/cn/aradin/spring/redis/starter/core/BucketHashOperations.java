@@ -188,7 +188,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		}
 		List<byte[]> rawValues = Lists.newArrayList();
 		for(Entry<Integer, Collection<byte[]>> entry:bucketMap.entrySet()) {
-			byte[] rawKey = rawKey(key, entry.getKey());
+			byte[] rawKey = rawKey(key, entry.getKey().intValue());
 			byte[][] rawHashKeys = new byte[entry.getValue().size()][];
 			int counter = 0;
 			for (byte[] rawHashKey : entry.getValue()) {
