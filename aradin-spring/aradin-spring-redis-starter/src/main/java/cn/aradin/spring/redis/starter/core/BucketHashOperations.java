@@ -1,5 +1,6 @@
 package cn.aradin.spring.redis.starter.core;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,15 +12,16 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.redis.connection.convert.Converters;
+import org.springframework.data.redis.core.ConvertingCursor;
 import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
-
-import com.google.common.collect.Lists;
 
 import cn.aradin.spring.redis.starter.core.annotation.NotSuggest;
 
@@ -182,11 +184,11 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		for(HK hashKey:hashKeys) {
 			Integer bucket = bucket(hashKey);
 			if (bucketMap.get(bucket) == null) {
-				bucketMap.put(bucket, Lists.newArrayList());
+				bucketMap.put(bucket, new ArrayList<byte[]>());
 			}
 			bucketMap.get(bucket).add(rawHashKey(hashKey));
 		}
-		List<byte[]> rawValues = Lists.newArrayList();
+		List<byte[]> rawValues = new ArrayList<byte[]>();
 		for(Entry<Integer, Collection<byte[]>> entry:bucketMap.entrySet()) {
 			byte[] rawKey = rawKey(key, entry.getKey().intValue());
 			byte[][] rawHashKeys = new byte[entry.getValue().size()][];
@@ -228,7 +230,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 	@Override
 	public List<HV> values(String key) {
 		// TODO Auto-generated method stub
-		List<byte[]> rawValues = Lists.newArrayList();
+		List<byte[]> rawValues = new ArrayList<byte[]>();
 		for(int i=0; i<bucket; i++) {
 			byte[] rawKey = rawKey(key, i);
 			List<byte[]> rawValue = execute(connection -> connection.hVals(rawKey));
@@ -276,9 +278,31 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 	}
 
 	@Override
-	@Deprecated
 	public Cursor<Entry<HK, HV>> scan(String key, ScanOptions options) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Bucket scan is not supported");
+		throw new UnsupportedOperationException("Scan with no bucket is not supported. Please use scan(String key, ScanOptions options, int bucket) instead.");
+	}
+	
+	/**
+	 * Multi bucket scan need traveral each bucket to avoid using too many connections
+	 * @param key
+	 * @param options
+	 * @param bucket from 0 to ${constructed-bucket}-1
+	 * @return
+	 */
+	public Cursor<Entry<HK, HV>> scan(String key, ScanOptions options, int bucket) {
+		// TODO Auto-generated method stub
+		if (bucket >= this.bucket) {
+			return null;
+		}
+		byte[] rawKey = rawKey(key, bucket);
+		return template.executeWithStickyConnection(
+				(RedisCallback<Cursor<Entry<HK, HV>>>) connection -> new ConvertingCursor<>(connection.hScan(rawKey, options),
+						new Converter<Entry<byte[], byte[]>, Entry<HK, HV>>() {
+							@Override
+							public Entry<HK, HV> convert(final Entry<byte[], byte[]> source) {
+								return Converters.entryOf(deserializeHashKey(source.getKey()), deserializeHashValue(source.getValue()));
+							}
+						}));
 	}
 }

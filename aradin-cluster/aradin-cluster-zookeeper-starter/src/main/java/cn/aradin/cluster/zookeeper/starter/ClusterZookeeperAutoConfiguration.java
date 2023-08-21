@@ -1,6 +1,7 @@
 package cn.aradin.cluster.zookeeper.starter;
 
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +27,7 @@ import cn.aradin.zookeeper.boot.starter.properties.ZookeeperProperties;
 public class ClusterZookeeperAutoConfiguration {
 	
 	@Bean
+	@ConditionalOnProperty(value = "aradin.cluster.zookeeper.address-id", havingValue = "")
 	public INodeHandler clusterNodeHandler(ClusterZookeeperProperties clusterZookeeperProperties, ClusterProperties clusterProperties, 
 			ZookeeperProperties zookeeperProperties,
 			IClusterNodeManager clusterNodeManager) {
