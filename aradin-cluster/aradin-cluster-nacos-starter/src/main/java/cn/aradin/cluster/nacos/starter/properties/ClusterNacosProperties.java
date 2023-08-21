@@ -16,7 +16,7 @@ public class ClusterNacosProperties implements Serializable {
 	private String serverAddr;
 	private String namespace;
 	private String group;
-	private String dataId;
+	private String serviceName;
 	public String getUsername() {
 		return username;
 	}
@@ -47,10 +47,10 @@ public class ClusterNacosProperties implements Serializable {
 	public void setGroup(String group) {
 		this.group = group;
 	}
-	public String getDataId() {
-		return dataId;
+	public String getServiceName() {
+		return serviceName;
 	}
-	public void setDataId(String dataId) {
-		this.dataId = dataId;
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
 	}
 }
