@@ -1,6 +1,7 @@
 package cn.aradin.cluster.nacos.starter;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,7 @@ import cn.aradin.cluster.nacos.starter.properties.ClusterNacosProperties;
 public class ClusterNacosAutoConfiguration {
 	
 	@Bean
+	@ConditionalOnProperty(value = "aradin.cluster.nacos.service-name", havingValue = "")
 	public ClusterNacosNodeHandler nacosNodeHandler(@Value("server.port")Integer port, 
 			@Value("spring.application.name") String serviceName,
 			ClusterProperties clusterProperties, 
