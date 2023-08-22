@@ -44,8 +44,9 @@ public class DefaultClusterNodeManager implements IClusterNodeManager {
 	@Override
 	public synchronized void nodeInit(Map<Integer, String> nodes) {
 		// TODO Auto-generated method stub
+		this.nodes.clear();
 		for(Integer index:nodes.keySet()) {
-			this.nodes.putIfAbsent(index, nodes.get(index));
+			this.nodes.put(index, nodes.get(index));
 		}
 	}
 
