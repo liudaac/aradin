@@ -39,7 +39,7 @@ public abstract class AbstractBucketOperations<K, V> {
 		public final V doInRedis(RedisConnection connection) {
 			byte[] result = null;
 			for(int i=0; i<bucket; i++) {
-				byte[] rawKey = rawKey(key);
+				byte[] rawKey = rawKey(key, i);
 				result = inRedis(rawKey, connection);
 				if (result == null) {
 					continue;
