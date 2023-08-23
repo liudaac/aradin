@@ -95,7 +95,7 @@ public abstract class AbstractBucketOperations<K, V> {
 	}
 
 	int bucket(Object hashKey) {
-		return hashKey.hashCode()%bucket;
+		return Math.abs(hashKey.hashCode())%bucket;
 	}
 	
 	byte[] rawRandomKey(Object key) {
