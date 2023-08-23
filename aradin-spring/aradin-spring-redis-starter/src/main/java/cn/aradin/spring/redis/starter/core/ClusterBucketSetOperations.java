@@ -106,7 +106,7 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		// TODO Auto-generated method stub
 		Long counts = 0l;
 		for (int i = 0; i < bucket; i++) {
-			byte[] rawDestKey = rawKey(destKey);
+			byte[] rawDestKey = rawKey(destKey, i);
 			byte[][] rawKeys = rawKeys(key, otherKeys, i);
 			Long count = differenceAndStore(rawKeys, rawDestKey);
 			counts += count;
