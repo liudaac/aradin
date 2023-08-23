@@ -287,7 +287,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 	 * Multi bucket scan need traveral each bucket to avoid using too many connections
 	 * @param key
 	 * @param options
-	 * @param bucket from 0 to ${constructed-bucket}-1
+	 * @param bucket from 0 to ${bucketsize}-1
 	 * @return
 	 */
 	public Cursor<Entry<HK, HV>> scan(String key, ScanOptions options, int bucket) {
