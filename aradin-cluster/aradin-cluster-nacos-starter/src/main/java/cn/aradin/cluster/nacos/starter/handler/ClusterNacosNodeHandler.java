@@ -6,8 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextClosedEvent;
+import org.springframework.util.Assert;
 
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.PropertyKeyConst;
@@ -22,18 +26,33 @@ import cn.aradin.cluster.core.manager.IClusterNodeManager;
 import cn.aradin.cluster.core.properties.ClusterProperties;
 import cn.aradin.cluster.nacos.starter.properties.ClusterNacosProperties;
 
-public class ClusterNacosNodeHandler implements EventListener {
+public class ClusterNacosNodeHandler implements EventListener,ApplicationListener<ContextClosedEvent> {
 	
 	private final static Logger log = LoggerFactory.getLogger(ClusterNacosNodeHandler.class);
 	
+	private final String serviceName;
+	private final String group;
 	private final NamingService namingService;
 	private final IClusterNodeManager clusterNodeManager;
+	private Instance instance;
 	
 	public ClusterNacosNodeHandler(ClusterNacosProperties clusterNacosProperties, 
 			ClusterProperties clusterProperties,
 			Integer port,
 			String serviceName,
 			IClusterNodeManager clusterNodeManager) {
+		Assert.notNull(serviceName, "ServiceName cannot be null");
+		Assert.notNull(clusterNacosProperties.getGroup(), "aradin.cluster.nacos.group cannot be null");
+		Assert.notNull(clusterNacosProperties.getServerAddr(), "aradin.cluster.nacos.server-addr cannot be null");
+		Assert.notNull(clusterNacosProperties.getUsername(), "aradin.cluster.nacos.username cannot be null");
+		Assert.notNull(clusterNacosProperties.getPassword(), "aradin.cluster.nacos.password cannot be null");
+		Assert.notNull(clusterNacosProperties.getNamespace(), "aradin.cluster.nacos.namespace cannot be null");
+		if (StringUtils.isNotBlank(clusterNacosProperties.getServiceName())) {
+			this.serviceName = clusterNacosProperties.getServiceName();
+		}else {
+			this.serviceName = serviceName;
+		}
+		this.group = clusterNacosProperties.getGroup();
 		this.clusterNodeManager = clusterNodeManager;
 		Properties properties = new Properties();
 		properties.put(PropertyKeyConst.SERVER_ADDR, clusterNacosProperties.getServerAddr());
@@ -43,9 +62,9 @@ public class ClusterNacosNodeHandler implements EventListener {
 		try {
 			namingService = NacosFactory.createNamingService(properties);
 			if (clusterProperties.isRegister()) {
-				register(clusterNacosProperties.getGroup(), serviceName, clusterProperties.getNodeName(), port, clusterProperties.getMaxNode());
+				register(group, serviceName, clusterProperties.getNodeName(), port, clusterProperties.getMaxNode());
 			}
-			namingService.subscribe(serviceName, clusterNacosProperties.getGroup(), this);
+			namingService.subscribe(serviceName, group, this);
 		} catch (NacosException e) {
 			// TODO Auto-generated catch block
 			log.error("Cluster of nacos started failed, Please check your configs.");
@@ -81,7 +100,7 @@ public class ClusterNacosNodeHandler implements EventListener {
 			List<String> cluster = Arrays.asList(String.valueOf(i));
 			List<Instance> instances = namingService.getAllInstances(serviceName, cluster);
 			if (CollectionUtils.isEmpty(instances)) {
-				Instance instance = new Instance();
+				instance = new Instance();
 				instance.setInstanceId(ip);
 				instance.setIp(ip);
 				instance.setPort(port);
@@ -104,5 +123,16 @@ public class ClusterNacosNodeHandler implements EventListener {
 			}
 		}
 		throw new RuntimeException("OutOfNodeNum " + maxNode);
+	}
+
+	@Override
+	public void onApplicationEvent(ContextClosedEvent event) {
+		// TODO Auto-generated method stub
+		try {
+			namingService.deregisterInstance(serviceName, group, instance);
+		} catch (NacosException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
