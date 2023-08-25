@@ -129,6 +129,7 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 	public void onApplicationEvent(ContextClosedEvent event) {
 		// TODO Auto-generated method stub
 		try {
+			log.warn("Cluster is deregistering.");
 			namingService.deregisterInstance(serviceName, group, instance);
 		} catch (NacosException e) {
 			// TODO Auto-generated catch block
