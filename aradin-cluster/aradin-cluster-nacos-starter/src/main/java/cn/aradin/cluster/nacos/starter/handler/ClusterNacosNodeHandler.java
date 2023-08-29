@@ -106,6 +106,7 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 				instance.setIp(ip);
 				instance.setPort(port);
 				instance.setEnabled(true);
+				instance.setHealthy(true);
 				instance.setClusterName(String.valueOf(i));
 				namingService.registerInstance(serviceName, group, instance);
 				instances = namingService.getAllInstances(serviceName, group, cluster);
