@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+cn.aradin.cluster.nacos.starter.ClusterNacosAutoConfiguration
