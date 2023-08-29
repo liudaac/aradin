@@ -19,7 +19,7 @@ import cn.aradin.cluster.nacos.starter.properties.ClusterNacosProperties;
 public class ClusterNacosAutoConfiguration {
 	
 	@Bean
-	@ConditionalOnProperty(value = "aradin.cluster.nacos.service-name", havingValue = "")
+	@ConditionalOnProperty(value = "aradin.cluster.nacos.server-addr", havingValue = "")
 	public ClusterNacosNodeHandler nacosNodeHandler(@Value("server.port")Integer port, 
 			@Value("spring.application.name") String serviceName,
 			ClusterProperties clusterProperties, 
