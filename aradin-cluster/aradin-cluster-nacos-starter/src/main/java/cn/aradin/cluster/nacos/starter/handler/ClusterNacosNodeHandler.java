@@ -105,6 +105,7 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+						return;
 					}
 				}
 				nodes.put(clusterNodeManager.currentIndex(), clusterNodeManager.currentNode());
