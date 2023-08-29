@@ -87,25 +87,30 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 			List<Instance> instances = namingEvent.getInstances();
 			if (CollectionUtils.isNotEmpty(instances)) {
 				Map<Integer, String> nodes = new HashMap<Integer, String>();
+				boolean flag = false;
 				for(Instance instance:instances) {
 					Integer index = Integer.parseInt(instance.getClusterName());
 					if (clusterNodeManager.currentIndex() != index) {
 						nodes.putIfAbsent(index, instance.getIp());
 					}else if (!instance.getInstanceId().equals(clusterNodeManager.currentNode())) {
-						log.warn("Found repeat node with current {}, {}. Your cluster will do rebalance immediately.", clusterNodeManager.currentNode(), instance.getInstanceId());
-						try {
-							namingService.deregisterInstance(serviceName, group, this.instance);
-						} catch (NacosException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+						if (!flag) {
+							log.warn("Found repeat node with current {}, {}. Your cluster will do rebalance immediately.", clusterNodeManager.currentNode(), instance.getInstanceId());
+							try {
+								namingService.deregisterInstance(serviceName, group, this.instance);
+							} catch (NacosException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							try {
+								register(group, serviceName, this.instance.getInstanceId(), this.instance.getPort(), clusterProperties.getMaxNode());
+							} catch (NacosException | InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							return;
 						}
-						try {
-							register(group, serviceName, this.instance.getInstanceId(), this.instance.getPort(), clusterProperties.getMaxNode());
-						} catch (NacosException | InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						return;
+					}else {
+						flag = true;
 					}
 				}
 				nodes.put(clusterNodeManager.currentIndex(), clusterNodeManager.currentNode());
