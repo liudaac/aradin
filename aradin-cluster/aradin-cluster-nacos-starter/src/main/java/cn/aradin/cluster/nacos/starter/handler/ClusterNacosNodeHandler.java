@@ -91,6 +91,7 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 						nodes.putIfAbsent(index, instance.getIp());
 					}
 				}
+				nodes.put(clusterNodeManager.currentIndex(), clusterNodeManager.currentNode());
 				clusterNodeManager.nodeInit(nodes);
 			}
 		}
