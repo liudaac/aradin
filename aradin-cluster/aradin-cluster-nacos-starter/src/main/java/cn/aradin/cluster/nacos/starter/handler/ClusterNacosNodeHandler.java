@@ -35,6 +35,7 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 	private final String group;
 	private final NamingService namingService;
 	private final IClusterNodeManager clusterNodeManager;
+	private final ClusterProperties clusterProperties;
 	private Instance instance;
 	
 	public ClusterNacosNodeHandler(ClusterNacosProperties clusterNacosProperties, 
@@ -55,6 +56,7 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 		}
 		this.group = clusterNacosProperties.getGroup();
 		this.clusterNodeManager = clusterNodeManager;
+		this.clusterProperties = clusterProperties;
 		Properties properties = new Properties();
 		properties.put(PropertyKeyConst.SERVER_ADDR, clusterNacosProperties.getServerAddr());
 		properties.put(PropertyKeyConst.USERNAME, clusterNacosProperties.getUsername());
@@ -90,11 +92,22 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 					if (clusterNodeManager.currentIndex() != index) {
 						nodes.putIfAbsent(index, instance.getIp());
 					}else if (!instance.getInstanceId().equals(clusterNodeManager.currentNode())) {
-						log.warn("Found repeat node with current {}, {}. Your cluster may has some error or need restart", clusterNodeManager.currentNode(), instance.getInstanceId());
-					}else {
-						nodes.put(clusterNodeManager.currentIndex(), clusterNodeManager.currentNode());
+						log.warn("Found repeat node with current {}, {}. Your cluster will do rebalance immediately.", clusterNodeManager.currentNode(), instance.getInstanceId());
+						try {
+							namingService.deregisterInstance(serviceName, group, this.instance);
+						} catch (NacosException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						try {
+							register(group, serviceName, this.instance.getInstanceId(), this.instance.getPort(), clusterProperties.getMaxNode());
+						} catch (NacosException | InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				}
+				nodes.put(clusterNodeManager.currentIndex(), clusterNodeManager.currentNode());
 				clusterNodeManager.nodeInit(nodes);
 			}
 		}
