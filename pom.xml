@@ -524,6 +524,11 @@
 			</dependency>
 			<dependency>
 				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-spring-session-starter</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
 				<artifactId>aradin-spring-salarm-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>
@@ -575,6 +580,11 @@
 			<dependency>
 				<groupId>cn.aradin</groupId>
 				<artifactId>aradin-cluster-zookeeper-starter</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-cluster-nacos-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
