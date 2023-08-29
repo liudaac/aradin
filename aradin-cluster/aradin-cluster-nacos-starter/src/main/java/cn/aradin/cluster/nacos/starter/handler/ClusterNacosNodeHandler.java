@@ -94,7 +94,7 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 						nodes.putIfAbsent(index, instance.getIp());
 					}else if (!instance.getInstanceId().equals(clusterNodeManager.currentNode())) {
 						if (!flag) {
-							log.warn("Found repeat node with current {}, {}. Your cluster will do rebalance immediately.", clusterNodeManager.currentNode(), instance.getInstanceId());
+							log.warn("Found repeat node with current {}, {}. Your cluster will do reRegister immediately.", clusterNodeManager.currentNode(), instance.getInstanceId());
 							try {
 								namingService.deregisterInstance(serviceName, group, this.instance);
 							} catch (NacosException e) {
@@ -122,7 +122,7 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 	private void register(String group, String serviceName, String ip, Integer port, Integer maxNode) throws NacosException, InterruptedException {
 		for(int i=0; i<maxNode; i++) {
 			List<String> cluster = Arrays.asList(String.valueOf(i));
-			List<Instance> instances = namingService.getAllInstances(serviceName, group, cluster);
+			List<Instance> instances = namingService.getAllInstances(serviceName, group, cluster, false);
 			if (CollectionUtils.isEmpty(instances)) {
 				instance = new Instance();
 				instance.setInstanceId(ip);
@@ -132,11 +132,11 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 				instance.setHealthy(true);
 				instance.setClusterName(String.valueOf(i));
 				namingService.registerInstance(serviceName, group, instance);
-				instances = namingService.getAllInstances(serviceName, group, cluster);
+				instances = namingService.getAllInstances(serviceName, group, cluster, false);
 				if (instances.size() > 1) {
 					//说明发生了重复注册
 					log.warn("Found repeat instance in same cluster {}", JSONObject.toJSONString(instances));
-					instances = namingService.getAllInstances(serviceName, group, cluster);
+					instances = namingService.getAllInstances(serviceName, group, cluster, false);
 					if (!instances.get(0).getInstanceId().equals(instance.getInstanceId())) {
 						log.warn("Repeat with exsit-node {}", instances.get(0).getInstanceId());
 						namingService.deregisterInstance(serviceName, group, instance);
