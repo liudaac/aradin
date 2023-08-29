@@ -20,7 +20,7 @@ public class ClusterNacosAutoConfiguration {
 	
 	@Bean
 	@ConditionalOnProperty(value = "aradin.cluster.nacos.server-addr", havingValue = "")
-	public ClusterNacosNodeHandler nacosNodeHandler(@Value("${server.port}")Integer port, 
+	public ClusterNacosNodeHandler nacosNodeHandler(@Value("${server.port:8080}")Integer port, 
 			@Value("${spring.application.name}") String serviceName,
 			ClusterProperties clusterProperties, 
 			ClusterNacosProperties clusterNacosProperties,
