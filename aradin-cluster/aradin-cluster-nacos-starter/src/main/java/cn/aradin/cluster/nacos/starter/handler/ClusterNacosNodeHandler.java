@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.util.Assert;
 
+import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.PropertyKeyConst;
 import com.alibaba.nacos.api.exception.NacosException;
@@ -110,6 +111,7 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 				instances = namingService.getAllInstances(serviceName, group, cluster);
 				if (instances.size() > 1) {
 					//说明发生了重复注册
+					log.warn("Found repeat instance in same cluster {}", JSONObject.toJSONString(instances));
 					instances = namingService.getAllInstances(serviceName, group, cluster);
 					if (!instances.get(0).getInstanceId().equals(instance.getInstanceId())) {
 						log.warn("Repeat with exsit-node {}", instances.get(0).getInstanceId());
