@@ -32,7 +32,7 @@
 		<module>aradin-spring-lts-starter</module>
 		<module>aradin-spring-salarm-starter</module>
 		<module>aradin-spring-xxljob-starter</module>
-		<!--<module>aradin-spring-session-starter</module>-->
+		<module>aradin-spring-session-starter</module>
 	</modules>
 
 	<build>
