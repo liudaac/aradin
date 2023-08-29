@@ -98,7 +98,7 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 	private void register(String group, String serviceName, String ip, Integer port, Integer maxNode) throws NacosException, InterruptedException {
 		for(int i=0; i<maxNode; i++) {
 			List<String> cluster = Arrays.asList(String.valueOf(i));
-			List<Instance> instances = namingService.getAllInstances(serviceName, cluster);
+			List<Instance> instances = namingService.getAllInstances(serviceName, group, cluster);
 			if (CollectionUtils.isEmpty(instances)) {
 				instance = new Instance();
 				instance.setInstanceId(ip);
@@ -107,10 +107,10 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 				instance.setEnabled(true);
 				instance.setClusterName(String.valueOf(i));
 				namingService.registerInstance(serviceName, group, instance);
-				instances = namingService.getAllInstances(serviceName, cluster);
+				instances = namingService.getAllInstances(serviceName, group, cluster);
 				if (instances.size() > 1) {
 					//说明发生了重复注册
-					instances = namingService.getAllInstances(serviceName, cluster);
+					instances = namingService.getAllInstances(serviceName, group, cluster);
 					if (!instances.get(0).getInstanceId().equals(instance.getInstanceId())) {
 						log.warn("Repeat with exsit-node {}", instances.get(0).getInstanceId());
 						namingService.deregisterInstance(serviceName, group, instance);
