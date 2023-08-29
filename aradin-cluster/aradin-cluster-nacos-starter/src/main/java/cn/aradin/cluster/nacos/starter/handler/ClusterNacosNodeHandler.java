@@ -119,6 +119,7 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 				}
 				//说明注册已成功
 				clusterNodeManager.setCurrentIndex(i);
+				clusterNodeManager.nodeAdded(i, ip);
 				return;
 			}
 		}
