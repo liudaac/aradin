@@ -89,9 +89,12 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 					Integer index = Integer.parseInt(instance.getClusterName());
 					if (clusterNodeManager.currentIndex() != index) {
 						nodes.putIfAbsent(index, instance.getIp());
+					}else if (!instance.getInstanceId().equals(clusterNodeManager.currentNode())) {
+						log.warn("Found repeat node with current {}, {}. Your cluster may has some error or need restart", clusterNodeManager.currentNode(), instance.getInstanceId());
+					}else {
+						nodes.put(clusterNodeManager.currentIndex(), clusterNodeManager.currentNode());
 					}
 				}
-				nodes.put(clusterNodeManager.currentIndex(), clusterNodeManager.currentNode());
 				clusterNodeManager.nodeInit(nodes);
 			}
 		}
