@@ -47,7 +47,6 @@ import org.springframework.session.data.redis.RedisFlushMode;
 import org.springframework.session.data.redis.RedisIndexedSessionRepository;
 import org.springframework.session.data.redis.config.ConfigureNotifyKeyspaceEventsAction;
 import org.springframework.session.data.redis.config.ConfigureRedisAction;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
@@ -252,7 +251,7 @@ public class AradinHttpSessionConfiguration extends SpringHttpSessionConfigurati
 	@Override
 	public void setImportMetadata(AnnotationMetadata importMetadata) {
 		Map<String, Object> attributeMap = importMetadata
-				.getAnnotationAttributes(EnableRedisHttpSession.class.getName());
+				.getAnnotationAttributes(EnableAradinHttpSession.class.getName());
 		AnnotationAttributes attributes = AnnotationAttributes.fromMap(attributeMap);
 		this.maxInactiveIntervalInSeconds = attributes.getNumber("maxInactiveIntervalInSeconds");
 		String redisNamespaceValue = attributes.getString("redisNamespace");
