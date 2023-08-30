@@ -13,7 +13,6 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.util.Assert;
 
-import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.PropertyKeyConst;
 import com.alibaba.nacos.api.exception.NacosException;
@@ -64,10 +63,10 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 		properties.put(PropertyKeyConst.NAMESPACE, clusterNacosProperties.getNamespace());
 		try {
 			namingService = NacosFactory.createNamingService(properties);
-			if (clusterProperties.isRegister()) {
-				register(group, serviceName, clusterProperties.getNodeName(), port, clusterProperties.getMaxNode());
-			}
 			namingService.subscribe(serviceName, group, this);
+			if (clusterProperties.isRegister()) {
+				register(group, serviceName, clusterProperties.getNodeName(), port, clusterProperties.getMaxNode(), -1);
+			}
 		} catch (NacosException e) {
 			// TODO Auto-generated catch block
 			log.error("Cluster of nacos started failed, Please check your configs.");
@@ -102,7 +101,8 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 								e.printStackTrace();
 							}
 							try {
-								register(group, serviceName, this.instance.getInstanceId(), this.instance.getPort(), clusterProperties.getMaxNode());
+								Thread.sleep(1000l);
+								register(group, serviceName, this.instance.getInstanceId(), this.instance.getPort(), clusterProperties.getMaxNode(), index);
 							} catch (NacosException | InterruptedException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -110,17 +110,21 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 							return;
 						}
 					}else {
+						nodes.put(clusterNodeManager.currentIndex(), clusterNodeManager.currentNode());
 						flag = true;
 					}
 				}
-				nodes.put(clusterNodeManager.currentIndex(), clusterNodeManager.currentNode());
+				
 				clusterNodeManager.nodeInit(nodes);
 			}
 		}
 	}
 	
-	private void register(String group, String serviceName, String ip, Integer port, Integer maxNode) throws NacosException, InterruptedException {
+	private void register(String group, String serviceName, String ip, Integer port, Integer maxNode, int ignoreIndex) throws NacosException, InterruptedException {
 		for(int i=0; i<maxNode; i++) {
+			if (i == ignoreIndex) {
+				continue;
+			}
 			List<String> cluster = Arrays.asList(String.valueOf(i));
 			List<Instance> instances = namingService.getAllInstances(serviceName, group, cluster, false);
 			if (CollectionUtils.isEmpty(instances)) {
@@ -131,21 +135,9 @@ public class ClusterNacosNodeHandler implements EventListener,ApplicationListene
 				instance.setEnabled(true);
 				instance.setHealthy(true);
 				instance.setClusterName(String.valueOf(i));
-				namingService.registerInstance(serviceName, group, instance);
-				instances = namingService.getAllInstances(serviceName, group, cluster, false);
-				if (instances.size() > 1) {
-					//说明发生了重复注册
-					log.warn("Found repeat instance in same cluster {}", JSONObject.toJSONString(instances));
-					instances = namingService.getAllInstances(serviceName, group, cluster, false);
-					if (!instances.get(0).getInstanceId().equals(instance.getInstanceId())) {
-						log.warn("Repeat with exsit-node {}", instances.get(0).getInstanceId());
-						namingService.deregisterInstance(serviceName, group, instance);
-						continue;
-					}
-				}
-				//说明注册已成功
 				clusterNodeManager.setCurrentIndex(i);
 				clusterNodeManager.nodeAdded(i, ip);
+				namingService.registerInstance(serviceName, group, instance);
 				return;
 			}
 		}
