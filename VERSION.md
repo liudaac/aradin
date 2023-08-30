@@ -36,7 +36,7 @@
 * aradin-spring-caffeine 增加定时cleanUp机制，避免过度依赖Caffiene的使用时过期检测机制导致大量过期Key堆积的问题。并支持配置项
 * aradin-spring-actuator-starter 增加KafkaListener的注销触发，增强平滑下线的实现
 * aradin-spring-core HttpError增加instance()静态构造方法
-* 升级相关基础依赖版本, springboot升级至2.7.12, dubbo升级至3.1.10
+* 升级相关基础依赖版本, springcloud升级至2021.0.6, springboot升级至2.7.12, dubbo升级至3.1.10
 
 # v1.0.2 （已完成）
 * 对于session的redis扩展包spring-session-data-redis，将session用的redis与业务redis进行分离，用于解决服务间共享登录状态时的redis捆绑问题
@@ -44,6 +44,6 @@
 * redis-starter增加分桶RedisBucketTemplate，解决hash，set的大key问题
 * cluster模式下中间件依赖增加nacos支持
 * version模块版本状态机配置简化，降低caffeine等配置复杂度，提高易读性
-* 升级相关基础依赖版本, springboot升级至2.7.15, dubbo升级至3.1.11
+* 升级相关基础依赖版本, springcloud升级至2021.0.8, springboot升级至2.7.15, dubbo升级至3.1.11
 
 # v1.0.3 (开发中)
