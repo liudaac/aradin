@@ -6,7 +6,7 @@
   * 扩充部分必要的能力     
   * 解决部分新旧组件交替淘汰时发生的兼容性问题
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;钉群</p>
-<img style="width:20%;" src="https://blogsolo.oss-cn-qingdao.aliyuncs.com/592503b6-0f88-4ee3-b003-da5cc7384c1d.jpg"/></p>
+<img style="width:100;" src="https://blogsolo.oss-cn-qingdao.aliyuncs.com/592503b6-0f88-4ee3-b003-da5cc7384c1d.jpg"/></p>
 
 ***
 ## 主框架版本说明
