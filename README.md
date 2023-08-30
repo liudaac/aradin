@@ -220,8 +220,8 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 
 ***
 + **aradin-spring-session-starter(1.0.2+)**
-<p>&nbsp;spring-session-data-redis的实现依赖spring.redis.*配置，这会造成session用的redis和业务redis高度绑定，在实际使用场景中，存在多服务共享session但不愿共享redis的场景。spring-session-data-redis中RedisConnectFactory引入方式虽然提供了@SpringSessionRedisConnectionFactory扩展槽来定制redis，但会造成默认RedisConnectFactory实例不再初始化，所以并不实用</p>
-<p>&nbsp;该模块实现了对默认redissession实现的替换，使用aradin.session.redis.*来定制session用的redis实例</p>
+<p>&nbsp;spring-session-data-redis的实现依赖spring.redis.*配置，这会造成session用的redis和业务redis高度绑定，在实际使用场景中，存在多服务共享session但不愿共享redis的场景。spring-session-data-redis中RedisConnectFactory引入方式虽然提供了@SpringSessionRedisConnectionFactory扩展槽来定制redis，但会造成默认RedisConnectFactory实例不再初始化，所以并不实用。</p>
+<p>&nbsp;该模块实现了对默认redissession实现的替换，使用aradin.session.redis.*来定制session用的redis实例，同时使用@EnableAradinHttpSession注解实现对@EnableRedisHttpSession注解的替换。</p>
 <p>&nbsp;配置方式如下</p>
 &nbsp;&nbsp;&nbsp;aradin:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session:<br>
