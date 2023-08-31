@@ -6,19 +6,54 @@ package cn.aradin.spring.core.net.http.code;
  *
  */
 public enum AradinCodedEnum implements CodedEnum {
-	
-	OK(0), //OK
-	ERROR(-1), //ERROR
-	PARTIAL(206), //PARTIAL
-	BADREQUEST(400), //BADREQUEST
-	NOAUTH(401), //NOAUTH
-	FORBBIDEN(403), //FORBBIDEN
-	NOTFOUND(404), //NOTFOUND
-	CONFLICT(409), //CONFLICT
-	TOOLARGE(413), //TOOLARGE
-	TOOFAST(429), //TOOFAST
-	INTERNAL(500), //INTERNAL
-	MQERROR(600); //MQERROR
+	/**
+	 * OK
+	 */
+	OK(0),
+	/**
+	 * ERROR
+	 */
+	ERROR(-1), 
+	/**
+	 * PARTIAL
+	 */
+	PARTIAL(206),
+	/**
+	 * BADREQUEST
+	 */
+	BADREQUEST(400), 
+	/**
+	 * NOAUTH
+	 */
+	NOAUTH(401),
+	/**
+	 * FORBBIDEN
+	 */
+	FORBBIDEN(403),
+	/**
+	 * NOTFOUND
+	 */
+	NOTFOUND(404),
+	/**
+	 * CONFLICT
+	 */
+	CONFLICT(409),
+	/**
+	 * TOOLARGE
+	 */
+	TOOLARGE(413),
+	/**
+	 * TOOFAST
+	 */
+	TOOFAST(429),
+	/**
+	 * INTERNAL
+	 */
+	INTERNAL(500),
+	/**
+	 * MQERROR
+	 */
+	MQERROR(600);
 	
 	/**
 	 * 错误码对应的int值

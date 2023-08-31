@@ -39,6 +39,7 @@ public class AradinRedisCacheWriter implements RedisCacheWriter {
 	/**
 	 * @param connectionFactory must not be {@literal null}.
 	 * @param batchStrategy must not be {@literal null}.
+	 * @param redisCacheManagerProperties must not be {@literal null}.
 	 */
 	public AradinRedisCacheWriter(RedisConnectionFactory connectionFactory, BatchStrategy batchStrategy, RedisCacheManagerProperties redisCacheManagerProperties) {
 		this(connectionFactory, Duration.ZERO, batchStrategy, redisCacheManagerProperties);
@@ -49,6 +50,7 @@ public class AradinRedisCacheWriter implements RedisCacheWriter {
 	 * @param sleepTime sleep time between lock request attempts. Must not be {@literal null}. Use {@link Duration#ZERO}
 	 *          to disable locking.
 	 * @param batchStrategy must not be {@literal null}.
+	 * @param redisCacheManagerProperties must not be {@literal null}.
 	 */
 	AradinRedisCacheWriter(RedisConnectionFactory connectionFactory, Duration sleepTime, BatchStrategy batchStrategy, RedisCacheManagerProperties redisCacheManagerProperties) {
 		this(connectionFactory, sleepTime, CacheStatisticsCollector.none(), batchStrategy, redisCacheManagerProperties);

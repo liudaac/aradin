@@ -9,7 +9,7 @@ package io.swagger.models;
 
 /***
  *
- * @since:swagger-bootstrap-ui 1.0
+ * @since swagger-bootstrap-ui 1.0
  * @author <a href="mailto:xiaoymin@foxmail.com">xiaoymin@foxmail.com</a> 
  * 2018/10/12 20:11
  */

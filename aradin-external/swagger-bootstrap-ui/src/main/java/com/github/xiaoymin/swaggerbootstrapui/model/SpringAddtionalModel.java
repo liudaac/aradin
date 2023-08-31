@@ -14,7 +14,7 @@ import java.util.List;
 
 /***
  *
- * @since:swagger-bootstrap-ui 1.9.4
+ * @since swagger-bootstrap-ui 1.9.4
  * @author <a href="mailto:xiaoymin@foxmail.com">xiaoymin@foxmail.com</a> 
  * 2019/06/01 20:54
  */
