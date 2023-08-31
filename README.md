@@ -3,7 +3,7 @@
 以SpringCloud及<a href="https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E">SpringCloud Alibaba</a>为基础做上层通用功能包扩展，已发布至https://mvnrepository.com/artifact/cn.aradin
   * 规范依赖
   * 降低集成复杂度    
-  * 扩充部分必要的能力     
+  * 扩充能力以更好的满足线上场景 
   * 解决部分新旧组件交替淘汰时发生的兼容性问题
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;钉群</p>
 <img style="width:100px;" src="https://blogsolo.oss-cn-qingdao.aliyuncs.com/592503b6-0f88-4ee3-b003-da5cc7384c1d.jpg"/></p>
