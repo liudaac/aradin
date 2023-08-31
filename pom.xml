@@ -666,7 +666,7 @@
 		<connection>scm:git:git@github.com:liudaac/aradin.git</connection>
 		<developerConnection>scm:git:git@github.com:liudaac/aradin.git</developerConnection>
 		<url>git@github.com:liudaac/aradin.git</url>
-		<tag>aradin-0.0.1</tag>
+		<tag>aradin-1.0.2</tag>
 	</scm>
 
 	<build>
