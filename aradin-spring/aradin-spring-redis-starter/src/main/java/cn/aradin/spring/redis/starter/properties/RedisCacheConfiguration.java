@@ -7,6 +7,7 @@ public class RedisCacheConfiguration {
 	private boolean cacheNullValues = true;
 	private String keyPrefix = "aradin_";
 	private boolean usePrefix = true;
+	private Duration ttlOffset = Duration.ZERO;
 	public Duration getTtl() {
 		return ttl;
 	}
@@ -30,5 +31,11 @@ public class RedisCacheConfiguration {
 	}
 	public void setUsePrefix(boolean usePrefix) {
 		this.usePrefix = usePrefix;
+	}
+	public Duration getTtlOffset() {
+		return ttlOffset;
+	}
+	public void setTtlOffset(Duration ttlOffset) {
+		this.ttlOffset = ttlOffset;
 	}
 }

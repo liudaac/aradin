@@ -71,10 +71,12 @@ public class Resp<T> implements Serializable {
 		return new Resp<A>().data(data);
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static Resp<Object> error(HttpError error) {
 		return error(error, null);
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static Resp<Object> error(HttpError error, String alias) {
 		return new Resp<Object>().code(error.getCode()!=null?error.getCode():error.getCoded().getCode()).msg(StringUtils.isNotBlank(alias) ? alias : error.getMsg());
 	}

@@ -25,16 +25,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.data.redis.cache.BatchStrategies;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheManager.RedisCacheManagerBuilder;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair;
 import org.springframework.util.Assert;
 
 import com.alibaba.fastjson2.JSONObject;
 
+import cn.aradin.spring.redis.starter.cache.AradinRedisCacheWriter;
 import cn.aradin.spring.redis.starter.properties.RedisCacheManagerProperties;
 
 /**
@@ -71,6 +74,13 @@ public class AradinRedisManagerAutoConfiguration {
 		return new CacheManagerValidator(cacheManager);
 	}
 
+	@ConditionalOnMissingBean(name = "redisCacheWriter")
+	@Bean(name = "redisCacheWriter")
+	public RedisCacheWriter redisCacheWriter(RedisConnectionFactory redisConnectionFactory, RedisCacheManagerProperties redisCacheManagerProperties) {
+		log.debug("RedisCacheWriter Initial");
+		return new AradinRedisCacheWriter(redisConnectionFactory, BatchStrategies.keys(), redisCacheManagerProperties);
+	}
+	
 	/**
 	 * 原生实现，由于原生存在对CacheManager的单实例限制
 	 * 
@@ -82,7 +92,7 @@ public class AradinRedisManagerAutoConfiguration {
 	 */
 	@Bean
 	@Primary
-	public RedisCacheManager cacheManager(RedisConnectionFactory redisConnectionFactory, ResourceLoader resourceLoader,
+	public RedisCacheManager cacheManager(RedisCacheWriter redisCacheWriter, ResourceLoader resourceLoader,
 			RedisCacheManagerProperties redisCacheManagerProperties, CacheManagerCustomizers cacheManagerCustomizers) {
 		log.debug("RedisCacheManager Initial");
 		CacheProperties cacheProperties = new CacheProperties();
@@ -91,7 +101,7 @@ public class AradinRedisManagerAutoConfiguration {
 		cacheProperties.getRedis().setKeyPrefix(redisCacheManagerProperties.getDefaults().getKeyPrefix());
 		cacheProperties.getRedis().setUseKeyPrefix(redisCacheManagerProperties.getDefaults().isUsePrefix());
 		RedisCacheManagerBuilder builder = org.springframework.data.redis.cache.RedisCacheManager
-				.builder(redisConnectionFactory)
+				.builder(redisCacheWriter)
 				.cacheDefaults(determineConfiguration(resourceLoader.getClassLoader(), cacheProperties));
 		List<String> cacheNames = cacheProperties.getCacheNames();
 		if (!cacheNames.isEmpty()) {

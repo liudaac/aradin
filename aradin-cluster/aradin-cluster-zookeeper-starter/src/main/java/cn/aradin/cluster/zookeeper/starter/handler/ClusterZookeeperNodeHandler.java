@@ -1,7 +1,5 @@
 package cn.aradin.cluster.zookeeper.starter.handler;
 
-import java.net.Inet4Address;
-import java.net.UnknownHostException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -21,15 +19,17 @@ import com.google.common.collect.Lists;
 
 import cn.aradin.cluster.core.manager.IClusterNodeManager;
 import cn.aradin.cluster.core.properties.ClusterProperties;
-import cn.aradin.spring.core.enums.RegisterType;
+import cn.aradin.cluster.zookeeper.starter.properties.ClusterZookeeperProperties;
 import cn.aradin.zookeeper.boot.starter.handler.INodeHandler;
 import cn.aradin.zookeeper.boot.starter.manager.ZookeeperClientManager;
 import cn.aradin.zookeeper.boot.starter.properties.Zookeeper;
 import cn.aradin.zookeeper.boot.starter.properties.ZookeeperProperties;
 
-public class ClusterNodeHandler implements INodeHandler {
+public class ClusterZookeeperNodeHandler implements INodeHandler {
 
-	private final static Logger log = LoggerFactory.getLogger(ClusterNodeHandler.class);
+	private final static Logger log = LoggerFactory.getLogger(ClusterZookeeperNodeHandler.class);
+	
+	private ClusterZookeeperProperties clusterZookeeperProperties;
 	
 	private ClusterProperties clusterProperties;
 
@@ -37,20 +37,17 @@ public class ClusterNodeHandler implements INodeHandler {
 
 	private Integer registerRetry = 0;
 
-	public ClusterNodeHandler(ClusterProperties clusterProperties, ZookeeperProperties zookeeperProperties,
+	public ClusterZookeeperNodeHandler(ClusterZookeeperProperties clusterZookeeperProperties, ClusterProperties clusterProperties, ZookeeperProperties zookeeperProperties,
 			IClusterNodeManager clusterNodeManager) {
 		// TODO Auto-generated constructor stub
-		if (clusterProperties == null) {
+		if (clusterZookeeperProperties == null || StringUtils.isBlank(clusterZookeeperProperties.getAddressId())) {
 			throw new RuntimeException("Cluster is not config");
 		}
-		if (!RegisterType.zookeeper.equals(clusterProperties.getRegisterType())) {
-			throw new RuntimeException("Cluster is not registed on zookeeper");
-		}
-		this.clusterProperties = clusterProperties;
-		if (zookeeperProperties != null && clusterProperties != null
+		this.clusterZookeeperProperties = clusterZookeeperProperties;
+		if (zookeeperProperties != null && clusterZookeeperProperties != null
 				&& CollectionUtils.isNotEmpty(zookeeperProperties.getAddresses())) {
 			Optional<Zookeeper> result = zookeeperProperties.getAddresses().stream()
-					.filter(zookeeper -> zookeeper.getId().equals(clusterProperties.getZookeeperAddressId())).findAny();
+					.filter(zookeeper -> zookeeper.getId().equals(clusterZookeeperProperties.getAddressId())).findAny();
 			if (result.isPresent()) {
 				this.clusterNodeManager = clusterNodeManager;
 				return;
@@ -92,7 +89,7 @@ public class ClusterNodeHandler implements INodeHandler {
 		}
 		Integer index = -1;
 		try {
-			List<String> childs = client.getChildren().forPath("/" + clusterProperties.getZookeeperAddressId());
+			List<String> childs = client.getChildren().forPath("/" + clusterZookeeperProperties.getAddressId());
 			index = rebaseNode(childs, clusterProperties.getMaxNode());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -101,7 +98,7 @@ public class ClusterNodeHandler implements INodeHandler {
 		}
 		try {
 			client.create().withMode(CreateMode.EPHEMERAL).forPath(
-					"/" + clusterProperties.getZookeeperAddressId() + "/" + String.valueOf(index),
+					"/" + clusterZookeeperProperties.getAddressId() + "/" + String.valueOf(index),
 					clusterProperties.getNodeName().getBytes());
 			registerRetry = 0;
 			clusterNodeManager.setCurrentIndex(index);
@@ -118,23 +115,10 @@ public class ClusterNodeHandler implements INodeHandler {
 	@Override
 	public void init(ZookeeperClientManager clientManager) {
 		// TODO Auto-generated method stub
-		if (StringUtils.isBlank(clusterProperties.getNodeName())) {
-			try {
-				if (clusterProperties.isPreferIpAddress()) {
-					clusterProperties.setNodeName(Inet4Address.getLocalHost().getHostAddress());
-				} else {
-					clusterProperties.setNodeName(Inet4Address.getLocalHost().getHostName());
-				}
-			} catch (UnknownHostException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				throw new RuntimeException(e.getCause());
-			}
-		}
 		if (log.isDebugEnabled()) {
 			log.debug("Node Registing, {}", clusterProperties.getNodeName());
 		}
-		CuratorFramework client = clientManager.getClient(clusterProperties.getZookeeperAddressId());
+		CuratorFramework client = clientManager.getClient(clusterZookeeperProperties.getAddressId());
 		try {
 			registerNode(client, clusterProperties.getNodeName());
 			client.getConnectionStateListenable().addListener(this);
@@ -156,7 +140,7 @@ public class ClusterNodeHandler implements INodeHandler {
 				if (log.isDebugEnabled()) {
 					log.debug("Parse Cluster {}", cluster);
 				}
-				if (clusterProperties.getZookeeperAddressId().equalsIgnoreCase(cluster)) {
+				if (clusterZookeeperProperties.getAddressId().equalsIgnoreCase(cluster)) {
 					return true;
 				}
 			}

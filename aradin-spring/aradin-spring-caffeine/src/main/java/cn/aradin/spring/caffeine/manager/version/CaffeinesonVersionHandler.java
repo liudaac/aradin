@@ -26,17 +26,14 @@ public class CaffeinesonVersionHandler implements IVersionHandler {
 	@Override
 	public String get(String group, String key) {
 		// TODO Auto-generated method stub
-		if (caffeinesonProperties.getGroup().equals(group))
-			return String.valueOf(caffeinesonCacheManager.version(key));
-		else
-			return null;
+		return String.valueOf(caffeinesonCacheManager.version(key));
 	}
 
 	@Override
 	public boolean support(String group, String key) {
 		// TODO Auto-generated method stub
-		if (caffeinesonProperties.isVersioned() 
-				&& caffeinesonProperties.getGroup().equals(group)) {
+		if ("defaults".equals(key) 
+				|| (caffeinesonProperties.getConfigs() != null && caffeinesonProperties.getConfigs().containsKey(key) && caffeinesonProperties.getConfigs().get(key).isVersioned())) {
 			return true;
 		}
 		return false;
@@ -45,7 +42,7 @@ public class CaffeinesonVersionHandler implements IVersionHandler {
 	@Override
 	public void version(String group, String key, String version) {
 		// TODO Auto-generated method stub
-		if (caffeinesonProperties.getGroup().equals(group) && StringUtils.isNumeric(version)) {
+		if (support(group, key) && StringUtils.isNumeric(version)) {
 			caffeinesonCacheManager.version(key, Long.parseLong(version));
 		}
 	}

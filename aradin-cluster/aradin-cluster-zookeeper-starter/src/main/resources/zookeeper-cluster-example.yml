@@ -4,7 +4,8 @@ aradin:
     node-name: ${HOST}
     register: true
     prefer-ip-address: true
-    zookeeper-address-id: ${customid}
+    zookeeper:
+      address-id: ${customid}
   zookeeper:
     enable: true
     session-timeout: 5000

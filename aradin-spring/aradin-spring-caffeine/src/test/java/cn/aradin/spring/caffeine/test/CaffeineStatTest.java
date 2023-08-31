@@ -8,8 +8,8 @@ import cn.aradin.spring.caffeine.cache.config.CaffeinesonConfig;
 public class CaffeineStatTest {
 
 	public static void main(String[] args) {
-		CaffeinesonConfig config = new CaffeinesonConfig(20000l, 20000l, 0, 100, 100l, 0, true, true, true);
-		Caffeineson caffeineson = new Caffeineson("test", "test", false, config, null);
+		CaffeinesonConfig config = new CaffeinesonConfig(20000l, 20000l, 0, 100, 100l, 0, true, true, true, false);
+		Caffeineson caffeineson = new Caffeineson("test", config, null);
 		for(int i=0; i<100; i++) {
 			caffeineson.put(i, i);
 		}

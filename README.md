@@ -3,32 +3,26 @@
 以SpringCloud及<a href="https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E">SpringCloud Alibaba</a>为基础做上层通用功能包扩展，已发布至https://mvnrepository.com/artifact/cn.aradin
   * 规范依赖
   * 降低集成复杂度    
-  * 扩充部分必要的能力     
+  * 扩充能力以更好的满足线上场景 
   * 解决部分新旧组件交替淘汰时发生的兼容性问题
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;钉群</p>
-<img style="width:20%;" src="https://blogsolo.oss-cn-qingdao.aliyuncs.com/592503b6-0f88-4ee3-b003-da5cc7384c1d.jpg"/></p>
+<img style="width:100px;" src="https://blogsolo.oss-cn-qingdao.aliyuncs.com/592503b6-0f88-4ee3-b003-da5cc7384c1d.jpg"/></p>
 
 ***
 ## 主框架版本说明
-### 0.0.3.x （发布版，BUG修复阶段）
-<p>SpringCloud Hoxton.SR12</p>
-<p>SpringBoot 2.3.12.RELEASE</p>
-<p>SpringCloudAlibaba 2.2.8.RELEASE</p>
-<p>0.0.3.26及以前对应dubbo2.7.x</p>
-<p>后续版本开始对应dubbo3.1.x，主要由于在测试过程中dubbo3虽然兼容dubbo2发现逻辑，但dubbo2反过来调用dubbo3目前存在问题，所以在springboot低版本的基础上单独对dubbo做了升级</p>
-
-### 1.0.1 (发布版)
-<p>SpringCloud 2021.0.6</p>
-<p>SpringBoot 2.7.12</p>
+### 1.0.2 (发布版，推荐使用)
+<p>SpringCloud 2021.0.8</p>
+<p>SpringBoot 2.7.15</p>
 <p>SpringCloudAlibaba 2021.0.4.0</p>
-<p>Dubbo 3.1.10</p>
+<p>Dubbo 3.1.11</p>
 
 ### 历史版本
-*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.25(springboot2.3.12.RELEASE+dubbo2)</a><br>
-*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.26(springboot2.3.12.RELEASE+dubbo3)</a><br>
-*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.4.2(springboot2.7.5+dubbo3)</a><br>
-*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">1.0.0(springboot2.7.10+dubbo3)</a><br>
-*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">1.0.1(springboot2.7.12+dubbo3 推荐使用)</a><br>
+*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.25(springcloud.Hoxton.SR12+springboot2.3.12.RELEASE+dubbo2.7)</a><br>
+*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.26(springcloud.Hoxton.SR12+springboot2.3.12.RELEASE+dubbo3.1)</a><br>
+*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.4.2(springboot2.7.5+dubbo3.1)</a><br>
+*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">1.0.0(springboot2.7.10+dubbo3.1)</a><br>
+*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">1.0.1(springboot2.7.12+dubbo3.1)</a><br>
+*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">1.0.2(springboot2.7.15+dubbo3.1)</a><br>
 
 ***
 <p>依赖管理</p>
@@ -68,7 +62,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 <p>&nbsp;⑤ cn.aradin.spring.core.net.http.* HTTP工具包，使用入口 HttpClientUtils</p>
 <p>&nbsp;⑥ cn.aradin.spring.core.queue.* 轻量级内存队列，可用于低可靠性要求的使用场景，参考AradinQueue构造方法可以注入生产者及消费者</p>
 <p>&nbsp;⑦ cn.aradin.spring.core.thread.* 线程池包，使用入口AradinThreadManager</p>
-<p>&nbsp;⑧ cn.aradin.spring.core.session.* Session配置，需要搭配@EnableSpringSession或者@EnableRedisHttpSession使用，用于替换webserver容器的默认session机制</p>
+<p>&nbsp;⑧ cn.aradin.spring.core.session.* Session配置，需要搭配@EnableSpringSession、@EnableRedisHttpSession或者@EnableAradinHttpSession使用，用于替换webserver容器的默认session机制</p>
 <p>&nbsp;&nbsp;&nbsp;参考配置</p>
 &nbsp;&nbsp;&nbsp;spring:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session:<br>
@@ -76,7 +70,9 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: ${COOKIE_NAME}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max-age: 3600<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http-only: false<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;security: false<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;security: false #若指定domain与当前域名不一致需要设置为true<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;same-site: None #若指定domain与当前域名不一致需要设置<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;domain: #若domain与当前域名不一致需要设置<br>
 
 ***
 + **aradin-spring-acutator-starter**
@@ -145,14 +141,12 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;① 利用Caffeine缓存自身的超时机制进行延时Evict，在触发之前持久层对应的数据可能已经发生变更，</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以对于更新的数据一定时间内存在不一致情况，此种使用方式更适合对一致性要求不严格或者不可变数据的缓存处理，</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;比如SessionID上的使用可以有效降低Redis调用损耗；题目的缓存；热点商品信息的缓存;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;② 利用分布式中间件，比如nacos，zookeeper，consul等进行变更的通知，以实现各节点内存缓存的同步更新;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;② 利用分布式中间件，比如nacos，zookeeper进行变更的通知，以实现各节点内存缓存的同步更新;cachename级别的版本变更控制，需要搭配**aradin-version**模块使用，**aradin-version-zookeeper-starter**和**aradin-version-nacos-starter**均提供了配置样例</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以该模块对应支持普通模式以及基于版本管理机制的分布式更新模式：</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对应配置如下：</p>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aradin:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;caffeine:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: caffeine #默认caffeine<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">versioned: false</font> #为true时启用cachename级别的版本变更控制，需要搭配**aradin-version**模块使用，**aradin-version-zookeeper-starter**部分提供了配置样例<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="green">clean-interval: PT20M</font> #1.0.1之后增加定时执行cleanUp逻辑，此处为执行间隔，主要原因是Caffeine的缓存过期逻辑为惰性清理，可能造成内存无法及时释放，线上场景建议按照实际需求进行适配<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaults: #默认缓存配置<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 1200000 #访问后过期时间，单位毫秒<br>
@@ -185,12 +179,15 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 <p>&nbsp;&nbsp;&nbsp;③ 搭配@EnableCache注解，使用方式@Cachable(cacheManager=CaffeinesonConfiguration.CACHE_MANAGER)</p>
 <p>&nbsp;&nbsp;&nbsp;④ 提供Endpoint入口查询Caffeine状态 caffeineson，参考record-stats配置说明，可以按照aradin-spring-acutator-starter的配置方式进行开放</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;监控项参考 https://github.com/liudaac/aradin/blob/main/aradin-spring/aradin-spring-caffeine/src/main/java/cn/aradin/spring/caffeine/manager/stats/CaffeinesonStatsService.java</p>
+<p>&nbsp;&nbsp;&nbsp;注：各配置项的设置可以参考https://github.com/ben-manes/caffeine/wiki/Memory-overhead-zh-CN中的内存占用指标</p>
 
 ***
 + **aradin-spring-redis-starter**
-<p>&nbsp;替换spring-boot-starter-data-redis中默认CacheManager实现（由于原生实现不支持多种缓存方式共存），对于各CacheName的初始化使用自定义配置项</p>
-<p>&nbsp;配置方式如下</p>
-<p>&nbsp;&nbsp;首先是原生配置</p>
+<p>这个模块目前实现了两个重点功能：</p>
+<p>&nbsp;一、针对于spring-cache注解的使用优化</p>
+<p>&nbsp;替换掉了spring-boot-starter-data-redis中默认CacheManager实现（由于原生实现不支持多种缓存方式共存），对于各CacheName的初始化使用自定义配置项<br>
+&nbsp;配置方式如下<br>
+&nbsp;&nbsp;首先是原生配置<br>
 &nbsp;&nbsp;&nbsp;spring:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redis:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;database: 0 #Redis数据库索引（默认为0）<br>
@@ -198,7 +195,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;port: 6379 #Redis服务器连接端口<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password:  #Redis服务器连接密码（默认为空）<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pool: #连接池配置，不再详细列出</p>
-&nbsp;&nbsp;然后是自定义配置</p>
+&nbsp;&nbsp;然后是通过自定义配置来定制各个cachename的属性</p>
 &nbsp;&nbsp;aradin:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;cache:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redis:<br>
@@ -219,9 +216,31 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key-prefix: client_<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use-key-prefix: true</p>
 
+<p>&nbsp;二、针对于redis大集合分桶操作的支持(v1.0.2+)</p>
+<p>&nbsp;&nbsp;面向实际业务场景时，随着数据量的增加，对于hashmap和set的操作往往伴随着大key问题，这时候常用的策略都是对数据进行分桶，但目前spring针对于redis的实现并未支持，需要集成方在上层手动进行，并不方便。<br>
+<br>
+&nbsp;&nbsp;该模块做的，就是提出了RedisBucketTemplate的概念，并提供了BucketHashOperations，BucketSetOperations（单机模式），ClusterBucketSetOperations（集群模式）操作类，来统一托管分桶逻辑以及桶聚合操作。<br>
+<br>
+&nbsp;&nbsp;对于Set的操作类之所以提供了两个Operations，是由于set提供的api存在跨Key操作，单机可以完全在redis中进行，而集群模式下由于key的分布在不同的slot中，跨key操作的支持需要转到内存中进行。<br>
+</p>
+
 ***
 + **aradin-spring-redisson-starter**
 <p>&nbsp;RedissonClient实例初始化，配置方式与spring-redis配置一致，无需额外配置项</p>
+
+***
++ **aradin-spring-session-starter(v1.0.2+)**
+<p>&nbsp;spring-session-data-redis的实现依赖spring.redis.*配置，这会造成session用的redis和业务redis高度绑定，在实际使用场景中，存在多服务共享session但不愿共享redis的场景。spring-session-data-redis中RedisConnectFactory引入方式虽然提供了@SpringSessionRedisConnectionFactory扩展槽来定制redis，但会造成默认RedisConnectFactory实例不再初始化，所以并不实用。</p>
+<p>&nbsp;该模块实现了对默认redissession实现的替换，使用aradin.session.redis.*来定制session用的redis实例，同时使用@EnableAradinHttpSession注解实现对@EnableRedisHttpSession注解的替换。</p>
+<p>&nbsp;配置方式如下</p>
+&nbsp;&nbsp;&nbsp;aradin:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redis:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;database: 0 #Redis数据库索引（默认为0）<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;host:  #Redis服务器地址<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;port: 6379 #Redis服务器连接端口<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password:  #Redis服务器连接密码（默认为空）<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pool: #连接池配置，不再详细列出</p>
 
 ***
 + **aradin-spring-salarm-starter**
@@ -255,7 +274,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 合并了必要的依赖项和配置样例，并未做额外开发
 + **aradin-alibaba-nacos-starter**
 
-+ **aradin-alibaba-nacos-starter**
++ **aradin-alibaba-sentinel-starter**
 
 ***
 ### 3、aradin-mybatis
@@ -379,8 +398,6 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address: 192.168.1.1:2181,192.168.1.2:2181,192.168.1.3:2181/chroot<br>
 	&nbsp;&nbsp;cache:<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;caffeine:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: caffeine #默认caffeine<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">versioned: true</font> #为true时启用cachename级别的版本变更控制<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaults: #默认缓存配置<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 1200000 #访问后过期时间，单位毫秒<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 1800000 #写入后过期时间，单位毫秒<br>
@@ -396,6 +413,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;versioned: true #标识当前cache是否开启分布式更新，默认为false<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session:<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 7200000<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 7200000<br>
@@ -422,8 +440,6 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-ids: #必填，data-id列表，需要管理的cacheName加进来即可<br>
 	&nbsp;&nbsp;cache:<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;caffeine:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: ${aradin.version.nacos.group} #默认caffeine<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">versioned: true</font> #为true时启用cachename级别的版本变更控制<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaults: #默认缓存配置<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 1200000 #访问后过期时间，单位毫秒<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 1800000 #写入后过期时间，单位毫秒<br>
@@ -439,6 +455,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;versioned: true #标识当前cache是否开启分布式更新，默认为false<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session:<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 7200000<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 7200000<br>
@@ -452,11 +469,37 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 
 ***
 ### 7、aradin-cluster
-<p>&nbsp;集群模块，可以借助zookeeper实现集群节点的注册和节点列表的获取</p>
 
 + **aradin-cluster-core**
+<p>&nbsp;集群模块，可以借助zookeeper，nacos实现集群节点的注册和节点列表的获取，该模块通过IClusterNodeManager对集群信息进行托管，依赖zk或nacos模块实现集群信息的更新。此外，该模块还提供了集群的通用注册配置</p>
+<p>&nbsp;① 相关配置如下：</p>
+	aradin:<br>
+	&nbsp;&nbsp;cluster:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;node-name: #节点注册名<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;register: true #当前节点是否注册到集群中，默认为true<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;prefer-ip-address: #节点注册名是否偏向于ip地址，当node-name不指定时，可以生成默认名<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;max-node: #当前集群支持的最大节点数<br>
 
 + **aradin-cluster-zookeeper-starter**
+<p>&nbsp;基于ZK实现集群节点的注册和同步</p>
+<p>&nbsp;① 相关配置如下：</p>
+	aradin:<br>
+	&nbsp;&nbsp;cluster:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;zookeeper: <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address-id: #和aradin-zookeeper-boot-starter的配置关联<br>
+
++ **aradin-cluster-nacos-starter**
+<p>&nbsp;基于nacos实现集群节点的注册和同步，原理是借助cluster独占的方式来确定各节点的序号，注意的是发布建议逐节点滚动发布，原因是目前nacos注册+注销操作频繁可能会有数据一致性问题，</p>
+<p>&nbsp;① 相关配置如下：</p>
+	aradin:<br>
+	&nbsp;&nbsp;cluster:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;nacos: <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username: <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server-addr: <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;namespace: #建议和服务注册发现的命名空间分离，防止有干扰<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;service-name: <br>
 
 ***
 ### 8、aradin-external
@@ -489,8 +532,8 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 
 ***
 ## 进展阶段
-<p>&nbsp;目前0.0.3.x进入bug修复阶段，0.0.4.x全量迁移至1.0.x版本，满足日常项目快速搭建需求，且已经普遍运行于线上环境。0.0.3.x系列依赖的SpringBoot2.3.12官方已经于2022停止了该版本的维护, 所以该版本不再迭代升级。</p>
-<p>&nbsp;同时经过线上服务的深度使用和验证，Aradin正式迈入1.x版本开发阶段，当前最新发布版本为1.0.1，JVM兼容jdk8至17，当前支持springboot2.7.12，紧跟SpringCloud及Alibaba全家桶的生态升级</p>
+<p>&nbsp;目前迭代至1.0.2版本，经过大量的线上场景验证和磨合，已基本满足日常项目快速搭建需求，且已经普遍运行于线上环境。</p>
+<p>&nbsp;JVM兼容jdk8至17，当前支持springboot2.7.15，后面等spring官方2023年11月停止2.7.x维护后，aradin框架将升级至1.1.x并开始支持springboot3.x，保持跟进SpringCloud及Alibaba全家桶的生态升级</p>
 
 ***
 ## JOIN US

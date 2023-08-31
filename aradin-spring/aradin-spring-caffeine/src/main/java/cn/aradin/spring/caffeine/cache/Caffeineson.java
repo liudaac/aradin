@@ -21,21 +21,17 @@ public class Caffeineson extends AbstractValueAdaptingCache {
 	private final static Logger log = LoggerFactory.getLogger(Caffeineson.class);
 	
 	private Cache<Object, Object> caffeineCache;
-	private final String group;
 	private final String name;
 	private final boolean versioned;
 	private IVersionBroadHandler versionBroadHandler;
 	
-	public Caffeineson(String name, 
-			String group,
-			boolean versioned, 
+	public Caffeineson(String name,
 			CaffeinesonConfig caffeineConfig,
 			IVersionBroadHandler versionBroadHandler) {
 		super(caffeineConfig.isAllowNullValues());
 		this.name = name;
-		this.versioned = versioned;
+		this.versioned = caffeineConfig.isVersioned();
 		this.versionBroadHandler = versionBroadHandler;
-		this.group = group;
 		caffeineCache = caffeineCache(caffeineConfig, new CaffeinesonRemovalListener(name));
 	}
 	
@@ -162,7 +158,7 @@ public class Caffeineson extends AbstractValueAdaptingCache {
 		}
 		caffeineCache.invalidate(key);
 		if (versioned) {
-			versionBroadHandler.broadcast(group, name);
+			versionBroadHandler.broadcast(name);
 		}
 	}
 
