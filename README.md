@@ -398,8 +398,6 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address: 192.168.1.1:2181,192.168.1.2:2181,192.168.1.3:2181/chroot<br>
 	&nbsp;&nbsp;cache:<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;caffeine:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: caffeine #默认caffeine<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">versioned: true</font> #为true时启用cachename级别的版本变更控制<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaults: #默认缓存配置<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 1200000 #访问后过期时间，单位毫秒<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 1800000 #写入后过期时间，单位毫秒<br>
@@ -415,6 +413,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;versioned: true #标识当前cache是否开启分布式更新，默认为false<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session:<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 7200000<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 7200000<br>
@@ -441,8 +440,6 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-ids: #必填，data-id列表，需要管理的cacheName加进来即可<br>
 	&nbsp;&nbsp;cache:<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;caffeine:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: ${aradin.version.nacos.group} #默认caffeine<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">versioned: true</font> #为true时启用cachename级别的版本变更控制<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaults: #默认缓存配置<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 1200000 #访问后过期时间，单位毫秒<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 1800000 #写入后过期时间，单位毫秒<br>
@@ -458,6 +455,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;versioned: true #标识当前cache是否开启分布式更新，默认为false<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session:<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 7200000<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 7200000<br>
@@ -471,11 +469,37 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 
 ***
 ### 7、aradin-cluster
-<p>&nbsp;集群模块，可以借助zookeeper实现集群节点的注册和节点列表的获取</p>
 
 + **aradin-cluster-core**
+<p>&nbsp;集群模块，可以借助zookeeper，nacos实现集群节点的注册和节点列表的获取，该模块通过IClusterNodeManager对集群信息进行托管，依赖zk或nacos模块实现集群信息的更新。此外，该模块还提供了集群的通用注册配置</p>
+<p>&nbsp;① 相关配置如下：</p>
+	aradin:<br>
+	&nbsp;&nbsp;cluster:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;node-name: #节点注册名<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;register: true #当前节点是否注册到集群中，默认为true<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;prefer-ip-address: #节点注册名是否偏向于ip地址，当node-name不指定时，可以生成默认名<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;max-node: #当前集群支持的最大节点数<br>
 
 + **aradin-cluster-zookeeper-starter**
+<p>&nbsp;基于ZK实现集群节点的注册和同步</p>
+<p>&nbsp;① 相关配置如下：</p>
+	aradin:<br>
+	&nbsp;&nbsp;cluster:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;zookeeper: <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address-id: #和aradin-zookeeper-boot-starter的配置关联<br>
+
++ **aradin-cluster-nacos-starter**
+<p>&nbsp;基于nacos实现集群节点的注册和同步，原理是借助cluster独占的方式来确定各节点的序号，注意的是发布建议逐节点滚动发布，原因是目前nacos注册+注销操作频繁可能会有数据一致性问题，</p>
+<p>&nbsp;① 相关配置如下：</p>
+	aradin:<br>
+	&nbsp;&nbsp;cluster:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;nacos: <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username: <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server-addr: <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;namespace: #建议和服务注册发现的命名空间分离，防止有干扰<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;service-name: <br>
 
 ***
 ### 8、aradin-external
@@ -508,8 +532,8 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 
 ***
 ## 进展阶段
-<p>&nbsp;目前0.0.3.x进入bug修复阶段，0.0.4.x全量迁移至1.0.x版本，满足日常项目快速搭建需求，且已经普遍运行于线上环境。0.0.3.x系列依赖的SpringBoot2.3.12官方已经于2022停止了该版本的维护, 所以该版本不再迭代升级。</p>
-<p>&nbsp;同时经过线上服务的深度使用和验证，Aradin正式迈入1.x版本开发阶段，当前最新发布版本为1.0.1，JVM兼容jdk8至17，当前支持springboot2.7.12，紧跟SpringCloud及Alibaba全家桶的生态升级</p>
+<p>&nbsp;目前迭代至1.0.2版本，经过大量的线上场景验证和磨合，已基本满足日常项目快速搭建需求，且已经普遍运行于线上环境。</p>
+<p>&nbsp;JVM兼容jdk8至17，当前支持springboot2.7.15，后面等spring官方2023年11月停止2.7.x维护后，aradin框架将升级至1.1.x并开始支持springboot3.x，保持跟进SpringCloud及Alibaba全家桶的生态升级</p>
 
 ***
 ## JOIN US
