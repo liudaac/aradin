@@ -216,7 +216,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key-prefix: client_<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use-key-prefix: true</p>
 
-<p>&nbsp;二、针对于redis大集合分桶操作的支持</p>
+<p>&nbsp;二、针对于redis大集合分桶操作的支持(v1.0.2+)</p>
 <p>&nbsp;&nbsp;面向实际业务场景时，随着数据量的增加，对于hashmap和set的操作往往伴随着大key问题，这时候常用的策略都是对数据进行分桶，但目前spring针对于redis的实现并未支持，需要集成方在上层手动进行，并不方便。<br>
 <br>
 &nbsp;&nbsp;该模块做的，就是提出了RedisBucketTemplate的概念，并提供了BucketHashOperations，BucketSetOperations（单机模式），ClusterBucketSetOperations（集群模式）操作类，来统一托管分桶逻辑以及桶聚合操作。<br>
@@ -274,7 +274,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 合并了必要的依赖项和配置样例，并未做额外开发
 + **aradin-alibaba-nacos-starter**
 
-+ **aradin-alibaba-nacos-starter**
++ **aradin-alibaba-sentinel-starter**
 
 ***
 ### 3、aradin-mybatis
