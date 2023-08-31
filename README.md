@@ -183,9 +183,11 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 
 ***
 + **aradin-spring-redis-starter**
-<p>&nbsp;替换spring-boot-starter-data-redis中默认CacheManager实现（由于原生实现不支持多种缓存方式共存），对于各CacheName的初始化使用自定义配置项</p>
-<p>&nbsp;配置方式如下</p>
-<p>&nbsp;&nbsp;首先是原生配置</p>
+<p>这个模块目前实现了两个重点功能：</p>
+<p>&nbsp;一、针对于spring-cache注解的使用优化</p>
+<p>&nbsp;替换掉了spring-boot-starter-data-redis中默认CacheManager实现（由于原生实现不支持多种缓存方式共存），对于各CacheName的初始化使用自定义配置项<br>
+&nbsp;配置方式如下<br>
+&nbsp;&nbsp;首先是原生配置<br>
 &nbsp;&nbsp;&nbsp;spring:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redis:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;database: 0 #Redis数据库索引（默认为0）<br>
@@ -213,6 +215,10 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache-null-values: true<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key-prefix: client_<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use-key-prefix: true</p>
+
+<p>&nbsp;二、针对于redis大集合分桶操作的支持</p>
+<p>&nbsp;面向实际业务场景时，随着数据量的增加，对于hashmap和set的操作往往伴随着大key问题，这时候一版的策略都是对数据进行分桶，但目前spring针对于redis的实现并未支持，需要集成方在上层手动进行，并不方面。<br>
+&nbsp;该模块做的，就是提出了RedisBucketTemplate的概念，并提供了BucketHashOperations，BucketSetOperations，ClusterBucketSetOperations操作类，来统一托管分桶逻辑以及桶聚合操作<br></p>
 
 ***
 + **aradin-spring-redisson-starter**
