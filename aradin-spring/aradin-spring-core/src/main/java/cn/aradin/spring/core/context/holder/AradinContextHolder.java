@@ -11,13 +11,39 @@ import cn.aradin.spring.core.context.strategy.GlobalAradinContextHolderStrategy;
 import cn.aradin.spring.core.context.strategy.InheritableThreadLocalAradinContextHolderStrategy;
 import cn.aradin.spring.core.context.strategy.ThreadLocalAradinContextHolderStrategy;
 
+/**
+ * Context holder
+ * @author daliu
+ *
+ */
 public class AradinContextHolder {
+	/**
+	 * MODE_THREADLOCAL
+	 */
 	public static final String MODE_THREADLOCAL = "MODE_THREADLOCAL";
+	/**
+	 * MODE_INHERITABLETHREADLOCAL
+	 */
 	public static final String MODE_INHERITABLETHREADLOCAL = "MODE_INHERITABLETHREADLOCAL";
+	/**
+	 * MODE_GLOBAL
+	 */
 	public static final String MODE_GLOBAL = "MODE_GLOBAL";
+	/**
+	 * SYSTEM_PROPERTY for context strategy
+	 */
 	public static final String SYSTEM_PROPERTY = "aradin.context.strategy";
+	/**
+	 * Current strategyName
+	 */
 	private static String strategyName = System.getProperty(SYSTEM_PROPERTY);
+	/**
+	 * Current strategy
+	 */
 	private static AradinContextHolderStrategy strategy;
+	/**
+	 * Initial size
+	 */
 	private static int initializeCount = 0;
 
 	static {
@@ -114,6 +140,8 @@ public class AradinContextHolder {
 
 	/**
 	 * Delegates the creation of a new, empty context to the configured strategy.
+	 * 
+	 * @return context
 	 */
 	public static AradinContext createEmptyContext() {
 		return strategy.createEmptyContext();

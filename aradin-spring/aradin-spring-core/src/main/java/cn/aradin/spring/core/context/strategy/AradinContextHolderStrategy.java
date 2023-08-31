@@ -2,6 +2,12 @@ package cn.aradin.spring.core.context.strategy;
 
 import cn.aradin.spring.core.context.AradinContext;
 
+/**
+ * The context holder interface
+ * 
+ * @author daliu
+ *
+ */
 public interface AradinContextHolderStrategy {
 	
 	/**
@@ -28,7 +34,7 @@ public interface AradinContextHolderStrategy {
 
 	/**
 	 * Creates a new, empty context implementation, for use by
-	 * <tt>SecurityContextRepository</tt> implementations, when creating a new context for
+	 * SecurityContextRepository implementations, when creating a new context for
 	 * the first time.
 	 *
 	 * @return the empty context.

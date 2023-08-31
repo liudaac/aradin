@@ -3,6 +3,11 @@ package cn.aradin.spring.core.context;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Default context impl
+ * @author daliu
+ *
+ */
 public class AradinContextImpl implements AradinContext {
 
 	/**

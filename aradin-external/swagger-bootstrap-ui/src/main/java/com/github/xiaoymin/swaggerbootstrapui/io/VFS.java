@@ -23,7 +23,7 @@ import java.util.jar.JarInputStream;
 
 /***
  *
- * @since:swagger-bootstrap-ui 1.9.4
+ * @since swagger-bootstrap-ui 1.9.4
  * @author <a href="mailto:xiaoymin@foxmail.com">xiaoymin@foxmail.com</a> 
  * 2019/04/30 14:16
  */

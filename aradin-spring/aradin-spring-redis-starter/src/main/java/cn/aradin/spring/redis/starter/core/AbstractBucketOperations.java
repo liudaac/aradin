@@ -27,6 +27,13 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
+/**
+ * AbstractBucketOperations 
+ * @author daliu
+ *
+ * @param <K> K
+ * @param <V> V
+ */
 public abstract class AbstractBucketOperations<K, V> {
 	
 	Random random = new Random();
@@ -90,6 +97,10 @@ public abstract class AbstractBucketOperations<K, V> {
 		return template.execute(callback, true);
 	}
 
+	/**
+	 * getOperations
+	 * @return basic opertion
+	 */
 	public RedisOperations<K, V> getOperations() {
 		return template;
 	}
@@ -410,6 +421,13 @@ public abstract class AbstractBucketOperations<K, V> {
 		return (HV) hashValueSerializer().deserialize(value);
 	}
 	
+	/**
+	 * expire
+	 * @param key key
+	 * @param timeout timeout
+	 * @param unit unit
+	 * @return result
+	 */
 	public Boolean expire(K key, final long timeout, final TimeUnit unit) {
 		Boolean result = true;
 		for(int i=0; i<bucket; i++) {
@@ -427,6 +445,12 @@ public abstract class AbstractBucketOperations<K, V> {
 		return result;
 	}
 	
+	/**
+	 * expireAt
+	 * @param key key
+	 * @param date dayline
+	 * @return result
+	 */
 	public Boolean expireAt(K key, final Date date) {
 		Boolean result = true;
 		for(int i=0; i<bucket; i++) {
@@ -442,6 +466,11 @@ public abstract class AbstractBucketOperations<K, V> {
 		return result;
 	}
 	
+	/**
+	 * Delete by key to bucket
+	 * @param key key
+	 * @return result
+	 */
 	public Boolean delete(K key) {
 		for(int i=0; i<bucket; i++) {
 			byte[] rawKey = rawKey(key, i);
@@ -450,6 +479,11 @@ public abstract class AbstractBucketOperations<K, V> {
 		return true;
 	}
 	
+	/**
+	 * Delete by multi keys
+	 * @param keys keys
+	 * @return size
+	 */
 	public Long delete(Collection<K> keys) {
 		if (CollectionUtils.isEmpty(keys)) {
 			return 0L;

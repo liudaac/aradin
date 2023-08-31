@@ -84,7 +84,7 @@ public class AradinRedisManagerAutoConfiguration {
 	/**
 	 * 原生实现，由于原生存在对CacheManager的单实例限制
 	 * 
-	 * @param redisConnectionFactory      redisConnectionFactory
+	 * @param redisCacheWriter      redisCacheWriter
 	 * @param resourceLoader              resourceLoader
 	 * @param redisCacheManagerProperties redisCacheManagerProperties
 	 * @param cacheManagerCustomizers     cacheManagerCustomizers

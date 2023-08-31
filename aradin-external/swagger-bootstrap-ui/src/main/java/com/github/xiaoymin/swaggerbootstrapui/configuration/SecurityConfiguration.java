@@ -18,7 +18,7 @@ import org.springframework.core.env.Environment;
 
 /***
  *
- * @since:swagger-bootstrap-ui 1.0
+ * @since swagger-bootstrap-ui 1.0
  * @author <a href="mailto:xiaoymin@foxmail.com">xiaoymin@foxmail.com</a> 
  * 2019/01/18 17:31
  */

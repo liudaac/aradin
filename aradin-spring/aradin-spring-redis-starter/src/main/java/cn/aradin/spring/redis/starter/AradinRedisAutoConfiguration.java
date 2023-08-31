@@ -15,6 +15,11 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 
 import cn.aradin.spring.redis.starter.core.RedisBucketTemplate;
 
+/**
+ * AradinRedisAutoConfiguration to enhance RedisAutoConfiguration
+ * @author daliu
+ *
+ */
 @Configuration
 @EnableCaching
 @ConditionalOnSingleCandidate(RedisConnectionFactory.class)
@@ -22,6 +27,11 @@ import cn.aradin.spring.redis.starter.core.RedisBucketTemplate;
 @EnableConfigurationProperties({ RedisProperties.class })
 public class AradinRedisAutoConfiguration {
 
+	/**
+	 * redisTemplate with just value serialize
+	 * @param redisConnectionFactory
+	 * @return RedisTemplate
+	 */
 	@ConditionalOnMissingBean(name = "redisSerializeTemplate")
 	@Bean(name = "redisSerializeTemplate")
 	public RedisTemplate<String, Object> redisSerializeTemplate(RedisConnectionFactory redisConnectionFactory) {
@@ -31,6 +41,11 @@ public class AradinRedisAutoConfiguration {
 		return template;
 	}
 	
+	/**
+	 * redisTemplate for bucket
+	 * @param redisConnectionFactory
+	 * @return RedisBucketTemplate
+	 */
 	@Bean
 	@ConditionalOnMissingBean(name = "redisBucketTemplate")
 	public RedisBucketTemplate<Object> redisBucketTemplate(RedisConnectionFactory redisConnectionFactory) {

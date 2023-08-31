@@ -11,7 +11,7 @@ import springfox.documentation.swagger.web.SwaggerResource;
 
 /***
  *
- * @since:swagger-bootstrap-ui 1.9.4
+ * @since swagger-bootstrap-ui 1.9.4
  * @author <a href="mailto:xiaoymin@foxmail.com">xiaoymin@foxmail.com</a> 
  * 2019/06/02 16:24
  */

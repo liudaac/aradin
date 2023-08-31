@@ -62,7 +62,7 @@ import static springfox.documentation.swagger.common.HostNameProvider.components
 
 /***
  * SwaggerBootstrapUiZ增强接口
- * @since:swagger-bootstrap-ui 1.8.5
+ * @since swagger-bootstrap-ui 1.8.5
  * @author <a href="mailto:xiaoymin@foxmail.com">xiaoymin@foxmail.com</a> 
  * 2018/10/11 11:26
  */
