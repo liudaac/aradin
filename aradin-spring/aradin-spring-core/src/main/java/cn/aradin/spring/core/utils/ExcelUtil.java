@@ -15,6 +15,8 @@ import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -23,6 +25,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class ExcelUtil {
 
+	private final static Logger log = LoggerFactory.getLogger(ExcelUtil.class);
+	
 	public static List<List<String>> parseSheet(Integer sheetindex, Integer startrow, Integer startcel,
 			String filename) {
 		List<List<String>> content = new ArrayList<List<String>>();
@@ -47,7 +51,9 @@ public class ExcelUtil {
 						continue;
 					}
 					cellcontent.add(getValue(xssfCell));
-					System.out.print("   " + getValue(xssfCell));
+					if (log.isDebugEnabled()) {
+						log.debug("{},{}", cellNum, getValue(xssfCell));
+					}
 				}
 				content.add(cellcontent);
 			}
@@ -81,7 +87,9 @@ public class ExcelUtil {
 						continue;
 					}
 					cellcontent.add(getValue(xssfCell));
-					System.out.print("   " + getValue(xssfCell));
+					if (log.isDebugEnabled()) {
+						log.debug("{},{}", cellNum, getValue(xssfCell));
+					}
 				}
 				content.add(cellcontent);
 			}
@@ -115,7 +123,9 @@ public class ExcelUtil {
 						continue;
 					}
 					cellcontent.add(getValue(xssfCell));
-					System.out.print("   " + getValue(xssfCell));
+					if (log.isDebugEnabled()) {
+						log.debug("{},{}", cellNum, getValue(xssfCell));
+					}
 				}
 				content.add(cellcontent);
 			}
@@ -126,7 +136,6 @@ public class ExcelUtil {
 		return content;
 	}
 
-	@SuppressWarnings("static-access")
 	private static String getValue(XSSFCell xssfCell) {
 		if (xssfCell.getCellType() == CellType.BOOLEAN) {
 			return String.valueOf(xssfCell.getBooleanCellValue());
