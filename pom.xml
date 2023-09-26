@@ -25,7 +25,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.15</version>
+		<version>2.7.16</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
@@ -35,7 +35,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- Springboot -->
-		<springboot.version>2.7.15</springboot.version>
+		<springboot.version>2.7.16</springboot.version>
 		<springboot.oauth2.version>2.6.8</springboot.oauth2.version>
 		<springboot.solr.version>2.4.13</springboot.solr.version><!-- 2.4.10 -->
 		<!-- Springcloud -->
@@ -77,7 +77,7 @@
 		<!-- TOOLS -->
 		<buddy.version>1.14.4</buddy.version>
 		<jacoco.version>0.8.3</jacoco.version>
-		<fastjson.version>2.0.33</fastjson.version>
+		<fastjson.version>2.0.40</fastjson.version>
 		<gson.version>2.10.1</gson.version>
 		<logback.version>1.2.11</logback.version><!-- for 1.4.5 need slf4j-api 2.x -->
 		<guava.version>32.1.1-jre</guava.version>
