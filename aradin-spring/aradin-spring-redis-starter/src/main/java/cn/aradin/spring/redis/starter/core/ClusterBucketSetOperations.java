@@ -25,9 +25,9 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		return execute(connection -> {
 			Set<byte[]> result = new HashSet<>();
 			if (rawKeys.length > 1) {
-				Set<byte[]> base = connection.sMembers(rawKeys[0]);
+				Set<byte[]> base = connection.setCommands().sMembers(rawKeys[0]);
 				for(int j=1; j<rawKeys.length; j++) {
-					Set<byte[]> set = connection.sMembers(rawKeys[j]);
+					Set<byte[]> set = connection.setCommands().sMembers(rawKeys[j]);
 					if (CollectionUtils.isNotEmpty(set)) {
 						result.addAll(CollectionUtils.subtract(set, base));
 					}
@@ -75,9 +75,9 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		return execute(connection -> {
 			Set<byte[]> result = new HashSet<>();
 			if (rawKeys.length > 1) {
-				Set<byte[]> base = connection.sMembers(rawKeys[0]);
+				Set<byte[]> base = connection.setCommands().sMembers(rawKeys[0]);
 				for(int j=1; j<rawKeys.length; j++) {
-					Set<byte[]> set = connection.sMembers(rawKeys[j]);
+					Set<byte[]> set = connection.setCommands().sMembers(rawKeys[j]);
 					if (CollectionUtils.isNotEmpty(set)) {
 						result.addAll(CollectionUtils.subtract(set, base));
 					}
@@ -88,7 +88,7 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 					for(byte[] rawValue:result) {
 						rawValues[j++] = rawValue;
 					}
-					connection.sAdd(rawDestKey, rawValues);
+					connection.setCommands().sAdd(rawDestKey, rawValues);
 				}
 			}
 			return (long)result.size();
@@ -139,7 +139,7 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		return execute(connection -> {
 			Collection<byte[]> base = null;
 			for(int j=0; j<rawKeys.length; j++) {
-				Set<byte[]> set = connection.sMembers(rawKeys[j]);
+				Set<byte[]> set = connection.setCommands().sMembers(rawKeys[j]);
 				if (base == null) {
 					base = set;
 				}else {
@@ -186,7 +186,7 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 			Long count = 0l;
 			Collection<byte[]> base = null;
 			for(int j=0; j<rawKeys.length; j++) {
-				Set<byte[]> set = connection.sMembers(rawKeys[j]);
+				Set<byte[]> set = connection.setCommands().sMembers(rawKeys[j]);
 				if (base == null) {
 					base = set;
 				}else if (set != null) {
@@ -202,7 +202,7 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 				for(byte[] rawValue:base) {
 					rawValues[j++] = rawValue;
 				}
-				count += connection.sAdd(rawDestKey, rawValues);
+				count += connection.setCommands().sAdd(rawDestKey, rawValues);
 			}
 			return count;
 		});
@@ -252,8 +252,8 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		byte[] rawValue = rawValue(value);
 
 		return execute(connection -> {
-			connection.sRem(rawKey, rawValue);
-			connection.sAdd(rawDestKey, rawValue);
+			connection.setCommands().sRem(rawKey, rawValue);
+			connection.setCommands().sAdd(rawDestKey, rawValue);
 			return true;
 		});
 	}
@@ -262,7 +262,7 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 		return execute(connection -> {
 			Collection<byte[]> base = null;
 			for(int i=0; i<rawKeys.length; i++) {
-				Set<byte[]> set = connection.sMembers(rawKeys[i]);
+				Set<byte[]> set = connection.setCommands().sMembers(rawKeys[i]);
 				if (base == null) {
 					base = set;
 				}else if (set != null){
@@ -312,7 +312,7 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 			Long count = 0l;
 			Collection<byte[]> base = null;
 			for(int i=0; i<rawKeys.length; i++) {
-				Set<byte[]> set = connection.sMembers(rawKeys[i]);
+				Set<byte[]> set = connection.setCommands().sMembers(rawKeys[i]);
 				if (base == null) {
 					base = set;
 				}else if (set != null){
@@ -325,7 +325,7 @@ public class ClusterBucketSetOperations<K, V> extends BucketSetOperations<K, V> 
 				for(byte[] rawValue:base) {
 					rawValues[j++] = rawValue;
 				}
-				count += connection.sAdd(rawDestKey, rawValues);
+				count += connection.setCommands().sAdd(rawDestKey, rawValues);
 			}
 			return count;
 		});

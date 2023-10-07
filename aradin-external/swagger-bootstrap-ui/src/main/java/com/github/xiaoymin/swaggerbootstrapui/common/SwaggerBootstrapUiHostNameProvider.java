@@ -14,7 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UrlPathHelper;
 import springfox.documentation.swagger.common.XForwardPrefixPathAdjuster;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import static org.springframework.util.StringUtils.hasText;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromContextPath;

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.Servlet;
+import jakarta.servlet.Servlet;
 
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.VelocityException;

@@ -38,7 +38,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		if (values.length == 1) {
 			byte[] rawKey = rawKey(key, values[0]);
 			byte[] rawValue = rawValue(values[0]);
-			Long count = execute(connection -> connection.sAdd(rawKey, rawValue));
+			Long count = execute(connection -> connection.setCommands().sAdd(rawKey, rawValue));
 			if (count != null) {
 				counts += count;
 			}
@@ -56,7 +56,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 			for (Entry<Integer, Collection<V>> entry : bucketValues.entrySet()) {
 				byte[] rawKey = rawKey(key, entry.getKey().intValue());
 				byte[][] rawValues = rawValues(entry.getValue().toArray());
-				Long count = execute(connection -> connection.sAdd(rawKey, rawValues));
+				Long count = execute(connection -> connection.setCommands().sAdd(rawKey, rawValues));
 				if (count != null) {
 					counts += count;
 				}
@@ -79,7 +79,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		Set<byte[]> rawValues = new HashSet<>();
 		for (int i = 0; i < bucket; i++) {
 			byte[][] rawKeys = rawKeys(key, otherKeys, i);
-			Set<byte[]> rawValue = execute(connection -> connection.sDiff(rawKeys));
+			Set<byte[]> rawValue = execute(connection -> connection.setCommands().sDiff(rawKeys));
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
 			}
@@ -94,7 +94,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		Set<byte[]> rawValues = new HashSet<>();
 		for (int i = 0; i < bucket; i++) {
 			byte[][] rawKeys = rawKeys(keys, i);
-			Set<byte[]> rawValue = execute(connection -> connection.sDiff(rawKeys));
+			Set<byte[]> rawValue = execute(connection -> connection.setCommands().sDiff(rawKeys));
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
 			}
@@ -117,7 +117,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		for (int i = 0; i < bucket; i++) {
 			byte[][] rawKeys = rawKeys(key, otherKeys, i);
 			byte[] rawDestKey = rawKey(destKey, i);
-			Long count = execute(connection -> connection.sDiffStore(rawDestKey, rawKeys));
+			Long count = execute(connection -> connection.setCommands().sDiffStore(rawDestKey, rawKeys));
 			if (count != null) {
 				counts += count;
 			}
@@ -133,7 +133,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		for (int i = 0; i < bucket; i++) {
 			byte[][] rawKeys = rawKeys(keys, i);
 			byte[] rawDestKey = rawKey(destKey, i);
-			Long count = execute(connection -> connection.sDiffStore(rawDestKey, rawKeys));
+			Long count = execute(connection -> connection.setCommands().sDiffStore(rawDestKey, rawKeys));
 			if (count != null) {
 				counts += count;
 			}
@@ -155,7 +155,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		Set<byte[]> rawValues = new HashSet<>();
 		for (int i = 0; i < bucket; i++) {
 			byte[][] rawKeys = rawKeys(key, otherKeys, i);
-			Set<byte[]> rawValue = execute(connection -> connection.sInter(rawKeys));
+			Set<byte[]> rawValue = execute(connection -> connection.setCommands().sInter(rawKeys));
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
 			}
@@ -170,7 +170,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		Set<byte[]> rawValues = new HashSet<>();
 		for (int i = 0; i < bucket; i++) {
 			byte[][] rawKeys = rawKeys(keys, i);
-			Set<byte[]> rawValue = execute(connection -> connection.sInter(rawKeys));
+			Set<byte[]> rawValue = execute(connection -> connection.setCommands().sInter(rawKeys));
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
 			}
@@ -193,7 +193,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		for (int i = 0; i < bucket; i++) {
 			byte[][] rawKeys = rawKeys(key, otherKeys, i);
 			byte[] rawDestKey = rawKey(destKey, i);
-			Long count = execute(connection -> connection.sInterStore(rawDestKey, rawKeys));
+			Long count = execute(connection -> connection.setCommands().sInterStore(rawDestKey, rawKeys));
 			if (count != null) {
 				counts += count;
 			}
@@ -209,7 +209,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		for (int i = 0; i < bucket; i++) {
 			byte[][] rawKeys = rawKeys(keys, i);
 			byte[] rawDestKey = rawKey(destKey, i);
-			Long count = execute(connection -> connection.sInterStore(rawDestKey, rawKeys));
+			Long count = execute(connection -> connection.setCommands().sInterStore(rawDestKey, rawKeys));
 			if (count != null) {
 				counts += count;
 			}
@@ -223,7 +223,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		byte[] rawKey = rawKey(key, o);
 		byte[] rawValue = rawValue(o);
 
-		return execute(connection -> connection.sIsMember(rawKey, rawValue));
+		return execute(connection -> connection.setCommands().sIsMember(rawKey, rawValue));
 	}
 
 	@Override
@@ -234,7 +234,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 			Map<Object, Boolean> isMember = new LinkedHashMap<>(objects.length);
 			for (Object object : objects) {
 				byte[] rawKey = rawKey(key, object);
-				Boolean result = connection.sIsMember(rawKey, rawValue(object));
+				Boolean result = connection.setCommands().sIsMember(rawKey, rawValue(object));
 				if (result == null || !result) {
 					isMember.put(object, false);
 				} else {
@@ -251,7 +251,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		Set<byte[]> rawValues = new HashSet<>();
 		for (int i = 0; i < bucket; i++) {
 			byte[] rawKey = rawKey(key, i);
-			Set<byte[]> rawValue = execute(connection -> connection.sMembers(rawKey));
+			Set<byte[]> rawValue = execute(connection -> connection.setCommands().sMembers(rawKey));
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
 			}
@@ -267,7 +267,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		byte[] rawDestKey = rawKey(destKey, value);
 		byte[] rawValue = rawValue(value);
 
-		return execute(connection -> connection.sMove(rawKey, rawDestKey, rawValue));
+		return execute(connection -> connection.setCommands().sMove(rawKey, rawDestKey, rawValue));
 	}
 
 	@Override
@@ -277,7 +277,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		return execute(new ValueDeserializingRedisCallback(key) {
 			@Override
 			protected byte[] inRedis(byte[] rawKey, RedisConnection connection) {
-				return connection.sRandMember(rawKey);
+				return connection.setCommands().sRandMember(rawKey);
 			}
 		});
 	}
@@ -303,7 +303,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		for (Object value : values) {
 			byte[] rawKey = rawKey(key, value);
 			byte[][] rawValues = rawValues(values);
-			Long count = execute(connection -> connection.sRem(rawKey, rawValues));
+			Long count = execute(connection -> connection.setCommands().sRem(rawKey, rawValues));
 			if (count != null) {
 				counts += count;
 			}
@@ -317,7 +317,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		return execute(new ValueDeserializingRedisCallback(key) {
 			@Override
 			protected byte[] inRedis(byte[] rawKey, RedisConnection connection) {
-				return connection.sPop(rawKey);
+				return connection.setCommands().sPop(rawKey);
 			}
 		});
 	}
@@ -347,7 +347,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		Long sizes = 0l;
 		for(int i=0; i<bucket; i++) {
 			byte[] rawKey = rawKey(key, i);
-			Long size = execute(connection -> connection.sCard(rawKey));
+			Long size = execute(connection -> connection.setCommands().sCard(rawKey));
 			if (size != null) {
 				sizes += size;
 			}
@@ -369,7 +369,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		Set<byte[]> rawValues = new HashSet<>();
 		for(int i=0; i<bucket; i++) {
 			byte[][] rawKeys = rawKeys(key, otherKeys, i);
-			Set<byte[]> rawValue = execute(connection -> connection.sUnion(rawKeys));
+			Set<byte[]> rawValue = execute(connection -> connection.setCommands().sUnion(rawKeys));
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
 			}
@@ -384,7 +384,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		Set<byte[]> rawValues = new HashSet<>();
 		for(int i=0; i<bucket; i++) {
 			byte[][] rawKeys = rawKeys(keys, i);
-			Set<byte[]> rawValue = execute(connection -> connection.sUnion(rawKeys));
+			Set<byte[]> rawValue = execute(connection -> connection.setCommands().sUnion(rawKeys));
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
 			}
@@ -407,7 +407,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		for(int i=0; i<bucket; i++) {
 			byte[][] rawKeys = rawKeys(key, otherKeys, i);
 			byte[] rawDestKey = rawKey(destKey, i);
-			Long count = execute(connection -> connection.sUnionStore(rawDestKey, rawKeys));
+			Long count = execute(connection -> connection.setCommands().sUnionStore(rawDestKey, rawKeys));
 			if (count != null) {
 				counts += count;
 			}
@@ -423,7 +423,7 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		for(int i=0; i<bucket; i++) {
 			byte[][] rawKeys = rawKeys(keys, i);
 			byte[] rawDestKey = rawKey(destKey, i);
-			Long count = execute(connection -> connection.sUnionStore(rawDestKey, rawKeys));
+			Long count = execute(connection -> connection.setCommands().sUnionStore(rawDestKey, rawKeys));
 			if (count != null) {
 				counts += count;
 			}

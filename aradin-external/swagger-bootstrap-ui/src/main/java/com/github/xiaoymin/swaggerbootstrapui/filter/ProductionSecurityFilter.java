@@ -7,8 +7,8 @@
 
 package com.github.xiaoymin.swaggerbootstrapui.filter;
 
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.*;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;

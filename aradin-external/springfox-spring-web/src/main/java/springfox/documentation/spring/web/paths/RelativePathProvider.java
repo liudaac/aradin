@@ -19,7 +19,7 @@
 
 package springfox.documentation.spring.web.paths;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 import static com.google.common.base.Strings.*;
 

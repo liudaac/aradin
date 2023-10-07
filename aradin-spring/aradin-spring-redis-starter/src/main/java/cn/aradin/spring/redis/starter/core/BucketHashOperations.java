@@ -38,7 +38,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		// TODO Auto-generated method stub
 		byte[] rawKey = rawKey(key, hashKey);
 		byte[] rawHashKey = rawHashKey(hashKey);
-		byte[] rawHashValue = execute(connection -> connection.hGet(rawKey, rawHashKey));
+		byte[] rawHashValue = execute(connection -> connection.hashCommands().hGet(rawKey, rawHashKey));
 
 		return (HV) rawHashValue != null ? deserializeHashValue(rawHashValue) : null;
 	}
@@ -48,7 +48,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		// TODO Auto-generated method stub
 		byte[] rawKey = rawKey(key, hashKey);
 		byte[] rawHashKey = rawHashKey(hashKey);
-		return execute(connection -> connection.hExists(rawKey, rawHashKey));
+		return execute(connection -> connection.hashCommands().hExists(rawKey, rawHashKey));
 	}
 	
 	@Override
@@ -56,7 +56,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		// TODO Auto-generated method stub
 		byte[] rawKey = rawKey(key, hashKey);
 		byte[] rawHashKey = rawHashKey(hashKey);
-		return execute(connection -> connection.hIncrBy(rawKey, rawHashKey, delta));
+		return execute(connection -> connection.hashCommands().hIncrBy(rawKey, rawHashKey, delta));
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		// TODO Auto-generated method stub
 		byte[] rawKey = rawKey(key, hashKey);
 		byte[] rawHashKey = rawHashKey(hashKey);
-		return execute(connection -> connection.hIncrBy(rawKey, rawHashKey, delta));
+		return execute(connection -> connection.hashCommands().hIncrBy(rawKey, rawHashKey, delta));
 	}
 	
 	@Nullable
@@ -73,7 +73,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 	public HK randomKey(String key) {
 		// TODO Auto-generated method stub
 		byte[] rawKey = rawRandomKey(key);
-		return deserializeHashKey(execute(connection -> connection.hRandField(rawKey)));
+		return deserializeHashKey(execute(connection -> connection.hashCommands().hRandField(rawKey)));
 	}
 	
 	@Nullable
@@ -82,7 +82,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 	public Entry<HK, HV> randomEntry(String key) {
 		// TODO Auto-generated method stub
 		byte[] rawKey = rawRandomKey(key);
-		Entry<byte[], byte[]> rawEntry = execute(connection -> connection.hRandFieldWithValues(rawKey));
+		Entry<byte[], byte[]> rawEntry = execute(connection -> connection.hashCommands().hRandFieldWithValues(rawKey));
 		return rawEntry == null ? null
 				: Converters.entryOf(deserializeHashKey(rawEntry.getKey()), deserializeHashValue(rawEntry.getValue()));
 	}
@@ -93,7 +93,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 	public List<HK> randomKeys(String key, long count) {
 		// TODO Auto-generated method stub
 		byte[] rawKey = rawRandomKey(key);
-		List<byte[]> rawValues = execute(connection -> connection.hRandField(rawKey, count));
+		List<byte[]> rawValues = execute(connection -> connection.hashCommands().hRandField(rawKey, count));
 		return deserializeHashKeys(rawValues);
 	}
 	
@@ -104,7 +104,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		// TODO Auto-generated method stub
 		Assert.isTrue(count > 0, "Count must not be negative");
 		byte[] rawKey = rawRandomKey(key);
-		List<Entry<byte[], byte[]>> rawEntries = execute(connection -> connection.hRandFieldWithValues(rawKey, count));
+		List<Entry<byte[], byte[]>> rawEntries = execute(connection -> connection.hashCommands().hRandFieldWithValues(rawKey, count));
 
 		if (rawEntries == null) {
 			return null;
@@ -121,7 +121,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		Set<byte[]> allRawValues = new HashSet<>();
 		for(int i=0; i<bucket; i++) {
 			byte[] rawKey = rawKey(key, i);
-			Set<byte[]> rawValues = execute(connection -> connection.hKeys(rawKey));
+			Set<byte[]> rawValues = execute(connection -> connection.hashCommands().hKeys(rawKey));
 			if (rawValues != null) {
 				allRawValues.addAll(rawValues);
 			}
@@ -135,7 +135,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		Long sizes = 0l;
 		for(int i=0; i<bucket; i++) {
 			byte[] rawKey = rawKey(key, i);
-			Long size = execute(connection -> connection.hLen(rawKey));
+			Long size = execute(connection -> connection.hashCommands().hLen(rawKey));
 			if (size != null) {
 				sizes+=size;
 			}
@@ -148,7 +148,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		// TODO Auto-generated method stub
 		byte[] rawKey = rawKey(key, hashKey);
 		byte[] rawHashKey = rawHashKey(hashKey);
-		return execute(connection -> connection.hStrLen(rawKey, rawHashKey));
+		return execute(connection -> connection.hashCommands().hStrLen(rawKey, rawHashKey));
 	}
 	
 	@Override
@@ -168,7 +168,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 
 		execute(connection -> {
 			for(Entry<Integer, Map<byte[], byte[]>> bucket:buckets.entrySet()) {
-				connection.hMSet(rawKey(key, bucket.getKey().intValue()), bucket.getValue());
+				connection.hashCommands().hMSet(rawKey(key, bucket.getKey().intValue()), bucket.getValue());
 			}
 			return null;
 		});
@@ -196,7 +196,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 			for (byte[] rawHashKey : entry.getValue()) {
 				rawHashKeys[counter++] = rawHashKey;
 			}
-			List<byte[]> rawValue = execute(connection -> connection.hMGet(rawKey, rawHashKeys));
+			List<byte[]> rawValue = execute(connection -> connection.hashCommands().hMGet(rawKey, rawHashKeys));
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
 			}
@@ -212,7 +212,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		byte[] rawHashValue = rawHashValue(value);
 
 		execute(connection -> {
-			connection.hSet(rawKey, rawHashKey, rawHashValue);
+			connection.hashCommands().hSet(rawKey, rawHashKey, rawHashValue);
 			return null;
 		});
 	}
@@ -224,7 +224,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		byte[] rawHashKey = rawHashKey(hashKey);
 		byte[] rawHashValue = rawHashValue(value);
 
-		return execute(connection -> connection.hSetNX(rawKey, rawHashKey, rawHashValue));
+		return execute(connection -> connection.hashCommands().hSetNX(rawKey, rawHashKey, rawHashValue));
 	}
 	
 	@Override
@@ -233,7 +233,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		List<byte[]> rawValues = new ArrayList<byte[]>();
 		for(int i=0; i<bucket; i++) {
 			byte[] rawKey = rawKey(key, i);
-			List<byte[]> rawValue = execute(connection -> connection.hVals(rawKey));
+			List<byte[]> rawValue = execute(connection -> connection.hashCommands().hVals(rawKey));
 			if (CollectionUtils.isNotEmpty(rawValue)) {
 				rawValues.addAll(rawValue);
 			}
@@ -251,7 +251,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		for(Object hashKey:hashKeys) {
 			byte[] rawKey = rawKey(key, hashKey);
 			byte[] rawHashKey = rawHashKey(hashKey);
-			Long count = execute(connection -> connection.hDel(rawKey, rawHashKey));
+			Long count = execute(connection -> connection.hashCommands().hDel(rawKey, rawHashKey));
 			if (count != null) {
 				counts += count;
 			}
@@ -265,7 +265,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		Map<byte[], byte[]> entries = null;
 		for(int i=0; i<bucket; i++) {
 			byte[] rawKey = rawKey(key, i);
-			Map<byte[], byte[]> entry = execute(connection -> connection.hGetAll(rawKey));
+			Map<byte[], byte[]> entry = execute(connection -> connection.hashCommands().hGetAll(rawKey));
 			if (entry != null) {
 				if (entries == null) {
 					entries = entry;
@@ -297,7 +297,7 @@ public class BucketHashOperations<HK, HV> extends AbstractBucketOperations<Strin
 		}
 		byte[] rawKey = rawKey(key, bucket);
 		return template.executeWithStickyConnection(
-				(RedisCallback<Cursor<Entry<HK, HV>>>) connection -> new ConvertingCursor<>(connection.hScan(rawKey, options),
+				(RedisCallback<Cursor<Entry<HK, HV>>>) connection -> new ConvertingCursor<>(connection.hashCommands().hScan(rawKey, options),
 						new Converter<Entry<byte[], byte[]>, Entry<HK, HV>>() {
 							@Override
 							public Entry<HK, HV> convert(final Entry<byte[], byte[]> source) {

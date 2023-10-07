@@ -21,7 +21,7 @@ package springfox.documentation.swagger.common;
 import org.springframework.core.SpringVersion;
 import springfox.documentation.service.PathAdjuster;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import static springfox.documentation.swagger.common.SpringVersionCapability.*;
 

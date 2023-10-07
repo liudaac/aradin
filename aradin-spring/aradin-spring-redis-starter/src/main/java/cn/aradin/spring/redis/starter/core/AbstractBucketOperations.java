@@ -12,9 +12,9 @@ import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.springframework.data.redis.connection.DefaultTuple;
 import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.connection.RedisZSetCommands.Tuple;
+import org.springframework.data.redis.connection.zset.DefaultTuple;
+import org.springframework.data.redis.connection.zset.Tuple;
 import org.springframework.data.redis.core.DefaultTypedTuple;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisOperations;
@@ -435,10 +435,10 @@ public abstract class AbstractBucketOperations<K, V> {
 			long rawTimeout = TimeoutUtils.toMillis(timeout, unit);
 			result = result&execute(connection -> {
 				try {
-					return connection.pExpire(rawKey, rawTimeout);
+					return connection.keyCommands().pExpire(rawKey, rawTimeout);
 				} catch (Exception e) {
 					// Driver may not support pExpire or we may be running on Redis 2.4
-					return connection.expire(rawKey, TimeoutUtils.toSeconds(timeout, unit));
+					return connection.keyCommands().pExpire(rawKey, TimeoutUtils.toSeconds(timeout, unit));
 				}
 			});
 		}
@@ -457,9 +457,9 @@ public abstract class AbstractBucketOperations<K, V> {
 			byte[] rawKey = rawKey(key, i);
 			result = result&execute(connection -> {
 				try {
-					return connection.pExpireAt(rawKey, date.getTime());
+					return connection.keyCommands().pExpireAt(rawKey, date.getTime());
 				} catch (Exception e) {
-					return connection.expireAt(rawKey, date.getTime() / 1000);
+					return connection.keyCommands().pExpireAt(rawKey, date.getTime() / 1000);
 				}
 			});
 		}
@@ -474,7 +474,7 @@ public abstract class AbstractBucketOperations<K, V> {
 	public Boolean delete(K key) {
 		for(int i=0; i<bucket; i++) {
 			byte[] rawKey = rawKey(key, i);
-			execute(connection -> connection.del(rawKey));
+			execute(connection -> connection.keyCommands().del(rawKey));
 		}
 		return true;
 	}
@@ -491,7 +491,7 @@ public abstract class AbstractBucketOperations<K, V> {
 		Long count = 0l;
 		for(int i=0; i<bucket; i++) {
 			byte[][] rawKeys = rawKeys(keys, i);
-			count+=execute(connection -> connection.del(rawKeys));
+			count+=execute(connection -> connection.keyCommands().del(rawKeys));
 		}
 		return count;
 	}

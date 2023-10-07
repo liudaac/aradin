@@ -27,7 +27,7 @@ import springfox.documentation.spi.service.contexts.Defaults;
 import springfox.documentation.spi.service.contexts.DocumentationContextBuilder;
 import springfox.documentation.spring.web.paths.RelativePathProvider;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 public class DefaultConfiguration implements DefaultsProviderPlugin {
 

@@ -31,8 +31,8 @@
 		<!-- ********************** plugin ********************** -->
 		<!-- groovy-all -->
 		<dependency>
-			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy</artifactId>
+		    <groupId>org.apache.groovy</groupId>
+		    <artifactId>groovy</artifactId>
 		</dependency>
 	</dependencies>
 </project>

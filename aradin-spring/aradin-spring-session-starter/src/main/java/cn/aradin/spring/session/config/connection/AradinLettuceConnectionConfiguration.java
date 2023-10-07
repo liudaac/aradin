@@ -69,7 +69,7 @@ public class AradinLettuceConnectionConfiguration extends AradinConnectionConfig
 
 	private LettuceClientConfigurationBuilder applyProperties(
 			LettuceClientConfiguration.LettuceClientConfigurationBuilder builder) {
-		if (getProperties().isSsl()) {
+		if (getProperties().getSsl() != null && getProperties().getSsl().isEnabled()) {
 			builder.useSsl();
 		}
 		if (getProperties().getTimeout() != null) {
