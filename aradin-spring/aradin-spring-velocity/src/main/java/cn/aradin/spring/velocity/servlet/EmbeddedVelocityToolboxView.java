@@ -29,7 +29,6 @@ import cn.aradin.spring.velocity.view.VelocityToolboxView;
  * @author Andy Wilkinson
  * @since 1.2.5
  */
-@SuppressWarnings("deprecation")
 public class EmbeddedVelocityToolboxView extends VelocityToolboxView {
 
 	@Override
