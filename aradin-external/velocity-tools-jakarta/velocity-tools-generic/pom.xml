@@ -47,10 +47,11 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
+		<!-- 待改造 -->
 		<dependency>
 			<groupId>com.github.cliftonlabs</groupId>
 			<artifactId>json-simple</artifactId>
-			<version>3.0.2</version>
+			<version>4.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
