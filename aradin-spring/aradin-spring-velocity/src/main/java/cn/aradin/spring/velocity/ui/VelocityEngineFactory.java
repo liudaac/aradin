@@ -26,7 +26,6 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.VelocityException;
 import org.apache.velocity.runtime.RuntimeConstants;
-import org.apache.velocity.runtime.log.CommonsLogLogChute;
 
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
@@ -82,8 +81,6 @@ public class VelocityEngineFactory {
 	private ResourceLoader resourceLoader = new DefaultResourceLoader();
 
 	private boolean preferFileSystemAccess = true;
-
-	private boolean overrideLogging = true;
 
 
 	/**
@@ -201,16 +198,6 @@ public class VelocityEngineFactory {
 	}
 
 	/**
-	 * Set whether Velocity should log via Commons Logging, i.e. whether Velocity's
-	 * log system should be set to {@link CommonsLogLogChute}. Default is "true".
-	 * @param overrideLogging overrideLogging
-	 */
-	public void setOverrideLogging(boolean overrideLogging) {
-		this.overrideLogging = overrideLogging;
-	}
-
-
-	/**
 	 * Prepare the VelocityEngine instance and return it.
 	 * @return the VelocityEngine instance
 	 * @throws IOException if the config file wasn't found
@@ -236,11 +223,6 @@ public class VelocityEngineFactory {
 		// Set a resource loader path, if required.
 		if (this.resourceLoaderPath != null) {
 			initVelocityResourceLoader(velocityEngine, this.resourceLoaderPath);
-		}
-
-		// Log via Commons Logging?
-		if (this.overrideLogging) {
-			velocityEngine.setProperty(RuntimeConstants.RUNTIME_LOG_LOGSYSTEM, new CommonsLogLogChute());
 		}
 
 		// Apply properties to VelocityEngine.

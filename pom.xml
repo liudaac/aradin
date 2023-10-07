@@ -68,7 +68,7 @@
 		<!-- Swagger -->
 		<!-- Old velocity -->
 		<velocity.version>1.7</velocity.version>
-		<velocity-tools.version>2.0</velocity-tools.version>
+		<velocity-tools.version>3.1</velocity-tools.version>
 		<!-- Netty -->
 		<netty.version>4.1.98.Final</netty.version>
 		<!-- WEIXIN -->
@@ -356,15 +356,15 @@
 				<version>${zookeeper.version}</version>
 			</dependency>
 
-			<!-- Old Velocity -->
 			<dependency>
-				<groupId>org.apache.velocity</groupId>
-				<artifactId>velocity</artifactId>
-				<version>${velocity.version}</version>
+			    <groupId>org.apache.velocity.tools</groupId>
+			    <artifactId>velocity-tools-generic</artifactId>
+			    <version>${velocity-tools.version}</version>
 			</dependency>
+			
 			<dependency>
-				<groupId>org.apache.velocity</groupId>
-				<artifactId>velocity-tools</artifactId>
+				<groupId>org.apache.velocity.tools</groupId>
+				<artifactId>velocity-tools-view</artifactId>
 				<version>${velocity-tools.version}</version>
 			</dependency>
 
@@ -653,6 +653,16 @@
 		    <dependency>
 		    	<groupId>cn.aradin</groupId>
 		    	<artifactId>xxl-job-core</artifactId>
+		    	<version>${revision}</version>
+		    </dependency>
+		    <dependency>
+		    	<groupId>cn.aradin</groupId>
+		    	<artifactId>velocity-tools-generic</artifactId>
+		    	<version>${revision}</version>
+		    </dependency>
+		    <dependency>
+		    	<groupId>cn.aradin</groupId>
+		    	<artifactId>velocity-tools-view</artifactId>
 		    	<version>${revision}</version>
 		    </dependency>
 		    <dependency>

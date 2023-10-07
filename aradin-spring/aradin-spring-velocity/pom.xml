@@ -24,35 +24,12 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
-		</dependency>
-		<dependency>
 		    <groupId>org.apache.velocity.tools</groupId>
 		    <artifactId>velocity-tools-generic</artifactId>
-		    <version>3.1</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity-tools</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.apache.struts</groupId>
-					<artifactId>struts-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.struts</groupId>
-					<artifactId>struts-taglib</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.struts</groupId>
-					<artifactId>struts-tiles</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>javax.servlet</groupId>
-  					<artifactId>servlet-api</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.apache.velocity.tools</groupId>
+			<artifactId>velocity-tools-view</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>

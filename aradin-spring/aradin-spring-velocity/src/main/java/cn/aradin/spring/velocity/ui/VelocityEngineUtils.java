@@ -2,6 +2,7 @@ package cn.aradin.spring.velocity.ui;
 
 import java.io.StringWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import org.apache.velocity.VelocityContext;
@@ -36,7 +37,7 @@ public abstract class VelocityEngineUtils {
 			throws VelocityException {
 
 		VelocityContext velocityContext = new VelocityContext(model);
-		velocityEngine.mergeTemplate(templateLocation, velocityContext, writer);
+		velocityEngine.mergeTemplate(templateLocation, StandardCharsets.UTF_8.name(), velocityContext, writer);
 	}
 
 	/**

@@ -20,6 +20,7 @@
     	<module>springfox-spi</module>
       	<module>springfox-core</module>
 		<module>xxl-job-core</module>
+		<module>velocity-tools-jakarta</module>
   </modules>
 	<build>
 		<resources>

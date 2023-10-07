@@ -1,17 +1,16 @@
 package cn.aradin.spring.velocity.ui;
 
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.Reader;
 import java.util.Arrays;
 
-import org.apache.commons.collections.ExtendedProperties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.resource.Resource;
 import org.apache.velocity.runtime.resource.loader.ResourceLoader;
-
+import org.apache.velocity.tools.view.WebappResourceLoader;
+import org.apache.velocity.util.ExtProperties;
 import org.springframework.util.StringUtils;
 
 /**
@@ -54,7 +53,7 @@ public class SpringResourceLoader extends ResourceLoader {
 
 
 	@Override
-	public void init(ExtendedProperties configuration) {
+	public void init(ExtProperties configuration) {
 		this.resourceLoader = (org.springframework.core.io.ResourceLoader)
 				this.rsvc.getApplicationAttribute(SPRING_RESOURCE_LOADER);
 		String resourceLoaderPath = (String) this.rsvc.getApplicationAttribute(SPRING_RESOURCE_LOADER_PATH);
@@ -80,7 +79,7 @@ public class SpringResourceLoader extends ResourceLoader {
 	}
 
 	@Override
-	public InputStream getResourceStream(String source) throws ResourceNotFoundException {
+	public Reader getResourceReader(String source, String encoding) throws ResourceNotFoundException {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Looking for Velocity resource with name [" + source + "]");
 		}
@@ -89,14 +88,13 @@ public class SpringResourceLoader extends ResourceLoader {
 			logger.debug("Operating for Velocity resource with name [" + source + "]");
 		}
 		for (String resourceLoaderPath : this.resourceLoaderPaths) {
-			org.springframework.core.io.Resource resource =
-					this.resourceLoader.getResource(resourceLoaderPath + source);
 			try {
-				return resource.getInputStream();
-			}
-			catch (IOException ex) {
+				WebappResourceLoader loader = new WebappResourceLoader();
+				return loader.getResourceReader(resourceLoaderPath+source, encoding);
+			} catch (Exception e) {
+				// TODO: handle exception
 				if (logger.isDebugEnabled()) {
-					logger.debug("Could not find Velocity resource: " + resource);
+					logger.debug("Could not find Velocity resource: " + resourceLoaderPath+source);
 				}
 			}
 		}

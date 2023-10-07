@@ -1,0 +1,570 @@
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+
+####################################
+#
+# BrowerTool user-agents keyword map
+#
+####################################
+#
+# format:
+# keyword=[<entity>][,<device>]
+# where <entity> is one of:
+# - browser
+# - browser_os: browser and operating system
+# - engine: rendering engine
+# - force_browser: browser, with greater precedence
+# - force_os: operating system, with greater precedence
+# - ignore: keyword to be ignored
+# - maybe_browser: browser, with lesser precedence
+# - maybe_os: operating system, with lesser precedence
+# - maybe_robot: robot, with lesser precedence
+# - merge: keyword to be merged to the next one
+# - merge_or_browser: browser if followed by a version number, otherwise merge to the next keyword
+# - merge_or_os: operating system if followed by a version number, otherwise merge to the next keyword
+# - os: operating system
+# - robot
+# and <device> is one of:
+# - desktop,
+# - mobile,
+# - tablet,
+# - tv,
+# - robot
+# (with a growing precedence)
+
+# browsers
+abrowse=browser,desktop
+acoo=merge
+acoo browser=browser,desktop
+amaya=browser
+america=merge
+america online=merge
+america online browser=browser,desktop
+amigavoyager=browser
+aol=browser,desktop
+arora=browser,desktop
+avant=merge
+avant browser=browser,desktop
+avantbrowser=browser,desktop
+beonex=browser,desktop
+blazer=browser,desktop
+bolt=browser,desktop
+browserng=browser,mobile
+bunjalloo=browser
+camino=browser,desktop
+chrome=browser
+chromeplus=browser
+cometbird=browser,desktop
+conkeror=browser,desktop
+crazy=merge
+crazy browser=force_browser,desktop
+deepnet=merge
+deepnet explorer=browser,desktop
+dillo=browser
+dooble=browser
+doris=browser
+dorothy=browser
+edge=browser,desktop
+element=merge
+element browser=browser,desktop
+elinks=browser,desktop
+enigmafox=browser,desktop
+epiphany=browser,desktop
+escape=browser,desktop
+fennec=browser
+firebird=browser
+firefox=maybe_browser
+fireweb=merge
+fireweb navigator=browser,desktop
+flock=force_browser,desktop
+fluid=browser,desktop
+galaxy=browser,mobile
+galeon=browser,desktop
+gngr.info=browser
+gobrowser=browser
+granparadiso=browser,desktop
+greenbrowser=browser,desktop
+hana=browser,desktop
+ibrowse=browser
+icab=browser,desktop
+iceape=browser,desktop
+icecat=browser,desktop
+iceweasel=browser,desktop
+iemobile=browser,mobile
+inet=merge
+inet browser=browser,mobile
+irider=browser,desktop
+iris=browser,desktop
+iron=force_browser
+itunes=browser
+k-meleon=browser
+k-ninja=browser,desktop
+kapiko=browser,desktop
+kazehakase=browser,desktop
+kkman=browser,desktop
+kmlite=browser,desktop
+konqueror=browser,desktop
+like=merge
+like gecko=ignore
+links=browser
+lobo=browser
+lolifox=browser,desktop
+lunascape=browser,desktop
+lynx=browser
+maemo=merge
+maemo browser=browser,mobile
+maxthon=browser
+midori=browser
+minefield=browser,desktop
+minimo=browser
+mobile=merge,mobile
+mobile safari=maybe_browser,mobile
+mozilla=maybe_browser
+msie=maybe_browser
+namoroka=browser,desktop
+navigator=browser
+netnewswire=browser,desktop
+netpositive=browser,desktop
+netscape=browser
+netscape6=browser
+nokia5250=force_browser,mobile
+omniweb=browser
+opera=merge_or_browser
+opera mini=force_browser
+opera mobi=browser,mobile
+orca=browser,desktop
+oregano=browser
+palemoon=browser,desktop
+prism=browser,desktop
+puffin=browser,mobile
+qtweb=merge
+qtweb internet=merge
+qtweb internet browser=browser,desktop
+rekonq=browser,desktop
+retawq=browser
+rockmelt=force_browser,desktop
+rv=maybe_browser
+safari=maybe_browser
+samsungbrowser=browser,mobile
+seamonkey=browser,desktop
+semc-browser=browser
+shiretoko=browser,desktop
+silk=browser,mobile
+skyfire=browser,desktop
+sleipnir=browser
+slimbrowser=browser,desktop
+stainless=browser,desktop
+sundance=browser
+sunrise=browser,desktop
+sunrisebrowser=browser,desktop
+surf=browser,desktop
+sylera=force_browser,desktop
+teashark=browser,desktop
+teleca=browser,desktop
+thunderbird=browser,desktop
+tencenttraveler=browser
+tenfourfox=browser
+theworld=browser
+ucbrowser=browser
+uzbl=browser
+version=maybe_browser
+vimprobable=browser
+vimprobable2=browser
+vonkeror=browser
+w3m=browser
+webpositive=force_browser
+weltweitimnetzbrowser=browser
+windows-media-player=robot
+wyzo=browser,desktop
+
+# robots (+everyone ending with 'bot', 'crawler', 'spider', 'agent' or 'validator')
+amaya=robot
+appengine-google=robot
+accoona-ai-agent=robot
+arachmo=robot
+b-l-i-t-z-b-o-t=robot
+baiduspider+=robot
+bing=robot
+binget=robot
+bingpreview=robot
+bloglines=robot
+boitho.com-dc=robot
+cerberian=robot
+charlotte=robot
+cocoal.icio.us=browser
+control=robot
+cosmos=robot
+csscheck=robot
+curl=robot
+cynthia=robot
+dataparksearch=robot
+emailsiphon=robot
+feedfetcher-google=robot
+findlinks=robot
+google=robot
+googlebot-image=robot
+greatnews=robot
+gregarius=robot
+holmes=robot
+htdig=robot
+html=merge
+htmlparser=robot
+ia_archiver=robot
+ichiro=robot
+igdespyder=robot
+java=maybe_robot
+larbin=robot
+lftp=robot
+libwww=robot
+libwww-perl=robot
+link=merge
+link checker=robot
+link valet=robot
+link validity=robot
+linkwalker=robot
+linkexaminer=robot
+lwp-trivial=robot
+magpierss=robot
+mediapartners-google=robot
+metauri=robot
+mnogosearch=robot
+morning=merge
+morning paper=robot
+mrchrome=robot
+mvaclient=robot
+netresearchserver=robot
+netseer=merge
+netseer crawler=robot
+newsgator=robot
+nfreader=robot
+ng-search=robot
+nitro=robot
+notifixious=robot
+nusearch=merge
+nutchcvs=robot
+nymesis=robot
+obot=robot
+oegp=robot
+offline=merge
+offline explorer=robot
+orbiter=robot
+p3p=robot
+peach=robot
+peew=robot
+php=robot
+pompos=robot
+postpost=robot
+pxyscand=robot
+pycurl=robot
+python-urllib=robot
+qseero=robot
+radian=robot
+reciprocal=merge
+reciprocal link=merge
+reciprocal link system=robot
+sbider=robot
+scoutjet=robot
+screenshot-generator=robot
+scrubby=robot
+searchsight=robot
+semanticdiscovery=robot
+seznam=robot
+shopwiki=robot
+sitebar=robot
+snappy=robot
+snoopy=robot
+sosospider+=robot
+sqworm=robot
+stackrambler=robot
+susie=robot
+teoma=robot
+tineye=robot
+tocrawl=robot
+truwogps=robot
+updated=robot
+universalfeedparser=robot
+urd-magpie=robot
+vagabondo=robot
+vortex=robot
+voyager=robot
+vyu2=robot
+w3c-checklink=robot
+web=merge
+web downloader=robot
+webcapture=robot
+webcollage=robot
+webcopier=robot
+webis=robot
+websquash.com=robot
+webzip=robot
+wget=robot
+womlpefactory=robot
+xenu=robot
+yacy=robot
+yahoo=merge
+yahoo slurp=robot
+yahooseeker=robot
+yahooseeker-testing=robot
+yandeximages=robot
+yeti=robot
+yooglifetchagent=robot
+zao=robot
+zeller=robot
+zyborg=robot
+
+# rendering engines
+applewebkit=engine
+blink=engine
+khtml=engine
+martha=engine
+presto=engine
+prince=engine
+trident=engine
+gecko=engine
+
+# operating systems
+amigaos=os,desktop
+android=os
+bada=force_os
+bb10=force_os
+beos=os,desktop
+blackberry=force_os,mobile
+blackberry8100=force_os,mobile
+blackberry8300=force_os,mobile
+blackberry8520=force_os,mobile
+blackberry8530=force_os,mobile
+blackberry8700=force_os,mobile
+blackberry9100=force_os,mobile
+blackberry9300=force_os,mobile
+blackberry9320=force_os,mobile
+blackberry9360=force_os,mobile
+blackberry9380=force_os,mobile
+blackberry9500=force_os,mobile
+blackberry9700=force_os,mobile
+blackberry9780=force_os,mobile
+blackberry9790=force_os,mobile
+blackberry9860=force_os,mobile
+blackberry9900=force_os,mobile
+bsd=os,desktop
+centos=os,desktop
+cros=force_os,desktop
+cpu=merge
+cpu like=merge
+cpu like mac=merge
+cpu like mac os=merge
+cpu like mac os x=ignore
+cpu like os=merge
+cpu like os x=ignore
+cpu os=merge
+cpu os x=ignore
+darwin=os
+debian=os,desktop
+elementary=merge
+elementary os=force_os,desktop
+fedora=force_os,desktop
+remi=force_os
+freebsd=os,desktop
+fxos=force_os
+gentoo=force_os,desktop
+haiku=os
+hp-ux=os,desktop
+hpwos=os
+ios=force_os
+kindle=maybe_os,tablet
+like mac=merge
+like mac os=merge
+like mac os x=ignore
+like os=merge
+like os x=ignore
+linux=maybe_os
+mint=os,desktop
+tizen=os
+mac=merge
+mac os=merge
+mac os x=maybe_os,desktop
+macos=merge
+macos x=maybe_os
+mandriva=force_os
+meego=force_os
+netbsd=os
+newstockrom=os
+nintendo=merge
+nintendo ds=os
+nokiae=os,mobile
+openbsd=os
+os=merge
+os x=os
+palm=merge
+palm os=os
+palmos=os
+palmsource=os
+playbook=os,tablet
+playstation=browser_os
+psp=browser_os
+red=merge
+red hat=os
+rhel=os
+risc=merge
+risc os=os
+sailfish=force_os
+slackware=force_os
+sonyericssonk=os
+suse=os
+series=force_os,mobile
+series40=force_os,mobile
+series60=force_os,mobile
+series80=force_os,mobile
+series90=force_os,mobile
+startos=os
+sunos=os
+supergamer=os
+syllable=os
+symbian=os
+symbianos=force_os
+symbos=os
+tigeros=os
+tt=os
+ubuntu=os,desktop
+unicos=merge,desktop
+unicos lclinux=os
+unix=merge_or_os
+unix bsd=os,desktop
+unixware=os,desktop
+webos=os
+wii=merge,mobile
+wii libnup=browser_os
+win98=os,desktop
+windows=merge_or_os
+windows nt=os,desktop
+windows xp=os,desktop
+windows phone=os,mobile
+windows mobile=os,mobile
+xbox=os,mobile
+
+# tvs
+apple=merge
+apple tv=,tv
+dlnadoc=,tv
+googletv=os,tv
+gtv100=,tv
+hbbtv=,tv
+iconbit=,tv
+itunes-appletv=,tv
+mk903v=,tv
+mt7001=,tv
+mx2=,tv
+pov_tv=,tv
+pov_tv-hdmi=,tv
+roku=,tv
+smart-tv=,tv
+smarttv=,tv
+tv=,tv
+
+# tablets
+allview=,tablet
+arc=,tablet
+at100=,tablet
+at10le=,tablet
+ax922=,tablet
+b1=,tablet
+cm_tenderloin=,tablet
+cyclops=,tablet
+elcano=,tablet
+f-01=,tablet
+freetab=,tablet
+gt-n=,tablet
+gt-p=,tablet
+gt-s=,tablet
+hp-tablet=,tablet
+huaweimediapad=,tablet
+ideatab=,tablet
+ideataba1000=,tablet
+ideataba1000l=,tablet
+ipad=maybe_os,tablet
+kfthwi=maybe_os,tablet
+kfjwi=maybe_os,tablet
+kftt=os,tablet
+lenovo=merge
+lenovo b8000=,tablet
+lenovo s5000=,tablet
+lenovoa3300=,tablet
+lg-v=,tablet
+lifetab_e=,tablet
+lifetab_p=,tablet
+lifetab_s=,tablet
+m785=,tablet
+me172v=,tablet
+me173x=,tablet
+me176c=,tablet
+me176cx=,tablet
+me269c=,tablet
+me301t=,tablet
+me302c=,tablet
+mp-1041=,tablet
+mz601=,tablet
+mz604=,tablet
+nettab=,tablet
+nexus 7=,tablet
+nexus 9=,tablet
+nexus 10=,tablet
+nookcolor=,tablet
+nookhd=,tablet
+pad=,tablet
+pc1038=,tablet
+pmp3670b=,tablet
+pov_tab=,tablet
+pov_tab-p=,tablet
+pov_tab-protab=,tablet
+prime=,tablet
+rct6077w=,tablet
+samsung-gt-s=,tablet
+sch-i=,tablet
+sgp311=,tablet
+sgp312=,tablet
+sgp321=,tablet
+sgp341=,tablet
+sh-06=,tablet
+sk-mtek=,tablet
+sm-p=,tablet
+sm-t=,tablet
+tab=,tablet
+tab10=,tablet
+tab465euk=,tablet
+tab9dualc=,tablet
+tablet=,tablet
+tb=,tablet
+transformer=,tablet
+x98=,tablet
+xoom=,tablet
+
+# mobiles
+apple-iphone=,mobile
+gt-i=,mobile
+htc=,mobile
+huawei=,mobile
+iphone=maybe_os,mobile
+ipod=maybe_os,mobile
+j2me=,mobile
+lenovo-a=,mobile
+nokia=,mobile
+nokia300=,mobile
+nokia5310xpressmusic=,mobile
+nokiax2=os,mobile
+samsung=,mobile
+smartphone=,mobile
+
+qt=,desktop

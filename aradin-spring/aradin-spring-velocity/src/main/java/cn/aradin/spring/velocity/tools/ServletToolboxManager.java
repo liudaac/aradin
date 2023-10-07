@@ -25,17 +25,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.digester.RuleSet;
+import org.apache.commons.digester3.RuleSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.velocity.tools.view.ToolInfo;
-import org.apache.velocity.tools.view.XMLToolboxManager;
-import org.apache.velocity.tools.view.context.ViewContext;
-import org.apache.velocity.tools.view.servlet.ServletToolInfo;
-import org.apache.velocity.tools.view.servlet.ServletToolboxRuleSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
@@ -43,9 +35,14 @@ import org.springframework.core.io.ResourceLoader;
 
 import cn.aradin.spring.core.bean.AradinBeanFactory;
 import cn.aradin.spring.velocity.ui.SpringResourceLoader;
+import jakarta.servlet.ServletContext;
 
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.tools.ToolInfo;
+import org.apache.velocity.tools.config.XmlFactoryConfiguration;
+import org.apache.velocity.tools.config.XmlFactoryConfigurationRuleSet;
 import org.apache.velocity.tools.view.ServletUtils;
+import org.apache.velocity.tools.view.ViewContext;
 
 
 /**
@@ -101,11 +98,9 @@ import org.apache.velocity.tools.view.ServletUtils;
  * @author <a href="mailto:geirm@apache.org">Geir Magnusson Jr.</a>
  * @author <a href="mailto:henning@schmiedehausen.org">Henning P. Schmiedehausen</a>
  * @version $Id$
- * @deprecated Use {@link org.apache.velocity.tools.config.XmlFactoryConfiguration}
  */
-@Deprecated
 @SuppressWarnings("rawtypes")
-public class ServletToolboxManager extends XMLToolboxManager
+public class ServletToolboxManager extends XmlFactoryConfiguration
 {
 
 	private final static Logger log = LoggerFactory.getLogger(ServletToolboxManager.class);
@@ -124,7 +119,7 @@ public class ServletToolboxManager extends XMLToolboxManager
     private boolean createSession;
 
     private static HashMap managersMap = new HashMap();
-    private static RuleSet servletRuleSet = new ServletToolboxRuleSet();
+    private static RuleSet servletRuleSet = new XmlFactoryConfigurationRuleSet();
 
     // --------------------------------------------------- Constructor --------
 
@@ -249,53 +244,6 @@ public class ServletToolboxManager extends XMLToolboxManager
         LOG.debug("create-session is set to " + b);
     }
 
-
-    /**
-     * <p>Sets an application attribute to tell velocimacros and tools
-     * (especially the LinkTool) whether they should output XHTML or HTML.</p>
-     *
-     * @see ViewContext#XHTML
-     * @since VelocityTools 1.1
-     * @param value Boolean
-     */
-    public void setXhtml(Boolean value)
-    {
-        servletContext.setAttribute(ViewContext.XHTML, value);
-        LOG.info(ViewContext.XHTML + " is set to " + value);
-    }
-
-
-    // ------------------------------ XMLToolboxManager Overrides -------------
-
-    /**
-     * <p>Retrieves the rule set Digester should use to parse and load
-     * the toolbox for this manager.</p>
-     *
-     * <p>The DTD corresponding to the ServletToolboxRuleSet is:</p>
-     * <pre>
-     *  &lt;?xml version="1.0"?&gt;
-     *  &lt;!ELEMENT toolbox (create-session?,xhtml?,tool*,data*,#PCDATA)&gt;
-     *  &lt;!ELEMENT create-session (#CDATA)&gt;
-     *  &lt;!ELEMENT xhtml          (#CDATA)&gt;
-     *  &lt;!ELEMENT tool           (key,scope?,class,parameter*,#PCDATA)&gt;
-     *  &lt;!ELEMENT data           (key,value)&gt;
-     *      &lt;!ATTLIST data type (string|number|boolean) "string"&gt;
-     *  &lt;!ELEMENT key            (#CDATA)&gt;
-     *  &lt;!ELEMENT scope          (#CDATA)&gt;
-     *  &lt;!ELEMENT class          (#CDATA)&gt;
-     *  &lt;!ELEMENT parameter (EMPTY)&gt;
-     *      &lt;!ATTLIST parameter name CDATA #REQUIRED&gt;
-     *      &lt;!ATTLIST parameter value CDATA #REQUIRED&gt;
-     *  &lt;!ELEMENT value          (#CDATA)&gt;
-     * </pre>
-     *
-     * @since VelocityTools 1.1
-     */
-    protected RuleSet getRuleSet()
-    {
-        return servletRuleSet;
-    }
-
     /**
      * Ensures that application-scoped tools do not have request path
      * restrictions set for them, as those will not be enforced.
@@ -306,10 +254,6 @@ public class ServletToolboxManager extends XMLToolboxManager
      */
     protected boolean validateToolInfo(ToolInfo info)
     {
-        if (!super.validateToolInfo(info))
-        {
-            return false;
-        }
         if (info instanceof ServletToolInfo)
         {
             ServletToolInfo sti = (ServletToolInfo)info;

@@ -3,8 +3,10 @@ package cn.aradin.spring.velocity.view;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -19,7 +21,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContextException;
-import org.springframework.core.NestedIOException;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.AbstractTemplateView;
 import org.springframework.web.util.NestedServletException;
@@ -260,7 +261,7 @@ public class VelocityView extends AbstractTemplateView {
 			return false;
 		}
 		catch (Exception ex) {
-			throw new NestedIOException(
+			throw new ServletException(
 					"Could not load Velocity template for URL [" + getUrl() + "]", ex);
 		}
 	}
