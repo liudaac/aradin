@@ -36,11 +36,11 @@ import org.apache.velocity.tools.config.FactoryConfiguration;
 import org.apache.velocity.tools.config.FileFactoryConfiguration;
 import org.apache.velocity.tools.config.PropertiesFactoryConfiguration;
 import org.apache.velocity.tools.config.XmlFactoryConfiguration;
+import org.apache.velocity.tools.view.JeeConfig;
+import org.apache.velocity.tools.view.JeeContextConfig;
+import org.apache.velocity.tools.view.JeeFilterConfig;
+import org.apache.velocity.tools.view.JeeServletConfig;
 import org.apache.velocity.tools.view.VelocityView;
-
-import cn.aradin.spring.velocity.view.tool.JeeConfig;
-import cn.aradin.spring.velocity.view.tool.JeeFilterConfig;
-import cn.aradin.spring.velocity.view.tool.JeeServletConfig;
 
 /**
  * <p>A set of utility methods for supporting and using

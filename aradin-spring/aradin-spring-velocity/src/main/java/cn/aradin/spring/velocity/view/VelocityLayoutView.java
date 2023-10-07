@@ -10,9 +10,6 @@ import org.apache.velocity.Template;
 import org.apache.velocity.context.Context;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
-import org.springframework.core.NestedIOException;
-import org.springframework.web.util.NestedServletException;
-
 /**
  * VelocityLayoutView emulates the functionality offered by Velocity's
  * VelocityLayoutServlet to ease page composition from different templates.

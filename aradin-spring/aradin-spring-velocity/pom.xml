@@ -24,11 +24,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.velocity.tools</groupId>
+		    <groupId>cn.aradin</groupId>
 		    <artifactId>velocity-tools-generic</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.velocity.tools</groupId>
+			<groupId>cn.aradin</groupId>
 			<artifactId>velocity-tools-view</artifactId>
 		</dependency>
 		<dependency>

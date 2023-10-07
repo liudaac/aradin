@@ -7,12 +7,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.context.Context;
-import org.apache.velocity.tools.view.ToolboxManager;
-import org.apache.velocity.tools.view.context.ChainedContext;
-import org.apache.velocity.tools.view.servlet.ServletToolboxManager;
 
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
+
+import cn.aradin.spring.velocity.tools.ServletToolboxManager;
 
 /**
  * {@link VelocityView} subclass which adds support for Velocity Tools toolboxes
@@ -94,7 +93,7 @@ public class VelocityToolboxView extends VelocityView {
 
 		// Load a Velocity Tools toolbox, if necessary.
 		if (getToolboxConfigLocation() != null) {
-			ToolboxManager toolboxManager = ServletToolboxManager.getInstance(
+			ServletToolboxManager toolboxManager = ServletToolboxManager.getInstance(
 					getServletContext(), getToolboxConfigLocation());
 			Map<String, Object> toolboxContext = toolboxManager.getToolbox(velocityContext);
 			velocityContext.setToolbox(toolboxContext);

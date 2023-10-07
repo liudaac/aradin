@@ -36,6 +36,7 @@ import org.springframework.core.io.ResourceLoader;
 import cn.aradin.spring.core.bean.AradinBeanFactory;
 import cn.aradin.spring.velocity.ui.SpringResourceLoader;
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpSession;
 
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.tools.ToolInfo;
