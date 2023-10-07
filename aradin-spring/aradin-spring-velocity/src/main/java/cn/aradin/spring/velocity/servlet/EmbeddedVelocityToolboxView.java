@@ -13,13 +13,11 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.context.ChainedInternalContextAdapter;
 import org.apache.velocity.context.Context;
-import org.apache.velocity.context.InternalContextAdapterImpl;
 import org.apache.velocity.tools.ToolboxFactory;
 import org.apache.velocity.tools.config.FactoryConfiguration;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.core.io.ClassPathResource;
 
-import cn.aradin.spring.velocity.tools.ServletToolboxManager;
 import cn.aradin.spring.velocity.view.VelocityToolboxView;
 
 /**
