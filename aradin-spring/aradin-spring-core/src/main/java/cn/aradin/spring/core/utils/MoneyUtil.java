@@ -1,6 +1,7 @@
 package cn.aradin.spring.core.utils;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * 数字转换为汉语中人民币的大写
@@ -51,7 +52,7 @@ public class MoneyUtil {
 			return CN_ZEOR_FULL;
 		}
 		// 这里会进行金额的四舍五入
-		long number = numberOfMoney.movePointRight(MONEY_PRECISION).setScale(0, 4).abs().longValue();
+		long number = numberOfMoney.movePointRight(MONEY_PRECISION).setScale(0, RoundingMode.HALF_UP).abs().longValue();
 		// 得到小数点后两位值
 		long scale = number % 100;
 		int numUnit = 0;

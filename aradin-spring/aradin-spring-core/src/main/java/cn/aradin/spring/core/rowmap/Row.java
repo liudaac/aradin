@@ -194,12 +194,12 @@ public class Row extends HashMap<Object, Object> {
 	}
 
 	public int putInt(Object name, int value) {
-		super.put(name, new Integer(value));
+		super.put(name, Integer.valueOf(value));
 		return value;
 	}
 
 	public float putFloat(Object name, float value) {
-		super.put(name, new Float(value));
+		super.put(name, Float.valueOf(value));
 		return value;
 	}
 

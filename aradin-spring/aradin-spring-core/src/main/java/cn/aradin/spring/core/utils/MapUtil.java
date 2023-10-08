@@ -45,7 +45,7 @@ public class MapUtil {
 	public static Map<String,String> objectToMap(Object object,String... ignore){
 		Map<String,String> tempMap = new LinkedHashMap<String, String>();
 		for(Field f : object.getClass().getDeclaredFields()){
-			if(!f.isAccessible()){
+			if(!f.canAccess(object)){
 				f.setAccessible(true);
 			}
 			boolean ig = false;

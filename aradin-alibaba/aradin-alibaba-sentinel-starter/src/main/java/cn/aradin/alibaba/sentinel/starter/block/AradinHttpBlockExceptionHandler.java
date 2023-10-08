@@ -15,6 +15,7 @@ import cn.aradin.spring.core.net.http.error.HttpError;
 @SuppressWarnings("deprecation")
 public class AradinHttpBlockExceptionHandler implements BlockExceptionHandler {
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response, BlockException e) throws Exception {
 		// TODO Auto-generated method stub
