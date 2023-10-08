@@ -528,6 +528,10 @@ public class VelocityView extends AbstractTemplateView {
 	 */
 	private static class LocaleAwareDateTool extends DateTool {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 3574821952354767748L;
 		private final HttpServletRequest request;
 
 		public LocaleAwareDateTool(HttpServletRequest request) {
@@ -554,6 +558,10 @@ public class VelocityView extends AbstractTemplateView {
 	 */
 	private static class LocaleAwareNumberTool extends NumberTool {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -8661158965591684349L;
 		private final HttpServletRequest request;
 
 		public LocaleAwareNumberTool(HttpServletRequest request) {

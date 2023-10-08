@@ -5,13 +5,12 @@ import java.util.Map;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import org.apache.velocity.VelocityContext;
 import org.apache.velocity.context.Context;
+import org.apache.velocity.tools.ToolManager;
+import org.apache.velocity.tools.view.ViewToolContext;
 
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
-
-import cn.aradin.spring.velocity.tools.ServletToolboxManager;
 
 /**
  * {@link VelocityView} subclass which adds support for Velocity Tools toolboxes
@@ -46,7 +45,6 @@ import cn.aradin.spring.velocity.tools.ServletToolboxManager;
  * @see org.apache.velocity.tools.view.context.ViewContext
  * @see org.apache.velocity.tools.view.context.ChainedContext
  */
-@SuppressWarnings("deprecation")
 public class VelocityToolboxView extends VelocityView {
 
 	private String toolboxConfigLocation;
@@ -82,24 +80,16 @@ public class VelocityToolboxView extends VelocityView {
 	 * initialization of ViewTool instances.
 	 * @see #initTool
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	protected Context createVelocityContext(
 			Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		// Create a ChainedContext instance.
-		ChainedContext velocityContext = new ChainedContext(
-				new VelocityContext(model), getVelocityEngine(), request, response, getServletContext());
-
-		// Load a Velocity Tools toolbox, if necessary.
+		ViewToolContext context = new ViewToolContext(getVelocityEngine(), request, response, getServletContext());
 		if (getToolboxConfigLocation() != null) {
-			ServletToolboxManager toolboxManager = ServletToolboxManager.getInstance(
-					getServletContext(), getToolboxConfigLocation());
-			Map<String, Object> toolboxContext = toolboxManager.getToolbox(velocityContext);
-			velocityContext.setToolbox(toolboxContext);
+			ToolManager toolManager = new ToolManager(false, true);
+			toolManager.configure(getToolboxConfigLocation());
+			context.addToolbox(toolManager.getApplicationToolbox());
 		}
-
-		return velocityContext;
+		return context;
 	}
 
 	/**

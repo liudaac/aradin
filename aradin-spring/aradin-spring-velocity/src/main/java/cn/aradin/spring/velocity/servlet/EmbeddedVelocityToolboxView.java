@@ -9,12 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
-import org.apache.velocity.context.ChainedInternalContextAdapter;
 import org.apache.velocity.context.Context;
-import org.apache.velocity.tools.ToolboxFactory;
-import org.apache.velocity.tools.config.FactoryConfiguration;
+import org.apache.velocity.tools.view.ViewToolContext;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.core.io.ClassPathResource;
 
@@ -34,25 +30,9 @@ public class EmbeddedVelocityToolboxView extends VelocityToolboxView {
 	@Override
 	protected Context createVelocityContext(Map<String, Object> model,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		VelocityEngine velocityEngine = getVelocityEngine();
-		VelocityContext context = new VelocityContext(model);
-		ChainedInternalContextAdapter chainedContext = (ChainedInternalContextAdapter)context.getChainedContext();
-//		org.apache.velocity.tools.view.context.ChainedContext context = new org.apache.velocity.tools.view.context.ChainedContext(
-//				new VelocityContext(model), getVelocityEngine(), request, response,
-//				getServletContext());
-		if (getToolboxConfigLocation() != null) {
-			setContextToolbox(context);
-		}
+		ViewToolContext context = new ViewToolContext(getVelocityEngine(), request, response, getToolboxConfigFileAwareServletContext());
+		//IF NEED SET TOOL
 		return context;
-	}
-
-	private void setContextToolbox(
-			VelocityContext context) {
-		FactoryConfiguration factoryConfig = new FactoryConfiguration();
-		factoryConfig.setSource(getToolboxConfigLocation());
-		ToolboxFactory toolboxFactory = new ToolboxFactory();
-		toolboxFactory.configure(factoryConfig);
-		
 	}
 
 	private ServletContext getToolboxConfigFileAwareServletContext() {
