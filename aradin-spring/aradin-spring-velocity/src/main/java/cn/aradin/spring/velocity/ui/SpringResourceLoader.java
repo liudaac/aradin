@@ -1,6 +1,8 @@
 package cn.aradin.spring.velocity.ui;
 
 
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Arrays;
 
@@ -9,7 +11,6 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.resource.Resource;
 import org.apache.velocity.runtime.resource.loader.ResourceLoader;
-import org.apache.velocity.tools.view.WebappResourceLoader;
 import org.apache.velocity.util.ExtProperties;
 import org.springframework.util.StringUtils;
 
@@ -88,13 +89,14 @@ public class SpringResourceLoader extends ResourceLoader {
 			logger.debug("Operating for Velocity resource with name [" + source + "]");
 		}
 		for (String resourceLoaderPath : this.resourceLoaderPaths) {
+			org.springframework.core.io.Resource resource =
+					this.resourceLoader.getResource(resourceLoaderPath + source);
 			try {
-				WebappResourceLoader loader = new WebappResourceLoader();
-				return loader.getResourceReader(resourceLoaderPath+source, encoding);
-			} catch (Exception e) {
-				// TODO: handle exception
+				return new InputStreamReader(resource.getInputStream(), encoding);
+			}
+			catch (IOException ex) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Could not find Velocity resource: " + resourceLoaderPath+source);
+					logger.debug("Could not find Velocity resource: " + resource);
 				}
 			}
 		}
