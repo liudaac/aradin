@@ -76,7 +76,8 @@
 		<fastjson.version>2.0.40</fastjson.version>
 		<gson.version>2.10.1</gson.version>
 		<slf4j.version>2.0.9</slf4j.version>
-		<logback.version>1.4.11</logback.version><!-- for 1.4.5 need slf4j-api 2.x -->
+		<logback.version>1.4.11</logback.version><!-- for 1.4.5 need slf4j-api 
+			2.x -->
 		<guava.version>32.1.2-jre</guava.version>
 		<joda.version>2.12.2</joda.version>
 		<lombok.version>1.18.30</lombok.version>
@@ -92,7 +93,7 @@
 		<annotation.version>1.3.2</annotation.version>
 		<servlet.version>6.0.0</servlet.version>
 		<groovy.version>4.0.15</groovy.version>
-		
+
 		<flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
 	</properties>
 
@@ -125,20 +126,20 @@
 				<scope>import</scope>
 			</dependency>
 			<dependency>
-		      <groupId>org.springframework.plugin</groupId>
-		      <artifactId>spring-plugin-core</artifactId>
-		      <version>${spring-plugin.version}</version>
-		    </dependency>
-		    <dependency>
-		      <groupId>org.springframework.plugin</groupId>
-		      <artifactId>spring-plugin-metadata</artifactId>
-		      <version>${spring-plugin.version}</version>
-		    </dependency>
+				<groupId>org.springframework.plugin</groupId>
+				<artifactId>spring-plugin-core</artifactId>
+				<version>${spring-plugin.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.plugin</groupId>
+				<artifactId>spring-plugin-metadata</artifactId>
+				<version>${spring-plugin.version}</version>
+			</dependency>
 			<!-- Apache Dubbo -->
 			<dependency>
-			    <groupId>org.apache.dubbo</groupId>
-			    <artifactId>dubbo</artifactId>
-			    <version>${dubbo.version}</version>
+				<groupId>org.apache.dubbo</groupId>
+				<artifactId>dubbo</artifactId>
+				<version>${dubbo.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.dubbo</groupId>
@@ -156,34 +157,33 @@
 				<version>${dubbo.version}</version>
 			</dependency>
 			<dependency>
-			    <groupId>org.apache.dubbo</groupId>
-			    <artifactId>dubbo-spring-boot-starter</artifactId>
-			    <version>${dubbo.version}</version>
+				<groupId>org.apache.dubbo</groupId>
+				<artifactId>dubbo-spring-boot-starter</artifactId>
+				<version>${dubbo.version}</version>
 			</dependency>
 			<dependency>
-			    <groupId>org.apache.dubbo</groupId>
-			    <artifactId>dubbo-metadata-report-nacos</artifactId>
-			    <version>${dubbo.version}</version>
+				<groupId>org.apache.dubbo</groupId>
+				<artifactId>dubbo-metadata-report-nacos</artifactId>
+				<version>${dubbo.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.dubbo</groupId>
 				<artifactId>dubbo-spring-boot-autoconfigure</artifactId>
 				<version>${dubbo.version}</version>
 			</dependency>
-			<!-- Not suggest to use spring-cloud-starter-dubbo as alibaba removed it after version 2.2.8.RELEASE.
-			  And it also not supported with dubbo 3+ versions. So we recommend developers to use dubbo-spring-boot-starter instead 
-			  or it will register service with dubbo.metadata-service.urls which is highly-cutomized by springcloud-dubbo2 -->
-			<!--<dependency>
-			    <groupId>com.alibaba.cloud</groupId>
-			    <artifactId>spring-cloud-starter-dubbo</artifactId>
-			    <version>${spring-cloud-dubbo.version}</version>
-			</dependency>-->
+			<!-- Not suggest to use spring-cloud-starter-dubbo as alibaba removed 
+				it after version 2.2.8.RELEASE. And it also not supported with dubbo 3+ versions. 
+				So we recommend developers to use dubbo-spring-boot-starter instead or it 
+				will register service with dubbo.metadata-service.urls which is highly-cutomized 
+				by springcloud-dubbo2 -->
+			<!--<dependency> <groupId>com.alibaba.cloud</groupId> <artifactId>spring-cloud-starter-dubbo</artifactId> 
+				<version>${spring-cloud-dubbo.version}</version> </dependency> -->
 			<dependency>
-			    <groupId>com.alibaba.fastjson2</groupId>
-			    <artifactId>fastjson2</artifactId>
-			    <version>${fastjson.version}</version>
+				<groupId>com.alibaba.fastjson2</groupId>
+				<artifactId>fastjson2</artifactId>
+				<version>${fastjson.version}</version>
 			</dependency>
-			
+
 			<!-- sentinel -->
 			<dependency>
 				<groupId>com.alibaba.csp</groupId>
@@ -195,13 +195,13 @@
 				<artifactId>sentinel-apache-dubbo3-adapter</artifactId>
 				<version>${sentinel.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.alibaba.nacos</groupId>
 				<artifactId>nacos-client</artifactId>
 				<version>${nacos.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.alibaba.nacos</groupId>
 				<artifactId>nacos-common</artifactId>
@@ -219,7 +219,7 @@
 				<artifactId>spring-boot-starter-data-solr</artifactId>
 				<version>${springboot.solr.version}</version>
 			</dependency>
-			
+
 			<!-- mybatis -->
 			<dependency>
 				<groupId>com.baomidou</groupId>
@@ -237,9 +237,9 @@
 				<version>${mybatis.version}</version>
 			</dependency>
 			<dependency>
-			    <groupId>com.mysql</groupId>
-    			<artifactId>mysql-connector-j</artifactId>
-			    <version>${mysqlconnect.version}</version>
+				<groupId>com.mysql</groupId>
+				<artifactId>mysql-connector-j</artifactId>
+				<version>${mysqlconnect.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.alibaba</groupId>
@@ -249,15 +249,15 @@
 
 			<!-- logback -->
 			<dependency>
-	            <groupId>ch.qos.logback</groupId>
-	            <artifactId>logback-core</artifactId>
-	            <version>${logback.version}</version>
-	        </dependency>
-	        <dependency>
-	            <groupId>ch.qos.logback</groupId>
-	            <artifactId>logback-classic</artifactId>
-	            <version>${logback.version}</version>
-	        </dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
 
 			<!-- Lucene -->
 			<dependency>
@@ -409,9 +409,9 @@
 				<version>${http.version}</version>
 			</dependency>
 			<dependency>
-			    <groupId>org.apache.httpcomponents.client5</groupId>
-			    <artifactId>httpclient5</artifactId>
-			    <version>${http5.version}</version>
+				<groupId>org.apache.httpcomponents.client5</groupId>
+				<artifactId>httpclient5</artifactId>
+				<version>${http5.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>net.sf.oval</groupId>
@@ -566,10 +566,10 @@
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-		    	<groupId>cn.aradin</groupId>
-		    	<artifactId>aradin-spring-xxljob-starter</artifactId>
-		    	<version>${revision}</version>
-		    </dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-spring-xxljob-starter</artifactId>
+				<version>${revision}</version>
+			</dependency>
 			<dependency>
 				<groupId>cn.aradin</groupId>
 				<artifactId>aradin-zookeeper-boot-starter</artifactId>
@@ -616,69 +616,69 @@
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-		      <groupId>cn.aradin</groupId>
-		      <artifactId>springfox-spring-web</artifactId>
-		      <version>${revision}</version>
-		    </dependency>
-		    <dependency>
-		      <groupId>cn.aradin</groupId>
-		      <artifactId>springfox-swagger-common</artifactId>
-		      <version>${revision}</version>
-		    </dependency>
-		    <dependency>
-		      <groupId>cn.aradin</groupId>
-		      <artifactId>springfox-swagger2</artifactId>
-		      <version>${revision}</version>
-		    </dependency>
-		    <dependency>
-		    	<groupId>cn.aradin</groupId>
-		    	<artifactId>swagger-bootstrap-ui</artifactId>
-		    	<version>${revision}</version>
-		    </dependency>
-		    <dependency>
-		    	<groupId>cn.aradin</groupId>
-		    	<artifactId>springfox-spi</artifactId>
-		    	<version>${revision}</version>
-		    </dependency>
-		    <dependency>
-		    	<groupId>cn.aradin</groupId>
-		    	<artifactId>springfox-core</artifactId>
-		    	<version>${revision}</version>
-		    </dependency>
-		    <dependency>
-		    	<groupId>cn.aradin</groupId>
-		    	<artifactId>xxl-job-core</artifactId>
-		    	<version>${revision}</version>
-		    </dependency>
-		    <dependency>
-		    	<groupId>cn.aradin</groupId>
-		    	<artifactId>velocity-tools-generic</artifactId>
-		    	<version>${revision}</version>
-		    </dependency>
-		    <dependency>
-		    	<groupId>cn.aradin</groupId>
-		    	<artifactId>velocity-tools-view</artifactId>
-		    	<version>${revision}</version>
-		    </dependency>
-		    <dependency>
-			    <groupId>net.bytebuddy</groupId>
-			    <artifactId>byte-buddy</artifactId>
-			    <version>${buddy.version}</version>
+				<groupId>cn.aradin</groupId>
+				<artifactId>springfox-spring-web</artifactId>
+				<version>${revision}</version>
 			</dependency>
 			<dependency>
-			  <groupId>javax.annotation</groupId>
-			  <artifactId>javax.annotation-api</artifactId>
-			  <version>${annotation.version}</version>
+				<groupId>cn.aradin</groupId>
+				<artifactId>springfox-swagger-common</artifactId>
+				<version>${revision}</version>
 			</dependency>
 			<dependency>
-			    <groupId>jakarta.servlet</groupId>
-			    <artifactId>jakarta.servlet-api</artifactId>
-			    <version>${servlet.version}</version>
+				<groupId>cn.aradin</groupId>
+				<artifactId>springfox-swagger2</artifactId>
+				<version>${revision}</version>
 			</dependency>
 			<dependency>
-			    <groupId>org.apache.groovy</groupId>
-			    <artifactId>groovy</artifactId>
-			    <version>${groovy.version}</version>
+				<groupId>cn.aradin</groupId>
+				<artifactId>swagger-bootstrap-ui</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>springfox-spi</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>springfox-core</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>xxl-job-core</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>velocity-tools-generic</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>velocity-tools-view</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.bytebuddy</groupId>
+				<artifactId>byte-buddy</artifactId>
+				<version>${buddy.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.annotation</groupId>
+				<artifactId>javax.annotation-api</artifactId>
+				<version>${annotation.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>jakarta.servlet</groupId>
+				<artifactId>jakarta.servlet-api</artifactId>
+				<version>${servlet.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.groovy</groupId>
+				<artifactId>groovy</artifactId>
+				<version>${groovy.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
