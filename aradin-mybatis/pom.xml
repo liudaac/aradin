@@ -16,7 +16,6 @@
 	<modules>
 		<module>aradin-mybatis-boot-starter</module>
 		<module>aradin-mybatis-plus-starter</module>
-		<module>aradin-mybatis-shard-starter</module>
 	</modules>
 	<dependencies>
 		<dependency>

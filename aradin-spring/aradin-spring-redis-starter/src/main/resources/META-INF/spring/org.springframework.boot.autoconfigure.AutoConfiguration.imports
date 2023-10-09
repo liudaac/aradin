@@ -1,0 +1,2 @@
+cn.aradin.spring.redis.starter.AradinRedisAutoConfiguration
+cn.aradin.spring.redis.starter.AradinRedisManagerAutoConfiguration
