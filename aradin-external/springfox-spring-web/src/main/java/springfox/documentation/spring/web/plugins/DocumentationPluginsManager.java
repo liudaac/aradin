@@ -139,7 +139,7 @@ public class DocumentationPluginsManager {
   }
 
   public ResourceGroupingStrategy resourceGroupingStrategy(DocumentationType documentationType) {
-    return resourceGroupingStrategies.getPluginFor(documentationType, new SpringGroupingStrategy());
+    return resourceGroupingStrategies.getPluginFor(documentationType).orElse(new SpringGroupingStrategy());
   }
 
   private DocumentationPlugin defaultDocumentationPlugin() {
@@ -149,7 +149,7 @@ public class DocumentationPluginsManager {
   public DocumentationContextBuilder createContextBuilder(
       DocumentationType documentationType,
       DefaultConfiguration defaultConfiguration) {
-    return defaultsProviders.getPluginFor(documentationType, defaultConfiguration)
+    return defaultsProviders.getPluginFor(documentationType).orElse(defaultConfiguration)
         .create(documentationType)
         .withResourceGroupingStrategy(resourceGroupingStrategy(documentationType));
   }

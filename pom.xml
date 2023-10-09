@@ -41,6 +41,7 @@
 		<!-- Springcloud -->
 		<spring-cloud.version>2022.0.4</spring-cloud.version>
 		<spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
+		<spring-plugin.version>3.0.0</spring-plugin.version>
 		<dubbo.version>3.2.7</dubbo.version>
 		<sentinel.version>1.8.6</sentinel.version>
 		<nacos.version>2.2.4</nacos.version>
@@ -123,6 +124,16 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+		      <groupId>org.springframework.plugin</groupId>
+		      <artifactId>spring-plugin-core</artifactId>
+		      <version>${spring-plugin.version}</version>
+		    </dependency>
+		    <dependency>
+		      <groupId>org.springframework.plugin</groupId>
+		      <artifactId>spring-plugin-metadata</artifactId>
+		      <version>${spring-plugin.version}</version>
+		    </dependency>
 			<!-- Apache Dubbo -->
 			<dependency>
 			    <groupId>org.apache.dubbo</groupId>
@@ -683,7 +694,7 @@
 		<connection>scm:git:git@github.com:liudaac/aradin.git</connection>
 		<developerConnection>scm:git:git@github.com:liudaac/aradin.git</developerConnection>
 		<url>git@github.com:liudaac/aradin.git</url>
-		<tag>aradin-1.0.2</tag>
+		<tag>aradin-1.1.0</tag>
 	</scm>
 
 	<build>
