@@ -30,6 +30,7 @@ import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.util.UriTemplate;
+import org.springframework.web.util.pattern.PathPattern;
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
@@ -65,9 +66,9 @@ public class PropertySourcedRequestMappingHandlerMapping extends RequestMappingH
             logger.info(String.format("Mapped URL path [%s] onto method [%s]", mappingPath, handlerMethod.toString()));
             handlerMethods.put(mappingPath, handlerMethod);
           } else {
-            for (String path : mapping.getPatternsCondition().getPatterns()) {
-              logger.info(String.format("Mapped URL path [%s] onto method [%s]", path, handlerMethod.toString()));
-              handlerMethods.put(path, handlerMethod);
+            for (PathPattern path : mapping.getPathPatternsCondition().getPatterns()) {
+              logger.info(String.format("Mapped URL path [%s] onto method [%s]", path.getPatternString(), handlerMethod.toString()));
+              handlerMethods.put(path.getPatternString(), handlerMethod);
             }
           }
         }
