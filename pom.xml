@@ -60,7 +60,6 @@
 		<druid.version>1.2.19</druid.version>
 		<!-- RDBC -->
 		<shiro.version>1.12.0</shiro.version>
-		<spring.social.version>1.1.6.RELEASE</spring.social.version>
 		<java-jwt.version>3.4.1</java-jwt.version>
 		<jjwt.version>0.9.1</jjwt.version>
 		<!-- ZK -->
@@ -311,27 +310,6 @@
 				<groupId>org.apache.shiro</groupId>
 				<artifactId>shiro-spring</artifactId>
 				<version>${shiro.version}</version>
-			</dependency>
-			<!-- spring social -->
-			<dependency>
-				<groupId>org.springframework.social</groupId>
-				<artifactId>spring-social-config</artifactId>
-				<version>${spring.social.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.social</groupId>
-				<artifactId>spring-social-core</artifactId>
-				<version>${spring.social.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.social</groupId>
-				<artifactId>spring-social-security</artifactId>
-				<version>${spring.social.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.social</groupId>
-				<artifactId>spring-social-web</artifactId>
-				<version>${spring.social.version}</version>
 			</dependency>
 
 			<!-- jwt -->
