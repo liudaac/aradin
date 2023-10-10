@@ -29,7 +29,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
-		<revision>1.1.0.ALPHA</revision>
+		<revision>1.1.0</revision>
 		<!-- Base Code -->
 		<java.version>17</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
