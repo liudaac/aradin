@@ -6,6 +6,7 @@ dubbo:
   scan:
     base-packages: cn.aradin.examples.boot.server
   protocol:
+    serialization: hessian2
     name: dubbo
     port: 60005
   cloud:
