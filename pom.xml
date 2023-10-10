@@ -72,7 +72,7 @@
 		<!-- TOOLS -->
 		<buddy.version>1.14.8</buddy.version>
 		<jacoco.version>0.8.3</jacoco.version>
-		<fastjson.version>2.0.40</fastjson.version>
+		<fastjson.version>2.0.41</fastjson.version>
 		<gson.version>2.10.1</gson.version>
 		<slf4j.version>2.0.9</slf4j.version>
 		<logback.version>1.4.11</logback.version><!-- for 1.4.5 need slf4j-api 
