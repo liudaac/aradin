@@ -47,3 +47,5 @@
 * 升级相关基础依赖版本, springcloud升级至2021.0.8, springboot升级至2.7.15, dubbo升级至3.1.11
 
 # v1.0.3 (开发中)
+* 升级至springboot2.7.16
+* 增加AI外部调用能力
