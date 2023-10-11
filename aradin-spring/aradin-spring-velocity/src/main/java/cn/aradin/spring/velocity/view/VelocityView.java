@@ -315,7 +315,6 @@ public class VelocityView extends AbstractTemplateView {
 	 * @throws Exception if there's a fatal error while creating the context
 	 * @see #createVelocityContext(Map)
 	 * @see #initTool
-	 * @see org.apache.velocity.tools.view.context.ChainedContext
 	 * @see VelocityToolboxView
 	 */
 	protected Context createVelocityContext(
@@ -424,8 +423,7 @@ public class VelocityView extends AbstractTemplateView {
 	 * @param velocityContext the Velocity context
 	 * @throws Exception if initializion of the tool failed
 	 * @see #createVelocityContext
-	 * @see org.apache.velocity.tools.view.context.ViewContext
-	 * @see org.apache.velocity.tools.view.context.ChainedContext
+	 * @see org.apache.velocity.tools.view.ViewToolContext
 	 * @see VelocityToolboxView
 	 */
 	protected void initTool(Object tool, Context velocityContext) throws Exception {

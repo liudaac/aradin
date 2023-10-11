@@ -495,7 +495,7 @@ public class ViewImportSupport extends ImportSupport
     // Public utility methods
 
     /**
-     * Strips a servlet session ID from <tt>url</tt>.  The session ID
+     * Strips a servlet session ID from url.  The session ID
      * is encoded as a URL "path parameter" beginning with "jsessionid=".
      * We thus remove anything we find between ";jsessionid=" (inclusive)
      * and either EOS or a subsequent ';' (exclusive).

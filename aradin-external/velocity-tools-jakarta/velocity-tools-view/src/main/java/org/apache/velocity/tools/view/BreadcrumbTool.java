@@ -50,7 +50,7 @@ import java.util.Optional;
  * '<code>_</code>' replaced by spaces, transformed to lowercase.</p>
  * <p>You can customize this displayed name and the URL of every path element using tools properties:</p>
  * <pre><code>
- *     <tool key="breadcrumb" colors.name="My Colors" colors.url="/colors/all.vhtml"/>
+ *     tool key="breadcrumb" colors.name="My Colors" colors.url="/colors/all.vhtml"
  * </code></pre>
  * <p>where '<code>colors</code>' refers to the <code>/colors/</code> path element. The name and destination of the
  * root path element can be changed with '<code>home.name</code>' and '<code>home.url</code>'.</p>
@@ -65,7 +65,7 @@ import java.util.Optional;
  * <pre><code>&lt;a href="/index.vhtml"&gt;home&lt;/a&gt;&amp;nbsp;&amp;gt;&amp;nbsp;&lt;a href="/colors/all.vhtml"&gt;My Colors&lt;/a&gt;&amp;nbsp;&amp;gt;&amp;nbsp;nuances</code></pre>
  * <p>or you would iterate through navigation elements for a better control of the output with:</p>
  * <pre><code>
- * <div id="breadcrumb">
+ * div id="breadcrumb"
  * #foreach($element in $breadcrumb)
  *  #if(!$foreach.first)
  *   <span class="divider">&gt;</span>
@@ -74,7 +74,7 @@ import java.util.Optional;
  *   $element.name
  *  #if(!$foreach.last)</a>#end
  * #end
- *</div></code></pre>
+ *div</code></pre>
  * <p>And of course, you would supply the necessary CSS, for instance:</p>
  * <pre><code>
  * #breadcrumb { font-size: smaller; }
