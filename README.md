@@ -16,6 +16,12 @@
 <p>SpringCloudAlibaba 2021.0.4.0</p>
 <p>Dubbo 3.1.11</p>
 
+### 1.1.0 (发布版，推荐使用)
+<p>SpringCloud 2022.0.4</p>
+<p>SpringBoot 3.1.4</p>
+<p>SpringCloudAlibaba 2022.0.0.0</p>
+<p>Dubbo 3.2.7</p>
+
 ### 历史版本
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.25(springcloud.Hoxton.SR12+springboot2.3.12.RELEASE+dubbo2.7)</a><br>
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.26(springcloud.Hoxton.SR12+springboot2.3.12.RELEASE+dubbo3.1)</a><br>
@@ -23,6 +29,7 @@
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">1.0.0(springboot2.7.10+dubbo3.1)</a><br>
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">1.0.1(springboot2.7.12+dubbo3.1)</a><br>
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">1.0.2(springboot2.7.15+dubbo3.1)</a><br>
+*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">1.1.0(springboot3.1.4+dubbo3.2)</a><br>
 
 ***
 <p>依赖管理</p>
@@ -189,12 +196,14 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;配置方式如下<br>
 &nbsp;&nbsp;首先是原生配置<br>
 &nbsp;&nbsp;&nbsp;spring:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redis:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;database: 0 #Redis数据库索引（默认为0）<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;host:  #Redis服务器地址<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;port: 6379 #Redis服务器连接端口<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password:  #Redis服务器连接密码（默认为空）<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pool: #连接池配置，不再详细列出</p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redis:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;database: 0 #Redis数据库索引（默认为0）<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;host:  #Redis服务器地址<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;port: 6379 #Redis服务器连接端口<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password:  #Redis服务器连接密码（默认为空）<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lettuce:  <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pool: #连接池配置，不再详细列出</p>
 &nbsp;&nbsp;然后是通过自定义配置来定制各个cachename的属性</p>
 &nbsp;&nbsp;aradin:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;cache:<br>
@@ -243,7 +252,8 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;host:  #Redis服务器地址<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;port: 6379 #Redis服务器连接端口<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password:  #Redis服务器连接密码（默认为空）<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pool: #连接池配置，不再详细列出</p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lettuce: #连接池配置，不再详细列出</p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pool: #连接池配置，不再详细列出</p>
 
 ***
 + **aradin-spring-salarm-starter**
