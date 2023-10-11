@@ -10,13 +10,13 @@
 
 ***
 ## 主框架版本说明
-### 1.0.2 (发布版，推荐使用)
+### 1.0.2 (发布版，推荐使用，JDK8+)
 <p>SpringCloud 2021.0.8</p>
 <p>SpringBoot 2.7.15</p>
 <p>SpringCloudAlibaba 2021.0.4.0</p>
 <p>Dubbo 3.1.11</p>
 
-### 1.1.0 (发布版，推荐使用)
+### 1.1.0 (发布版，推荐使用，JDK17+)
 <p>SpringCloud 2022.0.4</p>
 <p>SpringBoot 3.1.4</p>
 <p>SpringCloudAlibaba 2022.0.0.0</p>
