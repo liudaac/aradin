@@ -16,6 +16,12 @@
 <p>SpringCloudAlibaba 2021.0.4.0</p>
 <p>Dubbo 3.1.11</p>
 
+### 1.1.0 (发布版，推荐使用)
+<p>SpringCloud 2022.0.4</p>
+<p>SpringBoot 3.1.4</p>
+<p>SpringCloudAlibaba 2022.0.0.0</p>
+<p>Dubbo 3.2.7</p>
+
 ### 历史版本
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.25(springcloud.Hoxton.SR12+springboot2.3.12.RELEASE+dubbo2.7)</a><br>
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.26(springcloud.Hoxton.SR12+springboot2.3.12.RELEASE+dubbo3.1)</a><br>
@@ -23,6 +29,7 @@
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">1.0.0(springboot2.7.10+dubbo3.1)</a><br>
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">1.0.1(springboot2.7.12+dubbo3.1)</a><br>
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">1.0.2(springboot2.7.15+dubbo3.1)</a><br>
+*RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">1.1.0(springboot3.1.4+dubbo3.2)</a><br>
 
 ***
 <p>依赖管理</p>
