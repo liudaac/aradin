@@ -6,7 +6,7 @@
   * 扩充能力以更好的满足线上场景 
   * 解决部分新旧组件交替淘汰时发生的兼容性问题
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;钉群</p>
-<img style="width:100px;" src="https://blogsolo.oss-cn-qingdao.aliyuncs.com/1694398485258.png"/></p>
+<img style="width:200px;" src="https://blogsolo.oss-cn-qingdao.aliyuncs.com/1694398485258.png"/></p>
 
 ***
 ## 主框架版本说明
