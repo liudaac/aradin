@@ -79,7 +79,6 @@ public class VelocityViewResolver extends AbstractTemplateViewResolver {
 	 * the view package of Velocity Tools.
 	 * <p><b>Note:</b> Specifying a toolbox config location will lead to
 	 * VelocityToolboxView instances being created.
-	 * @see org.apache.velocity.tools.view.servlet.ServletToolboxManager#getInstance
 	 * @see VelocityToolboxView#setToolboxConfigLocation
 	 * @param toolboxConfigLocation toolboxConfigLocation
 	 */
