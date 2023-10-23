@@ -47,7 +47,6 @@ class DefaultRequestHandlerCombiner implements RequestHandlerCombiner {
 		List<RequestHandler> combined = new ArrayList<RequestHandler>();
 		Multimap<String, RequestHandler> byPath = LinkedListMultimap.create();
 		LOGGER.warn("Total number of request handlers {}", nullToEmptyList(source).size());
-		LOGGER.error("TEST LINE .............");
 		for (RequestHandler each : nullToEmptyList(source)) {
 			byPath.put(patternsCondition(each).toString(), each);
 		}
