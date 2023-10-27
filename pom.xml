@@ -625,6 +625,11 @@
 			</dependency>
 			<dependency>
 				<groupId>cn.aradin</groupId>
+				<artifactId>springfox-schema</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
 				<artifactId>xxl-job-core</artifactId>
 				<version>${revision}</version>
 			</dependency>

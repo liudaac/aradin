@@ -44,9 +44,8 @@
     	<artifactId>springfox-spi</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.springfox</groupId>
+      <groupId>cn.aradin</groupId>
       <artifactId>springfox-schema</artifactId>
-      <version>2.9.2</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
