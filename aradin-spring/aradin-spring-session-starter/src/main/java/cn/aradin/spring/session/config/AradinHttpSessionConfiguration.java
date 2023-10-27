@@ -11,9 +11,10 @@ import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.session.data.redis.RedisSessionRepository;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.util.StringUtils;
 import org.springframework.util.StringValueResolver;
+
+import cn.aradin.spring.session.config.annotation.EnableAradinHttpSession;
 
 @Configuration(proxyBeanMethods = false)
 public class AradinHttpSessionConfiguration extends AbstractAradinHttpSessionConfiguration<RedisSessionRepository>
@@ -45,7 +46,7 @@ public class AradinHttpSessionConfiguration extends AbstractAradinHttpSessionCon
 	@Override
 	public void setImportMetadata(AnnotationMetadata importMetadata) {
 		Map<String, Object> attributeMap = importMetadata
-				.getAnnotationAttributes(EnableRedisHttpSession.class.getName());
+				.getAnnotationAttributes(EnableAradinHttpSession.class.getName());
 		AnnotationAttributes attributes = AnnotationAttributes.fromMap(attributeMap);
 		if (attributes == null) {
 			return;
