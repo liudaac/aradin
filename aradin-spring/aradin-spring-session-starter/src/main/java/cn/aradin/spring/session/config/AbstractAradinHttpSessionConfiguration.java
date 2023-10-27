@@ -4,10 +4,13 @@ import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.data.redis.LettuceClientConfigurationBuilderCustomizer;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -24,6 +27,10 @@ import org.springframework.session.data.redis.RedisSessionRepository;
 import org.springframework.session.data.redis.config.annotation.SpringSessionRedisConnectionFactory;
 import org.springframework.util.Assert;
 
+import cn.aradin.spring.session.config.connection.AradinLettuceConnectionConfiguration;
+import cn.aradin.spring.session.config.properties.AradinSessionProperties;
+import io.lettuce.core.resource.ClientResources;
+
 /**
  * Base configuration class for Redis based {@link SessionRepository} implementations.
  *
@@ -37,6 +44,8 @@ import org.springframework.util.Assert;
 @Configuration(proxyBeanMethods = false)
 @Import(SpringHttpSessionConfiguration.class)
 public abstract class AbstractAradinHttpSessionConfiguration<T extends SessionRepository<? extends Session>> implements BeanClassLoaderAware {
+	
+	private final static Logger log = LoggerFactory.getLogger(AbstractAradinHttpSessionConfiguration.class);
 	
 	private Duration maxInactiveInterval = MapSession.DEFAULT_MAX_INACTIVE_INTERVAL;
 
@@ -98,10 +107,22 @@ public abstract class AbstractAradinHttpSessionConfiguration<T extends SessionRe
 
 	@Autowired
 	public void setRedisConnectionFactory(
-			@SpringSessionRedisConnectionFactory ObjectProvider<RedisConnectionFactory> springSessionRedisConnectionFactory,
+			AradinSessionProperties sessionProperties,
+			ObjectProvider<LettuceClientConfigurationBuilderCustomizer> builderCustomizers,
+			ClientResources clientResources,
 			ObjectProvider<RedisConnectionFactory> redisConnectionFactory) {
-		this.redisConnectionFactory = springSessionRedisConnectionFactory
-				.getIfAvailable(redisConnectionFactory::getObject);
+		log.info("Session redis connectionFactory is initialing");
+		RedisConnectionFactory redisConnectionFactoryToUse = null;
+		if (sessionProperties.getRedis() != null) {
+			log.info("Session-customzied redis connectionFactory initialed");
+			AradinLettuceConnectionConfiguration lettuce = new AradinLettuceConnectionConfiguration(sessionProperties.getRedis());
+			redisConnectionFactoryToUse = lettuce.redisConnectionFactory(builderCustomizers, clientResources);
+		}
+		if (redisConnectionFactoryToUse == null) {
+			log.info("Session-base redis connectionFactory initialed");
+			redisConnectionFactoryToUse = redisConnectionFactory.getObject();
+		}
+		this.redisConnectionFactory = redisConnectionFactoryToUse;
 	}
 
 	protected RedisConnectionFactory getRedisConnectionFactory() {

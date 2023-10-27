@@ -6,6 +6,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Import;
 import org.springframework.session.FlushMode;
 import org.springframework.session.MapSession;
@@ -15,10 +16,12 @@ import org.springframework.session.SessionRepository;
 import org.springframework.session.data.redis.RedisSessionRepository;
 
 import cn.aradin.spring.session.config.AradinHttpSessionConfiguration;
+import cn.aradin.spring.session.config.properties.AradinSessionProperties;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Documented
+@EnableConfigurationProperties(AradinSessionProperties.class)
 @Import(AradinHttpSessionConfiguration.class)
 public @interface EnableAradinHttpSession {
 
