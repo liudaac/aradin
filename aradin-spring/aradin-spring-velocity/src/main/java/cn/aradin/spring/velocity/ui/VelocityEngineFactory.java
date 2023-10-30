@@ -283,7 +283,7 @@ public class VelocityEngineFactory {
 			catch (IOException ex) {
 				if (logger.isDebugEnabled()) {
 					logger.debug("Cannot resolve resource loader path [" + resourceLoaderPath +
-							"] to [java.io.File]: using SpringResourceLoader", ex);
+							"] to [java.io.File]: using SpringResourceLoader");
 				}
 				initSpringResourceLoader(velocityEngine, resourceLoaderPath);
 			}
