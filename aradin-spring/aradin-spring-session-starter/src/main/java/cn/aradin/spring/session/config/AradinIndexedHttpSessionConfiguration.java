@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 
 import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -40,6 +42,8 @@ public class AradinIndexedHttpSessionConfiguration
 		extends AbstractAradinHttpSessionConfiguration<RedisIndexedSessionRepository>
 		implements EmbeddedValueResolverAware, ImportAware {
 
+	private final static Logger log = LoggerFactory.getLogger(AradinIndexedHttpSessionConfiguration.class);
+	
 	private String cleanupCron = RedisIndexedSessionRepository.DEFAULT_CLEANUP_CRON;
 
 	private ConfigureRedisAction configureRedisAction = new ConfigureNotifyKeyspaceEventsAction();
@@ -159,6 +163,7 @@ public class AradinIndexedHttpSessionConfiguration
 		if (StringUtils.hasText(redisNamespaceValue)) {
 			setRedisNamespace(this.embeddedValueResolver.resolveStringValue(redisNamespaceValue));
 		}
+		log.warn("REDISNAMESPACE is {}", getRedisNamespace());
 		setFlushMode(attributes.getEnum("flushMode"));
 		setSaveMode(attributes.getEnum("saveMode"));
 		String cleanupCron = attributes.getString("cleanupCron");

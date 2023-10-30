@@ -3,6 +3,8 @@ package cn.aradin.spring.session.config;
 import java.time.Duration;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.EmbeddedValueResolverAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,8 +22,10 @@ import cn.aradin.spring.session.config.annotation.EnableAradinHttpSession;
 public class AradinHttpSessionConfiguration extends AbstractAradinHttpSessionConfiguration<RedisSessionRepository>
 		implements EmbeddedValueResolverAware, ImportAware {
 	
+	private final static Logger log = LoggerFactory.getLogger(AradinHttpSessionConfiguration.class);
+	
 	private StringValueResolver embeddedValueResolver;
-
+	
 	@Bean
 	@Override
 	public RedisSessionRepository sessionRepository() {
@@ -55,6 +59,7 @@ public class AradinHttpSessionConfiguration extends AbstractAradinHttpSessionCon
 		String redisNamespaceValue = attributes.getString("redisNamespace");
 		if (StringUtils.hasText(redisNamespaceValue)) {
 			setRedisNamespace(this.embeddedValueResolver.resolveStringValue(redisNamespaceValue));
+			log.warn("REDISNAMESPACE is {}", getRedisNamespace());
 		}
 		setFlushMode(attributes.getEnum("flushMode"));
 		setSaveMode(attributes.getEnum("saveMode"));
