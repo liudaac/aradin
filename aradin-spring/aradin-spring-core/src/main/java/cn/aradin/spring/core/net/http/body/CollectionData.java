@@ -11,7 +11,7 @@ public class CollectionData<T> implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 404940008791914053L;
+	private static final long serialVersionUID = -7209013470857174379l;
 	private long total;
     private Collection<T> records = Lists.newArrayList();
 	
