@@ -63,10 +63,10 @@
 		<java-jwt.version>3.4.1</java-jwt.version>
 		<jjwt.version>0.9.1</jjwt.version>
 		<!-- ZK -->
-		<zookeeper.version>3.4.14</zookeeper.version>
-		<curator.version>2.13.0</curator.version>
+		<zookeeper.version>3.9.1</zookeeper.version>
+		<curator.version>5.5.0</curator.version>
 		<!-- Netty -->
-		<netty.version>4.1.98.Final</netty.version>
+		<netty.version>4.1.100.Final</netty.version>
 		<!-- WEIXIN -->
 		<wechat.version>2.8.32</wechat.version>
 		<!-- TOOLS -->
