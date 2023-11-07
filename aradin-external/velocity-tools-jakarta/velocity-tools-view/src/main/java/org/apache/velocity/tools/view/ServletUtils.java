@@ -36,6 +36,8 @@ import org.apache.velocity.tools.config.FactoryConfiguration;
 import org.apache.velocity.tools.config.FileFactoryConfiguration;
 import org.apache.velocity.tools.config.PropertiesFactoryConfiguration;
 import org.apache.velocity.tools.config.XmlFactoryConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p>A set of utility methods for supporting and using
@@ -45,6 +47,8 @@ import org.apache.velocity.tools.config.XmlFactoryConfiguration;
  */
 public class ServletUtils
 {
+	private final static Logger log = LoggerFactory.getLogger(ServletUtils.class);
+	
     public static final String VELOCITY_VIEW_KEY =
         VelocityView.class.getName();
     public static final String SHARED_CONFIG_PARAM =
@@ -358,6 +362,9 @@ public class ServletUtils
             // then webapp only for WEB-INF/*
             if (System.getSecurityManager() != null)
             {
+            	if (log.isDebugEnabled()) {
+					log.debug("URL解析 SecurityManager");
+				}
                 url = AccessController.doPrivileged(
                     new PrivilegedAction<URL>()
                     {
@@ -384,6 +391,9 @@ public class ServletUtils
                 catch (MalformedURLException mue) {}
             }
         }
+        if (log.isDebugEnabled()) {
+			log.debug("URL解析结果 {}", url.getPath());
+		}
         return url;
     }
 
@@ -411,14 +421,20 @@ public class ServletUtils
         URL url = getURL(path, application);
         if (url == null)
         {
+        	if (log.isDebugEnabled()) {
+				log.debug("Path parsed fail {}", path);
+			}
             return null;
         }
-
+        
         // then make sure it's a file type we recognize
         FileFactoryConfiguration config = null;
         String source = "ServletUtils.getConfiguration("+path+",ServletContext)";
         if (path.endsWith(".xml"))
         {
+        	if (log.isDebugEnabled()) {
+				log.debug("解析XML {}", path);
+			}
             config = new XmlFactoryConfiguration(source);
         }
         else if (path.endsWith(".properties"))
@@ -433,6 +449,7 @@ public class ServletUtils
         }
 
         // now, try to read the file
+        
         try
         {
             config.read(url);
@@ -441,6 +458,9 @@ public class ServletUtils
         {
             throw new RuntimeException("Failed to load configuration at: "+path, e);
         }
+        if (log.isDebugEnabled()) {
+			log.debug("解析完成 {}", config.getSource());
+		}
         return config;
     }
 

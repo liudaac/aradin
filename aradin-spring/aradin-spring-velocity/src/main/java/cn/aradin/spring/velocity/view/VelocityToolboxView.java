@@ -5,10 +5,10 @@ import java.util.Map;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import org.apache.velocity.VelocityContext;
 import org.apache.velocity.context.Context;
-import org.apache.velocity.tools.ToolManager;
 import org.apache.velocity.tools.view.ViewToolContext;
-
+import org.apache.velocity.tools.view.ViewToolManager;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
 
@@ -81,13 +81,24 @@ public class VelocityToolboxView extends VelocityView {
 	@Override
 	protected Context createVelocityContext(
 			Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ViewToolContext context = new ViewToolContext(getVelocityEngine(), request, response, getServletContext());
 		if (getToolboxConfigLocation() != null) {
-			ToolManager toolManager = new ToolManager(false, true);
-			toolManager.configure(getToolboxConfigLocation());
-			context.addToolbox(toolManager.getApplicationToolbox());
+			if (logger.isDebugEnabled()) {
+				logger.debug("初始化Context "+getToolboxConfigLocation());
+			}
+			ViewToolManager manager = new ViewToolManager(getServletContext(), false, false);
+			manager.configure(toolboxConfigLocation);
+			VelocityContext velocityContext = new VelocityContext(model, manager.createContext());
+			return velocityContext;
 		}
-		return context;
+		return new ViewToolContext(getVelocityEngine(), request, response, getServletContext());
+//		ViewToolContext context = new ViewToolContext(getVelocityEngine(), request, response, getServletContext());
+//		if (getToolboxConfigLocation() != null) {
+//			ViewToolManager vManager = new ViewToolManager(getServletContext(), false, false);
+//			vManager.configure(toolboxConfigLocation);
+//			vManager.setVelocityEngine(getVelocityEngine());
+//			return vManager.createContext(request, response);
+//		}
+//		return context;
 	}
 
 	/**

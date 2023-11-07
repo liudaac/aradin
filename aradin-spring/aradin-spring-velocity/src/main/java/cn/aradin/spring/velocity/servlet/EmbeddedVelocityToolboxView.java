@@ -11,6 +11,9 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.velocity.context.Context;
 import org.apache.velocity.tools.view.ViewToolContext;
+import org.apache.velocity.tools.view.ViewToolManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.core.io.ClassPathResource;
 
@@ -27,11 +30,18 @@ import cn.aradin.spring.velocity.view.VelocityToolboxView;
  */
 public class EmbeddedVelocityToolboxView extends VelocityToolboxView {
 
+	private final static Logger log = LoggerFactory.getLogger(EmbeddedVelocityToolboxView.class);
+	
 	@Override
 	protected Context createVelocityContext(Map<String, Object> model,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ViewToolContext context = new ViewToolContext(getVelocityEngine(), request, response, getToolboxConfigFileAwareServletContext());
 		//IF NEED SET TOOL
+		if (getToolboxConfigLocation() != null) {
+			ViewToolManager toolManager = new ViewToolManager(getToolboxConfigFileAwareServletContext(),false, false);
+			toolManager.configure(getToolboxConfigLocation());
+			context.addToolbox(toolManager.getApplicationToolbox());
+		}
 		return context;
 	}
 
@@ -51,6 +61,9 @@ public class EmbeddedVelocityToolboxView extends VelocityToolboxView {
 		private final String toolboxFile;
 
 		GetResourceMethodInterceptor(String toolboxFile) {
+			if (log.isDebugEnabled()) {
+				log.debug("Find toolboxFile {}", toolboxFile);
+			}
 			if (toolboxFile != null && !toolboxFile.startsWith("/")) {
 				toolboxFile = "/" + toolboxFile;
 			}

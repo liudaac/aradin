@@ -1,5 +1,7 @@
 package cn.aradin.spring.velocity.view;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.view.AbstractTemplateViewResolver;
 import org.springframework.web.servlet.view.AbstractUrlBasedView;
 
@@ -27,6 +29,8 @@ import org.springframework.web.servlet.view.AbstractUrlBasedView;
  */
 public class VelocityViewResolver extends AbstractTemplateViewResolver {
 
+	private final static Logger log = LoggerFactory.getLogger(VelocityViewResolver.class);
+	
 	private String dateToolAttribute;
 
 	private String numberToolAttribute;
@@ -113,6 +117,9 @@ public class VelocityViewResolver extends AbstractTemplateViewResolver {
 		view.setDateToolAttribute(this.dateToolAttribute);
 		view.setNumberToolAttribute(this.numberToolAttribute);
 		if (this.toolboxConfigLocation != null) {
+			if (log.isDebugEnabled()) {
+				log.debug("初始化toolBox {} {}", toolboxConfigLocation, viewName);
+			}
 			((VelocityToolboxView) view).setToolboxConfigLocation(this.toolboxConfigLocation);
 		}
 		return view;

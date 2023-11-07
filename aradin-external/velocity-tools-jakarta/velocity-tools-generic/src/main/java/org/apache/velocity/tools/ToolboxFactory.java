@@ -23,8 +23,9 @@ import java.util.HashMap;
 import java.util.Map;
 import org.apache.velocity.tools.config.Data;
 import org.apache.velocity.tools.config.FactoryConfiguration;
-import org.apache.velocity.tools.Scope;
 import org.apache.velocity.tools.config.ToolboxConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.velocity.tools.config.ToolConfiguration;
 
 /**
@@ -61,6 +62,7 @@ import org.apache.velocity.tools.config.ToolConfiguration;
  */
 public class ToolboxFactory
 {
+	private static final Logger log = LoggerFactory.getLogger(ToolboxFactory.class);
     public static final String DEFAULT_SCOPE = Scope.REQUEST;
 
     private final Map<String,Map<String,ToolInfo>> scopedToolInfo;
@@ -79,7 +81,7 @@ public class ToolboxFactory
     {
         // this will throw a ConfigurationException if there is a problem
         config.validate();
-
+        
         // first do the easy part and add any data
         for (Data datum : config.getData())
         {
@@ -93,8 +95,10 @@ public class ToolboxFactory
         // next add the toolboxes
         for (ToolboxConfiguration toolbox : config.getToolboxes())
         {
+        	if (log.isDebugEnabled()) {
+				log.debug(toolbox.getScope());
+			}
             String scope = toolbox.getScope();
-
             // starting with the toolinfo
             for (ToolConfiguration tool : toolbox.getTools())
             {
