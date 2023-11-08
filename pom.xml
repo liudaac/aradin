@@ -20,7 +20,8 @@
 		<module>aradin-version</module>
 		<module>aradin-external</module>
 		<module>aradin-easy</module>
-		<!-- <module>aradin-wechat</module> <module>aradin-examples</module> -->
+		<module>aradin-prospects</module>
+		<!-- <module>aradin-examples</module> -->
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
