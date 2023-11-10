@@ -545,8 +545,9 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 
 ***
 ## 进展阶段
-<p>&nbsp;目前迭代至1.0.2版本，经过大量的线上场景验证和磨合，已基本满足日常项目快速搭建需求，且已经普遍运行于线上环境。</p>
-<p>&nbsp;JVM兼容jdk8至17，当前支持springboot2.7.15，后面等spring官方2023年11月停止2.7.x维护后，aradin框架将升级至1.1.x并开始支持springboot3.x，保持跟进SpringCloud及Alibaba全家桶的生态升级</p>
+<p>&nbsp;目前迭代至1.1.1版本，经过大量的线上场景验证和磨合，已基本满足日常项目快速搭建需求，且已经普遍运行于线上环境。</p>
+<p>&nbsp;JVM兼容jdk8至17，当前支持springboot3.1.5，后面等spring官方2023年11月停止维护2.7.x并推出3.2.x后，</p>
+<p>aradin框架将从1.2.x开始以jdk21为基座支持springboot3.2.x，同时保持1.1.x对springboot3.1.x的支持，跟进SpringCloud及Alibaba全家桶的生态升级</p>
 
 ***
 ## JOIN US
