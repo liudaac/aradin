@@ -259,6 +259,12 @@ public class BucketSetOperations<K, V> extends AbstractBucketOperations<K, V> im
 		return deserializeValues(rawValues);
 	}
 
+	public Set<V> members(K key, int bucket) {
+		byte[] rawKey = rawKey(key, bucket);
+		Set<byte[]> rawValue = execute(connection -> connection.setCommands().sMembers(rawKey));
+		return deserializeValues(rawValue);
+	}
+	
 	@Override
 	@NotSupport(RedisModel.CLUSTER)
 	public Boolean move(K key, V value, K destKey) {
