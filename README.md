@@ -5,7 +5,7 @@
   * 降低集成复杂度    
   * 扩充能力以更好的满足线上场景 
   * 解决部分新旧组件交替淘汰时发生的兼容性问题
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;钉群</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;钉群
 <img style="width:200px;" src="https://blogsolo.oss-cn-qingdao.aliyuncs.com/1694398485258.png"/></p>
 
 ***
@@ -342,7 +342,6 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 ***
 + **aradin-version-zookeeper-starter**
 <p>
-<figure>
      ① cn.aradin.version.zookeeper.starter.handler.VersionsNodeHandler<br> 
      *接收ZK事件并使用VersionDispatcher(Bean)进行分发，接收方为所有的cn.aradin.version.core.handler.IVersionHandler(Bean)*<br>
      <br>
@@ -361,13 +360,11 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 	 &nbsp;&nbsp;&nbsp;&nbsp;addresses:<br>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- id: CUSTOMIZED-ID<br>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address:
-</figure>
 </p>
 
 ***
 + **aradin-version-nacos-starter(v1.0.0+)**
 <p>
-<figure>
 	<p>
 	① cn.aradin.version.nacos.starter.listener.VersionNacosConfigListener<br> 
 	*接收Nacos事件，并使用VersionDispatcher(Bean)进行分发，接收方为所有的cn.aradin.version.core.handler.IVersionHandler(Bean)*<br>
@@ -396,7 +393,6 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;namespace: d78b658c-182a-420a-9005-e8e8f36a1e7d<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group-id: aradin.version.nacos.group<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-id: aradin.version.nacos.data-id<br>
-</figure>
 </p>
 
 ***
