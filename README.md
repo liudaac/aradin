@@ -519,8 +519,18 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 <p>&nbsp;外部模块重写，目前包含springfox-swagger，原因是swagger近两年未做更新，与spring新版有兼容问题，所以做了本地化适配修改，0.0.4.x以后，兼容springboot2.7.X</p>
 
 ***
-+ **springfox-swagger**
-<p>&nbsp;swagger近两年未做更新，与spring新版有兼容问题，所以做了本地化适配修改，0.0.4.x+版本兼容springboot2.7.x，可直接引用aradin-spring-swagger-starter</p>
++ **springfox-core**
++ **springfox-schema**
++ **springfox-spi**
++ **springfox-spring-web**
++ **springfox-swagger2**
++ **springfox-swagger-common**
++ **swagger-bootstrap-ui**
+<p>&nbsp;swagger近两年未做更新，与spring新版有兼容问题，所以做了适配修改，1.0.x+版本兼容springboot2.7.x，1.1.x兼容springboot3.1.x，可直接引用aradin-spring-swagger-starter</p>
+
+***
++ **velocity-tools-jakarta**(v1.1.0+)
+<p>&nbsp;springboot3正式进入jakarta时代，但velocity已经停止了迭代，由于老项目的velocity模板迁移到其他模板的工程量巨大，对老项目框架升级造成了阻碍，所以针对这块做了适配修改，可直接引用aradin-spring-velocity-starter</p>
 
 ***
 + **xxl-job-core**
