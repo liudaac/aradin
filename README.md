@@ -120,8 +120,8 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource-loader-path: classpath:/template/ #设定模板路径，默认为:classpath:/templates/<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;toolbox-config-location: classpath:/toolbox.xml #设定Velocity Toolbox配置文件的路径，比如 /WEB-INF/toolbox.xml.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prefer-file-system-access: true #是否优先从文件系统加载模板以支持热加载，默认为true<br>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;其中关于toolbox.xml的格式，参考https://velocity.apache.org/tools/3.1/config-xml.html</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;注意此处xml的格式为velocity3.1版本，与旧版比有较大的格式改动且新旧不兼容，若旧项目使用velocity1.x的需要做格式调整，但大体配置逻辑一致调整比较简单</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;其中关于toolbox.xml的格式，参考https://velocity.apache.org/tools/3.1/config-xml.html<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(注：此处xml的格式为velocity3.1版本，与旧版比有较大的格式改动且新旧不兼容，若旧项目使用velocity1.x的需要做格式调整，但大体配置逻辑一致调整比较简单)</p>
 
 ***
 + **aradin-spring-swagger-starter**
