@@ -106,7 +106,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 
 ***
 + **aradin-spring-velocity-starter**
-<p>&nbsp;spring2.x之后不支持velocity的集成，考虑到旧项目模板代码迁移的复杂性，特别提供velocity的兼容包</p>
+<p>&nbsp;springboot2.x之后不支持velocity的集成，考虑到旧项目模板代码迁移的复杂性，特别提供velocity的兼容包，能够很好的支持springboot2及springboot3</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;配置方式与原velocity1.x版本一致，例如</p>
 &nbsp;spring:<br>
 &nbsp;&nbsp;&nbsp;velocity:<br>
