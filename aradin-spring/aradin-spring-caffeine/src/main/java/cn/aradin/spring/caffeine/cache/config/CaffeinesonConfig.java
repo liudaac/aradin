@@ -2,9 +2,9 @@ package cn.aradin.spring.caffeine.cache.config;
 
 public class CaffeinesonConfig {
 	/** 访问后过期时间，单位毫秒*/
-	private long expireAfterAccess = 120000l;
+	private long expireAfterAccess;
 	/** 写入后过期时间，单位毫秒*/
-	private long expireAfterWrite = 120000l;
+	private long expireAfterWrite;
 	/** 写入后刷新时间，单位毫秒 暂不支持*/
 	private long refreshAfterWrite;
 	/** 初始化大小*/
