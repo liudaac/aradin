@@ -32,6 +32,9 @@ public class Caffeineson extends AbstractValueAdaptingCache {
 		this.name = name;
 		this.versioned = caffeineConfig.isVersioned();
 		this.versionBroadHandler = versionBroadHandler;
+		if (log.isDebugEnabled()) {
+			log.debug("初始化Cache {}, {}", name, JSONObject.toJSONString(caffeineConfig));
+		}
 		caffeineCache = caffeineCache(caffeineConfig, new CaffeinesonRemovalListener(name));
 	}
 	
