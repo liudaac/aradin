@@ -26,7 +26,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.5</version>
+		<version>3.1.6</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
@@ -36,8 +36,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- Springboot -->
-		<springboot.version>3.1.5</springboot.version>
-		<springboot.oauth2.version>2.6.8</springboot.oauth2.version>
+		<springboot.version>3.1.6</springboot.version>
 		<springboot.solr.version>2.4.13</springboot.solr.version><!-- 2.4.10 -->
 		<!-- Springcloud -->
 		<spring-cloud.version>2022.0.4</spring-cloud.version>
@@ -212,12 +211,6 @@
 				<groupId>com.alibaba.nacos</groupId>
 				<artifactId>nacos-common</artifactId>
 				<version>${nacos.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springframework.security.oauth.boot</groupId>
-				<artifactId>spring-security-oauth2-autoconfigure</artifactId>
-				<version>${springboot.oauth2.version}</version><!--$NO-MVN-MAN-VER$ -->
 			</dependency>
 
 			<dependency>
