@@ -70,7 +70,7 @@
 		<!-- WEIXIN -->
 		<wechat.version>2.8.32</wechat.version>
 		<!-- TOOLS -->
-		<buddy.version>1.14.8</buddy.version>
+		<buddy.version>1.14.10</buddy.version>
 		<jacoco.version>0.8.3</jacoco.version>
 		<fastjson2.version>2.0.42</fastjson2.version>
 		<fastjson.version>1.2.83</fastjson.version>
