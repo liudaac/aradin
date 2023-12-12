@@ -25,8 +25,6 @@ import org.springframework.util.Assert;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.util.UriUtils;
 
-import java.io.UnsupportedEncodingException;
-
 import static springfox.documentation.spring.web.paths.Paths.splitCamelCase;
 
 public class ControllerNamingUtils {
@@ -34,8 +32,8 @@ public class ControllerNamingUtils {
   private static final String ISO_8859_1 = "ISO-8859-1";
 
   public static String pathRoot(String requestPattern) {
-    Assert.notNull(requestPattern);
-    Assert.hasText(requestPattern);
+    Assert.notNull(requestPattern, "The requestPattern must not be null");
+    Assert.hasText(requestPattern, "The requestPattern must not be empty");
     log.info("Resolving path root for {}", requestPattern);
     String adjustedPattern = requestPattern.startsWith("/") ? requestPattern : "/" + requestPattern;
     int idx = adjustedPattern.indexOf("/", 1);

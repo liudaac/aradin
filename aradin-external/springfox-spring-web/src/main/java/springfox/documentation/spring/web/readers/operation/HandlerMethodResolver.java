@@ -33,9 +33,9 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.google.common.primitives.Ints;
-import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ParameterNameDiscoverer;
+import org.springframework.core.StandardReflectionParameterNameDiscoverer;
 import org.springframework.web.method.HandlerMethod;
 import springfox.documentation.service.ResolvedMethodParameter;
 
@@ -280,7 +280,7 @@ public class HandlerMethodResolver {
     try {
       discoverer = (ParameterNameDiscoverer) Class.forName(SPRING4_DISCOVERER).newInstance();
     } catch (Exception e) {
-      discoverer = new LocalVariableTableParameterNameDiscoverer();
+      discoverer = new StandardReflectionParameterNameDiscoverer();
     }
     return discoverer;
   }
