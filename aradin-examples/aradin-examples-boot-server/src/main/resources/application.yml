@@ -13,6 +13,7 @@ dubbo:
     subscribed-services: 
   application:
     name: ${spring.application.name}
+    serialize-check-status: WARN #https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/advanced-features-and-usage/security/class-check/
   registry:
     register-mode: instance
     address: nacos://${spring.cloud.nacos.discovery.server-addr}
