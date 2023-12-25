@@ -26,7 +26,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.0</version>
+		<version>3.2.1</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
@@ -36,7 +36,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- Springboot -->
-		<springboot.version>3.2.0</springboot.version>
+		<springboot.version>3.2.1</springboot.version>
 		<springboot.solr.version>2.4.13</springboot.solr.version><!-- 2.4.10 -->
 		<!-- Springcloud -->
 		<spring-cloud.version>2023.0.0</spring-cloud.version>
@@ -70,9 +70,9 @@
 		<!-- WEIXIN -->
 		<wechat.version>2.8.32</wechat.version>
 		<!-- TOOLS -->
-		<buddy.version>1.14.10</buddy.version>
+		<buddy.version>1.14.11</buddy.version>
 		<jacoco.version>0.8.3</jacoco.version>
-		<fastjson2.version>2.0.43</fastjson2.version>
+		<fastjson2.version>2.0.44</fastjson2.version>
 		<fastjson.version>1.2.83</fastjson.version>
 		<gson.version>2.10.1</gson.version>
 		<slf4j.version>2.0.9</slf4j.version>
