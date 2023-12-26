@@ -26,7 +26,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.6</version>
+		<version>3.1.7</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
@@ -36,13 +36,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- Springboot -->
-		<springboot.version>3.1.6</springboot.version>
+		<springboot.version>3.1.7</springboot.version>
 		<springboot.solr.version>2.4.13</springboot.solr.version><!-- 2.4.10 -->
 		<!-- Springcloud -->
 		<spring-cloud.version>2022.0.4</spring-cloud.version>
 		<spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
 		<spring-plugin.version>3.0.0</spring-plugin.version>
-		<dubbo.version>3.2.9</dubbo.version>
+		<dubbo.version>3.2.10</dubbo.version>
 		<sentinel.version>1.8.6</sentinel.version>
 		<nacos.version>2.2.4</nacos.version>
 		<!-- Mybatis And DB -->
