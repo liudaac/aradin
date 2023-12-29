@@ -4,17 +4,14 @@
 	xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>cn.aradin</groupId>
-		<artifactId>aradin-examples</artifactId>
-		<version>${revision}</version>
-	</parent>
+	<groupId>cn.aradin</groupId>
 	<artifactId>aradin-examples-boot-server</artifactId>
+	<version>1.2.0</version>
 	<name>aradin-examples-boot-server</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<aradin.version>${revision}</aradin.version>
+		<aradin.version>${project.version}</aradin.version>
 		<start-class>cn.aradin.examples.boot.server.AradinExampleApplication</start-class>
 	</properties>
 	<dependencyManagement>
@@ -58,6 +55,10 @@
 		<dependency>
 			<groupId>cn.aradin</groupId>
 			<artifactId>aradin-spring-actuator-starter</artifactId>
+		</dependency>
+		<dependency>
+		  	<groupId>org.crac</groupId>
+		  	<artifactId>crac</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -106,7 +107,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>3.2.0</version>
+				<version>3.2.1</version>
 				<executions>
 					<execution>
 						<id>repackage</id>
