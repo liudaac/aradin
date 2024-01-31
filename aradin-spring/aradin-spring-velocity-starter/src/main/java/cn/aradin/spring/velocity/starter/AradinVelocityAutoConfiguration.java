@@ -5,7 +5,7 @@ import static cn.aradin.spring.velocity.template.VelocityTemplateAvailabilityPro
 import java.io.IOException;
 import java.util.Properties;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.Servlet;
 
 import org.apache.velocity.app.VelocityEngine;
