@@ -57,7 +57,7 @@
 		<redis.version>5.1.0</redis.version>
 		<redisson.version>3.26.0</redisson.version>
 		<caffeine.version>3.1.8</caffeine.version>
-		<druid.version>1.2.19</druid.version>
+		<druid.version>1.2.21</druid.version>
 		<!-- RDBC -->
 		<shiro.version>1.12.0</shiro.version>
 		<java-jwt.version>3.4.1</java-jwt.version>
@@ -70,7 +70,7 @@
 		<!-- WEIXIN -->
 		<wechat.version>2.8.32</wechat.version>
 		<!-- TOOLS -->
-		<buddy.version>1.14.10</buddy.version>
+		<buddy.version>1.14.11</buddy.version>
 		<jacoco.version>0.8.3</jacoco.version>
 		<fastjson2.version>2.0.45</fastjson2.version>
 		<fastjson.version>1.2.83</fastjson.version>
