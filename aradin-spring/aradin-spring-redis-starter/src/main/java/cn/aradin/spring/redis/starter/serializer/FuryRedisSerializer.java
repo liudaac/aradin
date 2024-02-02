@@ -76,5 +76,25 @@ public class FuryRedisSerializer implements RedisSerializer<Object> {
 		HttpError httpError2 = (HttpError)jdkSerializer.deserialize(datas2);
 		end2 = System.currentTimeMillis();
 		System.out.println(httpError2.getCoded() + "    "+(end2 - start2));
+		
+		int times = 10;
+		long total1 = 0l;
+		long total2 = 0l;
+		for(int i=0; i<times; i++) {
+			httpError = HttpError.instance(AradinCodedEnum.OK, String.valueOf(System.currentTimeMillis()));
+			start1 = System.nanoTime();
+			datas = serializer.serialize(httpError);
+			serializer.deserialize(datas);
+			end1 = System.nanoTime();
+			total1 += end1 - start1;
+			
+			start2 = System.nanoTime();
+			datas2 = jdkSerializer.serialize(httpError);
+			jdkSerializer.deserialize(datas2);
+			end2 = System.nanoTime();
+			total2 += end2 - start2;
+		}
+		System.out.println("AVG1 "+(double)total1/(1000000*times));
+		System.out.println("AVG2 "+(double)total2/(1000000*times));
 	}
 }
