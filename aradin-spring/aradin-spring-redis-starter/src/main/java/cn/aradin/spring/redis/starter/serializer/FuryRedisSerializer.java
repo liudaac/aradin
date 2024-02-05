@@ -21,7 +21,8 @@ import io.fury.config.Language;
  * 但是ThreadPoolFury 目前存在悲观锁问题，性能无法保证
  * 综上，Fury的序列化当前只能作为体验功能
  * 
- * 目前的测试用例看，对基础结构序列化效率有提升，自定义对象首次序列化操作效率较低，需要预热
+ * 目前的测试用例cn.aradin.spring.redis.starter.test.FuryBenchTest
+ * 对基础结构序列化效率有提升，自定义对象首次序列化操作效率较低，需要预热
  * @author daliu
  */
 public class FuryRedisSerializer implements RedisSerializer<Object> {
