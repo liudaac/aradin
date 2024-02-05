@@ -2,6 +2,7 @@ package cn.aradin.spring.redis.starter.serializer;
 
 import java.util.Collection;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
 
@@ -34,7 +35,7 @@ public class FuryRedisSerializer implements RedisSerializer<Object> {
 					.withRefTracking(false)
 					.withCompatibleMode(CompatibleMode.SCHEMA_CONSISTENT)
 					.withAsyncCompilation(true)
-					.requireClassRegistration(false)
+					.requireClassRegistration(CollectionUtils.isNotEmpty(clazzs))
 					.withClassLoader(classloader)
 					.build();
 			if (clazzs != null) {
