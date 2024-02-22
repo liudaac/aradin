@@ -503,11 +503,6 @@
 			</dependency>
 			<dependency>
 				<groupId>cn.aradin</groupId>
-				<artifactId>aradin-spring-lts-starter</artifactId>
-				<version>${revision}</version>
-			</dependency>
-			<dependency>
-				<groupId>cn.aradin</groupId>
 				<artifactId>aradin-spring-redis-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>

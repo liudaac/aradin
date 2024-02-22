@@ -29,7 +29,6 @@
 		<module>aradin-spring-velocity-starter</module>
 		<module>aradin-spring-swagger</module>
 		<module>aradin-spring-swagger-starter</module>
-		<module>aradin-spring-lts-starter</module>
 		<module>aradin-spring-salarm-starter</module>
 		<module>aradin-spring-xxljob-starter</module>
 		<module>aradin-spring-session-starter</module>
