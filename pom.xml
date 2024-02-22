@@ -51,7 +51,7 @@
 		<mysqlconnect.version>8.1.0</mysqlconnect.version>
 		<!-- Lucene -->
 		<elasticsearch.version>7.17.13</elasticsearch.version>
-		<solr.version>8.4.0</solr.version>
+		<solr.version>8.11.3</solr.version>
 		<camel.version>3.5.0</camel.version>
 		<!-- Caches -->
 		<redis.version>5.1.0</redis.version>
