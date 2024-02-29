@@ -22,6 +22,7 @@
     <module>aradin-prospects-webp</module>
     <module>aradin-prospects-mfa</module>
     <module>aradin-prospects-llm</module>
+    <module>aradin-prospects-algor</module>
   </modules>
   
 </project>
