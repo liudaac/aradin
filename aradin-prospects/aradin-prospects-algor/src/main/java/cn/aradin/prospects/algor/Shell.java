@@ -3,7 +3,7 @@ package cn.aradin.prospects.algor;
 import static cn.aradin.prospects.algor.Common.*;
 
 public class Shell {
-	public static void sort(Comparable[] a) { // 将a[]按升序排列
+	public static void sort(Comparable[] a) { 
 		int N = a.length;
 		int h = 1;
 		while (h < N / 3)
