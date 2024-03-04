@@ -26,7 +26,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.8</version>
+		<version>3.1.9</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
@@ -36,13 +36,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- Springboot -->
-		<springboot.version>3.1.8</springboot.version>
+		<springboot.version>3.1.9</springboot.version>
 		<springboot.solr.version>2.4.13</springboot.solr.version><!-- 2.4.10 -->
 		<!-- Springcloud -->
 		<spring-cloud.version>2022.0.5</spring-cloud.version>
 		<spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
 		<spring-plugin.version>3.0.0</spring-plugin.version>
-		<dubbo.version>3.2.10</dubbo.version>
+		<dubbo.version>3.2.11</dubbo.version>
 		<sentinel.version>1.8.7</sentinel.version>
 		<nacos.version>2.3.0</nacos.version>
 		<!-- Mybatis And DB -->
@@ -66,7 +66,7 @@
 		<zookeeper.version>3.9.1</zookeeper.version>
 		<curator.version>5.6.0</curator.version>
 		<!-- Netty -->
-		<netty.version>4.1.100.Final</netty.version>
+		<netty.version>4.1.107.Final</netty.version>
 		<!-- WEIXIN -->
 		<wechat.version>2.8.32</wechat.version>
 		<!-- TOOLS -->
