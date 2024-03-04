@@ -26,7 +26,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.2</version>
+		<version>3.2.3</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
@@ -36,13 +36,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- Springboot -->
-		<springboot.version>3.2.2</springboot.version>
+		<springboot.version>3.2.3</springboot.version>
 		<springboot.solr.version>2.4.13</springboot.solr.version><!-- 2.4.10 -->
 		<!-- Springcloud -->
 		<spring-cloud.version>2023.0.0</spring-cloud.version>
 		<spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
 		<spring-plugin.version>3.0.0</spring-plugin.version>
-		<dubbo.version>3.2.10</dubbo.version>
+		<dubbo.version>3.2.11</dubbo.version>
 		<sentinel.version>1.8.7</sentinel.version>
 		<nacos.version>2.3.0</nacos.version>
 		<!-- Mybatis And DB -->
@@ -66,13 +66,13 @@
 		<zookeeper.version>3.9.1</zookeeper.version>
 		<curator.version>5.6.0</curator.version>
 		<!-- Netty -->
-		<netty.version>4.1.100.Final</netty.version>
+		<netty.version>4.1.107.Final</netty.version>
 		<!-- WEIXIN -->
 		<wechat.version>2.8.32</wechat.version>
 		<!-- TOOLS -->
 		<buddy.version>1.14.11</buddy.version>
 		<jacoco.version>0.8.3</jacoco.version>
-		<fastjson2.version>2.0.45</fastjson2.version>
+		<fastjson2.version>2.0.47</fastjson2.version>
 		<fastjson.version>1.2.83</fastjson.version>
 		<gson.version>2.10.1</gson.version>
 		<slf4j.version>2.0.11</slf4j.version>
