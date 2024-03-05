@@ -1,28 +1,36 @@
 # ARADIN
+
 **阿拉丁基础开发框架**
-以SpringCloud及<a href="https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E">SpringCloud Alibaba</a>为基础做上层通用功能包扩展，已发布至https://mvnrepository.com/artifact/cn.aradin
-  * 规范依赖
-  * 降低集成复杂度    
-  * 扩充能力以更好的满足线上场景 
-  * 解决部分新旧组件交替淘汰时发生的兼容性问题
+以SpringCloud及<a href="https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E">SpringCloud Alibaba</a>为基础做上层通用功能包扩展，已发布至<https://mvnrepository.com/artifact/cn.aradin>
+
+* 规范依赖
+* 降低集成复杂度
+* 扩充能力以更好的满足线上场景
+* 解决部分新旧组件交替淘汰时发生的兼容性问题
+
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;钉群
 <img style="width:200px;" src="https://blogsolo.oss-cn-qingdao.aliyuncs.com/1694398485258.png"/></p>
 
 ***
+
 ## 主框架版本说明
+
 ### 1.0.3 (发布版，推荐使用，JDK8+)
+
 <p>SpringCloud 2021.0.8</p>
 <p>SpringBoot 2.7.18</p>
 <p>SpringCloudAlibaba 2021.0.4.0</p>
 <p>Dubbo 3.1.11</p>
 
 ### 1.1.1 (发布版，推荐使用，JDK17+)
+
 <p>SpringCloud 2022.0.4</p>
 <p>SpringBoot 3.1.6</p>
 <p>SpringCloudAlibaba 2022.0.0.0</p>
 <p>Dubbo 3.2.7</p>
 
 ### 历史版本
+
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.25(springcloud.Hoxton.SR12+springboot2.3.12.RELEASE+dubbo2.7)</a><br>
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.3.26(springcloud.Hoxton.SR12+springboot2.3.12.RELEASE+dubbo3.1)</a><br>
 *RELEASE版* <a href="https://mvnrepository.com/artifact/cn.aradin">0.0.4.2(springboot2.7.5+dubbo3.1)</a><br>
@@ -46,12 +54,17 @@
 &nbsp;&nbsp;&nbsp;&lt;/dependencyManagement&gt;<br>
 
 ***
+
 ## 模块结构
+
 ### 1、aradin-spring
+
 spring加强，面向线上使用场景，扩充协议文档、缓存、模板、心跳集成能力
 
 ***
-+ **aradin-spring-core**
+
+* **aradin-spring-core**
+
 <p>&nbsp;基础能力模块</p>
 <p>&nbsp;① cn.aradin.spring.core.algo.* 算法包   目前只有SWRR负载均衡</p>
 <p>&nbsp;② cn.aradin.spring.core.bean.* BEAN工具  
@@ -60,7 +73,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Configuration<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@PropertySource(value = "classpath:config.yml", factory = AradinPropertySourceFactory.class)<br>
 <p>&nbsp;&nbsp;&nbsp;方便灵活的布局配置文件</p>
-<p>&nbsp;③ cn.aradin.spring.core.context.* 上下文运行时变量 支持三种模式，借鉴SpringSecurity源码中该功能实现方式</p> 
+<p>&nbsp;③ cn.aradin.spring.core.context.* 上下文运行时变量 支持三种模式，借鉴SpringSecurity源码中该功能实现方式</p>
 &nbsp;&nbsp;&nbsp;MODE_THREADLOCAL;<br>
 &nbsp;&nbsp;&nbsp;MODE_INHERITABLETHREADLOCAL;<br>
 &nbsp;&nbsp;&nbsp;MODE_GLOBAL;</p>
@@ -82,7 +95,9 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;domain: #若domain与当前域名不一致需要设置<br>
 
 ***
-+ **aradin-spring-acutator-starter**
+
+* **aradin-spring-acutator-starter**
+
 <p>&nbsp;心跳组件模块，在spring原生actuator基础上增加inited,offline,online三个服务管理节点</p>
 <p>&nbsp;① /inited 查看服务的初始化状态</p>
 <p>&nbsp;② /online 持续集成发布时增加上线后的处理逻辑，比如容器应用启动应用后执行指定的脚本文件（如日志采集），也支持扩展Handler实现业务高度定制的启动逻辑</p>
@@ -105,7 +120,9 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shut-wait: #优雅停机配置，服务注销和销毁context间的时间间隔，单位ms<br>
 
 ***
-+ **aradin-spring-velocity-starter**
+
+* **aradin-spring-velocity-starter**
+
 <p>&nbsp;springboot2.x之后不支持velocity的集成，考虑到旧项目模板代码迁移的复杂性，特别提供velocity的兼容包，能够很好的支持springboot2及springboot3</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;配置方式与原velocity1.x版本一致，例如</p>
 &nbsp;spring:<br>
@@ -124,7 +141,9 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;(注：此处xml的格式为velocity3.1版本，与旧版比有较大的格式改动且新旧不兼容，若旧项目使用velocity1.x的需要做格式调整，但大体配置逻辑一致调整比较简单)</p>
 
 ***
-+ **aradin-spring-swagger-starter**
+
+* **aradin-spring-swagger-starter**
+
 <p>&nbsp;Swagger-bootstrap-ui集成组件，选型的原因是相对原生UI更加友好</p>
 <p>&nbsp;① cn.aradin.spring.swagger.starter.dto。Resp 标准返回结构</p>
 <p>&nbsp;② 配置方式</p>
@@ -144,7 +163,9 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use-default-status: false<br>
 
 ***
-+ **aradin-spring-caffeine-starter**
+
+* **aradin-spring-caffeine-starter**
+
 <p>&nbsp;使用Caffeineson类包装内存缓存Caffeine，实现对应的CacheManager，支持spring-cache注解方式集成</p>
 <p>&nbsp;&nbsp;&nbsp;一般情况下，对于内存缓存的更新机制也分为两种：</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;① 利用Caffeine缓存自身的超时机制进行延时Evict，在触发之前持久层对应的数据可能已经发生变更，</p>
@@ -191,7 +212,9 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 <p>&nbsp;&nbsp;&nbsp;注：各配置项的设置可以参考https://github.com/ben-manes/caffeine/wiki/Memory-overhead-zh-CN中的内存占用指标</p>
 
 ***
-+ **aradin-spring-redis-starter**
+
+* **aradin-spring-redis-starter**
+
 <p>这个模块目前实现了两个重点功能：</p>
 <p>&nbsp;一、针对于spring-cache注解的使用优化</p>
 <p>&nbsp;替换掉了spring-boot-starter-data-redis中默认CacheManager实现（由于原生实现不支持多种缓存方式共存），对于各CacheName的初始化使用自定义配置项<br>
@@ -239,11 +262,15 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 </p>
 
 ***
-+ **aradin-spring-redisson-starter**
+
+* **aradin-spring-redisson-starter**
+
 <p>&nbsp;RedissonClient实例初始化，配置方式与spring-redis配置一致，无需额外配置项</p>
 
 ***
-+ **aradin-spring-session-starter(v1.0.2+)**
+
+* **aradin-spring-session-starter(v1.0.2+)**
+
 <p>&nbsp;spring-session-data-redis的实现依赖spring.redis.*配置，这会造成session用的redis和业务redis高度绑定，在实际使用场景中，存在多服务共享session但不愿共享redis的场景。spring-session-data-redis中RedisConnectFactory引入方式虽然提供了@SpringSessionRedisConnectionFactory扩展槽来定制redis，但会造成默认RedisConnectFactory实例不再初始化，所以并不实用。</p>
 <p>&nbsp;该模块实现了对默认redissession实现的替换，使用aradin.session.redis.*来定制session用的redis实例，同时使用@EnableAradinHttpSession注解实现对@EnableRedisHttpSession注解的替换。</p>
 <p>&nbsp;配置方式如下</p>
@@ -258,7 +285,9 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pool: #连接池配置，不再详细列出</p>
 
 ***
-+ **aradin-spring-salarm-starter**
+
+* **aradin-spring-salarm-starter**
+
 <p>&nbsp;告警通知模块，类似log4j的API，实现Content的组装和发送，发送目标默认只提供控制台输出</p>
 <p>&nbsp;&nbsp;&nbsp;① cn.aradin.spring.salarm.starter.handler.ISalarmHandler 实现该接口Bean实例，自定义各个通知渠道逻辑</p>
 <p>&nbsp;&nbsp;&nbsp;② cn.aradin.spring.salarm.starter.notifier.ISalarm 调用入口，负责告警消息的拼装，去重以及全局ISalarmHandler的分发，引用方式为Bean引用</p>
@@ -269,7 +298,9 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;level: warn # Min level to send<br>
 
 ***
-+ **aradin-spring-xxljob-starter**
+
+* **aradin-spring-xxljob-starter**
+
 <p>&nbsp;Xxljob自动配置，配置项与官方建议一致</p>
 <p>&nbsp;&nbsp;&nbsp;配置项</p>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xxl:<br>
@@ -285,20 +316,29 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logretentiondays:<br>
 
 ***
-### 2、aradin-alibaba
-合并了必要的依赖项和配置样例，并未做额外开发
-+ **aradin-alibaba-nacos-starter**
 
-+ **aradin-alibaba-sentinel-starter**
+### 2、aradin-alibaba
+
+合并了必要的依赖项和配置样例，并未做额外开发
+
+* **aradin-alibaba-nacos-starter**
+
+* **aradin-alibaba-sentinel-starter**
 
 ***
+
 ### 3、aradin-mybatis
-+ **aradin-mybatis-plus-starter**
+
+* **aradin-mybatis-plus-starter**
+
 <p>&nbsp;增加了开启分页的配置，由于默认情况下Page查询是必要的，无需下沉到项目实现中再开启</p>
 
 ***
+
 ### 4、aradin-lucene
-+ **aradin-lucene-solr-starter**
+
+* **aradin-lucene-solr-starter**
+
 <p>&nbsp;使用自定义配置初始化CloudSolrClient Bean</p>
 &nbsp;配置如下</p>
 &nbsp;&nbsp;&nbsp;spring:<br>
@@ -311,8 +351,11 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;chroot: /solrcloud</p>
 
 ***
+
 ### 5、aradin-zookeeper
-+ **aradin-zookeeper-boot-starter**
+
+* **aradin-zookeeper-boot-starter**
+
 <p>&nbsp;可同时配置多个ZK集群，并绑定事件路由机制</p>
 <p>&nbsp;&nbsp;支持的使用方式如下</p>
 <p>&nbsp;&nbsp;① 事件接收方式 实现cn.aradin.zookeeper.boot.starter.handler.INodeHandler Bean实例 通过support方法进行事件过滤，handler方法实现事件的处理</p>
@@ -325,9 +368,13 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 <p>&nbsp;&nbsp;③ ZKClient获取方式 ZookeeperClientManager.getClient(String id)</p>
 
 ***
+
 ### 6、aradin-version
+
 版本分发引擎，建立标准的版本控制分发机制，并支持选择性集成zookeeper，nacos中间件
-+ **aradin-version-core**
+
+* **aradin-version-core**
+
 <p>&nbsp;版本分发通用模块，对版本分发的上层逻辑进行抽象，并提供分布式一致性中间件的扩展入口，目前支持zookeeper、nacos</p>
   <figure>
   <p>① cn.aradin.version.core.dispatcher.VersionDispatcher 唤起所有的IVersionHandler(Bean)进行版本变更的发布</p>
@@ -340,9 +387,11 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
   <p>④ cn.aradin.version.core.properties.VersionProperties 相关配置项 **aradin.version**<br></p>
   
 ***
-+ **aradin-version-zookeeper-starter**
+
+* **aradin-version-zookeeper-starter**
+
 <p>
-     ① cn.aradin.version.zookeeper.starter.handler.VersionsNodeHandler<br> 
+     ① cn.aradin.version.zookeeper.starter.handler.VersionsNodeHandler<br>
      *接收ZK事件并使用VersionDispatcher(Bean)进行分发，接收方为所有的cn.aradin.version.core.handler.IVersionHandler(Bean)*<br>
      <br>
      ② cn.aradin.version.zookeeper.starter.handler.VersionZookeeperBroadHandler<br>
@@ -350,200 +399,224 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
      <br>
      ③ 配置样例<br>
      aradin:<br>
-	 &nbsp;&nbsp;version:<br>
-	 &nbsp;&nbsp;&nbsp;&nbsp;zookeeper:<br>
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address-id: CUSTOMIZED-ID<br>
-	 &nbsp;&nbsp;zookeeper:<br>
-	 &nbsp;&nbsp;&nbsp;&nbsp;enable: true #default true<br>
-	 &nbsp;&nbsp;&nbsp;&nbsp;session-timeout: 5000 #default 5000<br>
-	 &nbsp;&nbsp;&nbsp;&nbsp;connection-timeout: 5000 #default 5000<br>
-	 &nbsp;&nbsp;&nbsp;&nbsp;addresses:<br>
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- id: CUSTOMIZED-ID<br>
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address:
+  &nbsp;&nbsp;version:<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;zookeeper:<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address-id: CUSTOMIZED-ID<br>
+  &nbsp;&nbsp;zookeeper:<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;enable: true #default true<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;session-timeout: 5000 #default 5000<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;connection-timeout: 5000 #default 5000<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;addresses:<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- id: CUSTOMIZED-ID<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address:
 </p>
 
 ***
-+ **aradin-version-nacos-starter(v1.0.0+)**
+
+* **aradin-version-nacos-starter(v1.0.0+)**
+
 <p>
-	<p>
-	① cn.aradin.version.nacos.starter.listener.VersionNacosConfigListener<br> 
-	*接收Nacos事件，并使用VersionDispatcher(Bean)进行分发，接收方为所有的cn.aradin.version.core.handler.IVersionHandler(Bean)*<br>
-	<br>
-	② cn.aradin.version.nacos.starter.handler.VersionNacosBroadHandler<br>
-	*Nacos的版本广播触发入口，方便人工触发版本变更事件，另外初始化时同时为指定的group data-id绑定listener*<br>
-	<br>
-	③ 配置样例</p>
-	aradin:<br>
-	&nbsp;&nbsp;version:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;nacos:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server-addr: #若不配置与spring.cloud.nacos一致<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username: #若不配置与spring.cloud.nacos一致<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: #若不配置与spring.cloud.nacos一致<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;namespace: #若不配置与spring.cloud.nacos一致<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: #必填<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-ids: #必填，data-id列表<br>
-	spring:<br>
-	&nbsp;&nbsp;cloud:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;nacos:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username: <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;config:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled: true<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server-addr: 192.168.1.1:8888,192.168.1.2:8888,192.168.1.3:8888<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;namespace: d78b658c-182a-420a-9005-e8e8f36a1e7d<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group-id: aradin.version.nacos.group<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-id: aradin.version.nacos.data-id<br>
+ <p>
+ ① cn.aradin.version.nacos.starter.listener.VersionNacosConfigListener<br>
+ *接收Nacos事件，并使用VersionDispatcher(Bean)进行分发，接收方为所有的cn.aradin.version.core.handler.IVersionHandler(Bean)*<br>
+ <br>
+ ② cn.aradin.version.nacos.starter.handler.VersionNacosBroadHandler<br>
+ *Nacos的版本广播触发入口，方便人工触发版本变更事件，另外初始化时同时为指定的group data-id绑定listener*<br>
+ <br>
+ ③ 配置样例</p>
+ aradin:<br>
+ &nbsp;&nbsp;version:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;nacos:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server-addr: #若不配置与spring.cloud.nacos一致<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username: #若不配置与spring.cloud.nacos一致<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: #若不配置与spring.cloud.nacos一致<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;namespace: #若不配置与spring.cloud.nacos一致<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: #必填<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-ids: #必填，data-id列表<br>
+ spring:<br>
+ &nbsp;&nbsp;cloud:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;nacos:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username: <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;config:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled: true<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server-addr: 192.168.1.1:8888,192.168.1.2:8888,192.168.1.3:8888<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;namespace: d78b658c-182a-420a-9005-e8e8f36a1e7d<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group-id: aradin.version.nacos.group<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-id: aradin.version.nacos.data-id<br>
 </p>
 
 ***
-+ **aradin-version-caffeine-starter整合aradin-version-zookeeper-starter实现分布式内存缓存**
+
+* **aradin-version-caffeine-starter整合aradin-version-zookeeper-starter实现分布式内存缓存**
+
 <p>&nbsp;aradin-version-caffeine-starter中实现了位于VersionDispatcher(Bean)下游的IVersionHandler（cn.aradin.spring.caffeine.manager.version.CaffeinesonVersionHandler）实现内存信息的版本淘汰机制<br>
 <p>&nbsp;① 相关配置如下：可以参考复用至nacos集成</p>
-	aradin:<br>
-	&nbsp;&nbsp;version:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;zookeeper:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address-id: CUSTOMID<br>
-	&nbsp;&nbsp;zookeeper:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;addresses:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- id: ${aradin.version.zookeeper-address-id}<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address: 192.168.1.1:2181,192.168.1.2:2181,192.168.1.3:2181/chroot<br>
-	&nbsp;&nbsp;cache:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;caffeine:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaults: #默认缓存配置<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 1200000 #访问后过期时间，单位毫秒<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 1800000 #写入后过期时间，单位毫秒<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100 #初始化大小<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 10000 #最大缓存对象个数，超过此数量时之前放入的缓存将失效<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true #是否允许空值<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true #是否启用软引用<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;configs: #自定义cacheName对应的缓存配置<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base: #具体的cache名,与springcache配合使用<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 3600000<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 3600000<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;versioned: true #标识当前cache是否开启分布式更新，默认为false<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 7200000<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 7200000<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true</p>
+ aradin:<br>
+ &nbsp;&nbsp;version:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;zookeeper:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address-id: CUSTOMID<br>
+ &nbsp;&nbsp;zookeeper:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;addresses:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- id: ${aradin.version.zookeeper-address-id}<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address: 192.168.1.1:2181,192.168.1.2:2181,192.168.1.3:2181/chroot<br>
+ &nbsp;&nbsp;cache:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;caffeine:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaults: #默认缓存配置<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 1200000 #访问后过期时间，单位毫秒<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 1800000 #写入后过期时间，单位毫秒<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100 #初始化大小<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 10000 #最大缓存对象个数，超过此数量时之前放入的缓存将失效<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true #是否允许空值<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true #是否启用软引用<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;configs: #自定义cacheName对应的缓存配置<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base: #具体的cache名,与springcache配合使用<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 3600000<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 3600000<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;versioned: true #标识当前cache是否开启分布式更新，默认为false<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 7200000<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 7200000<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true</p>
 <p>&nbsp;② 缓存失效的手动触发</p>
-	&nbsp;**IVersionBroadHandler(Bean).broadcast(String group, String key);**<br> 
-	&nbsp;group为aradin.cache.caffeine.group，key为cacheName，对应的cache将被清空达到被动更新的目的<br>
+ &nbsp;**IVersionBroadHandler(Bean).broadcast(String group, String key);**<br>
+ &nbsp;group为aradin.cache.caffeine.group，key为cacheName，对应的cache将被清空达到被动更新的目的<br>
 
 ***
-+ **aradin-version-caffeine-starter整合aradin-version-nacos-starter实现分布式内存缓存**
+
+* **aradin-version-caffeine-starter整合aradin-version-nacos-starter实现分布式内存缓存**
+
 <p>&nbsp;aradin-version-caffeine-starter中实现了位于VersionDispatcher(Bean)下游的IVersionHandler（cn.aradin.spring.caffeine.manager.version.CaffeinesonVersionHandler）实现内存信息的版本淘汰机制<br>
 <p>&nbsp;① 相关配置如下：可以参考复用至nacos集成</p>
-	aradin:<br>
-	&nbsp;&nbsp;version:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;nacos:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username: #选填，默认与spring.cloud.nacos一致<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: #选填，默认与spring.cloud.nacos一致<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server-addr: #选填，默认与spring.cloud.nacos一致<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;namespace: #选填，建议与项目配置做隔离<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: #必填<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-ids: #必填，data-id列表，需要管理的cacheName加进来即可<br>
-	&nbsp;&nbsp;cache:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;caffeine:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaults: #默认缓存配置<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 1200000 #访问后过期时间，单位毫秒<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 1800000 #写入后过期时间，单位毫秒<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100 #初始化大小<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 10000 #最大缓存对象个数，超过此数量时之前放入的缓存将失效<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true #是否允许空值<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true #是否启用软引用<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;configs: #自定义cacheName对应的缓存配置<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base: #具体的cache名,与springcache配合使用<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 3600000<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 3600000<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;versioned: true #标识当前cache是否开启分布式更新，默认为false<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 7200000<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 7200000<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true</p>
+ aradin:<br>
+ &nbsp;&nbsp;version:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;nacos:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username: #选填，默认与spring.cloud.nacos一致<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: #选填，默认与spring.cloud.nacos一致<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server-addr: #选填，默认与spring.cloud.nacos一致<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;namespace: #选填，建议与项目配置做隔离<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: #必填<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-ids: #必填，data-id列表，需要管理的cacheName加进来即可<br>
+ &nbsp;&nbsp;cache:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;caffeine:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaults: #默认缓存配置<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 1200000 #访问后过期时间，单位毫秒<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 1800000 #写入后过期时间，单位毫秒<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100 #初始化大小<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 10000 #最大缓存对象个数，超过此数量时之前放入的缓存将失效<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true #是否允许空值<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true #是否启用软引用<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;configs: #自定义cacheName对应的缓存配置<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base: #具体的cache名,与springcache配合使用<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 3600000<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 3600000<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;versioned: true #标识当前cache是否开启分布式更新，默认为false<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-access: 7200000<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expire-after-write: 7200000<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initial-capacity: 100<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum-size: 100000<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-null-values: true<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-soft: true</p>
 <p>&nbsp;② 缓存失效的手动触发</p>
-	&nbsp;**IVersionBroadHandler(Bean).broadcast(String group, String key);**<br> 
-	&nbsp;group为aradin.cache.caffeine.group，key为cacheName，对应的cache将被清空达到被动更新的目的<br>
+ &nbsp;**IVersionBroadHandler(Bean).broadcast(String group, String key);**<br>
+ &nbsp;group为aradin.cache.caffeine.group，key为cacheName，对应的cache将被清空达到被动更新的目的<br>
 
 ***
+
 ### 7、aradin-cluster
 
-+ **aradin-cluster-core**
+* **aradin-cluster-core**
+
 <p>&nbsp;集群模块，可以借助zookeeper，nacos实现集群节点的注册和节点列表的获取，该模块通过IClusterNodeManager对集群信息进行托管，依赖zk或nacos模块实现集群信息的更新。此外，该模块还提供了集群的通用注册配置</p>
 <p>&nbsp;① 相关配置如下：</p>
-	aradin:<br>
-	&nbsp;&nbsp;cluster:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;node-name: #节点注册名<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;register: true #当前节点是否注册到集群中，默认为true<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;prefer-ip-address: #节点注册名是否偏向于ip地址，当node-name不指定时，可以生成默认名<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;max-node: #当前集群支持的最大节点数<br>
+ aradin:<br>
+ &nbsp;&nbsp;cluster:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;node-name: #节点注册名<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;register: true #当前节点是否注册到集群中，默认为true<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;prefer-ip-address: #节点注册名是否偏向于ip地址，当node-name不指定时，可以生成默认名<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;max-node: #当前集群支持的最大节点数<br>
 
-+ **aradin-cluster-zookeeper-starter**
+* **aradin-cluster-zookeeper-starter**
+
 <p>&nbsp;基于ZK实现集群节点的注册和同步</p>
 <p>&nbsp;① 相关配置如下：</p>
-	aradin:<br>
-	&nbsp;&nbsp;cluster:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;zookeeper: <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address-id: #和aradin-zookeeper-boot-starter的配置关联<br>
+ aradin:<br>
+ &nbsp;&nbsp;cluster:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;zookeeper: <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address-id: #和aradin-zookeeper-boot-starter的配置关联<br>
 
-+ **aradin-cluster-nacos-starter**
+* **aradin-cluster-nacos-starter**
+
 <p>&nbsp;基于nacos实现集群节点的注册和同步，原理是借助cluster独占的方式来确定各节点的序号，注意的是发布建议逐节点滚动发布，原因是目前nacos注册+注销操作频繁可能会有数据一致性问题，</p>
 <p>&nbsp;① 相关配置如下：</p>
-	aradin:<br>
-	&nbsp;&nbsp;cluster:<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;nacos: <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username: <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server-addr: <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;namespace: #建议和服务注册发现的命名空间分离，防止有干扰<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;service-name: <br>
+ aradin:<br>
+ &nbsp;&nbsp;cluster:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;nacos: <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username: <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server-addr: <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;namespace: #建议和服务注册发现的命名空间分离，防止有干扰<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;service-name: <br>
 
 ***
+
 ### 8、aradin-external
+
 <p>&nbsp;外部模块重写，目前包含springfox-swagger，原因是swagger近两年未做更新，与spring新版有兼容问题，所以做了本地化适配修改，0.0.4.x以后，兼容springboot2.7.X</p>
 
 ***
-+ **springfox-core**
-+ **springfox-schema**
-+ **springfox-spi**
-+ **springfox-spring-web**
-+ **springfox-swagger2**
-+ **springfox-swagger-common**
-+ **swagger-bootstrap-ui**
+
+* **springfox-core**
+* **springfox-schema**
+* **springfox-spi**
+* **springfox-spring-web**
+* **springfox-swagger2**
+* **springfox-swagger-common**
+* **swagger-bootstrap-ui**
+
 <p>&nbsp;swagger近两年未做更新，与spring新版有兼容问题，所以做了适配修改，1.0.x+版本兼容springboot2.7.x，1.1.x兼容springboot3.1.x，可直接引用aradin-spring-swagger-starter</p>
 
 ***
-+ **velocity-tools-jakarta**(v1.1.0+)
+
+* **velocity-tools-jakarta**(v1.1.0+)
+
 <p>&nbsp;springboot3正式进入jakarta时代，但velocity已经停止了迭代，由于老项目的velocity模板迁移到其他模板的工程量巨大，对老项目框架升级造成了阻碍，所以针对这块做了适配修改，可直接引用aradin-spring-velocity-starter</p>
 
 ***
-+ **xxl-job-core**
+
+* **xxl-job-core**
+
 <p>&nbsp;原版core包在log4j和spring-context存在强依赖，导致jar包出现包冲突，本地化适配修改，可直接引用aradin-spring-xxljob-starter</p>
 
 ***
+
 ### 9、aradin-easy
+
 <p>&nbsp;方便客户端调用方的构造，目前先对Http各种请求模式进行了支持，</p>
 
 ***
-+ **aradin-easy-http**
+
+* **aradin-easy-http**
+
 <p>&nbsp;参考springmvc注解方式提供Http接口类的注解及执行代理，同时做到对spring无依赖，新旧项目均能接入，基于jdk动态代理实现对Http接口类的代理</p>
 
 ***
-+ **aradin-easy-http-buddy**
+
+* **aradin-easy-http-buddy**
+
 <p>&nbsp;对aradin-easy-http中代理实现的构造进行了重写，基于ByteBuddy实现对Http接口类的代理</p>
 <p>接口类可以参考 https://github.com/liudaac/aradin/blob/main/aradin-easy/aradin-easy-http-buddy/src/test/java/cn/aradin/easy/http/compare/result/NcClient.java </p>
 <p>代理类构造，使用工厂模式 EasyBuilder.ins().service(NcClient.class)</p>
@@ -552,12 +625,16 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 <p>在Http接口类的代理构造上，对jdk动态代理和bytebuddy字节码增强进行了对比，参考https://github.com/liudaac/aradin/issues/6</p>
 
 ***
+
 ## 进展阶段
+
 <p>&nbsp;目前最新发布的1.0.3(springboot2.7.18)以及1.1.1(springboot3.1.6)版本，经过大量的线上场景验证和磨合，已基本满足日常项目快速搭建需求，且已经普遍运行于线上环境。</p>
 <p>&nbsp;JVM兼容jdk8至17，当前支持springboot3.1.6，spring官方已于2023年11月停止维护2.7.x并推出3.2.x，</p>
 <p>aradin框架将从1.2.x开始以jdk21为基座支持springboot3.2.x，同时保持1.1.x对springboot3.1.x的支持，跟进SpringCloud及Alibaba全家桶的生态升级</p>
 
 ***
+
 ## JOIN US
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们致力于为Javaer提供更加快捷的项目搭建途径，所以无论对该项目有任何的见解，都欢迎来交流，如果有其他需要补充的功能或者对现有模块的Fix，也欢迎不吝提交你的issue，审核通过即可加入本项目开发 </p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开发者邮箱 liudaax@126.com </p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开发者邮箱 <liudaax@126.com> </p>
