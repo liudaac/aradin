@@ -36,6 +36,12 @@ import org.springframework.util.CollectionUtils;
  */
 public abstract class AbstractBucketOperations<K, V> {
 	
+	static final int HASH_BITS = 0x7fffffff; // usable bits of normal node hash
+	
+	static final int spread(int h) {
+        return (h ^ (h >>> 16)) & HASH_BITS;
+    }
+	
 	Random random = new Random();
 	// utility methods for the template internal methods
 	abstract class ValueDeserializingRedisCallback implements RedisCallback<V> {
@@ -106,7 +112,7 @@ public abstract class AbstractBucketOperations<K, V> {
 	}
 
 	int bucket(Object hashKey) {
-		return Math.abs(hashKey.hashCode())%bucket;
+		return spread(hashKey.hashCode()) & (bucket-1);
 	}
 	
 	byte[] rawRandomKey(Object key) {
