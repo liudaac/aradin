@@ -112,7 +112,7 @@ public abstract class AbstractBucketOperations<K, V> {
 	}
 
 	int bucket(Object hashKey) {
-		return spread(hashKey.hashCode())%bucket;
+		return spread(hashKey.hashCode()) & (bucket-1);
 	}
 	
 	byte[] rawRandomKey(Object key) {
