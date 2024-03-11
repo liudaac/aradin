@@ -93,6 +93,7 @@
 		<annotation.version>2.1.1</annotation.version>
 		<servlet.version>6.0.0</servlet.version>
 		<groovy.version>4.0.18</groovy.version>
+		<jupiter.version>5.10.2</jupiter.version>
 
 		<flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
 	</properties>
@@ -662,6 +663,12 @@
 				<groupId>org.apache.groovy</groupId>
 				<artifactId>groovy</artifactId>
 				<version>${groovy.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.junit.jupiter</groupId>
+			    <artifactId>junit-jupiter-engine</artifactId>
+			    <version>${jupiter.version}</version>
+			    <scope>test</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
