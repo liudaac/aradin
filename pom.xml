@@ -55,7 +55,7 @@
 		<camel.version>3.5.0</camel.version>
 		<!-- Caches -->
 		<redis.version>5.1.0</redis.version>
-		<redisson.version>3.26.0</redisson.version>
+		<redisson.version>3.27.1</redisson.version>
 		<caffeine.version>3.1.8</caffeine.version>
 		<druid.version>1.2.21</druid.version>
 		<!-- RDBC -->
