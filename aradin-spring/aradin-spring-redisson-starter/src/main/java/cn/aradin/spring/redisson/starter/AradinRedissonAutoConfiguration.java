@@ -2,6 +2,7 @@ package cn.aradin.spring.redisson.starter;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,14 +50,9 @@ public class AradinRedissonAutoConfiguration {
     	Method clusterMethod = ReflectionUtils.findMethod(RedisProperties.class, "getCluster");
     	Method timeoutMethod = ReflectionUtils.findMethod(RedisProperties.class, "getTimeout");
     	Object timeoutValue = ReflectionUtils.invokeMethod(timeoutMethod, redisProperties);
-    	int timeout;
-    	if (null == timeoutValue) {
-			timeout = 0;
-		}else if (!(timeoutValue instanceof Integer)) {
-			Method millisMethod = ReflectionUtils.findMethod(timeoutValue.getClass(), "toMillis");
-			timeout = ((Long)ReflectionUtils.invokeMethod(millisMethod, timeoutValue)).intValue();
-		}else {
-			timeout = (Integer)timeoutValue;
+    	long timeout = 10000l;
+    	if (null != timeoutValue && timeoutValue instanceof Duration) {
+			timeout = ((Duration)timeoutValue).toMillis();
 		}
     	if (redisProperties.getSentinel() != null) {
             Method nodesMethod = ReflectionUtils.findMethod(Sentinel.class, "getNodes");
@@ -74,7 +70,7 @@ public class AradinRedissonAutoConfiguration {
                 .setMasterName(redisProperties.getSentinel().getMaster())
                 .addSentinelAddress(nodes)
                 .setDatabase(redisProperties.getDatabase())
-                .setConnectTimeout(timeout)
+                .setConnectTimeout((int)timeout)
                 .setPassword(redisProperties.getPassword());
         } else if (clusterMethod != null && ReflectionUtils.invokeMethod(clusterMethod, redisProperties) != null) {
             Object clusterObject = ReflectionUtils.invokeMethod(clusterMethod, redisProperties);
@@ -86,7 +82,7 @@ public class AradinRedissonAutoConfiguration {
             config = new Config();
             config.useClusterServers()
                 .addNodeAddress(nodes)
-                .setConnectTimeout(timeout)
+                .setConnectTimeout((int)timeout)
                 .setPassword(redisProperties.getPassword());
         } else {
             config = new Config();
@@ -98,9 +94,11 @@ public class AradinRedissonAutoConfiguration {
             
             config.useSingleServer()
                 .setAddress(prefix + redisProperties.getHost() + ":" + redisProperties.getPort())
-                .setConnectTimeout(timeout)
+                .setConnectTimeout((int)timeout)
                 .setDatabase(redisProperties.getDatabase())
-                .setPassword(redisProperties.getPassword());
+                .setPassword(redisProperties.getPassword())
+                .setConnectionPoolSize(redisProperties.getLettuce() != null?redisProperties.getLettuce().getPool().getMinIdle():redisProperties.getJedis()!=null?redisProperties.getJedis().getPool().getMinIdle():16)
+                .setConnectionMinimumIdleSize(redisProperties.getLettuce() != null?redisProperties.getLettuce().getPool().getMinIdle():redisProperties.getJedis()!=null?redisProperties.getJedis().getPool().getMinIdle():16);
         }
         
         return Redisson.create(config);
