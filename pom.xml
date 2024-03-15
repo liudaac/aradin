@@ -20,7 +20,7 @@
 		<module>aradin-version</module>
 		<module>aradin-external</module>
 		<module>aradin-easy</module>
-		<module>aradin-prospects</module>
+		<!-- <module>aradin-prospects</module> -->
 		<!-- <module>aradin-examples</module> -->
 	</modules>
 	<parent>
