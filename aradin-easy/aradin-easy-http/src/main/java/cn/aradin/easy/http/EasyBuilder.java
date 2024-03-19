@@ -2,8 +2,6 @@ package cn.aradin.easy.http;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.locks.ReentrantLock;
-
 import org.apache.http.client.config.RequestConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,25 +13,18 @@ public class EasyBuilder {
 	 */
 	public Map<Class<?>, Object> serviceMap = new HashMap<Class<?>, Object>();
 
-	private static EasyBuilder factory;
-
-	private static ReentrantLock lock = new ReentrantLock();
-
 	private EasyRequest client;
 
 	private EasyBuilder() {
 		client = new EasyRequest();
 	}
+	
+	private static class EasyBuilderHolder {
+		private static EasyBuilder factory = new EasyBuilder();
+	}
 
 	public static EasyBuilder ins() {
-		if (factory == null) {
-			lock.lock();
-			if (factory == null) {
-				factory = new EasyBuilder();
-			}
-			lock.unlock();
-		}
-		return factory;
+		return EasyBuilderHolder.factory;
 	}
 
 	public <T> T service(Class<T> serviceInterface) {

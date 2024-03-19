@@ -3,8 +3,6 @@ package cn.aradin.easy.http.buddy;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.locks.ReentrantLock;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.config.RequestConfig;
 import org.slf4j.Logger;
@@ -21,20 +19,13 @@ public class BuddyBuilder {
 	private static final Logger logger = LoggerFactory.getLogger(BuddyBuilder.class);
 	
 	public Map<Class<?>, Object> serviceMap = new HashMap<Class<?>, Object>();
-	
-	private static BuddyBuilder factory;
 
-	private static ReentrantLock lock = new ReentrantLock();
+	private static class BuddyBuilderHolder {
+		private static BuddyBuilder factory = new BuddyBuilder();
+	}
 
 	public static BuddyBuilder ins() {
-		if (factory == null) {
-			lock.lock();
-			if (factory == null) {
-				factory = new BuddyBuilder();
-			}
-			lock.unlock();
-		}
-		return factory;
+		return BuddyBuilderHolder.factory;
 	}
 	
 	public <T> T service(Class<T> serviceInterface) {
