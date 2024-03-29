@@ -1,0 +1,2 @@
+cn.aradin.cache.redis.starter.AradinRedisAutoConfiguration
+cn.aradin.cache.redis.starter.AradinRedisManagerAutoConfiguration

@@ -586,6 +586,26 @@
 			</dependency>
 			<dependency>
 				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-cache-caffeine</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-cache-caffeine-starter</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-cache-redis-starter</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
+				<artifactId>aradin-cache-redisson-starter</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.aradin</groupId>
 				<artifactId>aradin-easy-http</artifactId>
 				<version>${revision}</version>
 			</dependency>

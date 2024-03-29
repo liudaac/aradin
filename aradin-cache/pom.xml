@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<groupId>cn.aradin</groupId>
+		<artifactId>aradin</artifactId>
+		<version>${revision}</version>
+		<relativePath>../pom.xml</relativePath>
+		<!-- lookup parent from repository -->
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>aradin-cache</artifactId>
+	<packaging>pom</packaging>
+	<name>aradin-cache</name>
+	<description>Aradin Features on Cache</description>
+
+	<modules>
+		<module>aradin-cache-redis-starter</module>
+		<module>aradin-cache-redisson-starter</module>
+		<module>aradin-cache-caffeine</module>
+		<module>aradin-cache-caffeine-starter</module>
+	</modules>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+	</build>
+</project>
