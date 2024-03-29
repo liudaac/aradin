@@ -12,6 +12,7 @@
 	<description>Aradin Build And Dependencies</description>
 	<modules>
 		<module>aradin-spring</module>
+		<module>aradin-cache</module>
 		<module>aradin-mybatis</module>
 		<module>aradin-alibaba</module>
 		<module>aradin-lucene</module>
