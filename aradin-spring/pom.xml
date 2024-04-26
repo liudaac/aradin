@@ -1,45 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
-	<parent>
-		<groupId>cn.aradin</groupId>
-		<artifactId>aradin</artifactId>
-		<version>${revision}</version>
-		<relativePath>../pom.xml</relativePath>
-		<!-- lookup parent from repository -->
-	</parent>
-
-	<modelVersion>4.0.0</modelVersion>
-	<artifactId>aradin-spring</artifactId>
-	<packaging>pom</packaging>
-	<name>aradin-spring</name>
-	<description>Aradin features on Spring</description>
-
-	<modules>
-		<module>aradin-spring-core</module>
-		<module>aradin-spring-actuator-starter</module>
-		<module>aradin-spring-webwall-starter</module>
-		<module>aradin-spring-redis-starter</module>
-		<module>aradin-spring-redisson-starter</module>
-		<module>aradin-spring-caffeine</module>
-		<module>aradin-spring-caffeine-starter</module>
-		<module>aradin-spring-velocity</module>
-		<module>aradin-spring-velocity-starter</module>
-		<module>aradin-spring-swagger</module>
-		<module>aradin-spring-swagger-starter</module>
-		<module>aradin-spring-lts-starter</module>
-		<module>aradin-spring-salarm-starter</module>
-		<module>aradin-spring-xxljob-starter</module>
-		<module>aradin-spring-session-starter</module>
-	</modules>
-
-	<build>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-			</resource>
-		</resources>
-	</build>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	
+  <parent>
+    <groupId>cn.aradin</groupId>
+    <artifactId>aradin</artifactId>
+    <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  	
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>aradin-spring</artifactId>
+  <packaging>pom</packaging>
+  <name>aradin-spring</name>
+  <description>Aradin features on Spring</description>
+  	
+  <modules>
+    <module>aradin-spring-core</module>
+    <module>aradin-spring-actuator-starter</module>
+    <module>aradin-spring-webwall-starter</module>
+    <module>aradin-spring-redis-starter</module>
+    <module>aradin-spring-redisson-starter</module>
+    <module>aradin-spring-caffeine</module>
+    <module>aradin-spring-caffeine-starter</module>
+    <module>aradin-spring-velocity</module>
+    <module>aradin-spring-velocity-starter</module>
+    <module>aradin-spring-swagger</module>
+    <module>aradin-spring-swagger-starter</module>
+    <module>aradin-spring-lts-starter</module>
+    <module>aradin-spring-salarm-starter</module>
+    <module>aradin-spring-xxljob-starter</module>
+    <module>aradin-spring-session-starter</module>
+    <module>aradin-spring-kafka-starter</module>
+  </modules>
+  	
+  <build>
+    <resources>
+      <resource>	
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
+  </build>
 </project>

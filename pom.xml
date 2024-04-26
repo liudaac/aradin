@@ -45,14 +45,14 @@
 		<spring-plugin.version>3.0.0</spring-plugin.version>
 		<dubbo.version>3.2.11</dubbo.version>
 		<sentinel.version>1.8.7</sentinel.version>
-		<nacos.version>2.3.1</nacos.version>
+		<nacos.version>2.3.2</nacos.version>
 		<!-- Mybatis And DB -->
 		<mybatis.version>3.0.2</mybatis.version><!-- 2.1.3 -->
 		<mybatis.plus.version>3.5.5</mybatis.plus.version>
 		<mysqlconnect.version>8.1.0</mysqlconnect.version>
 		<!-- Lucene -->
-		<elasticsearch.version>7.17.13</elasticsearch.version>
-		<solr.version>8.4.0</solr.version>
+		<elasticsearch.version>7.17.19</elasticsearch.version>
+		<solr.version>8.11.3</solr.version>
 		<camel.version>3.5.0</camel.version>
 		<!-- Caches -->
 		<redis.version>5.1.0</redis.version>
@@ -60,7 +60,7 @@
 		<caffeine.version>3.1.8</caffeine.version>
 		<druid.version>1.2.21</druid.version>
 		<!-- RDBC -->
-		<shiro.version>1.12.0</shiro.version>
+		<shiro.version>1.13.0</shiro.version>
 		<java-jwt.version>3.4.1</java-jwt.version>
 		<jjwt.version>0.9.1</jjwt.version>
 		<!-- ZK -->
