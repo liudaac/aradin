@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import cn.aradin.spring.redis.starter.AradinRedisAutoConfiguration;
+import cn.aradin.cache.redis.starter.AradinRedisAutoConfiguration;
 import cn.aradin.spring.salarm.starter.handler.DefaultSalarmHandlerImpl;
 import cn.aradin.spring.salarm.starter.handler.ISalarmHandler;
 import cn.aradin.spring.salarm.starter.notifier.ISalarm;

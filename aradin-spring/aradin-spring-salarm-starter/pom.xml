@@ -24,7 +24,7 @@
 		</dependency>
 		<dependency>
 			<groupId>cn.aradin</groupId>
-			<artifactId>aradin-spring-redis-starter</artifactId>
+			<artifactId>aradin-cache-redis-starter</artifactId>
 		</dependency>
 	</dependencies>
 </project>
