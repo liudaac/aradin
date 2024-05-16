@@ -479,6 +479,8 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 	&nbsp;**IVersionBroadHandler(Bean).broadcast(String group, String key);**<br> 
 	&nbsp;group为aradin.cache.caffeine.group，key为cacheName，对应的cache将被清空达到被动更新的目的<br>
 
+![image](https://github.com/liudaac/aradin/assets/2231449/62b9fcae-7cdc-49d7-a9fd-0ee2a0ff98a7)
+
 ***
 ### 7、aradin-cluster
 
