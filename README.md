@@ -145,7 +145,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use-default-status: false<br>
 
 ***
-+ **aradin-spring-caffeine-starter**
++ **aradin-spring-caffeine-starter(aradin-cache-caffeine-starter from 1.1.3)**
 <p>&nbsp;使用Caffeineson类包装内存缓存Caffeine，实现对应的CacheManager，支持spring-cache注解方式集成</p>
 <p>&nbsp;&nbsp;&nbsp;一般情况下，对于内存缓存的更新机制也分为两种：</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;① 利用Caffeine缓存自身的超时机制进行延时Evict，在触发之前持久层对应的数据可能已经发生变更，</p>
@@ -192,7 +192,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 <p>&nbsp;&nbsp;&nbsp;注：各配置项的设置可以参考https://github.com/ben-manes/caffeine/wiki/Memory-overhead-zh-CN中的内存占用指标</p>
 
 ***
-+ **aradin-spring-redis-starter**
++ **aradin-spring-redis-starter(aradin-cache-redis-starter from 1.1.3)**
 <p>这个模块目前实现了两个重点功能：</p>
 <p>&nbsp;一、针对于spring-cache注解的使用优化</p>
 <p>&nbsp;替换掉了spring-boot-starter-data-redis中默认CacheManager实现（由于原生实现不支持多种缓存方式共存），对于各CacheName的初始化使用自定义配置项<br>
@@ -240,7 +240,7 @@ spring加强，面向线上使用场景，扩充协议文档、缓存、模板�
 </p>
 
 ***
-+ **aradin-spring-redisson-starter**
++ **aradin-spring-redisson-starter(aradin-cache-redisson-starter from 1.1.3)**
 <p>&nbsp;RedissonClient实例初始化，配置方式与spring-redis配置一致，无需额外配置项</p>
 
 ***
