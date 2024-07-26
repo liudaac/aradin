@@ -1,0 +1,38 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: caffeineson #开启指定的actuator
+      basepath: /actuator #改变原本内建的/actuator/xxx路径
+
+aradin:
+  #aradin.cache.caffeine.versioned为true时需要配置
+  version:
+    register-type: zookeeper #nacos
+    zookeeper-address-id: ${caffeine-version-root or projectid}
+  zookeeper:
+    #enable: true
+    #session-timeout: 5000
+    #connection-timeout: 5000
+    addresses:
+      - id: ${caffeine-version-root or projectid}
+        address:
+  cache:
+    caffeine:
+      group: caffeine #默认caffeine
+      versioned: false #为true时启用cachename级别的版本变更控制
+      defaults:
+        expire-after-access: #访问后过期时间，单位毫秒
+        expire-after-write: #写入后过期时间，单位毫秒
+        initial-capacity: #初始化大小
+        maximum-size: #最大缓存对象个数，超过此数量时之前放入的缓存将失效
+        allow-null-values: true #是否允许空值
+        is-soft: true #是否启用软引用
+      configs:
+        ${cachename}: #具体的cache名,与springcache配合使用
+          expire-after-access: #访问后过期时间，单位毫秒
+          expire-after-write: #写入后过期时间，单位毫秒
+          initial-capacity: #初始化大小
+          maximum-size: #最大缓存对象个数，超过此数量时之前放入的缓存将失效
+          allow-null-values: true #是否允许空值
+          is-soft: true #是否启用软引用
