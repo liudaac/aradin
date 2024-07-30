@@ -12,7 +12,6 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.RemovalListener;
 import com.github.benmanes.caffeine.cache.stats.CacheStats;
-
 import cn.aradin.cache.caffeine.cache.config.CaffeinesonConfig;
 import cn.aradin.cache.caffeine.cache.listener.CaffeinesonRemovalListener;
 import cn.aradin.version.core.handler.IVersionBroadHandler;
@@ -33,9 +32,6 @@ public class Caffeineson extends AbstractValueAdaptingCache {
 		this.name = name;
 		this.versioned = caffeineConfig.isVersioned();
 		this.versionBroadHandler = versionBroadHandler;
-		if (log.isDebugEnabled()) {
-			log.debug("初始化Cache {}, {}", name, JSONObject.toJSONString(caffeineConfig));
-		}
 		caffeineCache = caffeineCache(caffeineConfig, new CaffeinesonRemovalListener(name));
 	}
 	

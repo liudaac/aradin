@@ -11,8 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.Cache;
 
-import com.alibaba.fastjson2.JSONObject;
-
 import cn.aradin.cache.caffeine.cache.Caffeineson;
 import cn.aradin.cache.caffeine.cache.config.CaffeinesonConfig;
 import cn.aradin.cache.caffeine.manager.properties.CaffeinesonProperties;
@@ -40,9 +38,6 @@ public class CaffeinesonCacheManager implements VersionCacheManager{
 			IVersionBroadHandler versionBroadHandler) {
 		// TODO Auto-generated constructor stub
 		this.configs = caffeinesonProperties.getConfigs();
-		if (log.isDebugEnabled()) {
-			log.debug("Caffeine Configs :  {}", JSONObject.toJSONString(configs));
-		}
 		this.defaultConfig = caffeinesonProperties.getDefaults();
 		this.versionBroadHandler = versionBroadHandler;
 		if (caffeinesonProperties.getCleanInterval() != null) {

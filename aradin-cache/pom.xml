@@ -15,13 +15,13 @@
 	<artifactId>aradin-cache</artifactId>
 	<packaging>pom</packaging>
 	<name>aradin-cache</name>
-	<description>Aradin features on Cache For JD</description>
+	<description>Aradin Features on Cache</description>
 
 	<modules>
-		<module>aradin-cache-caffeine</module>
-		<module>aradin-cache-caffeine-starter</module>
 		<module>aradin-cache-redis-starter</module>
 		<module>aradin-cache-redisson-starter</module>
+		<module>aradin-cache-caffeine</module>
+		<module>aradin-cache-caffeine-starter</module>
 	</modules>
 
 	<build>

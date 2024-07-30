@@ -108,9 +108,9 @@ public class AradinRedisCacheWriter implements RedisCacheWriter {
 		
 		execute(name, connection -> {
 			if (shouldExpireWithin(ttl)) {
-				connection.set(key, value, computeExpiration(name, ttl), SetOption.upsert());
+				connection.stringCommands().set(key, value, computeExpiration(name, ttl), SetOption.upsert());
 			} else {
-				connection.set(key, value);
+				connection.stringCommands().set(key, value);
 			}
 			return "OK";
 		});
@@ -126,7 +126,7 @@ public class AradinRedisCacheWriter implements RedisCacheWriter {
 	public byte[] get(String name, byte[] key) {
 		Assert.notNull(name, "Name must not be null!");
 		Assert.notNull(key, "Key must not be null!");
-		byte[] result = execute(name, connection -> connection.get(key));
+		byte[] result = execute(name, connection -> connection.stringCommands().get(key));
 		statistics.incGets(name);
 		if (result != null) {
 			statistics.incHits(name);
@@ -154,15 +154,15 @@ public class AradinRedisCacheWriter implements RedisCacheWriter {
 			try {
 				boolean put;
 				if (shouldExpireWithin(ttl)) {
-					put = connection.set(key, value, computeExpiration(name, ttl), SetOption.ifAbsent());
+					put = connection.stringCommands().set(key, value, computeExpiration(name, ttl), SetOption.ifAbsent());
 				} else {
-					put = connection.setNX(key, value);
+					put = connection.stringCommands().setNX(key, value);
 				}
 				if (put) {
 					statistics.incPuts(name);
 					return null;
 				}
-				return connection.get(key);
+				return connection.stringCommands().get(key);
 			} finally {
 				if (isLockingCacheWriter()) {
 					doUnlock(name, connection);
@@ -181,7 +181,7 @@ public class AradinRedisCacheWriter implements RedisCacheWriter {
 		Assert.notNull(name, "Name must not be null!");
 		Assert.notNull(key, "Key must not be null!");
 
-		execute(name, connection -> connection.del(key));
+		execute(name, connection -> connection.keyCommands().del(key));
 		statistics.incDeletes(name);
 	}
 
@@ -263,15 +263,15 @@ public class AradinRedisCacheWriter implements RedisCacheWriter {
 	}
 
 	private Boolean doLock(String name, RedisConnection connection) {
-		return connection.setNX(createCacheLockKey(name), new byte[0]);
+		return connection.stringCommands().setNX(createCacheLockKey(name), new byte[0]);
 	}
 
 	private Long doUnlock(String name, RedisConnection connection) {
-		return connection.del(createCacheLockKey(name));
+		return connection.keyCommands().del(createCacheLockKey(name));
 	}
 
 	boolean doCheckLock(String name, RedisConnection connection) {
-		return connection.exists(createCacheLockKey(name));
+		return connection.keyCommands().exists(createCacheLockKey(name));
 	}
 
 	/**

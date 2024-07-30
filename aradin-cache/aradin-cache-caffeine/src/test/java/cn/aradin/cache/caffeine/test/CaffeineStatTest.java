@@ -1,4 +1,4 @@
-package cn.aradin.spring.caffeine.test;
+package cn.aradin.cache.caffeine.test;
 
 import com.alibaba.fastjson2.JSONObject;
 
