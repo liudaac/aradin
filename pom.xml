@@ -77,7 +77,8 @@
 		<!-- TOOLS -->
 		<buddy.version>1.14.4</buddy.version>
 		<jacoco.version>0.8.3</jacoco.version>
-		<fastjson.version>2.0.40</fastjson.version>
+		<fastjson2.version>2.0.40</fastjson2.version>
+		<fastjson.version>1.2.83</fastjson.version>
 		<gson.version>2.10.1</gson.version>
 		<logback.version>1.2.11</logback.version><!-- for 1.4.5 need slf4j-api 2.x -->
 		<guava.version>32.1.1-jre</guava.version>
@@ -171,6 +172,11 @@
 			<dependency>
 			    <groupId>com.alibaba.fastjson2</groupId>
 			    <artifactId>fastjson2</artifactId>
+			    <version>${fastjson2.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.alibaba</groupId>
+			    <artifactId>fastjson</artifactId>
 			    <version>${fastjson.version}</version>
 			</dependency>
 			
